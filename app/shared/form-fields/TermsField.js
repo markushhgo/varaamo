@@ -23,6 +23,7 @@ function TermsField({
             {labelLink}
           </HelpBlock>
 
+
           *
           {showError && <HelpBlock>{meta.error}</HelpBlock>}
         </RBCheckbox>

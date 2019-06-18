@@ -93,6 +93,7 @@ class ReservationInfoModal extends Component {
                   <ControlLabel>
                     {t('common.commentsLabel')}
 
+
 :
                   </ControlLabel>
                   <FormControl

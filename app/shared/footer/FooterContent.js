@@ -23,6 +23,7 @@ function FooterContent({ t }) {
               <Link className="brand-link" to="/">
                 <Logo />
 
+
                 Varaamo
               </Link>
             </Col>
@@ -47,6 +48,7 @@ function FooterContent({ t }) {
               <Link className="brand-link" to="/">
                 <Logo />
 
+
                 Varaamo
               </Link>
             </Col>
@@ -70,6 +72,7 @@ function FooterContent({ t }) {
             <Col lg={3} md={3}>
               <Link className="brand-link" to="/">
                 <Logo />
+
 
                 Varaamo
               </Link>
