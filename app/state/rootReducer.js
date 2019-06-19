@@ -8,6 +8,7 @@ import dataReducer from './reducers/dataReducer';
 import notificationsReducer from './reducers/notificationsReducer';
 import uiReducers from './reducers/ui';
 import recurringReservations from './recurringReservations';
+import accessReducer from './reducers/accessReducer';
 
 export default combineReducers({
   api: apiReducers,
@@ -18,4 +19,5 @@ export default combineReducers({
   notifications: notificationsReducer,
   recurringReservations: recurringReservations.reducer,
   ui: uiReducers,
+  acc: accessReducer,
 });

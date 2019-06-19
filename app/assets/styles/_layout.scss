@@ -21,13 +21,16 @@ html {
 }
 
 body {
-  font-size: 1rem;
+  font-size: 16px;
   background-color: $white;
   @media (max-width: $screen-xs-max) {
     font-size: 1.4rem;
   }
 }
 
+#root {
+  font-size: 1rem;
+}
 .app {
   display: flex;
   flex-direction: column;

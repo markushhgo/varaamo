@@ -23,9 +23,13 @@ class TopNavbar extends Component {
     window.location.assign(`${window.location.origin}/login?next=${next}`);
   }
 
+  handleContrast() {
+
+  }
+
   render() {
     const {
-      changeLocale, currentLanguage, isLoggedIn, t, userName
+      changeLocale, currentLanguage, isLoggedIn, t, userName,
     } = this.props;
 
     return (
@@ -39,6 +43,12 @@ class TopNavbar extends Component {
         </Navbar.Header>
 
         <Nav activeKey="none" pullRight>
+          <NavItem className="app-TopNavbar__contrast" onClick={this.handleContrast}>
+
+
+            CON
+          </NavItem>
+
           <NavDropdown
             className="app-TopNavbar__language"
             eventKey="lang"
