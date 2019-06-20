@@ -1,7 +1,7 @@
 .app-TopNavbar {
   background-color: $white;
   margin-bottom: 0;
-  
+
   .brand-logo {
     @include helsinki-logo($black);
     display: block;
@@ -21,6 +21,10 @@
 
   &__language > a::before {
     @include hel-background-icon('globe');
+  }
+
+  &__font:hover {
+    border-bottom: none;
   }
 
   &__contrast > a::before {

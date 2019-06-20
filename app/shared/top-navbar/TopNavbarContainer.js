@@ -2,9 +2,10 @@ import trim from 'lodash/trim';
 import { createSelector, createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 
-import { clearSearchResults } from 'actions/searchActions';
+import { clearSearchResults, changeContrast, changeFontSize } from 'actions/searchActions';
 import { currentUserSelector, isLoggedInSelector } from 'state/selectors/authSelectors';
 import { currentLanguageSelector } from 'state/selectors/translationSelectors';
+import { toggleContrast } from 'state/selectors/accessSelector';
 import { changeLocale } from 'i18n';
 import TopNavbar from './TopNavbar';
 
@@ -29,6 +30,8 @@ export const selector = createStructuredSelector({
 const actions = {
   changeLocale,
   clearSearchResults,
+  changeContrast,
+  changeFontSize,
 };
 
 export default connect(selector, actions)(TopNavbar);

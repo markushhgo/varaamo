@@ -7,6 +7,7 @@ import Nav from 'react-bootstrap/lib/Nav';
 import NavDropdown from 'react-bootstrap/lib/NavDropdown';
 import NavItem from 'react-bootstrap/lib/NavItem';
 
+import ACC from '../../constants/AppConstants';
 import { injectT } from 'i18n';
 
 class TopNavbar extends Component {
@@ -16,6 +17,8 @@ class TopNavbar extends Component {
     isLoggedIn: PropTypes.bool.isRequired,
     t: PropTypes.func.isRequired,
     userName: PropTypes.string.isRequired,
+    changeContrast: PropTypes.func,
+    changeFontSize: PropTypes.func,
   };
 
   handleLoginClick() {
@@ -29,7 +32,7 @@ class TopNavbar extends Component {
 
   render() {
     const {
-      changeLocale, currentLanguage, isLoggedIn, t, userName,
+      changeLocale, currentLanguage, isLoggedIn, t, userName, changeContrast, changeFontSize,
     } = this.props;
 
     return (
@@ -43,10 +46,12 @@ class TopNavbar extends Component {
         </Navbar.Header>
 
         <Nav activeKey="none" pullRight>
-          <NavItem className="app-TopNavbar__contrast" onClick={this.handleContrast}>
+          <NavItem className="app-TopNavbar__font" onClick={() => changeFontSize(ACC.FONT_SIZES.LARGE)}>
+            Tekstikoko
+          </NavItem>
+          <NavItem className="app-TopNavbar__contrast" onClick={changeContrast}>
 
-
-            CON
+            Kontrasti
           </NavItem>
 
           <NavDropdown
