@@ -16,12 +16,13 @@ html, body, #root {
 }
 
 // Sets the default font-size to 16px instead of 10px from bootstrap-sass/assets/stylesheets/bootstrap/_scaffolding.scss
+
 html {
-  font-size: 16px !important;
+  font-size: 16px;
 }
 
 body {
-  font-size: 16px;
+//  font-size: 16px;
   background-color: $white;
   @media (max-width: $screen-xs-max) {
     font-size: 1.4rem;
@@ -31,6 +32,7 @@ body {
 #root {
   font-size: 1rem;
 }
+
 .app {
   display: flex;
   flex-direction: column;

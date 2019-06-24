@@ -291,5 +291,7 @@
   "UserReservationsPage.preliminaryReservationsHeader": "Preliminärbokningar",
   "UserReservationsPage.regularEmptyMessage": "Det finns inga vanliga bokningar att visa.",
   "UserReservationsPage.regularReservationsHeader": "Vanliga bokningar",
-  "UserReservationsPage.title": "Mina bokningar"
+  "UserReservationsPage.title": "Mina bokningar",
+  "Nav.FontSize.title": "Fontstorlek",
+  "Nav.Contrast.title": "Kontrast"
 }

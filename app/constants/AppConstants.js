@@ -77,8 +77,8 @@ export default {
     // TODO: sortby 'open now' should be implemented later after API support it
   },
   FONT_SIZES: {
-    SMALL: '16',
-    MEDIUM: '24',
-    LARGE: '32',
+    SMALL: 'font-size-1',
+    MEDIUM: 'font-size-2',
+    LARGE: 'font-size-3',
   }
 };

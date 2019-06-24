@@ -289,5 +289,7 @@
   "UserReservationsPage.preliminaryReservationsHeader": "Alustavat varaukset",
   "UserReservationsPage.regularEmptyMessage": "Ei tavallisia varauksia näytettäväksi.",
   "UserReservationsPage.regularReservationsHeader": "Tavalliset varaukset",
-  "UserReservationsPage.title": "Omat varaukset"
+  "UserReservationsPage.title": "Omat varaukset",
+  "Nav.FontSize.title": "Tekstikoko",
+  "Nav.Contrast.title": "Kontrasti"
 }

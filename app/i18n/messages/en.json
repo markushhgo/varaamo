@@ -289,5 +289,7 @@
   "UserReservationsPage.preliminaryReservationsHeader": "Preliminary reservations",
   "UserReservationsPage.regularEmptyMessage": "No standard reservations",
   "UserReservationsPage.regularReservationsHeader": "Standard reservations",
-  "UserReservationsPage.title": "My reservations"
+  "UserReservationsPage.title": "My reservations",
+  "Nav.FontSize.title": "Fontsize",
+  "Nav.Contrast.title": "Contrast"
 }

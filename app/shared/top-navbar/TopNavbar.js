@@ -19,6 +19,7 @@ class TopNavbar extends Component {
     userName: PropTypes.string.isRequired,
     changeContrast: PropTypes.func,
     changeFontSize: PropTypes.func,
+    contrast: PropTypes.bool,
   };
 
   handleLoginClick() {
@@ -32,26 +33,32 @@ class TopNavbar extends Component {
 
   render() {
     const {
-      changeLocale, currentLanguage, isLoggedIn, t, userName, changeContrast, changeFontSize,
+      changeLocale,
+      currentLanguage, isLoggedIn, t, userName, changeContrast, changeFontSize, contrast,
     } = this.props;
-
+    const logo = contrast ? 'turku-logo' : 'turku-logo-high-contrast';
     return (
       <Navbar className="app-TopNavbar" fluid>
         <Navbar.Header>
           <Navbar.Brand>
             <Link to="/">
-              <span className="brand-logo" />
+              <span className={logo} />
             </Link>
           </Navbar.Brand>
         </Navbar.Header>
 
-        <Nav activeKey="none" pullRight>
-          <NavItem className="app-TopNavbar__font" onClick={() => changeFontSize(ACC.FONT_SIZES.LARGE)}>
-            Tekstikoko
-          </NavItem>
-          <NavItem className="app-TopNavbar__contrast" onClick={changeContrast}>
+        <Nav pullRight>
+          <li className="app-TopNavbar__font" role="presentation">
+            <div className="font_buttonGroup">
+              {t('Nav.FontSize.title')}
+              <span id="first" onClick={() => changeFontSize(ACC.FONT_SIZES.SMALL)}>A</span>
+              <span id="second" onClick={() => changeFontSize(ACC.FONT_SIZES.MEDIUM)}>A</span>
+              <span id="third" onClick={() => changeFontSize(ACC.FONT_SIZES.LARGE)}>A</span>
+            </div>
 
-            Kontrasti
+          </li>
+          <NavItem className="app-TopNavbar__contrast" onClick={changeContrast}>
+            {t('Nav.Contrast.title')}
           </NavItem>
 
           <NavDropdown
