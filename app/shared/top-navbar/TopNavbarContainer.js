@@ -23,12 +23,14 @@ const userNameSelector = createSelector(
 );
 
 const contrastSelector = state => state.acc.contrast;
+const fontSizeSelector = state => state.acc.fontSize;
 
 export const selector = createStructuredSelector({
   isLoggedIn: isLoggedInSelector,
   currentLanguage: currentLanguageSelector,
   userName: userNameSelector,
   contrast: contrastSelector,
+  fontSize: fontSizeSelector,
 });
 
 const actions = {

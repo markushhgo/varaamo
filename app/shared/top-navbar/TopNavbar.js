@@ -20,6 +20,7 @@ class TopNavbar extends Component {
     changeContrast: PropTypes.func,
     changeFontSize: PropTypes.func,
     contrast: PropTypes.bool,
+    fontSize: PropTypes.string,
   };
 
   handleLoginClick() {
@@ -27,22 +28,41 @@ class TopNavbar extends Component {
     window.location.assign(`${window.location.origin}/login?next=${next}`);
   }
 
-  handleContrast() {
-
+  handleFontSize(size) {
+    switch (size) {
+      case 'font-size-1':
+        return 'first';
+      case 'font-size-2':
+        return 'second';
+      case 'font-size-3':
+        return 'third';
+      default:
+        return 'first';
+    }
   }
 
   render() {
     const {
       changeLocale,
-      currentLanguage, isLoggedIn, t, userName, changeContrast, changeFontSize, contrast,
+      currentLanguage,
+      isLoggedIn,
+      t,
+      userName,
+      changeContrast,
+      changeFontSize,
+      contrast,
+      fontSize,
     } = this.props;
-    const logo = contrast ? 'turku-logo' : 'turku-logo-high-contrast';
+    const highContrast = contrast ? '' : 'high-contrast';
+    const logo = (currentLanguage === 'sv') ? 'turku-logo-sv' : 'turku-logo';
+    const fs = this.handleFontSize(fontSize);
+    console.log(logo);
     return (
       <Navbar className="app-TopNavbar" fluid>
         <Navbar.Header>
           <Navbar.Brand>
             <Link to="/">
-              <span className={logo} />
+              <span className={`${logo} ${highContrast}`} />
             </Link>
           </Navbar.Brand>
         </Navbar.Header>
@@ -51,11 +71,10 @@ class TopNavbar extends Component {
           <li className="app-TopNavbar__font" role="presentation">
             <div className="font_buttonGroup">
               {t('Nav.FontSize.title')}
-              <span id="first" onClick={() => changeFontSize(ACC.FONT_SIZES.SMALL)}>A</span>
-              <span id="second" onClick={() => changeFontSize(ACC.FONT_SIZES.MEDIUM)}>A</span>
-              <span id="third" onClick={() => changeFontSize(ACC.FONT_SIZES.LARGE)}>A</span>
+              <span className={((fs === 'first') ? 'active' : '')} id="first" onClick={() => changeFontSize(ACC.FONT_SIZES.SMALL)}>A</span>
+              <span className={((fs === 'second') ? 'active' : '')} id="second" onClick={() => changeFontSize(ACC.FONT_SIZES.MEDIUM)}>A</span>
+              <span className={((fs === 'third') ? 'active' : '')} id="third" onClick={() => changeFontSize(ACC.FONT_SIZES.LARGE)}>A</span>
             </div>
-
           </li>
           <NavItem className="app-TopNavbar__contrast" onClick={changeContrast}>
             {t('Nav.Contrast.title')}

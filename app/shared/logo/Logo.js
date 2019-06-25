@@ -6,6 +6,7 @@ import { getCurrentCustomization } from 'utils/customizationUtils';
 import helsinkiLogoSrc from './helsinki-logo-white.png';
 import espooLogoSrc from './espoo-blue-logo.png';
 import vantaaLogoSrc from './vantaa-logo.png';
+import turkuLogoSrc from './logo.png';
 
 function Logo({ t }) {
   switch (getCurrentCustomization()) {
@@ -31,7 +32,7 @@ function Logo({ t }) {
       return (
         <img
           alt={t('Logo.helsinkiAlt')}
-          src={helsinkiLogoSrc}
+          src={turkuLogoSrc}
         />
       );
     }
