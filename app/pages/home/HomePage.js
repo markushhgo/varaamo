@@ -84,7 +84,6 @@ class UnconnectedHomePage extends Component {
           <h5>{t('HomePage.contentSubTitle')}</h5>
           <HomeSearchBox onSearch={this.handleSearch} />
         </div>
-        <div className="app-HomePage__koro" />
         <PageWrapper className="app-HomePageContent" title={t('HomePage.title')}>
           <h4>{t('HomePage.bannersTitle')}</h4>
           <Loader loaded={!isFetchingPurposes}>

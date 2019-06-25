@@ -4,12 +4,22 @@
   color: $white !important;
 
   .turku-logo {
-    display: block;
-    height: 1.875rem;
-    width: 120px;
+
+
     background-image: url('../../assets/pictures/logo.png');
     background-size: contain;
     background-repeat: no-repeat;
+
+    @media (max-width:978px) {
+      display: block;
+      height: 1.875rem;
+      width: 60px;
+    }
+    @media (min-width:979px) {
+      display: block;
+      height: 1.875rem;
+      width: 120px;
+    }
   }
   .turku-logo-sv {
     display: block;
@@ -195,3 +205,4 @@
     background-color: $hel-copper;
   }
 }
+

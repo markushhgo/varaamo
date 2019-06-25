@@ -2,7 +2,7 @@ $purposeCellHeight: 350px;
 
 .app-HomePage {
   background-color: $white;
-  background-image: url("./images/etusivu_tausta.jpg");
+  background-image: url("./images/aurajokibanner.jpg");
   background-position: top;
   background-repeat: no-repeat;
   background-size: contain;
@@ -48,6 +48,7 @@ $purposeCellHeight: 350px;
   }
 
   .app-HomePageContent {
+    padding-top: 30px;
     padding-bottom: 30px;
     text-align: center;
 
@@ -73,13 +74,16 @@ $purposeCellHeight: 350px;
         flex-direction: column;
         flex: 1;
         justify-content: space-around;
-        background-color: $hel-copper;
+        background-color: #7dcdc8;
+//        background-color: $hel-copper;
         height: 100%;
         position: relative;
         text-decoration: none;
+        border: 1px solid black;
 
         &:hover, &:active, &:focus {
           color: $black;
+          background-color: #86dbd6;
         }
         img {
           height: 100%;

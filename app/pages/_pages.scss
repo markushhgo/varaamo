@@ -8,7 +8,9 @@
 
 .app-PageWrapper {
   position: relative;
-  background-color: white;
+//  background-color: white;
+  background: rgb(255,255,255);
+  background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 99.5%, rgba(255,255,255,0) 100%);
 
   &__transparent {
     background-color: transparent;
