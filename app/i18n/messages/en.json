@@ -94,6 +94,7 @@
   "Logo.espooAlt": "City of Espoo",
   "Logo.helsinkiAlt": "Helsinki coat-of-arms",
   "Logo.vantaaAlt": "City of Vantaa",
+  "Logo.turkuAlt": "City of Turku",
   "MapToggle.noResultsText": "Your search found no results.",
   "MapToggle.resultsText": "{count} {count, plural, one {premise} other {premises}} found",
   "MapToggle.showList": "List",

@@ -94,6 +94,7 @@
   "Logo.espooAlt": "Espoon kaupunki",
   "Logo.helsinkiAlt": "Helsingin vaakuna",
   "Logo.vantaaAlt": "Vantaan kaupunki",
+  "Logo.turkuAlt": "Turun kaupunki",
   "MapToggle.noResultsText": "Yhtään hakutulosta ei löytynyt.",
   "MapToggle.resultsText": "Tiloja löytyi {count} {count, plural, one {kpl} other {kpl}}",
   "MapToggle.showList": "Lista",

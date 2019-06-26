@@ -1,27 +1,28 @@
 $externalIconMarginLeft: 5px;
 
 .app-MainNavbar {
-  background-color: $theme-primary-dark;
+  background-color: $white;
+//  background-color: $theme-primary-dark;
   margin-bottom: 0;
   .navbar-nav li,
   .navbar-nav > .active {
     a {
-      color: $white !important;
+      color: $black !important;
     }
     a:hover {
-      color: $white;
+      color: $black;
     }
     a:after,
     a:before,
     a:hover:after {
-      color: $white;
-      border-color: $white;
+      color: $black;
+      border-color: $black;
     }
   }
   .navbar-brand,
   .navbar-brand:hover,
   .navbar-toggle .icon-bar {
-    color: $white;
+    color: $black;
   }
   .navbar-brand {
     font-size: 1rem;

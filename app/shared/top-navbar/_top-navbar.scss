@@ -1,5 +1,6 @@
 .app-TopNavbar {
-  background-color: rgba(0, 107, 182, 0.75);
+//  background-color: rgba(0, 107, 182, 0.75);
+  background-color: rgba(0,55,94,0.7);
   margin-bottom: 0;
   color: $white !important;
 
@@ -100,6 +101,7 @@
     float: left;
     margin-right: 4px;
     cursor: pointer;
+    filter: invert(100%);
   }
 
 
