@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import classNames from 'classnames';
 import MenuItem from 'react-bootstrap/lib/MenuItem';
 import Navbar from 'react-bootstrap/lib/Navbar';
 import Nav from 'react-bootstrap/lib/Nav';
@@ -70,16 +71,16 @@ class TopNavbar extends Component {
       contrast,
       fontSize,
     } = this.props;
-    const highContrast = contrast ? '' : 'high-contrast';
+    const highContrastNav = contrast ? '' : 'nav-high-contrast';
     const logo = (currentLanguage === 'sv') ? 'turku-logo-sv' : 'turku-logo';
     const fs = this.handleFontSize(fontSize);
     return (
-      <Navbar className="app-TopNavbar" expanded={this.state.expanded} fluid onToggle={() => this.toggleCollapse()}>
+      <Navbar className={classNames('app-TopNavbar', highContrastNav)} expanded={this.state.expanded} fluid onToggle={() => this.toggleCollapse()}>
         <Navbar.Toggle />
         <Navbar.Header>
           <Navbar.Brand>
             <Link to="/">
-              <span className={`${logo} ${highContrast}`} />
+              <span className={`${logo}`} />
             </Link>
           </Navbar.Brand>
         </Navbar.Header>

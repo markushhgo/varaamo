@@ -20,6 +20,7 @@ import { getCustomizationClassName } from 'utils/customizationUtils';
 const userIdSelector = state => state.auth.userId;
 const accFontSize = state => state.acc.fontSize;
 
+
 export const selector = createStructuredSelector({
   userId: userIdSelector,
   fontSize: accFontSize,
@@ -57,14 +58,14 @@ export class UnconnectedAppContainer extends Component {
   render() {
     const { fontSize } = this.props;
     return (
-      <div className={classNames('app', getCustomizationClassName(), (fontSize))}>
+      <div className={classNames('app', getCustomizationClassName())}>
         <Helmet title="Varaamo" />
 
         <Header location={this.props.location}>
           <Favicon />
           <TestSiteMessage />
         </Header>
-        <div className="app-content test">
+        <div className={classNames('app-content', (fontSize))}>
           <Grid>
             <Notifications />
           </Grid>
