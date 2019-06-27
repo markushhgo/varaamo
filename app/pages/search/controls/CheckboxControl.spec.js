@@ -24,7 +24,7 @@ describe('pages/search/controls/CheckboxControl', () => {
   test('renders a Toggle with correct props', () => {
     const toggle = getWrapper({}).find(Toggle);
     expect(toggle).toHaveLength(1);
-    expect(toggle.prop('defaultChecked')).toBe(defaults.value);
+    expect(toggle.prop('checked')).toBe(defaults.value);
     expect(typeof toggle.prop('onChange')).toBe('function');
   });
 

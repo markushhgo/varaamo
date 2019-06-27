@@ -14,8 +14,8 @@ function CheckboxControl({
   return (
     <div className="app-CheckboxControl">
       <Toggle
+        checked={value}
         className={toggleClassNames}
-        defaultChecked={value}
         id={id}
         onChange={e => onConfirm(e.target.checked)}
       />
