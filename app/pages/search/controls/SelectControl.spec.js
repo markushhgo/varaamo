@@ -141,10 +141,10 @@ describe('pages/search/controls/SelectControl', () => {
       expect(selectedOption).toEqual(defaults.options[0]);
     });
 
-    test('return underfined if value is not exist in any options', () => {
+    test('return an empty string if value is not found in options ', () => {
       const wrapper = getWrapper({});
       const selectedOption = wrapper.instance().getValue('foo', defaults.options);
-      expect(selectedOption).toBeUndefined();
+      expect(selectedOption).toBe('');
     });
 
     test('return array of options if value is array', () => {

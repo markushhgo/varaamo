@@ -14,7 +14,12 @@ class SelectControl extends React.Component {
       return value.map(item => options.find(option => option.value === item));
     }
 
-    return options.find(option => option.value === value);
+    const foundValue = options.find(option => option.value === value);
+    if (foundValue === undefined) {
+      return '';
+    }
+
+    return foundValue;
   };
 
   noOptionsMessage = () => this.props.t('SelectControl.noOptions')
@@ -55,7 +60,13 @@ class SelectControl extends React.Component {
                     onChange(isMulti ? [] : {}, action);
                     break;
                   default:
-                    onChange(!selected && isMulti ? [] : selected, action);
+                    if (!selected && isMulti) {
+                      onChange([], selected);
+                    } else if (!selected && !isMulti) {
+                      onChange({}, action);
+                    } else {
+                      onChange(selected, action);
+                    }
                     break;
                 }
               }}
