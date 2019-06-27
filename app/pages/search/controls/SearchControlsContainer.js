@@ -134,6 +134,10 @@ class UnconnectedSearchControlsContainer extends Component {
     ['freeOfCharge', 'end', 'distance', 'duration', 'purpose', 'start', 'unit', 'municipality'].forEach((key) => {
       if (!isEmpty(filters[key])) {
         hasFilters = true;
+      } else if (typeof filters[key] === 'boolean') {
+        if (filters[key] === true) {
+          hasFilters = true;
+        }
       }
     });
     return hasFilters;
