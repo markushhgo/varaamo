@@ -50,7 +50,7 @@ router.get('/login/helsinki/return',
 router.get('/logout', (req, res) => {
   req.logOut();
   const redirectUrl = req.query.next || 'https://varaamo.hel.fi';
-  res.redirect(`https://api.hel.fi/sso/logout/?next=${redirectUrl}`);
+  res.redirect(`http://10.201.204.47:8000/sso/logout/?next=${redirectUrl}`);
 });
 
 export default router;
