@@ -55,7 +55,7 @@ class SelectControl extends React.Component {
                     onChange(isMulti ? [] : {}, action);
                     break;
                   default:
-                    onChange(selected, action);
+                    onChange(!selected && isMulti ? [] : selected, action);
                     break;
                 }
               }}
