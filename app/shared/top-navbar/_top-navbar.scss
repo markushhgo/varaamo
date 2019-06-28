@@ -205,6 +205,18 @@
       border: 1px solid rgba(0, 0, 0, 0.15);
       box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
       min-width: 10px;
+      li > a:hover,
+      li > a:focus,
+      li > a.active {
+        text-decoration: underline;
+      }
+    }
+    > .open > a,
+    > .open > a:hover,
+    > .open > a:focus,
+    > .open > a:active {
+      color: inherit;
+
     }
   }
 
@@ -260,4 +272,11 @@
       bottom: 21px;
     }
   }
+  > .open > a,
+    > .open > a:hover,
+    > .open > a:focus,
+    > .open > a:active {
+      color: inherit;
+
+    }
 }

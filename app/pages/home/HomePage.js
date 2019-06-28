@@ -47,12 +47,13 @@ class UnconnectedHomePage extends Component {
   }
 
   renderPurposeBanner(purpose) {
-    const { t } = this.props;
+    const { t, contrast } = this.props;
     const image = purposeIcons[camelCase(purpose.value)];
+    const highContrast = contrast ? '' : 'high-contrast';
 
     return (
       <Col className="app-HomePageContent__banner" key={purpose.value} md={3} sm={6} xs={12}>
-        <Link className="app-HomePageContent__banner__linkWrapper" to={`/search?purpose=${purpose.value}`}>
+        <Link className={`app-HomePageContent__banner__linkWrapper ${highContrast}`} to={`/search?purpose=${purpose.value}`}>
           <div className="app-HomePageContent__banner-icon">
             {typeof image === 'string' ? <img alt={purpose.label} src={image} />
             // TODO: VAR-80 | VAR-81 Replace those icon with designed icon.
@@ -105,6 +106,7 @@ UnconnectedHomePage.propTypes = {
   purposes: PropTypes.array.isRequired,
   history: PropTypes.object.isRequired,
   t: PropTypes.func.isRequired,
+  contrast: PropTypes.bool,
 };
 
 UnconnectedHomePage = injectT(UnconnectedHomePage); // eslint-disable-line

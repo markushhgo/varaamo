@@ -7,6 +7,7 @@ import { createSelector, createStructuredSelector } from 'reselect';
 import { purposesSelector } from 'state/selectors/dataSelectors';
 import requestIsActiveSelectorFactory from 'state/selectors/factories/requestIsActiveSelectorFactory';
 
+const contrastSelector = state => state.acc.contrast;
 const purposeOptionsSelector = createSelector(
   purposesSelector,
   (purposes) => {
@@ -23,6 +24,7 @@ const purposeOptionsSelector = createSelector(
 const homePageSelector = createStructuredSelector({
   isFetchingPurposes: requestIsActiveSelectorFactory(ActionTypes.API.PURPOSES_GET_REQUEST),
   purposes: purposeOptionsSelector,
+  contrast: contrastSelector,
 });
 
 export default homePageSelector;
