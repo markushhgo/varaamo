@@ -1,28 +1,29 @@
 $externalIconMarginLeft: 5px;
 
 .app-MainNavbar {
-  background-color: $white;
-//  background-color: $theme-primary-dark;
+//  background-color: rgba(0,55,94,1);
+  background-color: $turku-blue;
   margin-bottom: 0;
   .navbar-nav li,
   .navbar-nav > .active {
     a {
-      color: $black !important;
+      color: $white !important;
     }
     a:hover {
-      color: $black;
+      color: $white;
     }
     a:after,
     a:before,
     a:hover:after {
-      color: $black;
-      border-color: $black;
+      color: $white;
+      border-color: $white;
+      border-bottom: 1px solid;
     }
   }
   .navbar-brand,
   .navbar-brand:hover,
   .navbar-toggle .icon-bar {
-    color: $black;
+    color: $white;
   }
   .navbar-brand {
     font-size: 1rem;

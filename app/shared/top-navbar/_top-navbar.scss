@@ -68,36 +68,52 @@
 
   }
 
-  .font_buttonGroup {
-    padding-top: 10px;
-    padding-bottom: 14px;
-    margin-right: 15px;
-    font-size: 16px;
-    cursor: default;
-    span {
-      padding-left: 0px;
-      margin-left: 5px;
-      cursor: pointer;
-      &:hover {
-        text-decoration: underline;
-      }
-      &.active {
-        text-decoration: underline;
-      }
-    }
-    span#first {
+  .accessability{
+    &__buttonGroup {
+      padding-top: 10px;
+      padding-bottom: 14px;
+      margin-right: 15px;
       font-size: 16px;
+      cursor: default;
+      span {
+        padding-left: 0px;
+        margin-left: 5px;
+        cursor: pointer;
+        &:hover {
+          text-decoration: underline;
+        }
+        &.active {
+          text-decoration: underline;
+        }
+      }
+      span#first {
+        font-size: 16px;
 
+      }
+      span#second {
+        font-size: 20px;
+      }
+      span#third {
+        font-size: 24px;
+      }
     }
-    span#second {
-      font-size: 20px;
-    }
-    span#third {
-      font-size: 24px;
+    &__contrast {
+      padding-top: 18px;
+      padding-bottom: 18px;
+
+      .contrast_button {
+        background-image: url('../../assets/icons/iconContrastSV.svg');
+        background-size: 24px 24px;
+        width: 24px;
+        height: 24px;
+        float: right;
+        cursor: pointer;
+        filter: invert(100%);
+      }
     }
   }
 
-
+/*
   &__contrast > a::before {
     background-image: url('../../assets/icons/iconContrastSV.svg');
     background-size: 24px 24px;
@@ -109,7 +125,7 @@
     cursor: pointer;
     filter: invert(100%);
   }
-
+*/
 
   &__name > a {
     @media (max-width: $screen-xs-max) {
@@ -246,9 +262,11 @@
     }
   }
 
-  .app-TopNavbar__contrast > a::before {
+  .app-TopNavbar__contrast > .accessability__contrast > .contrast_button {
     filter: invert(0%);
   }
+
+
 
   .navbar-nav {
     li {

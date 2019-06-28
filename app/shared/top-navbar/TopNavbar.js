@@ -87,16 +87,19 @@ class TopNavbar extends Component {
         <Navbar.Collapse>
           <Nav pullRight>
             <li className="app-TopNavbar__font" role="presentation">
-              <div className="font_buttonGroup">
+              <div className="accessability__buttonGroup">
                 {t('Nav.FontSize.title')}
                 <span className={((fs === 'first') ? 'active' : '')} id="first" onClick={() => changeFontSize(ACC.FONT_SIZES.SMALL)}>A</span>
                 <span className={((fs === 'second') ? 'active' : '')} id="second" onClick={() => changeFontSize(ACC.FONT_SIZES.MEDIUM)}>A</span>
                 <span className={((fs === 'third') ? 'active' : '')} id="third" onClick={() => changeFontSize(ACC.FONT_SIZES.LARGE)}>A</span>
               </div>
             </li>
-            <NavItem className="app-TopNavbar__contrast" onClick={changeContrast}>
-              {t('Nav.Contrast.title')}
-            </NavItem>
+            <li className="app-TopNavbar__contrast" role="presentation">
+              <div className="accessability__contrast">
+                {t('Nav.Contrast.title')}
+                <div className="contrast_button" onClick={changeContrast} />
+              </div>
+            </li>
 
             <NavDropdown
               className="app-TopNavbar__language"
