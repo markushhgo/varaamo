@@ -1,6 +1,8 @@
 import React from 'react';
+import Button from 'react-bootstrap/lib/Button';
 import ControlLabel from 'react-bootstrap/lib/ControlLabel';
 import FormGroup from 'react-bootstrap/lib/FormGroup';
+import FormControl from 'react-bootstrap/lib/FormControl';
 import Overlay from 'react-bootstrap/lib/Overlay';
 import DayPicker from 'react-day-picker';
 import moment from 'moment';
@@ -37,16 +39,26 @@ describe('pages/search/controls/DatePickerControl', () => {
 
   test('renders FormGroup with correct props', () => {
     const wrapper = getWrapper();
-    const instance = wrapper.instance();
     const formGroup = wrapper.find(FormGroup);
     expect(formGroup).toHaveLength(1);
-    expect(formGroup.prop('onClick')).toBe(instance.showOverlay);
+    expect(formGroup.prop('controlId')).toBe('datePickerField');
   });
 
-  test('renders app-DatePickerControl__title with correct text', () => {
+  test('renders FormControl with correct props', () => {
     const wrapper = getWrapper();
-    const title = wrapper.find('.app-DatePickerControl__title');
-    expect(title).toHaveLength(1);
+    const formControl = wrapper.find(FormControl);
+    expect(formControl).toHaveLength(1);
+    expect(formControl.prop('onChange')).toBe(wrapper.instance().handleDateInputChange);
+    expect(formControl.prop('type')).toBe('text');
+    expect(formControl.prop('value')).toBe(defaults.date);
+    expect(formControl.prop('onBlur')).toBe(wrapper.instance().handleDateInputFocusOut);
+  });
+
+  test('renders Button with correct props', () => {
+    const wrapper = getWrapper();
+    const button = wrapper.find(Button);
+    expect(button).toHaveLength(1);
+    expect(button.prop('onClick')).toBe(wrapper.instance().handleDateButtonClick);
   });
 
   test('renders Overlay with correct props', () => {
@@ -167,6 +179,70 @@ describe('pages/search/controls/DatePickerControl', () => {
       instance.state.visible = false;
       instance.showOverlay();
       expect(instance.state.visible).toBe(true);
+    });
+  });
+
+  describe('handleDateInputChange', () => {
+    test('sets state.date to correct value', () => {
+      const instance = getWrapper().instance();
+      const mockEvent = { target: { value: '12.05.2019' } };
+      instance.handleDateInputChange(mockEvent);
+      expect(instance.state.date).toBe('12.05.2019');
+    });
+  });
+
+  describe('handleDateInputFocusOut', () => {
+    describe('if state.date is not a valid date', () => {
+      const todaysDate = moment().format('L');
+
+      test('sets state.date to todays date', () => {
+        const instance = getWrapper().instance();
+        instance.state.date = '';
+        instance.handleDateInputFocusOut();
+        expect(instance.state.date).toBe(todaysDate);
+      });
+
+      test('calls handleConfirm with todays date', () => {
+        const onConfirm = simple.mock();
+        const instance = getWrapper({ onConfirm }).instance();
+        instance.state.date = '';
+        const expected = { date: todaysDate };
+        instance.handleDateInputFocusOut();
+        expect(onConfirm.callCount).toBe(1);
+        expect(onConfirm.lastCall.args).toEqual([expected]);
+      });
+    });
+  });
+
+  describe('if state.date is a valid date', () => {
+    test('calls handleConfirm with state.date', () => {
+      const onConfirm = simple.mock();
+      const instance = getWrapper({ onConfirm }).instance();
+      const someValidDate = '12.06.2019';
+      instance.state.date = someValidDate;
+      const expected = { date: someValidDate };
+      instance.handleDateInputFocusOut();
+      expect(onConfirm.callCount).toBe(1);
+      expect(onConfirm.lastCall.args).toEqual([expected]);
+    });
+  });
+
+  describe('handleDateButtonClick', () => {
+    describe('if state.visible is true', () => {
+      test('sets state.visible to false', () => {
+        const instance = getWrapper().instance();
+        instance.state.visible = true;
+        instance.handleDateButtonClick();
+        expect(instance.state.visible).toBe(false);
+      });
+    });
+    describe('if state.visible is false', () => {
+      test('sets state.visible to true', () => {
+        const instance = getWrapper().instance();
+        instance.state.visible = false;
+        instance.handleDateButtonClick();
+        expect(instance.state.visible).toBe(true);
+      });
     });
   });
 });

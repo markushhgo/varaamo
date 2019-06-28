@@ -2,8 +2,9 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import ControlLabel from 'react-bootstrap/lib/ControlLabel';
 import FormGroup from 'react-bootstrap/lib/FormGroup';
-import Glyphicon from 'react-bootstrap/lib/Glyphicon';
 import InputGroup from 'react-bootstrap/lib/InputGroup';
+import FormControl from 'react-bootstrap/lib/FormControl';
+import Button from 'react-bootstrap/lib/Button';
 import Overlay from 'react-bootstrap/lib/Overlay';
 import DayPicker from 'react-day-picker';
 import moment from 'moment';
@@ -28,6 +29,10 @@ class DatePickerControl extends React.Component {
       date,
       visible: false,
     };
+
+    this.handleDateInputChange = this.handleDateInputChange.bind(this);
+    this.handleDateButtonClick = this.handleDateButtonClick.bind(this);
+    this.handleDateInputFocusOut = this.handleDateInputFocusOut.bind(this);
   }
 
   componentWillUpdate(nextProps) {
@@ -53,25 +58,58 @@ class DatePickerControl extends React.Component {
     this.hideOverlay();
   };
 
+  handleDateInputChange(event) {
+    const date = event.target.value;
+    this.setState({ date });
+  }
+
+  handleDateInputFocusOut() {
+    const date = this.state.date;
+    if (moment(date, 'L').isValid() === false) {
+      const todaysDate = moment().format('L');
+      this.handleConfirm(todaysDate);
+      this.setState({ date: todaysDate });
+    } else {
+      this.handleConfirm(date);
+    }
+  }
+
+  handleDateButtonClick() {
+    if (this.state.visible === true) {
+      this.hideOverlay();
+    } else {
+      this.showOverlay();
+    }
+  }
+
   render() {
     const { currentLanguage, t } = this.props;
-    const { date } = this.state;
+    const localDate = this.state.date;
+    const { date } = this.props;
     const selectedDay = moment(date, 'L')
       .startOf('day')
       .toDate();
 
     return (
       <div className="app-DatePickerControl">
-        <ControlLabel>{t('DatePickerControl.label')}</ControlLabel>
-        <FormGroup onClick={this.showOverlay}>
+        <FormGroup controlId="datePickerField">
+          <ControlLabel>{t('DatePickerControl.label')}</ControlLabel>
           <InputGroup>
-            <InputGroup.Addon className="app-DatePickerControl__title">
-              <img alt="" className="app-DatePickerControl__icon" src={iconCalendar} />
-              <span>{date}</span>
-            </InputGroup.Addon>
-            <InputGroup.Addon className="app-DatePickerControl__triangle">
-              <Glyphicon glyph="triangle-bottom" />
-            </InputGroup.Addon>
+            <FormControl
+              onBlur={this.handleDateInputFocusOut}
+              onChange={this.handleDateInputChange}
+              type="text"
+              value={localDate}
+            />
+
+
+            <InputGroup.Button>
+              <Button className="app-DatePickerControl__button" onClick={this.handleDateButtonClick}>
+                <img alt="" className="app-DatePickerControl__icon" src={iconCalendar} />
+              </Button>
+            </InputGroup.Button>
+
+
           </InputGroup>
         </FormGroup>
         <Overlay

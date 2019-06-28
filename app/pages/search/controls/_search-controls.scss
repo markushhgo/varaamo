@@ -177,6 +177,11 @@
     width: 22px;
   }
 
+  &__button {
+    height: 40px !important;
+    border-left-width: 2px !important;
+  }
+
   &__title {
     border-right-width: 0;
     text-align: left;
@@ -262,9 +267,6 @@
     border-radius: 0;
     font-size: 1.6rem;
 
-    &:focus {
-      outline: none;
-    }
     &--available:not(.DayPicker-Day--disabled) {
       background-color: $light-gray;
       &.DayPicker-Day--selected {
