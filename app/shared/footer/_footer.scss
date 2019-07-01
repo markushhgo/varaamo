@@ -23,7 +23,7 @@ footer {
   }
 
   .feedback-link {
-    color: #ccc;
+    color: $white;
   }
 
   .about-link {
@@ -32,7 +32,7 @@ footer {
   }
 
   a {
-    color: #fff;
+    color: $white;
   }
 
   a:hover {
@@ -41,7 +41,7 @@ footer {
 }
 
 .normal-contrast {
-  background-color: $black;
+  background-color: $turku-blue-dark;
   color: $white;
 }
 
@@ -55,6 +55,9 @@ footer {
   }
 
   .feedback-link {
+    color: blue;
+  }
+  a, a:hover {
     color: blue;
   }
 }

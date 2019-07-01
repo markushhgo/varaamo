@@ -70,9 +70,9 @@ function FooterContent({ t }) {
         <Grid>
           <Row>
             <Col lg={3} md={3}>
-              <Link className="brand-link" to="/">
+              <div className="brand-link">
                 <Logo />
-              </Link>
+              </div>
               <p className="text-left" style={{ paddingTop: '20px' }}>Turun Kaupunki</p>
               <p className="text-left">
                 PL 355, 20101 TURKU
@@ -87,7 +87,7 @@ function FooterContent({ t }) {
             <Col lg={6} md={6}>
               <h5>Varaamo</h5>
               <p>
-                <FormattedHTMLMessage id="Footer.turkuText" />
+                <FormattedHTMLMessage id="Footer.turkuText_2" />
               </p>
               <p>
                 {feedbackLink}
