@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
+import classNames from 'classnames';
 import Navbar from 'react-bootstrap/lib/Navbar';
 import Nav from 'react-bootstrap/lib/Nav';
 import NavItem from 'react-bootstrap/lib/NavItem';
@@ -34,15 +35,11 @@ class MainNavbar extends React.Component {
       isAdmin,
       isLoggedIn,
       t,
+      contrast,
     } = this.props;
-
+    const highContrastNav = contrast ? '' : 'main-nav-high-contrast';
     return (
-      <Navbar
-        className="app-MainNavbar"
-        expanded={this.state.expanded}
-        fluid
-        onToggle={() => this.toggleCollapse()}
-      >
+      <Navbar className={classNames('app-MainNavbar', highContrastNav)} expanded={this.state.expanded} fluid onToggle={() => this.toggleCollapse()}>
         <Navbar.Header>
           <Navbar.Toggle />
           <Navbar.Brand>
@@ -79,7 +76,7 @@ class MainNavbar extends React.Component {
             {isAdmin
               && (
                 <Fragment>
-                  <NavItem eventKey="adminMaintenance" href="http://10.201.204.47:8000/ra/" target="_blank">
+                  <NavItem eventKey="adminMaintenance" href="http://10.201.204.46:8000/ra/" target="_blank">
                     {t('Navbar.adminMaintenance')}
                     <FAIcon icon={faExternalLinkAlt} />
                   </NavItem>
@@ -109,6 +106,7 @@ MainNavbar.propTypes = {
   isAdmin: PropTypes.bool.isRequired,
   isLoggedIn: PropTypes.bool.isRequired,
   t: PropTypes.func.isRequired,
+  contrast: PropTypes.bool,
 };
 
 export default injectT(MainNavbar);
