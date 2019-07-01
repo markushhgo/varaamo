@@ -19,6 +19,9 @@ $purposeCellHeight: 350px;
     h1 {
       margin: 2px 0;
     }
+    &.container {
+      background-color: rgba(0,55,94,0.2);
+    }
   }
 
   .app-HomeSearchBox {

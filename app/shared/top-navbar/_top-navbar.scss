@@ -128,10 +128,10 @@
 */
 
   &__name > a {
-    @media (max-width: $screen-xs-max) {
+/*    @media (max-width: $screen-xs-max) {
       font-size: 0 !important;
     }
-
+*/
     &::before {
       @include hel-background-icon('user-o');
     }

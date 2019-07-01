@@ -82,7 +82,7 @@
           margin-left: 5px;
           cursor: pointer;
           &:hover {
-            text-decoration: underline;
+            text-decoration: none;
           }
           &.active {
             text-decoration: underline;
@@ -249,7 +249,7 @@
     // End: Remove responsive features
 
     &.navbar-default .navbar-nav .open .dropdown-menu > li > a:hover {
-      background-color: $black;
+      background-color: $white;
     }
   }
 

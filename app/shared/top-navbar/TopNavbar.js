@@ -97,7 +97,7 @@ class TopNavbar extends Component {
             <li className="app-TopNavbar__contrast" role="presentation">
               <div className="accessability__contrast">
                 {t('Nav.Contrast.title')}
-                <div className="contrast_button" onClick={changeContrast} />
+                <div className="contrast_button" onClick={() => changeContrast()} />
               </div>
             </li>
 

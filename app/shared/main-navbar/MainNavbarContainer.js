@@ -6,9 +6,12 @@ import { isAdminSelector, isLoggedInSelector } from 'state/selectors/authSelecto
 import { changeLocale } from 'i18n';
 import MainNavbar from './MainNavbar';
 
+const contrastSelector = state => state.acc.contrast;
+
 export const selector = createStructuredSelector({
   isAdmin: isAdminSelector,
   isLoggedIn: isLoggedInSelector,
+  contrast: contrastSelector,
 });
 
 const actions = {

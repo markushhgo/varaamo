@@ -79,7 +79,7 @@ class UnconnectedHomePage extends Component {
     const { isFetchingPurposes, purposes, t } = this.props;
     return (
       <div className="app-HomePage">
-        <div className="app-HomePage__content container" style={{ backgroundColor: 'rgba(0,55,94,0.2)' }}>
+        <div className="app-HomePage__content container">
           <h1>Varaamo –</h1>
           <h1>{t('HomePage.contentTitle')}</h1>
           <h5>{t('HomePage.contentSubTitle')}</h5>
