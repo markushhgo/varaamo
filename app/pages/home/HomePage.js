@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import camelCase from 'lodash/camelCase';
 import Link from 'react-router-dom/Link';
+import { FormattedHTMLMessage } from 'react-intl';
 import { faHotTub as iconSauna, faCalendarAlt as iconOrganizeEvents } from '@fortawesome/free-solid-svg-icons';
 
 // TODO: VAR-80 | VAR-81 Replace those icon with designed icon.
@@ -80,8 +81,7 @@ class UnconnectedHomePage extends Component {
     return (
       <div className="app-HomePage">
         <div className="app-HomePage__content container">
-          <h1>Varaamo –</h1>
-          <h1>{t('HomePage.contentTitle')}</h1>
+          <h1><FormattedHTMLMessage id="HomePage.contentTitle" /></h1>
           <h5>{t('HomePage.contentSubTitle')}</h5>
           <HomeSearchBox onSearch={this.handleSearch} />
         </div>

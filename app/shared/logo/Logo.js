@@ -33,6 +33,7 @@ function Logo({ t }) {
         <img
           alt={t('Logo.turkuAlt')}
           src={turkuLogoSrc}
+          title="Turun vaakuna"
         />
       );
     }

@@ -9,7 +9,8 @@ $externalIconMarginLeft: 5px;
     a {
       color: $white;
     }
-    a:hover {
+    a:hover,
+    a:focus {
       color: $white;
     }
     a:after,
@@ -22,6 +23,7 @@ $externalIconMarginLeft: 5px;
   }
   .navbar-brand,
   .navbar-brand:hover,
+  .navbar-brand:focus,
   .navbar-toggle .icon-bar {
     color: $white;
   }

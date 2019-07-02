@@ -34,6 +34,7 @@ class HomeSearchBox extends React.Component {
     return (
       <form className="app-HomeSearchBox" onSubmit={this.handleSubmit}>
         <FormControl
+          aria-label="Haku"
           className="app-HomeSearchBox__textfield"
           onChange={this.handleChange}
           placeholder={t('HomeSearchBox.searchPlaceholder')}

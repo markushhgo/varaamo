@@ -7,7 +7,6 @@ import Navbar from 'react-bootstrap/lib/Navbar';
 import Nav from 'react-bootstrap/lib/Nav';
 import NavDropdown from 'react-bootstrap/lib/NavDropdown';
 import NavItem from 'react-bootstrap/lib/NavItem';
-import { Container } from 'react-bootstrap';
 
 import ACC from '../../constants/AppConstants';
 import { injectT } from 'i18n';
@@ -48,11 +47,11 @@ class TopNavbar extends Component {
 
   handleFontSize(size) {
     switch (size) {
-      case 'font-size-1':
+      case '__font-size-1':
         return 'first';
-      case 'font-size-2':
+      case '__font-size-2':
         return 'second';
-      case 'font-size-3':
+      case '__font-size-3':
         return 'third';
       default:
         return 'first';
@@ -79,8 +78,8 @@ class TopNavbar extends Component {
         <Navbar.Toggle />
         <Navbar.Header>
           <Navbar.Brand>
-            <Link to="/">
-              <span className={`${logo}`} />
+            <Link aria-label="etusivulle" to="/">
+              <span aria-label="Turun vaakuna" className={`${logo}`} title="Etusivu" />
             </Link>
           </Navbar.Brand>
         </Navbar.Header>
@@ -89,15 +88,15 @@ class TopNavbar extends Component {
             <li className="app-TopNavbar__font" role="presentation">
               <div className="accessability__buttonGroup">
                 {t('Nav.FontSize.title')}
-                <span className={((fs === 'first') ? 'active' : '')} id="first" onClick={() => changeFontSize(ACC.FONT_SIZES.SMALL)}>A</span>
-                <span className={((fs === 'second') ? 'active' : '')} id="second" onClick={() => changeFontSize(ACC.FONT_SIZES.MEDIUM)}>A</span>
-                <span className={((fs === 'third') ? 'active' : '')} id="third" onClick={() => changeFontSize(ACC.FONT_SIZES.LARGE)}>A</span>
+                <span className={((fs === 'first') ? 'active' : '')} id="first" onClick={() => changeFontSize(ACC.FONT_SIZES.SMALL)} tabIndex="0">A</span>
+                <span className={((fs === 'second') ? 'active' : '')} id="second" onClick={() => changeFontSize(ACC.FONT_SIZES.MEDIUM)} tabIndex="0">A</span>
+                <span className={((fs === 'third') ? 'active' : '')} id="third" onClick={() => changeFontSize(ACC.FONT_SIZES.LARGE)} tabIndex="0">A</span>
               </div>
             </li>
             <li className="app-TopNavbar__contrast" role="presentation">
               <div className="accessability__contrast">
                 {t('Nav.Contrast.title')}
-                <div className="contrast_button" onClick={() => changeContrast()} />
+                <div className="contrast_button" onClick={() => changeContrast()} tabIndex="0" />
               </div>
             </li>
 
@@ -109,13 +108,14 @@ class TopNavbar extends Component {
               onSelect={changeLocale}
               title={currentLanguage}
             >
-              {currentLanguage !== 'en' && <MenuItem eventKey="en">EN</MenuItem>}
+              {currentLanguage !== 'en' && <MenuItem eventKey="en" tabIndex="0">EN</MenuItem>}
               {currentLanguage !== 'fi' && <MenuItem eventKey="fi">FI</MenuItem>}
               {currentLanguage !== 'sv' && <MenuItem eventKey="sv">SV</MenuItem>}
             </NavDropdown>
 
             {isLoggedIn && (
               <NavDropdown
+                aria-label="Logout"
                 className="app-TopNavbar__name"
                 eventKey="lang"
                 id="user-nav-dropdown"
