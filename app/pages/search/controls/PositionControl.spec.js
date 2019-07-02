@@ -78,19 +78,11 @@ describe('pages/search/controls/PositionControl', () => {
       instance.handleToggleChange(true);
       expect(onPositionSwitch.callCount).toBe(1);
     });
-
-    test('sets toggled state', () => {
-      const instance = getWrapper().instance();
-      expect(instance.state.toggled).toBe(false);
-      const value = true;
-      instance.handleToggleChange(value);
-      expect(instance.state.toggled).toBe(true);
-    });
   });
 
   describe('handleDistanceSliderChange', () => {
     test('sets distance state', () => {
-      const instance = getWrapper().instance();
+      const instance = getWrapper({ geolocated: true }).instance();
       expect(instance.state.distance).toBe(21000);
       const value = 100;
       instance.handleDistanceSliderChange(value);
