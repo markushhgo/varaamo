@@ -73,16 +73,6 @@ function FooterContent({ t }) {
               <div className="brand-link">
                 <Logo />
               </div>
-              <p className="text-left" style={{ paddingTop: '20px' }}>Turun Kaupunki</p>
-              <p className="text-left">
-                PL 355, 20101 TURKU
-                <br />
-                vaihde (02) 330 000
-                <br />
-                <a href="mailto:turun.kaupunki@turku.fi">turun.kaupunki.turku.fi</a>
-                <br />
-                <a href="mailto:etunimi.sukunimi@turku.fi">etunimi.sukunimi@turku.fi</a>
-              </p>
             </Col>
             <Col lg={6} md={6}>
               <h5>Varaamo</h5>
