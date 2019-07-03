@@ -184,22 +184,6 @@ class UnconnectedSearchControlsContainer extends Component {
               header={t('SearchControlsContainer.advancedSearch')}
             >
               <Row>
-                <Col md={12}>
-                  <SelectControl
-                    id="municipality"
-                    isLoading={isFetchingUnits}
-                    isMulti
-                    label={t('SearchControlsContainer.municipalityLabel')}
-                    name="app-SearchControls-municipality-select"
-                    onChange={municipalities => this.handleFiltersChange(
-                      { municipality: municipalities.map(mun => mun.value) }
-                    )}
-                    options={this.getMunicipalityOptions()}
-                    value={filters.municipality}
-                  />
-                </Col>
-              </Row>
-              <Row>
                 <Col className="app-SearchControlsContainer__control" md={4} sm={12}>
                   <SelectControl
                     id="purpose"
