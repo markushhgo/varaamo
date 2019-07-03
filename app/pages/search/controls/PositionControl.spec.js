@@ -48,6 +48,14 @@ describe('pages/search/controls/PositionControl', () => {
     expect(modal).toHaveLength(0);
   });
 
+  test('distance is set to initial value if geolocation toggle is turned off in a later update', () => {
+    const wrapper = getWrapper();
+    const initialValue = wrapper.instance().state.distance;
+    wrapper.setState({ distance: 3000 });
+    wrapper.setProps({ geolocated: false });
+    expect(wrapper.instance().state.distance).toEqual(initialValue);
+  });
+
   describe('handleConfirm', () => {
     test('calls onConfirm with correct value', () => {
       const onConfirm = simple.mock();

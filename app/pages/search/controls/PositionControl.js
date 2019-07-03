@@ -40,7 +40,7 @@ class PositionControl extends React.Component {
 
   // if geolocation was turned off, call to confirm no distance value is used.
   componentDidUpdate(prevProps) {
-    if (prevProps.geolocated === false) {
+    if (prevProps.geolocated === true && this.props.geolocated === false) {
       this.props.onConfirm('');
     }
   }
