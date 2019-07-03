@@ -60,7 +60,7 @@ describe('pages/search/controls/SelectControl', () => {
     const select = getWrapper({}).find(Select);
     expect(select).toHaveLength(1);
     expect(select.prop('isClearable')).toBe(true);
-    expect(select.prop('id')).toBe(defaults.id);
+    expect(select.prop('inputId')).toBe(defaults.id);
     expect(select.prop('name')).toBe(defaults.name);
     expect(typeof select.prop('onChange')).toBe('function');
     expect(select.prop('placeholder')).toBe('common.select');

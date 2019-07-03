@@ -49,7 +49,7 @@ class SelectControl extends React.Component {
               {...rest}
               className={classNames('app-Select', className)}
               classNamePrefix="app-Select"
-              id={id}
+              inputId={id}
               isClearable={isClearable}
               isMulti={isMulti}
               isSearchable={isSearchable}
