@@ -8,7 +8,8 @@ import Nav from 'react-bootstrap/lib/Nav';
 import NavDropdown from 'react-bootstrap/lib/NavDropdown';
 import NavItem from 'react-bootstrap/lib/NavItem';
 
-import ACC from '../../constants/AppConstants';
+import FontChanger from './accessability/TopNavbarFontContainer';
+import ContrastChanger from './accessability/TopNavbarContrastContainer';
 import { injectT } from 'i18n';
 
 class TopNavbar extends Component {
@@ -18,10 +19,7 @@ class TopNavbar extends Component {
     isLoggedIn: PropTypes.bool.isRequired,
     t: PropTypes.func.isRequired,
     userName: PropTypes.string.isRequired,
-    changeContrast: PropTypes.func,
-    changeFontSize: PropTypes.func,
     contrast: PropTypes.bool,
-    fontSize: PropTypes.string,
   };
 
   constructor(props) {
@@ -45,19 +43,6 @@ class TopNavbar extends Component {
     window.location.assign(`${window.location.origin}/login?next=${next}`);
   }
 
-  handleFontSize(size) {
-    switch (size) {
-      case '__font-size-1':
-        return 'first';
-      case '__font-size-2':
-        return 'second';
-      case '__font-size-3':
-        return 'third';
-      default:
-        return 'first';
-    }
-  }
-
   render() {
     const {
       changeLocale,
@@ -65,14 +50,10 @@ class TopNavbar extends Component {
       isLoggedIn,
       t,
       userName,
-      changeContrast,
-      changeFontSize,
       contrast,
-      fontSize,
     } = this.props;
     const highContrastNav = contrast ? '' : 'nav-high-contrast';
     const logo = (currentLanguage === 'sv') ? 'turku-logo-sv' : 'turku-logo';
-    const fs = this.handleFontSize(fontSize);
     return (
       <Navbar className={classNames('app-TopNavbar', highContrastNav)} expanded={this.state.expanded} fluid onToggle={() => this.toggleCollapse()}>
         <Navbar.Toggle />
@@ -85,20 +66,10 @@ class TopNavbar extends Component {
         </Navbar.Header>
         <Navbar.Collapse>
           <Nav pullRight>
-            <li className="app-TopNavbar__font" role="presentation">
-              <div className="accessability__buttonGroup">
-                {t('Nav.FontSize.title')}
-                <span className={((fs === 'first') ? 'active' : '')} id="first" onClick={() => changeFontSize(ACC.FONT_SIZES.SMALL)} tabIndex="0">A</span>
-                <span className={((fs === 'second') ? 'active' : '')} id="second" onClick={() => changeFontSize(ACC.FONT_SIZES.MEDIUM)} tabIndex="0">A</span>
-                <span className={((fs === 'third') ? 'active' : '')} id="third" onClick={() => changeFontSize(ACC.FONT_SIZES.LARGE)} tabIndex="0">A</span>
-              </div>
-            </li>
-            <li className="app-TopNavbar__contrast" role="presentation">
-              <div className="accessability__contrast">
-                {t('Nav.Contrast.title')}
-                <div className="contrast_button" onClick={() => changeContrast()} tabIndex="0" />
-              </div>
-            </li>
+
+            <FontChanger />
+
+            <ContrastChanger />
 
             <NavDropdown
               className="app-TopNavbar__language"

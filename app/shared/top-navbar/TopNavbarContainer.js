@@ -2,7 +2,7 @@ import trim from 'lodash/trim';
 import { createSelector, createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 
-import { clearSearchResults, changeContrast, changeFontSize } from 'actions/searchActions';
+import { clearSearchResults } from 'actions/searchActions';
 import { currentUserSelector, isLoggedInSelector } from 'state/selectors/authSelectors';
 import { currentLanguageSelector } from 'state/selectors/translationSelectors';
 import { changeLocale } from 'i18n';
@@ -22,21 +22,17 @@ const userNameSelector = createSelector(
 );
 
 const contrastSelector = state => state.acc.contrast;
-const fontSizeSelector = state => state.acc.fontSize;
 
 export const selector = createStructuredSelector({
   isLoggedIn: isLoggedInSelector,
   currentLanguage: currentLanguageSelector,
   userName: userNameSelector,
   contrast: contrastSelector,
-  fontSize: fontSizeSelector,
 });
 
 const actions = {
   changeLocale,
   clearSearchResults,
-  changeContrast,
-  changeFontSize,
 };
 
 export default connect(selector, actions)(TopNavbar);
