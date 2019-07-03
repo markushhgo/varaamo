@@ -105,7 +105,7 @@ class DatePickerControl extends React.Component {
 
             <InputGroup.Button>
               <Button className="app-DatePickerControl__button" onClick={this.handleDateButtonClick}>
-                <img alt="" className="app-DatePickerControl__icon" src={iconCalendar} />
+                <img alt={t('DatePickerControl.button.imageAlt')} className="app-DatePickerControl__icon" src={iconCalendar} />
               </Button>
             </InputGroup.Button>
 

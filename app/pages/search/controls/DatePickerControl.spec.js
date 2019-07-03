@@ -61,6 +61,14 @@ describe('pages/search/controls/DatePickerControl', () => {
     expect(button.prop('onClick')).toBe(wrapper.instance().handleDateButtonClick);
   });
 
+  test('renders Button img with correct props', () => {
+    const wrapper = getWrapper();
+    const image = wrapper.find('img');
+    expect(image).toHaveLength(1);
+    expect(image.prop('alt')).toBe('DatePickerControl.button.imageAlt');
+    expect(image.prop('className')).toBe('app-DatePickerControl__icon');
+  });
+
   test('renders Overlay with correct props', () => {
     const wrapper = getWrapper();
     const instance = wrapper.instance();

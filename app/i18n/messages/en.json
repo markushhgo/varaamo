@@ -79,6 +79,7 @@
   "DatePickerControl.buttonLabel": "Date",
   "DatePickerControl.header": "Select date",
   "DatePickerControl.label": "When? (e.g. 27/06/2019)",
+  "DatePickerControl.button.imageAlt" : "Date picker",
   "Footer.espooText": "Varaamo is the City of Helsinki’s reservation booking system, which is being trialled in certain premises provided by Espoo City Library. This is a pilot version, so please feel free to send us any feedback you may have.</p>",
   "Footer.feedbackLink": "You can send your feedback here.",
   "Footer.helsinkiText": "Varaamo is the City of Helsinki’s reservation booking system. This is a pilot version, so please feel free to send us any feedback you may have.</p>",
