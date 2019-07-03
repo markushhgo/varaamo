@@ -58,14 +58,14 @@ export class UnconnectedAppContainer extends Component {
   render() {
     const { fontSize } = this.props;
     return (
-      <div className={classNames('app', getCustomizationClassName())}>
+      <div className={classNames('app', getCustomizationClassName(), (fontSize))}>
         <Helmet title="Varaamo" />
 
         <Header location={this.props.location}>
           <Favicon />
           <TestSiteMessage />
         </Header>
-        <div className={classNames('app-content', (fontSize))}>
+        <div className={classNames('app-content')}>
           <Grid>
             <Notifications />
           </Grid>

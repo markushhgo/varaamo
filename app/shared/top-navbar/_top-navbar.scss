@@ -69,7 +69,7 @@
         padding-top: 10px;
         padding-bottom: 14px;
         margin-right: 15px;
-        font-size: 16px;
+        font-size: 1em;
         cursor: default;
         span {
           padding-left: 0px;
@@ -83,13 +83,13 @@
           }
         }
         span#first {
-          font-size: 16px;
+          font-size: 1em;
         }
         span#second {
-          font-size: 20px;
+          font-size: 1.25em;
         }
         span#third {
-          font-size: 24px;
+          font-size: 1.5em;
         }
       }
       &__contrast {
@@ -170,7 +170,8 @@
           padding-right: 0;
           margin-right: 15px;
           font-weight: 500;
-          font-size: 0.9375rem;
+//          font-size: 0.9375rem;
+          font-size: inherit;
           color: $black;
           &:hover {
             color: $black;
