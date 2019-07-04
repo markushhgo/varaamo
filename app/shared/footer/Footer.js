@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import FooterContent from './FooterContent';
 
-function Footer(props) {
+export function Footer(props) {
   const style = props.contrast ? 'normal-contrast' : 'high-contrast';
   return (
     <footer className={style}>

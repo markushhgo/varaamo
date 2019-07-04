@@ -2,7 +2,7 @@ import { shallow } from 'enzyme';
 import React from 'react';
 
 import FooterContent from './FooterContent';
-import Footer from './Footer';
+import { Footer } from './Footer';
 
 describe('shared/footer/Footer', () => {
   function getWrapper(props) {
@@ -12,6 +12,16 @@ describe('shared/footer/Footer', () => {
   test('renders a footer element', () => {
     const footer = getWrapper().find('footer');
     expect(footer.length).toBe(1);
+  });
+
+  test('renders highcontrast to footerclass', () => {
+    const footerStyle = getWrapper({ contrast: false }).find('.high-contrast');
+    expect(footerStyle.length).toBe(1);
+  });
+
+  test('renders normalcontrast to footerclass', () => {
+    const footerStyle = getWrapper({ contrast: true }).find('.normal-contrast');
+    expect(footerStyle.length).toBe(1);
   });
 
   test('renders FooterContent component', () => {
