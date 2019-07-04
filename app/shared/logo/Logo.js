@@ -3,7 +3,6 @@ import React from 'react';
 
 import { injectT } from 'i18n';
 import { getCurrentCustomization } from 'utils/customizationUtils';
-import helsinkiLogoSrc from './helsinki-logo-white.png';
 import espooLogoSrc from './espoo-blue-logo.png';
 import vantaaLogoSrc from './vantaa-logo.png';
 import turkuLogoSrc from './logo_footer.png';
