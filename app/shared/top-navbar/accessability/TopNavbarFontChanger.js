@@ -11,16 +11,23 @@ class FontSizeChanger extends Component {
     changeFontSize: PropTypes.func,
   };
 
-  handleFontSize(size) {
+  firstA = 'firstA';
+
+  secondA = 'secondA';
+
+  thirdA = 'thirdA';
+
+
+  getActiveFontButton(size) {
     switch (size) {
-      case '__font-size-1':
-        return 'first';
-      case '__font-size-2':
-        return 'second';
-      case '__font-size-3':
-        return 'third';
+      case ACC.FONT_SIZES.SMALL:
+        return this.firstA;
+      case ACC.FONT_SIZES.MEDIUM:
+        return this.secondA;
+      case ACC.FONT_SIZES.LARGE:
+        return this.thirdA;
       default:
-        return 'first';
+        return this.firstA;
     }
   }
 
@@ -28,14 +35,14 @@ class FontSizeChanger extends Component {
     const {
       t, fontSize, changeFontSize
     } = this.props;
-    const spanID = this.handleFontSize(fontSize);
+    const spanID = this.getActiveFontButton(fontSize);
     return (
       <li className="app-TopNavbar__font" role="presentation">
         <div className="accessability__buttonGroup">
           {t('Nav.FontSize.title')}
-          <span className={((spanID === 'first') ? 'active' : '')} id="first" onClick={() => changeFontSize(ACC.FONT_SIZES.SMALL)} tabIndex="0">A</span>
-          <span className={((spanID === 'second') ? 'active' : '')} id="second" onClick={() => changeFontSize(ACC.FONT_SIZES.MEDIUM)} tabIndex="0">A</span>
-          <span className={((spanID === 'third') ? 'active' : '')} id="third" onClick={() => changeFontSize(ACC.FONT_SIZES.LARGE)} tabIndex="0">A</span>
+          <span className={((spanID === this.firstA) ? 'active' : '')} id={this.firstA} onClick={() => changeFontSize(ACC.FONT_SIZES.SMALL)} tabIndex="0">A</span>
+          <span className={((spanID === this.secondA) ? 'active' : '')} id={this.secondA} onClick={() => changeFontSize(ACC.FONT_SIZES.MEDIUM)} tabIndex="0">A</span>
+          <span className={((spanID === this.thirdA) ? 'active' : '')} id={this.thirdA} onClick={() => changeFontSize(ACC.FONT_SIZES.LARGE)} tabIndex="0">A</span>
         </div>
       </li>
 
