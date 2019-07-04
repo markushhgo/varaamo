@@ -2,28 +2,28 @@ import types from 'constants/ActionTypes';
 
 import Immutable from 'seamless-immutable';
 
-import APP from '../../constants/AppConstants';
+import APP from '../../../constants/AppConstants';
 
 
 const initialState = Immutable({
-  contrast: true,
+  isNormalContrast: true,
   fontSize: APP.FONT_SIZES.SMALL
 });
 
 function toggleContrast(state) {
-  return { ...state, contrast: !state.contrast };
+  return { ...state, isNormalContrast: !state.isNormalContrast };
 }
 
 function changeFontSize(state, data) {
   return { ...state, fontSize: data };
 }
 
-function accessReducer(state = initialState, action) {
+function accessabilityReducer(state = initialState, action) {
   switch (action.type) {
-    case types.ACC.CHANGE_CONTRAST: {
+    case types.UI.CHANGE_CONTRAST: {
       return toggleContrast(state);
     }
-    case types.ACC.CHANGE_FONTSIZE: {
+    case types.UI.CHANGE_FONTSIZE: {
       return changeFontSize(state, action.payload);
     }
     default: {
@@ -32,4 +32,4 @@ function accessReducer(state = initialState, action) {
   }
 }
 
-export default accessReducer;
+export default accessabilityReducer;

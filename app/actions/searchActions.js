@@ -19,8 +19,7 @@ const clearSearchResults = createAction(types.UI.CLEAR_SEARCH_FILTERS);
 const toggleMap = createAction(types.UI.TOGGLE_SEARCH_SHOW_MAP);
 const searchMapClick = createAction(types.UI.SEARCH_MAP_CLICK);
 const selectUnit = createAction(types.UI.SELECT_SEARCH_RESULTS_UNIT);
-const changeContrast = createAction(types.ACC.CHANGE_CONTRAST);
-const changeFontSize = createAction(types.ACC.CHANGE_FONTSIZE, fontsize => fontsize);
+
 
 function getPiwikActionName(searchParams) {
   if (searchParams.search) {
@@ -75,6 +74,4 @@ export {
   searchMapClick,
   selectUnit,
   toggleMap,
-  changeContrast,
-  changeFontSize,
 };

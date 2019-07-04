@@ -20,7 +20,7 @@ Footer.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  contrast: state.acc.contrast,
+  contrast: state.ui.accessability.isNormalContrast,
 });
 
 export default connect(mapStateToProps, null)(Footer);

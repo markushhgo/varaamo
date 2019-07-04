@@ -18,12 +18,12 @@ import Notifications from 'shared/notifications';
 import { getCustomizationClassName } from 'utils/customizationUtils';
 
 const userIdSelector = state => state.auth.userId;
-const accFontSize = state => state.acc.fontSize;
+const fontSizeSelector = state => state.ui.accessability.fontSize;
 
 
 export const selector = createStructuredSelector({
   userId: userIdSelector,
-  fontSize: accFontSize,
+  fontSize: fontSizeSelector,
 });
 
 export class UnconnectedAppContainer extends Component {

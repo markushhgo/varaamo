@@ -1,11 +1,11 @@
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 
-import { changeContrast } from 'actions/searchActions';
+import { changeContrast } from 'actions/uiActions';
 import ContrastChanger from './TopNavbarContrast';
 
 
-const contrastSelector = state => state.acc.contrast;
+const contrastSelector = state => state.ui.accessability.isNormalContrast;
 
 export const selector = createStructuredSelector({
   contrast: contrastSelector,
