@@ -13,13 +13,11 @@ const currentUserSelector = createSelector(
 
 const isAdminSelector = createSelector(
   currentUserSelector,
-  //  currentUser => Boolean(() => true)
   currentUser => Boolean(currentUser.isStaff)
 );
 
 function isLoggedInSelector(state) {
-  return (Boolean(() => true));
-  //  return Boolean(state.auth.userId && state.auth.token);
+  return Boolean(state.auth.userId && state.auth.token);
 }
 
 const staffUnitsSelector = createSelector(
