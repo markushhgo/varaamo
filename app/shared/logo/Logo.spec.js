@@ -6,7 +6,6 @@ import { shallowWithIntl } from 'utils/testUtils';
 import Logo from './Logo';
 import espooLogoSrc from './espoo-blue-logo.png';
 import vantaaLogoSrc from './vantaa-logo.png';
-import helsinkiLogoSrc from './helsinki-logo-white.png';
 import turkuLogoSrc from './logo_footer.png';
 
 describe('shared/logo/Logo', () => {
@@ -23,7 +22,7 @@ describe('shared/logo/Logo', () => {
 
     test('renders logo of Turku', () => {
       expect(logo.type()).toBe('img');
-      //      expect(logo.props().src).toBe(helsinkiLogoSrc);
+      expect(logo.props().src).toBe(turkuLogoSrc);
     });
 
     test('renders Turku alt text', () => {
