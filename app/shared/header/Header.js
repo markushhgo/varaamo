@@ -9,14 +9,12 @@ function Header({ children, location }) {
   const { pathname } = location;
   const activeLink = pathname === '/' ? 'home' : pathname.replace('/', '');
   return (
-    <header>
-      <div className="app-Header">
-        <TopNavbar />
-        <Sticky>
-          <MainNavbar activeLink={activeLink} />
-        </Sticky>
-        {children}
-      </div>
+    <header className="app-Header">
+      <TopNavbar />
+      <Sticky>
+        <MainNavbar activeLink={activeLink} />
+      </Sticky>
+      {children}
     </header>
   );
 }
