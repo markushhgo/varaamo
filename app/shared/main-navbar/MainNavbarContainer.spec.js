@@ -14,6 +14,9 @@ describe('shared/main-navbar/MainNavbarContainer', () => {
         intl: {
           locale,
         },
+        ui: {
+          accessability: { isNormalContrast: true },
+        },
       };
     }
 
@@ -25,6 +28,11 @@ describe('shared/main-navbar/MainNavbarContainer', () => {
     test('returns isLoggedIn', () => {
       const selected = selector(getState());
       expect(selected.isLoggedIn).toBeDefined();
+    });
+
+    test('returns contrast', () => {
+      const selected = selector(getState());
+      expect(selected.contrast).toBeDefined();
     });
   });
 });

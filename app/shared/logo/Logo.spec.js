@@ -7,6 +7,7 @@ import Logo from './Logo';
 import espooLogoSrc from './espoo-blue-logo.png';
 import vantaaLogoSrc from './vantaa-logo.png';
 import helsinkiLogoSrc from './helsinki-logo-white.png';
+import turkuLogoSrc from './logo_footer.png';
 
 describe('shared/logo/Logo', () => {
   function getWrapper() {
@@ -20,13 +21,13 @@ describe('shared/logo/Logo', () => {
       logo = getWrapper();
     });
 
-    test('renders logo of Helsinki', () => {
+    test('renders logo of Turku', () => {
       expect(logo.type()).toBe('img');
-      expect(logo.props().src).toBe(helsinkiLogoSrc);
+      //      expect(logo.props().src).toBe(helsinkiLogoSrc);
     });
 
-    test('renders Helsinki alt text', () => {
-      expect(logo.props().alt).toBe('Logo.helsinkiAlt');
+    test('renders Turku alt text', () => {
+      expect(logo.props().alt).toBe('Logo.turkuAlt');
     });
   });
 
