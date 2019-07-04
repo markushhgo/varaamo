@@ -77,7 +77,7 @@ function FooterContent({ t }) {
             <Col lg={6} md={6}>
               <h5>Varaamo</h5>
               <p>
-                <FormattedHTMLMessage id="Footer.turkuText_2" />
+                <FormattedHTMLMessage id="Footer.turkuText" />
               </p>
               <p>
                 {feedbackLink}
