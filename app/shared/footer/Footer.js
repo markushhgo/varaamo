@@ -8,7 +8,7 @@ export function Footer(props) {
   const style = props.contrast ? 'normal-contrast' : 'high-contrast';
   return (
     <footer className={style}>
-      <FooterContent onLinkClick={props.onLinkClick} />
+      <FooterContent currentLang={props.currentLanguage} onLinkClick={props.onLinkClick} />
     </footer>
   );
 }
@@ -16,11 +16,13 @@ export function Footer(props) {
 Footer.propTypes = {
   onLinkClick: PropTypes.func,
   contrast: PropTypes.bool,
+  currentLanguage: PropTypes.string,
 
 };
 
 const mapStateToProps = state => ({
   contrast: state.ui.accessability.isNormalContrast,
+  currentLanguage: state.intl.locale,
 });
 
 export default connect(mapStateToProps, null)(Footer);

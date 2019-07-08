@@ -34,4 +34,12 @@ describe('shared/footer/Footer', () => {
     const footerContent = getWrapper({ onLinkClick }).find(FooterContent);
     expect(footerContent.prop('onLinkClick')).toBe(onLinkClick);
   });
+
+  test('passes currentLanguage prop to FooterContent', () => {
+    const currentLang = {
+      currentLanguage: 'fi',
+    };
+    const currentLanguage = getWrapper(currentLang).find(FooterContent);
+    expect(currentLanguage.prop('currentLang')).toBe(currentLang.currentLanguage);
+  });
 });
