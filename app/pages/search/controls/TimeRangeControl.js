@@ -148,6 +148,7 @@ class TimeRangeControl extends React.Component {
             isClearable={false}
             isDisabled={!useTimeRange}
             isSearchable={false}
+            label={t('TimeRangeControl.start.label')}
             onChange={this.handleStart}
             options={startTimeOptions}
             placeholder=""
@@ -160,6 +161,7 @@ class TimeRangeControl extends React.Component {
             isClearable={false}
             isDisabled={!useTimeRange}
             isSearchable={false}
+            label={t('TimeRangeControl.end.label')}
             onChange={this.handleEnd}
             options={endTimeOptions}
             placeholder=""
@@ -172,6 +174,7 @@ class TimeRangeControl extends React.Component {
             isClearable={false}
             isDisabled={!useTimeRange}
             isSearchable={false}
+            label={t('TimeRangeControl.duration.label')}
             onChange={this.handleDuration}
             options={durationOptions}
             placeholder=""
