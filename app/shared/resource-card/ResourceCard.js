@@ -83,7 +83,7 @@ class ResourceCard extends Component {
           'app-ResourceCard__stacked': this.props.stacked,
         })}
       >
-        <Link className="app-ResourceCard__image-link" onClick={this.handleLinkClick} to={linkTo}>
+        <Link aria-label={resource.name} className="app-ResourceCard__image-link" onClick={this.handleLinkClick} to={linkTo}>
           <BackgroundImage height={420} image={getMainImage(resource.images)} width={700} />
         </Link>
         <div className="app-ResourceCard__content">
