@@ -18,9 +18,12 @@ import Notifications from 'shared/notifications';
 import { getCustomizationClassName } from 'utils/customizationUtils';
 
 const userIdSelector = state => state.auth.userId;
+const fontSizeSelector = state => state.ui.accessability.fontSize;
+
 
 export const selector = createStructuredSelector({
   userId: userIdSelector,
+  fontSize: fontSizeSelector,
 });
 
 export class UnconnectedAppContainer extends Component {
@@ -53,17 +56,16 @@ export class UnconnectedAppContainer extends Component {
   }
 
   render() {
+    const { fontSize } = this.props;
     return (
-      <div className={classNames('app', getCustomizationClassName())}>
-        <Helmet>
-          <title>Varaamo</title>
-        </Helmet>
+      <div className={classNames('app', getCustomizationClassName(), (fontSize))}>
+        <Helmet title="Varaamo" />
 
         <Header location={this.props.location}>
           <Favicon />
           <TestSiteMessage />
         </Header>
-        <div className="app-content">
+        <div className={classNames('app-content')}>
           <Grid>
             <Notifications />
           </Grid>
@@ -81,6 +83,7 @@ UnconnectedAppContainer.propTypes = {
   fetchUser: PropTypes.func.isRequired,
   location: PropTypes.object.isRequired,
   userId: PropTypes.string,
+  fontSize: PropTypes.string,
 };
 
 const actions = { enableGeoposition, fetchUser };

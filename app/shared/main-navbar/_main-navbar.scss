@@ -1,14 +1,15 @@
 $externalIconMarginLeft: 5px;
 
 .app-MainNavbar {
-  background-color: $theme-primary-dark;
+  background-color: $turku-blue;
   margin-bottom: 0;
   .navbar-nav li,
   .navbar-nav > .active {
     a {
-      color: $white !important;
+      color: $white;
     }
-    a:hover {
+    a:hover,
+    a:focus {
       color: $white;
     }
     a:after,
@@ -16,12 +17,17 @@ $externalIconMarginLeft: 5px;
     a:hover:after {
       color: $white;
       border-color: $white;
+      border-bottom: 1px solid;
     }
   }
   .navbar-brand,
   .navbar-brand:hover,
+  .navbar-brand:focus,
   .navbar-toggle .icon-bar {
     color: $white;
+  }
+  .navbar-brand {
+    font-size: 1rem;
   }
 
   .navbar-nav {
@@ -29,11 +35,38 @@ $externalIconMarginLeft: 5px;
       a {
         display: flex;
         align-items: center;
+        font-size: inherit;
       }
     }
   }
 
   .app-fontAwesome {
     margin-left: $externalIconMarginLeft;
+  }
+}
+
+.main-nav-high-contrast {
+  background-color: $white;
+  border-bottom: 1px solid $black;
+  .navbar-nav li,
+  .navbar-nav > .active {
+    a {
+      color: $black;
+    }
+    a:hover {
+      color: $black;
+    }
+    a:after,
+    a:before,
+    a:hover:after {
+      color: $black;
+      border-color: $black;
+      border-bottom: 1px solid;
+    }
+  }
+  .navbar-brand,
+  .navbar-brand:hover,
+  .navbar-toggle .icon-bar {
+    color: $black;
   }
 }

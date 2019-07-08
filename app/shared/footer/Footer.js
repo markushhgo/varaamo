@@ -1,18 +1,26 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import { connect } from 'react-redux';
 
 import FooterContent from './FooterContent';
 
-function Footer({ onLinkClick }) {
+export function Footer(props) {
+  const style = props.contrast ? 'normal-contrast' : 'high-contrast';
   return (
-    <footer>
-      <FooterContent onLinkClick={onLinkClick} />
+    <footer className={style}>
+      <FooterContent onLinkClick={props.onLinkClick} />
     </footer>
   );
 }
 
 Footer.propTypes = {
   onLinkClick: PropTypes.func,
+  contrast: PropTypes.bool,
+
 };
 
-export default Footer;
+const mapStateToProps = state => ({
+  contrast: state.ui.accessability.isNormalContrast,
+});
+
+export default connect(mapStateToProps, null)(Footer);

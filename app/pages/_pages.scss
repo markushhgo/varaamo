@@ -8,10 +8,24 @@
 
 .app-PageWrapper {
   position: relative;
-  background-color: white;
+
+  background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 99.5%, rgba(255,255,255,0) 100%);
 
   &__transparent {
     background-color: transparent;
     min-height: auto;
   }
 }
+
+.__font-size-small {
+  font-size: $fontSize-1;
+}
+
+.__font-size-medium {
+  font-size: $fontSize-2;
+}
+
+.__font-size-large {
+  font-size: $fontSize-3;
+}
+

@@ -20,6 +20,7 @@ const toggleMap = createAction(types.UI.TOGGLE_SEARCH_SHOW_MAP);
 const searchMapClick = createAction(types.UI.SEARCH_MAP_CLICK);
 const selectUnit = createAction(types.UI.SELECT_SEARCH_RESULTS_UNIT);
 
+
 function getPiwikActionName(searchParams) {
   if (searchParams.search) {
     return searchParams.search;

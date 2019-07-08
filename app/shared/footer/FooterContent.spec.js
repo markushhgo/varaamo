@@ -1,6 +1,7 @@
 import React from 'react';
 // import { Link } from 'react-router';
 import simple from 'simple-mock';
+import { FormattedHTMLMessage } from 'react-intl';
 
 import FeedbackLink from 'shared/feedback-link';
 import * as customizationUtils from 'utils/customizationUtils';
@@ -24,6 +25,10 @@ describe('shared/footer/FooterContent', () => {
       expect(feedbackLink.length).toBe(1);
     });
 
+    test('renders FormattedHTMLMessage for Turku', () => {
+      const texts = content.find(FormattedHTMLMessage);
+      expect(texts.length).toBe(1);
+    });
     // it('renders texts for Helsinki', () => {
     //  const texts = content.find('p').text();
     //  expect(texts).to.contain('Footer.helsinkiText');

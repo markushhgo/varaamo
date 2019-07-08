@@ -62,6 +62,7 @@ class SearchResultsPaging extends React.Component {
           onClick={() => this.handleClick(page - 1)}
         >
 
+
           &laquo;
         </Button>
         {this.renderPageButtons(pages, page)}
@@ -70,6 +71,7 @@ class SearchResultsPaging extends React.Component {
           disabled={page >= pages}
           onClick={() => this.handleClick(page + 1)}
         >
+
 
           &raquo;
         </Button>

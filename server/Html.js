@@ -66,6 +66,7 @@ class Html extends Component {
           <meta content="IE=edge" httpEquiv="X-UA-Compatible" />
           <meta content="width=device-width, initial-scale=1" name="viewport" />
           <link href="https://overpass-30e2.kxcdn.com/overpass.css" rel="stylesheet" />
+          <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,800" rel="stylesheet" />
           {this.renderStylesLink(appCssSrc, isProduction)}
           <title>Varaamo</title>
         </head>

@@ -75,5 +75,10 @@ export default {
     PREMISES: 'unit_name_lang',
     PEOPLE: 'people_capacity',
     // TODO: sortby 'open now' should be implemented later after API support it
+  },
+  FONT_SIZES: {
+    SMALL: '__font-size-small',
+    MEDIUM: '__font-size-medium',
+    LARGE: '__font-size-large',
   }
 };

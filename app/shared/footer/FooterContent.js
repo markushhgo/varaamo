@@ -23,6 +23,7 @@ function FooterContent({ t }) {
               <Link className="brand-link" to="/">
                 <Logo />
 
+
                 Varaamo
               </Link>
             </Col>
@@ -47,6 +48,7 @@ function FooterContent({ t }) {
               <Link className="brand-link" to="/">
                 <Logo />
 
+
                 Varaamo
               </Link>
             </Col>
@@ -68,15 +70,14 @@ function FooterContent({ t }) {
         <Grid>
           <Row>
             <Col lg={3} md={3}>
-              <Link className="brand-link" to="/">
+              <div className="brand-link">
                 <Logo />
-
-                Varaamo
-              </Link>
+              </div>
             </Col>
             <Col lg={6} md={6}>
+              <h5>Varaamo</h5>
               <p>
-                <FormattedHTMLMessage id="Footer.helsinkiText" />
+                <FormattedHTMLMessage id="Footer.turkuText" />
               </p>
               <p>
                 {feedbackLink}

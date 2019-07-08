@@ -83,8 +83,9 @@
   "Footer.feedbackLink": "You can send your feedback here.",
   "Footer.helsinkiText": "Varaamo is the City of Helsinki’s reservation booking system. This is a pilot version, so please feel free to send us any feedback you may have.</p>",
   "Footer.vantaaText": "Varaamo is the City of Helsinki’s reservation booking system, which is also used by the cities of Espoo and Vantaa. This is a pilot version, so please feel free to send us any feedback you may have.</p>",
+  "Footer.turkuText" : "© City of Turku <br />PO 355, 20101 Turku <br />phone (02) 330 000 <br /><a href='http://www.turku.fi/en'>www.turku.fi</a>",
   "HomePage.title": "Welcome",
-  "HomePage.contentTitle": "Premises and equipment available for booking",
+  "HomePage.contentTitle": "Welcome –<br />Premises and equipment available for booking",
   "HomePage.contentSubTitle": "Through Varaamo, you can reserve public premises and equipment for your own use",
   "HomePage.bannersTitle": "What do you want to do?",
   "HomePage.buttonText": "Search",
@@ -93,6 +94,7 @@
   "Logo.espooAlt": "City of Espoo",
   "Logo.helsinkiAlt": "Helsinki coat-of-arms",
   "Logo.vantaaAlt": "City of Vantaa",
+  "Logo.turkuAlt": "City of Turku",
   "MapToggle.noResultsText": "Your search found no results.",
   "MapToggle.resultsText": "{count} {count, plural, one {premise} other {premises}} found",
   "MapToggle.showList": "List",
@@ -289,5 +291,7 @@
   "UserReservationsPage.preliminaryReservationsHeader": "Preliminary reservations",
   "UserReservationsPage.regularEmptyMessage": "No standard reservations",
   "UserReservationsPage.regularReservationsHeader": "Standard reservations",
-  "UserReservationsPage.title": "My reservations"
+  "UserReservationsPage.title": "My reservations",
+  "Nav.FontSize.title": "Fontsize",
+  "Nav.Contrast.title": "Contrast"
 }
