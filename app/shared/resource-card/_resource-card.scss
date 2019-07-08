@@ -129,7 +129,7 @@ $cellHeight: 50%;
         text-transform: capitalize;
       }
     }
-    
+
     @media (min-width: $screen-xs-min) {
       display: inline-block;
       width: 100%;
@@ -148,5 +148,9 @@ $cellHeight: 50%;
 
   &.app-ResourceCard__stacked {
     border: 2px solid $hel-silver;
+  }
+
+  .do-not-capitalize {
+    text-transform: none;
   }
 }

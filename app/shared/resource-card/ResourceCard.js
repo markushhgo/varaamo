@@ -109,39 +109,60 @@ class ResourceCard extends Component {
 
         <div className="app-ResourceCard__info">
           <ResourceCardInfoCell
-            alt={resource.type.name}
+            alt=""
             icon={iconHome}
             onClick={this.handleSearchByType}
           >
-            <span>
-              {resource.type ? resource.type.name : '\u00A0'}
-            </span>
+            <Fragment>
+              <span className="app-ResourceCard__infoTitle__purpose">
+                {t('ResourceCard.infoTitle.purpose')}
+              </span>
+              <span>
+                {resource.type ? resource.type.name : '\u00A0'}
+              </span>
+            </Fragment>
+
           </ResourceCardInfoCell>
 
           <ResourceCardInfoCell
-            alt={resource.type.name}
+            alt=""
             icon={iconUser}
             onClick={this.handleSearchByPeopleCapacity}
           >
-            <span className="app-ResourceCard__peopleCapacity">
-              {t('ResourceCard.peopleCapacity', { people: resource.peopleCapacity })}
-            </span>
+            <Fragment>
+              <span className="app-ResourceCard__infoTitle__capacity">
+                {t('ResourceCard.infoTitle.peopleCapacity')}
+              </span>
+              <span className="app-ResourceCard__peopleCapacity">
+                {t('ResourceCard.peopleCapacity', { people: resource.peopleCapacity })}
+              </span>
+            </Fragment>
+
           </ResourceCardInfoCell>
 
           <ResourceCardInfoCell
-            alt={resource.type.name}
+            alt=""
             icon={iconTicket}
           >
-            <span className="app-ResourceCard__hourly-price">
-              {getHourlyPrice(t, resource) || '\u00A0'}
-            </span>
+            <Fragment>
+              <span className="app-ResourceCard__infoTitle__price">
+                {t('ResourceCard.infoTitle.price')}
+              </span>
+              <span className="app-ResourceCard__hourly-price">
+                {getHourlyPrice(t, resource) || '\u00A0'}
+              </span>
+            </Fragment>
+
           </ResourceCardInfoCell>
 
           <ResourceCardInfoCell
-            alt={resource.type.name}
+            alt=""
             icon={iconMap}
           >
             <Fragment>
+              <span className="app-ResourceCard__infoTitle__address">
+                {t('ResourceCard.infoTitle.address')}
+              </span>
               <span className="app-ResourceCard__street-address">
                 {unit.streetAddress}
               </span>
@@ -154,26 +175,36 @@ class ResourceCard extends Component {
           </ResourceCardInfoCell>
 
           <ResourceCardInfoCell
-            alt={resource.type.name}
+            alt=""
             icon={iconMapMarker}
             onClick={this.handleSearchByDistance}
           >
-            <span className="app-ResourceCard__distance">
-              {resource.distance ? this.renderDistance(resource.distance) : '\u00A0'}
-            </span>
+            <Fragment>
+              <span className="app-ResourceCard__infoTitle__distance">
+                {t('ResourceCard.infoTitle.distance')}
+              </span>
+              <span className="app-ResourceCard__distance">
+                {resource.distance ? this.renderDistance(resource.distance) : t('ResourceCard.unknown')}
+              </span>
+            </Fragment>
+
           </ResourceCardInfoCell>
 
           {isLoggedIn
             && (
             <ResourceCardInfoCell
-              alt={resource.type.name}
+              alt=""
               icon={resource.isFavorite ? iconHeartFilled : iconHeart}
               onClick={
               resource.isFavorite
                 ? () => actions.unfavoriteResource(resource.id)
                 : () => actions.favoriteResource(resource.id)
             }
-            />
+            >
+              <span className="app-ResourceCard__infoTitle__favorite do-not-capitalize">
+                {resource.isFavorite ? t('ResourceCard.infoTitle.removeFavorite') : t('ResourceCard.infoTitle.addFavorite')}
+              </span>
+            </ResourceCardInfoCell>
             )
           }
         </div>
