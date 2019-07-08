@@ -81,7 +81,7 @@ $purposeCellHeight: 350px;
         flex-direction: column;
         flex: 1;
         justify-content: space-around;
-        background-color: #7dcdc8;
+        background-color: $turku-yellow;
         height: 100%;
         position: relative;
         text-decoration: none;
@@ -89,7 +89,7 @@ $purposeCellHeight: 350px;
 
         &:hover, &:active, &:focus {
           color: $black;
-          background-color: #86dbd6;
+          background-color: $turku-yellow;
         }
         img {
           height: 100%;
