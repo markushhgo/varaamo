@@ -6,7 +6,7 @@ import { FormattedHTMLMessage } from 'react-intl';
 
 import PageWrapper from 'pages/PageWrapper';
 import { shallowWithIntl } from 'utils/testUtils';
-import AboutPage from './AboutPage_new';
+import AboutPage from './AboutPage';
 
 describe('pages/about/AboutPage', () => {
   function getWrapper() {
