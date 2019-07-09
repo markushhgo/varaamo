@@ -8,6 +8,7 @@ import { currentLanguageSelector } from 'state/selectors/translationSelectors';
 import { changeLocale } from 'i18n';
 import TopNavbar from './TopNavbar';
 
+
 const userNameSelector = createSelector(
   currentUserSelector,
   (user) => {
@@ -20,10 +21,13 @@ const userNameSelector = createSelector(
   }
 );
 
+const contrastSelector = state => state.ui.accessability.isNormalContrast;
+
 export const selector = createStructuredSelector({
   isLoggedIn: isLoggedInSelector,
   currentLanguage: currentLanguageSelector,
   userName: userNameSelector,
+  contrast: contrastSelector,
 });
 
 const actions = {

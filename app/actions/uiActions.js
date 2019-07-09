@@ -100,6 +100,10 @@ const toggleResourceMap = createAction(types.UI.TOGGLE_RESOURCE_SHOW_MAP);
 
 const unselectAdminResourceType = createAction(types.UI.UNSELECT_ADMIN_RESOURCE_TYPE);
 
+const changeContrast = createAction(types.UI.CHANGE_CONTRAST);
+
+const changeFontSize = createAction(types.UI.CHANGE_FONTSIZE, fontsize => fontsize);
+
 export {
   cancelReservationEdit,
   cancelReservationEditInInfoModal,
@@ -132,4 +136,6 @@ export {
   toggleResourceMap,
   toggleTimeSlot,
   unselectAdminResourceType,
+  changeContrast,
+  changeFontSize,
 };

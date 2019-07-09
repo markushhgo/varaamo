@@ -14,8 +14,18 @@ describe('shared/top-navbar/TopNavbarContainer', () => {
         intl: {
           locale,
         },
+        ui: {
+          accessability: { isNormalContrast: true }
+        }
       };
     }
+
+    describe('contrast', () => {
+      test('returns contrast', () => {
+        const selected = selector(getState());
+        expect(selected.contrast).toBeDefined();
+      });
+    });
 
     describe('currentLanguage', () => {
       test('returns sv is current locale is se', () => {

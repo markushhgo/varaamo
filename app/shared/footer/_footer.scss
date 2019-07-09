@@ -1,14 +1,12 @@
 footer {
-  background-color: $brand-primary;
-  color: #fff;
+  color: $white;
   z-index: $max-map-z-index + 1;
   margin-top: 40px;
   text-align: center;
-  font-size: 1.6rem;
 
   .brand-link {
     display: block;
-    color: #fff;
+    color: $white;
     font-size: 2.5rem;
     line-height: 50px;
     font-weight: bold;
@@ -18,12 +16,12 @@ footer {
       display: block;
       margin: 0 auto;
       vertical-align: top;
-      height: 50px;
+      height: 100px;
     }
   }
 
   .feedback-link {
-    color: #ccc;
+    color: $white;
   }
 
   .about-link {
@@ -32,10 +30,32 @@ footer {
   }
 
   a {
-    color: #fff;
+    color: $white;
   }
 
   a:hover {
     color: #eee;
+  }
+}
+
+.normal-contrast {
+  background-color: $turku-blue-dark;
+  color: $white;
+}
+
+.high-contrast {
+  background-color: $white;
+  color: $black;
+  border-top: 1px solid $black;
+
+  .brand-link > img {
+    filter: brightness(0);
+  }
+
+  .feedback-link {
+    color: blue;
+  }
+  a, a:hover {
+    color: blue;
   }
 }

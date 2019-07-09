@@ -1,12 +1,15 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import classNames from 'classnames';
 import MenuItem from 'react-bootstrap/lib/MenuItem';
 import Navbar from 'react-bootstrap/lib/Navbar';
 import Nav from 'react-bootstrap/lib/Nav';
 import NavDropdown from 'react-bootstrap/lib/NavDropdown';
 import NavItem from 'react-bootstrap/lib/NavItem';
 
+import FontChanger from './accessability/TopNavbarFontContainer';
+import ContrastChanger from './accessability/TopNavbarContrastContainer';
 import { injectT } from 'i18n';
 
 class TopNavbar extends Component {
@@ -16,7 +19,24 @@ class TopNavbar extends Component {
     isLoggedIn: PropTypes.bool.isRequired,
     t: PropTypes.func.isRequired,
     userName: PropTypes.string.isRequired,
+    contrast: PropTypes.bool,
   };
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      expanded: false,
+    };
+  }
+
+  collapseItem() {
+    this.setState({ expanded: false });
+  }
+
+  toggleCollapse() {
+    this.setState(prevState => ({ expanded: !prevState.expanded }));
+  }
+
 
   handleLoginClick() {
     const next = encodeURIComponent(window.location.href);
@@ -25,53 +45,67 @@ class TopNavbar extends Component {
 
   render() {
     const {
-      changeLocale, currentLanguage, isLoggedIn, t, userName
+      changeLocale,
+      currentLanguage,
+      isLoggedIn,
+      t,
+      userName,
+      contrast,
     } = this.props;
-
+    const highContrastNav = contrast ? '' : 'nav-high-contrast';
+    const logo = (currentLanguage === 'sv') ? 'turku-logo-sv' : 'turku-logo';
     return (
-      <Navbar className="app-TopNavbar" fluid>
+      <Navbar className={classNames('app-TopNavbar', highContrastNav)} expanded={this.state.expanded} fluid onToggle={() => this.toggleCollapse()}>
+        <Navbar.Toggle />
         <Navbar.Header>
           <Navbar.Brand>
-            <Link to="/">
-              <span className="brand-logo" />
+            <Link aria-label="etusivulle" to="/">
+              <span aria-label="Turun vaakuna" className={`${logo}`} title="Etusivu" />
             </Link>
           </Navbar.Brand>
         </Navbar.Header>
+        <Navbar.Collapse>
+          <Nav pullRight>
 
-        <Nav activeKey="none" pullRight>
-          <NavDropdown
-            className="app-TopNavbar__language"
-            eventKey="lang"
-            id="language-nav-dropdown"
-            noCaret
-            onSelect={changeLocale}
-            title={currentLanguage}
-          >
-            {currentLanguage !== 'en' && <MenuItem eventKey="en">EN</MenuItem>}
-            {currentLanguage !== 'fi' && <MenuItem eventKey="fi">FI</MenuItem>}
-            {currentLanguage !== 'sv' && <MenuItem eventKey="sv">SV</MenuItem>}
-          </NavDropdown>
+            <FontChanger />
 
-          {isLoggedIn && (
+            <ContrastChanger />
+
             <NavDropdown
-              className="app-TopNavbar__name"
+              className="app-TopNavbar__language"
               eventKey="lang"
-              id="user-nav-dropdown"
+              id="language-nav-dropdown"
               noCaret
-              title={userName}
+              onSelect={changeLocale}
+              title={currentLanguage}
             >
-              <MenuItem eventKey="logout" href={`/logout?next=${window.location.origin}`}>
-                {t('Navbar.logout')}
-              </MenuItem>
+              {currentLanguage !== 'en' && <MenuItem eventKey="en" tabIndex="0">EN</MenuItem>}
+              {currentLanguage !== 'fi' && <MenuItem eventKey="fi">FI</MenuItem>}
+              {currentLanguage !== 'sv' && <MenuItem eventKey="sv">SV</MenuItem>}
             </NavDropdown>
-          )}
 
-          {!isLoggedIn && (
-            <NavItem id="app-TopNavbar__login" onClick={this.handleLoginClick}>
-              {t('Navbar.login')}
-            </NavItem>
-          )}
-        </Nav>
+            {isLoggedIn && (
+              <NavDropdown
+                aria-label="Logout"
+                className="app-TopNavbar__name"
+                eventKey="lang"
+                id="user-nav-dropdown"
+                noCaret
+                title={userName}
+              >
+                <MenuItem eventKey="logout" href={`/logout?next=${window.location.origin}`}>
+                  {t('Navbar.logout')}
+                </MenuItem>
+              </NavDropdown>
+            )}
+
+            {!isLoggedIn && (
+              <NavItem id="app-TopNavbar__login" onClick={this.handleLoginClick}>
+                {t('Navbar.login')}
+              </NavItem>
+            )}
+          </Nav>
+        </Navbar.Collapse>
       </Navbar>
     );
   }

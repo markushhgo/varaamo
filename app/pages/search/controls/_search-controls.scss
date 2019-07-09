@@ -18,6 +18,8 @@
   }
   &__submit-button {
     min-width: 120px;
+    font-size: 1em;
+    text-transform: uppercase;
   }
   &__reset-button {
     img {
@@ -186,6 +188,7 @@
     border-right-width: 0;
     text-align: left;
     vertical-align: middle;
+    font-size: 1em;
 
     img {
       margin-right: 6px;

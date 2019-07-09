@@ -84,8 +84,9 @@
   "Footer.feedbackLink": "Palautteesi voit lähettää täältä.",
   "Footer.helsinkiText": "Varaamo on Helsingin kaupungin tilanvarauspalvelu. Kyseessä on pilottiversio, josta toivomme Sinulta palautetta.</p>",
   "Footer.vantaaText": "Varaamo on Helsingin kaupungin tilanvarauspalvelu, jota kokeillaan Vantaalla alkuvaiheessa Tikkurilan kirjaston ja Pointin tiloissa. Kyseessä on pilottiversio, josta toivomme Sinulta palautetta.</p>",
+  "Footer.turkuText" : "© Turun Kaupunki <br />PL 355 20101 Turku <br />vaihde (02) 330 000 <br /><a href='http://www.turku.fi'>www.turku.fi</a>",
   "HomePage.title": "Tervetuloa",
-  "HomePage.contentTitle": "Tilat ja laitteet varattavana",
+  "HomePage.contentTitle": "Varaamo –<br />Tilat ja laitteet varattavana",
   "HomePage.contentSubTitle": "Varaamosta voit varata julkisia tiloja ja laitteita omaan käyttöösi",
   "HomePage.bannersTitle": "Mitä haluat tehdä?",
   "HomePage.buttonText": "Hae",
@@ -94,6 +95,7 @@
   "Logo.espooAlt": "Espoon kaupunki",
   "Logo.helsinkiAlt": "Helsingin vaakuna",
   "Logo.vantaaAlt": "Vantaan kaupunki",
+  "Logo.turkuAlt": "Turun kaupunki",
   "MapToggle.noResultsText": "Yhtään hakutulosta ei löytynyt.",
   "MapToggle.resultsText": "Tiloja löytyi {count} {count, plural, one {kpl} other {kpl}}",
   "MapToggle.showList": "Lista",
@@ -301,5 +303,7 @@
   "UserReservationsPage.preliminaryReservationsHeader": "Alustavat varaukset",
   "UserReservationsPage.regularEmptyMessage": "Ei tavallisia varauksia näytettäväksi.",
   "UserReservationsPage.regularReservationsHeader": "Tavalliset varaukset",
-  "UserReservationsPage.title": "Omat varaukset"
+  "UserReservationsPage.title": "Omat varaukset",
+  "Nav.FontSize.title": "Tekstikoko",
+  "Nav.Contrast.title": "Kontrasti"
 }

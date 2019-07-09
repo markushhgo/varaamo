@@ -8,7 +8,10 @@ export default {
   },
   DATE_FORMAT: 'YYYY-MM-DD',
   DEFAULT_LOCALE: 'fi',
-  FEEDBACK_URL: 'https://app.helmet-kirjasto.fi/forms/?site=varaamopalaute',
+  FEEDBACK_URL: {
+    FI: 'https://opaskartta.turku.fi/eFeedback/fi/Feedback/30-S%C3%A4hk%C3%B6iset%20asiointipalvelut',
+    SV: 'https://opaskartta.turku.fi/eFeedback/sv/Feedback/30-S%C3%A4hk%C3%B6iset%20asiointipalvelut',
+  },
   FILTER: {
     timeFormat: 'HH:mm',
     timePeriod: 30,
@@ -75,5 +78,10 @@ export default {
     PREMISES: 'unit_name_lang',
     PEOPLE: 'people_capacity',
     // TODO: sortby 'open now' should be implemented later after API support it
+  },
+  FONT_SIZES: {
+    SMALL: '__font-size-small',
+    MEDIUM: '__font-size-medium',
+    LARGE: '__font-size-large',
   }
 };
