@@ -79,7 +79,6 @@ class TopNavbar extends Component {
               onSelect={changeLocale}
               title={currentLanguage}
             >
-              {currentLanguage !== 'en' && <MenuItem eventKey="en" tabIndex="0">EN</MenuItem>}
               {currentLanguage !== 'fi' && <MenuItem eventKey="fi">FI</MenuItem>}
               {currentLanguage !== 'sv' && <MenuItem eventKey="sv">SV</MenuItem>}
             </NavDropdown>
