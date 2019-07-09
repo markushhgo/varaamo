@@ -77,10 +77,13 @@ class UnconnectedHomePage extends Component {
   }
 
   render() {
-    const { isFetchingPurposes, purposes, t } = this.props;
+    const {
+      isFetchingPurposes, purposes, t, contrast
+    } = this.props;
+    const highContrast = contrast ? '' : 'high-contrast';
     return (
       <div className="app-HomePage">
-        <div className="app-HomePage__content container">
+        <div className={`app-HomePage__content container ${highContrast}`}>
           <h1><FormattedHTMLMessage id="HomePage.contentTitle" /></h1>
           <h5>{t('HomePage.contentSubTitle')}</h5>
           <HomeSearchBox onSearch={this.handleSearch} />
