@@ -130,6 +130,13 @@ $purposeCellHeight: 350px;
 }
 
 .app-HomePage {
+  &__content {
+    &.container.high-contrast {
+      background-color: $white;
+      color:$black;
+      text-shadow: none;
+    }
+  }
   .app-HomePageContent {
     &__banner {
       &__linkWrapper.high-contrast {
