@@ -1,10 +1,6 @@
 import React from 'react';
-// import { Link } from 'react-router';
-import simple from 'simple-mock';
 import { FormattedHTMLMessage } from 'react-intl';
 
-import FeedbackLink from 'shared/feedback-link';
-import * as customizationUtils from 'utils/customizationUtils';
 import { shallowWithIntl } from 'utils/testUtils';
 import FooterContent from './FooterContent';
 
@@ -20,8 +16,13 @@ describe('shared/footer/FooterContent', () => {
       content = getWrapper();
     });
 
+    test('contains turku img', () => {
+      const image = content.find('img');
+      expect(image.length).toBe(1);
+    });
+
     test('contains feedback link', () => {
-      const feedbackLink = content.find(FeedbackLink);
+      const feedbackLink = content.find('.feedback-link');
       expect(feedbackLink.length).toBe(1);
     });
 
@@ -29,73 +30,5 @@ describe('shared/footer/FooterContent', () => {
       const texts = content.find(FormattedHTMLMessage);
       expect(texts.length).toBe(1);
     });
-    // it('renders texts for Helsinki', () => {
-    //  const texts = content.find('p').text();
-    //  expect(texts).to.contain('Footer.helsinkiText');
-    // });
-
-    // it('Logo link has correct onClick prop', () => {
-    //   const onLinkClick = () => {};
-    //   const link = getWrapper({ onLinkClick }).find(Link).filter('.brand-link');
-    //   expect(link.prop('onClick')).to.equal(onLinkClick);
-    // });
-  });
-
-  describe('When Espoo customization is used', () => {
-    let content;
-
-    beforeAll(() => {
-      simple.mock(customizationUtils, 'getCurrentCustomization').returnWith('ESPOO');
-      content = getWrapper();
-    });
-
-    afterAll(() => {
-      simple.restore();
-    });
-
-    test('contains feedback link', () => {
-      const feedbackLink = content.find(FeedbackLink);
-      expect(feedbackLink.length).toBe(1);
-    });
-
-    // it('renders texts for Espoo', () => {
-    //   const texts = content.find('p').text();
-    //   expect(texts).to.contain('Footer.espooText');
-    // });
-
-    // it('Logo link has correct onClick prop', () => {
-    //   const onLinkClick = () => {};
-    //   const link = getWrapper({ onLinkClick }).find(Link).filter('.brand-link');
-    //   expect(link.prop('onClick')).to.equal(onLinkClick);
-    // });
-  });
-
-  describe('When Vantaa customization is used', () => {
-    let content;
-
-    beforeAll(() => {
-      simple.mock(customizationUtils, 'getCurrentCustomization').returnWith('VANTAA');
-      content = getWrapper();
-    });
-
-    afterAll(() => {
-      simple.restore();
-    });
-
-    test('contains feedback link', () => {
-      const feedbackLink = content.find(FeedbackLink);
-      expect(feedbackLink.length).toBe(1);
-    });
-
-    // it('renders texts for Vantaa', () => {
-    //   const texts = content.find('p').text();
-    //   expect(texts).to.contain('Footer.vantaaText');
-    // });
-
-    // it('Logo link has correct onClick prop', () => {
-    //   const onLinkClick = () => {};
-    //   const link = getWrapper({ onLinkClick }).find(Link).filter('.brand-link');
-    //   expect(link.prop('onClick')).to.equal(onLinkClick);
-    // });
   });
 });
