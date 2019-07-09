@@ -219,15 +219,7 @@ class UnconnectedSearchControlsContainer extends Component {
                 </Col>
               </Row>
               <Row>
-                <Col className="app-SearchControlsContainer__control" md={4} sm={6}>
-                  <PositionControl
-                    geolocated={Boolean(this.props.position)}
-                    onConfirm={distance => this.handleFiltersChange({ distance })}
-                    onPositionSwitch={this.handlePositionSwitch}
-                    value={parseInt(filters.distance, 10)}
-                  />
-                </Col>
-                <Col className="app-SearchControlsContainer__control" md={4} sm={6}>
+                <Col className="app-SearchControlsContainer__control" md={12} sm={12}>
                   <TimeRangeControl
                     duration={parseInt(filters.duration, 10)}
                     end={filters.end}
@@ -237,7 +229,15 @@ class UnconnectedSearchControlsContainer extends Component {
                     useTimeRange={filters.useTimeRange}
                   />
                 </Col>
-                <Col className="app-SearchControlsContainer__control" md={4} sm={12}>
+                <Col className="app-SearchControlsContainer__control" md={4} sm={6}>
+                  <PositionControl
+                    geolocated={Boolean(this.props.position)}
+                    onConfirm={distance => this.handleFiltersChange({ distance })}
+                    onPositionSwitch={this.handlePositionSwitch}
+                    value={parseInt(filters.distance, 10)}
+                  />
+                </Col>
+                <Col className="app-SearchControlsContainer__control" md={4} sm={6}>
                   <CheckboxControl
                     id="charge"
                     label={t('SearchControlsContainer.chargeLabel')}
