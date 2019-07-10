@@ -176,7 +176,7 @@ class UnconnectedResourcePage extends Component {
           {!showMap && (
             <PageWrapper title={resource.name || ''} transparent>
               <div>
-                <Col className="app-ResourcePage__content" lg={8} md={8} xs={12}>
+                <Col className="app-ResourcePage__content" lg={9} md={9} xs={12}>
                   {mainImage
                     && this.renderImage(mainImage, mainImageIndex, {
                       mainImageMobileVisibility: true,
