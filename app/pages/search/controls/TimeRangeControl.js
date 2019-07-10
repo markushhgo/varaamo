@@ -132,54 +132,106 @@ class TimeRangeControl extends React.Component {
     const durationOptions = this.getDurationOptions();
 
     return (
-      <div className="app-TimeRangeControl">
-        <CheckboxControl
-          id="timerange-status"
-          label={t('TimeRangeControl.timeRangeTitle')}
-          labelClassName="app-SearchControlsCheckbox__label"
-          onConfirm={this.handleToggleChange}
-          toggleClassName="app-SearchControlsCheckbox__toggle"
-          value={useTimeRange}
-        />
-        <div className="app-TimeRangeControl__range">
-          <SelectControl
-            className="app-TimeRangeControl__range-start"
-            id="time-filter-start-select"
-            isClearable={false}
-            isDisabled={!useTimeRange}
-            isSearchable={false}
-            label={t('TimeRangeControl.start.label')}
-            onChange={this.handleStart}
-            options={startTimeOptions}
-            placeholder=""
-            value={start}
+      <div>
+        <div className="app-TimeRangeControl">
+          <CheckboxControl
+            id="timerange-status"
+            label={t('TimeRangeControl.timeRangeTitle')}
+            labelClassName="app-SearchControlsCheckbox__label"
+            onConfirm={this.handleToggleChange}
+            toggleClassName="app-SearchControlsCheckbox__toggle"
+            value={useTimeRange}
           />
-          <div className="app-TimeRangeControl__range-separator">-</div>
-          <SelectControl
-            className="app-TimeRangeControl__range-end"
-            id="time-filter-end-select"
-            isClearable={false}
-            isDisabled={!useTimeRange}
-            isSearchable={false}
-            label={t('TimeRangeControl.end.label')}
-            onChange={this.handleEnd}
-            options={endTimeOptions}
-            placeholder=""
-            searchable={false}
-            value={end}
+          <div className="app-TimeRangeControl__range">
+            <SelectControl
+              className="app-TimeRangeControl__range-start"
+              id="time-filter-start-select"
+              isClearable={false}
+              isDisabled={!useTimeRange}
+              isSearchable={false}
+              label={t('TimeRangeControl.start.label')}
+              onChange={this.handleStart}
+              options={startTimeOptions}
+              placeholder=""
+              value={start}
+            />
+            <SelectControl
+              className="app-TimeRangeControl__range-end"
+              id="time-filter-end-select"
+              isClearable={false}
+              isDisabled={!useTimeRange}
+              isSearchable={false}
+              label={t('TimeRangeControl.end.label')}
+              onChange={this.handleEnd}
+              options={endTimeOptions}
+              placeholder=""
+              searchable={false}
+              value={end}
+            />
+            <SelectControl
+              className="app-TimeRangeControl__range-duration"
+              id="time-filter-duration-select"
+              isClearable={false}
+              isDisabled={!useTimeRange}
+              isSearchable={false}
+              label={t('TimeRangeControl.duration.label')}
+              onChange={this.handleDuration}
+              options={durationOptions}
+              placeholder=""
+              value={duration}
+            />
+          </div>
+        </div>
+        <div className="koe">
+          <CheckboxControl
+            id="timerange-status"
+            label={t('TimeRangeControl.timeRangeTitle')}
+            labelClassName="app-SearchControlsCheckbox__label"
+            onConfirm={this.handleToggleChange}
+            toggleClassName="app-SearchControlsCheckbox__toggle"
+            value={useTimeRange}
           />
-          <SelectControl
-            className="app-TimeRangeControl__range-duration"
-            id="time-filter-duration-select"
-            isClearable={false}
-            isDisabled={!useTimeRange}
-            isSearchable={false}
-            label={t('TimeRangeControl.duration.label')}
-            onChange={this.handleDuration}
-            options={durationOptions}
-            placeholder=""
-            value={duration}
-          />
+          <div className="app-TimeRangeControl__range">
+            <SelectControl
+              className="app-TimeRangeControl__range-start"
+              id="time-filter-start-select"
+              isClearable={false}
+              isDisabled={!useTimeRange}
+              isSearchable={false}
+              label={t('TimeRangeControl.start.label')}
+              onChange={this.handleStart}
+              options={startTimeOptions}
+              placeholder=""
+              value={start}
+            />
+            <div className="app-TimeRangeControl__range-separator" />
+            <SelectControl
+              className="app-TimeRangeControl__range-end"
+              id="time-filter-end-select"
+              isClearable={false}
+              isDisabled={!useTimeRange}
+              isSearchable={false}
+              label={t('TimeRangeControl.end.label')}
+              onChange={this.handleEnd}
+              options={endTimeOptions}
+              placeholder=""
+              searchable={false}
+              value={end}
+            />
+            <div className="app-TimeRangeControl__range-separator" />
+            <SelectControl
+              className="app-TimeRangeControl__range-duration"
+              id="time-filter-duration-select"
+              isClearable={false}
+              isDisabled={!useTimeRange}
+              isSearchable={false}
+              label={t('TimeRangeControl.duration.label')}
+              onChange={this.handleDuration}
+              options={durationOptions}
+              placeholder=""
+              value={duration}
+            />
+          </div>
         </div>
       </div>
     );

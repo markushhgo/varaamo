@@ -195,7 +195,7 @@ class UnconnectedSearchControlsContainer extends Component {
                     value={filters.purpose}
                   />
                 </Col>
-                <Col className="app-SearchControlsContainer__control" md={4} sm={6}>
+                <Col className="app-SearchControlsContainer__control" md={4} sm={12}>
                   <SelectControl
                     id="unit"
                     isLoading={isFetchingUnits}
@@ -206,7 +206,7 @@ class UnconnectedSearchControlsContainer extends Component {
                     value={filters.unit}
                   />
                 </Col>
-                <Col className="app-SearchControlsContainer__control" md={4} sm={6}>
+                <Col className="app-SearchControlsContainer__control" md={4} sm={12}>
                   <SelectControl
                     id="people"
                     isLoading={isFetchingUnits}
@@ -229,7 +229,7 @@ class UnconnectedSearchControlsContainer extends Component {
                     useTimeRange={filters.useTimeRange}
                   />
                 </Col>
-                <Col className="app-SearchControlsContainer__control" md={4} sm={6}>
+                <Col className="app-SearchControlsContainer__control" md={6} sm={12}>
                   <PositionControl
                     geolocated={Boolean(this.props.position)}
                     onConfirm={distance => this.handleFiltersChange({ distance })}
@@ -237,7 +237,7 @@ class UnconnectedSearchControlsContainer extends Component {
                     value={parseInt(filters.distance, 10)}
                   />
                 </Col>
-                <Col className="app-SearchControlsContainer__control" md={4} sm={6}>
+                <Col className="app-SearchControlsContainer__control" md={6} sm={12}>
                   <CheckboxControl
                     id="charge"
                     label={t('SearchControlsContainer.chargeLabel')}
