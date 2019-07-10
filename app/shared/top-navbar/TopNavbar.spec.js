@@ -34,9 +34,8 @@ describe('shared/top-navbar/TopNavbar', () => {
     test('renders MenuItems for other languages', () => {
       const currentLanguage = 'fi';
       const menuItems = getLanguageNavWrapper({ currentLanguage }).find(MenuItem);
-      expect(menuItems).toHaveLength(2);
-      expect(menuItems.at(0).prop('eventKey')).toBe('en');
-      expect(menuItems.at(1).prop('eventKey')).toBe('sv');
+      expect(menuItems).toHaveLength(1);
+      expect(menuItems.at(0).prop('eventKey')).toBe('sv');
     });
   });
 
