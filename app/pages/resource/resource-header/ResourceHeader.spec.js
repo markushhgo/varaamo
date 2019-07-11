@@ -1,5 +1,3 @@
-import { exec } from 'child_process';
-
 import React from 'react';
 import { FormattedNumber } from 'react-intl';
 import Immutable from 'seamless-immutable';
