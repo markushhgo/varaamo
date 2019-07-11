@@ -6,7 +6,7 @@ $cellHeight: 50%;
 
 .app-ResourceCard {
   margin: 20px 0;
-  background-color: white;
+  background-color: $white;
   display: flow-root;
 
   @media (min-width: $screen-md-min) {
