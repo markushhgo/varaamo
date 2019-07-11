@@ -90,6 +90,7 @@ describe('pages/resource/resource-info/ResourceInfo', () => {
     expect(link).toHaveLength(1);
     expect(link.prop('href')).toBe(unit.wwwUrl);
     expect(link.prop('target')).toBe('_blank');
+    expect(link.text()).toBe('ResourceInfo.webSiteLink');
   });
 
   test('renders service map link', () => {
@@ -109,6 +110,7 @@ describe('pages/resource/resource-info/ResourceInfo', () => {
     expect(link).toHaveLength(1);
     expect(link.prop('href')).toBe(expected);
     expect(link.prop('target')).toBe('_blank');
+    expect(link.text()).toBe('ResourceInfo.serviceMapLink');
   });
 
   test('does not render service map link if unit empty', () => {

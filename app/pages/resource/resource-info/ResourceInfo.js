@@ -42,7 +42,7 @@ function ResourceInfo({
               {unit && unit.wwwUrl && (
                 <span className="app-ResourceInfo__www">
                   <a href={unit.wwwUrl} rel="noopener noreferrer" target="_blank">
-                    {unit.wwwUrl}
+                    {t('ResourceInfo.webSiteLink')}
                   </a>
                 </span>
               )}
