@@ -49,24 +49,25 @@ $cellHeight: 50%;
   }
 
   &__content {
-    padding: $resourceCardPadding;
+    padding-left: $resourceCardPadding;
     @media (min-width: $screen-md-min) {
       flex: 1 2 40%;
-      overflow: hidden;
+      overflow: none;
     }
   }
 
   h4 {
+    font-size: 1.4rem;
     margin-top: 0;
     margin-bottom: 0;
     @media (max-width: $screen-xs-max) {
-      font-size: 1.6rem;
+      font-size: 1rem;
       line-height: 1;
     }
   }
 
   &__unit-name {
-    font-size: 1.5rem;
+    font-size: 0.9rem;
     font-weight: bold;
     margin-bottom: 5px;
     text-decoration: none;
@@ -89,7 +90,7 @@ $cellHeight: 50%;
     text-align: center;
   }
   &__description {
-    font-size: 1.4rem;
+    font-size: 1.1rem;
     line-height: 2rem;
     max-height: 2*3rem;
     margin-top: 15px;
@@ -97,9 +98,9 @@ $cellHeight: 50%;
   }
 
   &__info {
-    padding: $resourceCardPadding;
     display: flex;
     flex-wrap: wrap;
+    font-size: 0.5rem;
 
     &-cell {
       border: none;
@@ -118,24 +119,27 @@ $cellHeight: 50%;
         box-shadow: none;
       }
 
+      @media screen and (max-width: 767px) {
+        display: flex;
+        width: 50%;
+      }
+
       &__icon {
         width: $line-height-computed*1.2;
       }
 
       span {
-        font-size: 1.2rem;
+        font-size: 0.8rem;
         font-weight: bold;
         text-align: center;
         text-transform: capitalize;
       }
-    }
-
-    @media (min-width: $screen-xs-min) {
+    }  @media (min-width: $screen-xs-min) {
       display: inline-block;
       width: 100%;
     }
     @media (min-width: $screen-md-min) {
-      flex: 1 2 30%;
+      flex: 1 2 40%;
     }
   }
 
