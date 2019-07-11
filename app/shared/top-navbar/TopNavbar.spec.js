@@ -4,6 +4,7 @@ import MenuItem from 'react-bootstrap/lib/MenuItem';
 
 import { shallowWithIntl } from 'utils/testUtils';
 import TopNavbar from './TopNavbar';
+import MobileNavbar from './mobile/MobileNavbar';
 
 describe('shared/top-navbar/TopNavbar', () => {
   function getWrapper(props) {
@@ -15,6 +16,20 @@ describe('shared/top-navbar/TopNavbar', () => {
     };
     return shallowWithIntl(<TopNavbar {...defaults} {...props} />);
   }
+
+  describe('renders mobile', () => {
+    test('renders MobileNavbar', () => {
+      const element = getWrapper().find(MobileNavbar);
+      expect(element.length).toBe(1);
+    });
+
+    test('renders all 3 navbar-toggles', () => {
+      const first = getWrapper().find('.navbar-toggle');
+      expect(first.length).toBe(2);
+      const second = getWrapper().find('.navbar-toggle.lang');
+      expect(second.length).toBe(1);
+    });
+  });
 
   describe('language nav', () => {
     function getLanguageNavWrapper(props) {
