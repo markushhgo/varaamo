@@ -14,6 +14,7 @@ $cellHeight: 50%;
     flex-flow: row nowrap;
     justify-content: flex-start;
     height: $app-ResourceCard-height;
+    width: $app-ResourceCard-width;
   }
 
   a {
@@ -95,6 +96,7 @@ $cellHeight: 50%;
     max-height: 2*3rem;
     margin-top: 15px;
     overflow: hidden;
+    width: 400px;
   }
 
   &__info {
@@ -107,8 +109,7 @@ $cellHeight: 50%;
       background: transparent;
       display: inline-flex;
       flex-direction: column;
-      width: $cellWidth;
-      height: $cellHeight;
+      width: 33%;
       align-items: center;
       font-size: 2em;
       &:hover,
