@@ -47,7 +47,7 @@ function ResourceHeader({
   const distance = formatDistance(resource.distance);
 
   return (
-    <section className="app-ResourceHeader">
+    <section aria-label={t('ResourceHeader.title')} className="app-ResourceHeader">
       <Grid>
         <div className="app-ResourceHeader__content">
           {showBackButton && (

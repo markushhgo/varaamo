@@ -183,7 +183,7 @@ class UnconnectedResourcePage extends Component {
                     })}
                   <ResourceInfo isLoggedIn={isLoggedIn} resource={resource} unit={unit} />
 
-                  <Panel defaultExpanded header={t('ResourceInfo.reserveTitle')}>
+                  <Panel aria-label={t('ResourcePage.timeTable')} defaultExpanded header={t('ResourceInfo.reserveTitle')} role="region">
                     {resource.externalReservationUrl && (
                       <form action={resource.externalReservationUrl}>
                         <input
@@ -227,7 +227,9 @@ class UnconnectedResourcePage extends Component {
                   </Panel>
                 </Col>
                 <Col className="app-ResourceInfo__images" lg={3} md={3} xs={12}>
-                  {images.map(this.renderImage)}
+                  <section>
+                    {images.map(this.renderImage)}
+                  </section>
                 </Col>
               </div>
             </PageWrapper>
