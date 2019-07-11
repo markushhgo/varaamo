@@ -57,7 +57,7 @@ $cellHeight: 50%;
   }
 
   h4 {
-    font-size: 1.4rem;
+    font-size: 1.4em;
     margin-top: 0;
     margin-bottom: 0;
     @media (max-width: $screen-xs-max) {
@@ -67,7 +67,7 @@ $cellHeight: 50%;
   }
 
   &__unit-name {
-    font-size: 0.9rem;
+    font-size: 0.9em;
     font-weight: bold;
     margin-bottom: 5px;
     text-decoration: none;
@@ -90,7 +90,7 @@ $cellHeight: 50%;
     text-align: center;
   }
   &__description {
-    font-size: 1.1rem;
+    font-size: 1.1em;
     line-height: 2rem;
     max-height: 2*3rem;
     margin-top: 15px;
@@ -100,7 +100,7 @@ $cellHeight: 50%;
   &__info {
     display: flex;
     flex-wrap: wrap;
-    font-size: 0.5rem;
+    font-size: 0.5em;
 
     &-cell {
       border: none;
@@ -110,6 +110,7 @@ $cellHeight: 50%;
       width: $cellWidth;
       height: $cellHeight;
       align-items: center;
+      font-size: 2em;
       &:hover,
       &:focus {
         outline: none;
@@ -129,7 +130,7 @@ $cellHeight: 50%;
       }
 
       span {
-        font-size: 0.8rem;
+        font-size: 0.8em;
         font-weight: bold;
         text-align: center;
         text-transform: capitalize;
