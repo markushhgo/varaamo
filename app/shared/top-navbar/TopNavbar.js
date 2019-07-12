@@ -62,7 +62,7 @@ class TopNavbar extends Component {
       userName,
       contrast,
     } = this.props;
-    const highContrastNav = contrast ? '' : 'nav-high-contrast';
+    const highContrastNav = contrast ? '' : 'high-contrast';
     const logo = (currentLanguage === 'sv') ? 'turku-logo-sv' : 'turku-logo';
     return (
       <div>
@@ -76,10 +76,8 @@ class TopNavbar extends Component {
               </div>
             </Navbar.Toggle>
             <div className="navbar-toggle">
-              <div className="mobile__main">
-                <div className="mobile_accessability" onClick={() => this.toggleMobileNavbar()} style={{ cursor: 'pointer' }} type="button">
-                  <FontAwesomeIcon icon={faWheelchair} />
-                </div>
+              <div className="mobile_accessability" onClick={() => this.toggleMobileNavbar()} type="button">
+                <FontAwesomeIcon icon={faWheelchair} />
               </div>
             </div>
             <div className="navbar-toggle lang" data-target="#login" data-toggle="collapse">
@@ -87,7 +85,7 @@ class TopNavbar extends Component {
                 <NavDropdown
                   className="mobile_lang_dropdown"
                   eventKey="lang"
-                  id="test"
+                  id="mobile"
                   noCaret
                   onSelect={changeLocale}
                   title={currentLanguage}
