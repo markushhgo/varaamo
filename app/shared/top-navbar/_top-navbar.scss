@@ -4,11 +4,12 @@
     color: $black;
 
     > div.container-fluid {
-      margin-left: -15px;
-      margin-right: -15px;
+
       .navbar-brand {
         margin-left: 0;
-
+        &#main {
+//          padding-left: 0;
+        }
       }
     }
 
@@ -148,8 +149,8 @@
     // Start: Remove responsive features from bootstrap nav to create a single-line top nav
     .navbar-header {
 //      float: left;
-      margin-left: 0;
-      margin-right: 0;
+      margin-left: -15px;
+      margin-right: -15px;
     }
 
 
