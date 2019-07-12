@@ -223,9 +223,9 @@
     position: static;
   }
   .DayPicker-Month {
-    margin: 0;
+    margin:0 10px 0 0;
     border-collapse: separate;
-    width: 100%;
+    width: 400px;
   }
   .DayPicker-Day {
     border: 2px solid $white;
@@ -235,6 +235,13 @@
     background-color: $light-gray;
     border-radius: 0;
     font-size: 1em;
+
+    @media screen and (max-width: 330px){
+
+      padding: 5px;
+
+    }
+
     &--available:not(.DayPicker-Day--disabled) {
       background-color: $light-gray;
       &.DayPicker-Day--selected {

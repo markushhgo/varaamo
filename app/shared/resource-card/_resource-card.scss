@@ -33,7 +33,7 @@ $cellHeight: 50%;
       max-width: 200px;
       height: 100%;
     }
-    @media (max-width: 1370px) {
+    @media screen and (max-width: 767px) {
       height: $app-ResourceCard-height;
       width: 100%;
     }
@@ -47,6 +47,7 @@ $cellHeight: 50%;
     background-repeat: no-repeat;
     background-position: 50% 50%;
     background-size: cover;
+    outline-width: 7px;
   }
 
   &__content {
@@ -61,7 +62,7 @@ $cellHeight: 50%;
     font-size: 1.4em;
     margin-top: 0;
     margin-bottom: 0;
-    @media (max-width: 1370px) {
+    @media screen and (max-width: 767px) {
       font-size: 1rem;
       line-height: 1;
     }
@@ -98,7 +99,7 @@ $cellHeight: 50%;
     overflow: hidden;
     width: -webkit-fill-available;
 
-    @media (max-width: 1370px) {
+    @media screen and (max-width: 767px) {
       font-size: 0.9em;
       width: -webkit-fill-available;
     }
@@ -120,14 +121,13 @@ $cellHeight: 50%;
       font-size: 2em;
       &:hover,
       &:focus {
-        outline: none;
         &:active {
           outline: none;
         }
         box-shadow: none;
       }
 
-      @media (max-width: 1370px) {
+      @media screen and (max-width: 767px) {
         width: 100%;
       }
 
