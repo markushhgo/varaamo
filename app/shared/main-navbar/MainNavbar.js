@@ -37,7 +37,7 @@ class MainNavbar extends React.Component {
       t,
       contrast,
     } = this.props;
-    const highContrastNav = contrast ? '' : 'main-nav-high-contrast';
+    const highContrastNav = contrast ? '' : 'high-contrast';
     return (
       <Navbar className={classNames('app-MainNavbar', highContrastNav)} expanded={this.state.expanded} fluid onToggle={() => this.toggleCollapse()}>
         <Navbar.Header>

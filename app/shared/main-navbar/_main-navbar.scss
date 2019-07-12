@@ -45,28 +45,33 @@ $externalIconMarginLeft: 5px;
   }
 }
 
-.main-nav-high-contrast {
+.app-MainNavbar {
+
+  &.high-contrast {
   background-color: $white;
   border-bottom: 1px solid $black;
   .navbar-nav li,
-  .navbar-nav > .active {
-    a {
-      color: $black;
+    .navbar-nav > .active {
+      a {
+        color: $black;
+      }
+      a:hover {
+        color: $black;
+      }
+      a:after,
+      a:before,
+      a:hover:after {
+        color: $black;
+        border-color: $black;
+        border-bottom: 1px solid;
+      }
     }
-    a:hover {
+    .navbar-brand,
+    .navbar-brand:hover,
+    .navbar-toggle .icon-bar {
       color: $black;
-    }
-    a:after,
-    a:before,
-    a:hover:after {
-      color: $black;
-      border-color: $black;
-      border-bottom: 1px solid;
     }
   }
-  .navbar-brand,
-  .navbar-brand:hover,
-  .navbar-toggle .icon-bar {
-    color: $black;
-  }
+
 }
+

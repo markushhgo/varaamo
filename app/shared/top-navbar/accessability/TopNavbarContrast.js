@@ -12,7 +12,7 @@ class ContrastChanger extends Component {
   render() {
     const { t, changeContrast } = this.props;
     return (
-      <li className="app-TopNavbar__contrast" role="presentation">
+      <li className="navbar__contrast" role="presentation">
         <div className="accessability__contrast">
           {t('Nav.Contrast.title')}
           <div className="contrast_button" onClick={() => changeContrast()} tabIndex="0" />

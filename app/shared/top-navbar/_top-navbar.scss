@@ -3,39 +3,50 @@
     margin-bottom: 0;
     color: $black;
 
+    > div.container-fluid {
+      margin-left: -15px;
+      margin-right: -15px;
+      .navbar-brand {
+        margin-left: 0;
+
+      }
+    }
+
     .turku-logo {
       background-image: url('../../assets/pictures/logo.png');
       background-size: contain;
       background-repeat: no-repeat;
       filter: brightness(0);
 
-      @media (max-width:978px) {
-        display: block;
-        height: 1.875rem;
-        width: 60px;
-      }
-      @media (min-width:979px) {
+      &-sv {
         display: block;
         height: 1.875rem;
         width: 120px;
-      }
-      &.high-contrast {
+        background-image: url('../../assets/pictures/logo_sv.png');
+        background-size: contain;
+        background-repeat: no-repeat;
         filter: brightness(0);
       }
     }
-    .turku-logo-sv {
-      display: block;
-      height: 1.875rem;
-      width: 120px;
-      background-image: url('../../assets/pictures/logo_sv.png');
-      background-size: contain;
-      background-repeat: no-repeat;
-      filter: brightness(0);
+    .turku-logo, .turku-logo-sv {
+
+      @media (max-width:$screen-sm-max) {
+        display: block;
+        height: 1.875em;
+        width: 5.5em;
+      }
+
+      @media (min-width:$screen-md-min) {
+        display: block;
+        height: 1.875em;
+        width: 5.5em;
+      }
 
       &.high-contrast {
         filter: brightness(0);
       }
     }
+
 
     .brand-logo {
       @include helsinki-logo($black);
@@ -64,7 +75,10 @@
         padding-top: 10px;
         padding-bottom: 14px;
         margin-right: 15px;
+        margin-left: 15px;
         font-size: 1em;
+        border-bottom: none;
+        display: block;
         cursor: default;
         span {
           padding-left: 0px;
@@ -90,12 +104,14 @@
       &__contrast {
         padding-top: 18px;
         padding-bottom: 18px;
+        margin-right: 15px;
+        margin-left: 15px;
 
         .contrast_button {
           background-image: url('../../assets/icons/iconContrastSV.svg');
-          background-size: 24px 24px;
-          width: 24px;
-          height: 24px;
+          background-size: 1.5em 1.5em;
+          width: 1.5em;
+          height: 1.5em;
           float: right;
           cursor: pointer;
           filter: invert(0%);
@@ -120,7 +136,7 @@
         }
         a#language-nav-dropdown {
           text-transform: uppercase;
-          margin: 0 25px 0 10px;
+          margin: 0 15px 0 15px;
         }
       }
       li.disabled > a {
@@ -131,15 +147,16 @@
 
     // Start: Remove responsive features from bootstrap nav to create a single-line top nav
     .navbar-header {
-      float: left;
+//      float: left;
       margin-left: 0;
       margin-right: 0;
     }
 
+
     .navbar-nav {
       float: left;
       margin: 0;
-      margin-right: -15px;
+      margin-right: 0px;
 
 
       > li {
@@ -150,8 +167,10 @@
           position: relative;
           padding-right: 0;
           margin-right: 15px;
+          margin-left: 15px;
           font-weight: 500;
           font-size: inherit;
+          line-height: 1.5;
           color: $black;
           &:hover {
             color: $black;
@@ -207,52 +226,93 @@
     &.navbar-default .navbar-nav .open .dropdown-menu > li > a:hover {
       background-color: $white;
     }
-  }
 
-  .nav-high-contrast {
+    &.high-contrast {
     background-color: $white;
     color: $black;
     border-bottom: 1px solid $black;
 
-    .navbar-brand {
-      span {
-        filter: brightness(0);
-      }
-    }
-
-    .app-TopNavbar__contrast > .accessability__contrast > .contrast_button {
-      filter: invert(0%);
-    }
-
-
-
-    .navbar-nav {
-      li {
-        a {
-          color: $black;
-          &:hover {
-            color: $black;
-          }
-          &:active {
-            color: $black;
-          }
-          &:focus {
-            color: $black;
-          }
+      .navbar-brand {
+        span {
+          filter: brightness(0);
         }
       }
-      > .active > a:after,
-      > li > a:hover:after {
-        content: '';
-        border-bottom: 1px solid $black;
-        bottom: 21px;
+
+      .navbar__contrast > .accessability__contrast > .contrast_button {
+        filter: invert(0%);
       }
-    }
-    > .open > a,
+
+      .navbar-nav {
+        li {
+          a {
+            color: $black;
+            &:hover {
+              color: $black;
+            }
+            &:active {
+              color: $black;
+            }
+            &:focus {
+              color: $black;
+            }
+          }
+        }
+        > .active > a:after,
+        > li > a:hover:after {
+          content: '';
+          border-bottom: 1px solid $black;
+          bottom: 21px;
+        }
+      }
+      > .open > a,
       > .open > a:hover,
       > .open > a:focus,
       > .open > a:active {
         color: inherit;
+        }
+    }
+  }
 
+
+
+
+  .mobile_lang_dropdown {
+    list-style: none;
+    text-transform: uppercase;
+
+    a:hover,
+    a:active,
+    a:focus {
+      color: $black;
+    }
+    .dropdown-menu {
+      min-width: 10px;
+
+      > li >a:hover {
+        color: $black;
+        text-decoration: none;
+        background-color: $white;
       }
+    }
+  }
+  .navbar-toggle {
+    margin-left: 15px;
+
+    &.lang {
+      margin-left: 0;
+    }
+
+    .mobile_accessability {
+      cursor: pointer;
+    }
+  }
+
+  .navbar-collapse > ul li.app-TopNavbar__language.dropdown,
+  .navbar-collapse > ul li.navbar__font,
+  .navbar-collapse > ul li.navbar__contrast  {
+    @media(max-width: $screen-sm-max) {
+      display: none;
+    }
+
+
   }
