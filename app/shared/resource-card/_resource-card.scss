@@ -96,11 +96,11 @@ $cellHeight: 50%;
     max-height: 2*3rem;
     margin-top: 15px;
     overflow: hidden;
-    width: 400px;
+    width: -webkit-fill-available;
 
     @media (max-width: 1370px) {
       font-size: 0.9em;
-      width: 270px;
+      width: -webkit-fill-available;
     }
   }
 
@@ -142,8 +142,11 @@ $cellHeight: 50%;
         text-transform: capitalize;
       }
     }  @media (min-width: $screen-xs-min) {
-      display: inline-block;
+      display: flex;
       width: 100%;
+      flex-direction: row;
+      flex-flow: inherit;
+      overflow: hidden;
     }
     @media (min-width: $screen-md-min) {
       flex: 1 2 40%;
