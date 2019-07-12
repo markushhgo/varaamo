@@ -96,7 +96,7 @@ class TopNavbar extends Component {
               </div>
             </div>
             <Navbar.Brand>
-              <Link aria-label="etusivulle" to="/">
+              <Link aria-label="etusivulle" id="main" to="/">
                 <span aria-label="Turun vaakuna" className={`${logo}`} title="Etusivu" />
               </Link>
             </Navbar.Brand>
