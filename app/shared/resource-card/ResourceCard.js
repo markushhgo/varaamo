@@ -11,6 +11,7 @@ import iconMapMarker from 'hel-icons/dist/shapes/map-marker.svg';
 import iconTicket from 'hel-icons/dist/shapes/ticket.svg';
 import iconUser from 'hel-icons/dist/shapes/user-o.svg';
 import iconHeart from 'hel-icons/dist/shapes/heart-o.svg';
+import Col from 'react-bootstrap/lib/Col';
 
 import { injectT } from 'i18n';
 import iconHeartFilled from 'assets/icons/heart-filled.svg';
@@ -68,7 +69,7 @@ class ResourceCard extends Component {
 
   render() {
     const {
-      date, resource, t, unit, actions, isLoggedIn
+      date, resource, t, unit, actions, isLoggedIn, isLargerFontSizeUsed
     } = this.props;
     const { pathname, query } = getResourcePageUrlComponents(resource, date);
     const linkTo = {
@@ -79,11 +80,21 @@ class ResourceCard extends Component {
 
     return (
       <div
-        className={classNames('app-ResourceCard', {
-          'app-ResourceCard__stacked': this.props.stacked,
-        })}
+        className={classNames(
+          'app-ResourceCard',
+          !isLargerFontSizeUsed && 'app-ResourceCard__normal-font-size',
+          { 'app-ResourceCard__stacked': this.props.stacked, }
+        )}
       >
-        <Link aria-label={resource.name} className="app-ResourceCard__image-link" onClick={this.handleLinkClick} to={linkTo}>
+        <Link
+          aria-label={resource.name}
+          className={classNames(
+            'app-ResourceCard__image-link',
+            isLargerFontSizeUsed && 'app-ResourceCard__image-link__large-font-size'
+          )}
+          onClick={this.handleLinkClick}
+          to={linkTo}
+        >
           <BackgroundImage height={420} image={getMainImage(resource.images)} width={700} />
         </Link>
         <div className="app-ResourceCard__content">
@@ -108,103 +119,120 @@ class ResourceCard extends Component {
         </div>
 
         <div className="app-ResourceCard__info">
-          <ResourceCardInfoCell
-            alt=""
-            icon={iconHome}
-            onClick={this.handleSearchByType}
-          >
-            <Fragment>
-              <span className="app-ResourceCard__infoTitle__purpose">
-                {t('ResourceCard.infoTitle.purpose')}
-              </span>
-              <span>
-                {resource.type ? resource.type.name : '\u00A0'}
-              </span>
-            </Fragment>
+          <Col md={4} sm={4} xs={6}>
+            <ResourceCardInfoCell
+              alt=""
+              icon={iconHome}
+              onClick={this.handleSearchByType}
+            >
+              <Fragment>
+                <span className="app-ResourceCard__infoTitle__purpose">
+                  {t('ResourceCard.infoTitle.purpose')}
+                </span>
+                <span>
+                  {resource.type ? resource.type.name : '\u00A0'}
+                </span>
+              </Fragment>
 
-          </ResourceCardInfoCell>
+            </ResourceCardInfoCell>
+          </Col>
 
-          <ResourceCardInfoCell
-            alt=""
-            icon={iconUser}
-            onClick={this.handleSearchByPeopleCapacity}
-          >
-            <Fragment>
-              <span className="app-ResourceCard__infoTitle__capacity">
-                {t('ResourceCard.infoTitle.peopleCapacity')}
-              </span>
-              <span className="app-ResourceCard__peopleCapacity">
-                {t('ResourceCard.peopleCapacity', { people: resource.peopleCapacity })}
-              </span>
-            </Fragment>
+          <Col md={4} sm={4} xs={6}>
+            <ResourceCardInfoCell
+              alt=""
+              icon={iconUser}
+              onClick={this.handleSearchByPeopleCapacity}
+            >
+              <Fragment>
+                <span className="app-ResourceCard__infoTitle__capacity">
+                  {t('ResourceCard.infoTitle.peopleCapacity')}
+                </span>
+                <span className="app-ResourceCard__peopleCapacity">
+                  {t('ResourceCard.peopleCapacity', { people: resource.peopleCapacity })}
+                </span>
+              </Fragment>
 
-          </ResourceCardInfoCell>
+            </ResourceCardInfoCell>
+          </Col>
 
-          <ResourceCardInfoCell
-            alt=""
-            icon={iconTicket}
-          >
-            <Fragment>
-              <span className="app-ResourceCard__infoTitle__price">
-                {t('ResourceCard.infoTitle.price')}
-              </span>
-              <span className="app-ResourceCard__hourly-price">
-                {getHourlyPrice(t, resource) || '\u00A0'}
-              </span>
-            </Fragment>
 
-          </ResourceCardInfoCell>
+          <Col md={4} sm={4} xs={6}>
+            <ResourceCardInfoCell
+              alt=""
+              icon={iconTicket}
+            >
+              <Fragment>
+                <span className="app-ResourceCard__infoTitle__price">
+                  {t('ResourceCard.infoTitle.price')}
+                </span>
+                <span className="app-ResourceCard__hourly-price">
+                  {getHourlyPrice(t, resource) || '\u00A0'}
+                </span>
+              </Fragment>
 
-          <ResourceCardInfoCell
-            alt=""
-            icon={iconMap}
-          >
-            <Fragment>
-              <span className="app-ResourceCard__infoTitle__address">
-                {t('ResourceCard.infoTitle.address')}
-              </span>
-              <span className="app-ResourceCard__street-address">
-                {unit.streetAddress}
-              </span>
-              <span className="app-ResourceCard__zip-address">
-                {unit.addressZip}
-                {' '}
-                {unit.municipality}
-              </span>
-            </Fragment>
-          </ResourceCardInfoCell>
+            </ResourceCardInfoCell>
+          </Col>
 
-          <ResourceCardInfoCell
-            alt=""
-            icon={iconMapMarker}
-            onClick={this.handleSearchByDistance}
-          >
-            <Fragment>
-              <span className="app-ResourceCard__infoTitle__distance">
-                {t('ResourceCard.infoTitle.distance')}
-              </span>
-              <span className="app-ResourceCard__distance">
-                {resource.distance ? this.renderDistance(resource.distance) : t('ResourceCard.unknown')}
-              </span>
-            </Fragment>
 
-          </ResourceCardInfoCell>
+          <Col md={4} sm={4} xs={6}>
+            <ResourceCardInfoCell
+              alt=""
+              icon={iconMap}
+            >
+              <Fragment>
+                <span className="app-ResourceCard__infoTitle__address">
+                  {t('ResourceCard.infoTitle.address')}
+                </span>
+                <span className="app-ResourceCard__street-address">
+                  {unit.streetAddress}
+                </span>
+                <span className="app-ResourceCard__zip-address">
+                  {unit.addressZip}
+                  {' '}
+                  {unit.municipality}
+                </span>
+              </Fragment>
+            </ResourceCardInfoCell>
+          </Col>
+
+
+          <Col md={4} sm={4} xs={6}>
+            <ResourceCardInfoCell
+              alt=""
+              icon={iconMapMarker}
+              onClick={this.handleSearchByDistance}
+            >
+              <Fragment>
+                <span className="app-ResourceCard__infoTitle__distance">
+                  {t('ResourceCard.infoTitle.distance')}
+                </span>
+                <span className="app-ResourceCard__distance">
+                  {resource.distance ? this.renderDistance(resource.distance) : t('ResourceCard.unknown')}
+                </span>
+              </Fragment>
+
+            </ResourceCardInfoCell>
+          </Col>
+
 
           {isLoggedIn
             && (
-            <ResourceCardInfoCell
-              alt=""
-              icon={resource.isFavorite ? iconHeartFilled : iconHeart}
-              onClick={
-              resource.isFavorite
-                ? () => actions.unfavoriteResource(resource.id)
-                : () => actions.favoriteResource(resource.id)
-            }
-            >
-              <span className="app-ResourceCard__infoTitle__favorite do-not-capitalize">
-                {resource.isFavorite ? t('ResourceCard.infoTitle.removeFavorite') : t('ResourceCard.infoTitle.addFavorite')}
-              </span>
-            </ResourceCardInfoCell>
+              <Col md={4} sm={4} xs={6}>
+                <ResourceCardInfoCell
+                  alt=""
+                  icon={resource.isFavorite ? iconHeartFilled : iconHeart}
+                  onClick={
+                    resource.isFavorite
+                      ? () => actions.unfavoriteResource(resource.id)
+                      : () => actions.favoriteResource(resource.id)
+                  }
+                >
+                  <span className="app-ResourceCard__infoTitle__favorite do-not-capitalize">
+                    {resource.isFavorite ? t('ResourceCard.infoTitle.removeFavorite') : t('ResourceCard.infoTitle.addFavorite')}
+                  </span>
+                </ResourceCardInfoCell>
+              </Col>
+
             )
           }
         </div>
@@ -223,6 +251,7 @@ ResourceCard.propTypes = {
   unit: PropTypes.object.isRequired,
   actions: PropTypes.object,
   isLoggedIn: PropTypes.bool,
+  isLargerFontSizeUsed: PropTypes.bool,
 };
 
 const UnconnectedResourceCard = injectT(ResourceCard);
