@@ -83,6 +83,7 @@ export class UnconnectedResourceCalendar extends Component {
     return (
       <div className="app-ResourceCalendar">
         <button
+          aria-label={t('ResourceCalendar.previousWeek')}
           className="app-ResourceCalendar__week-button app-ResourceCalendar__week-button--prev"
           onClick={() => this.handleDateChange(
             moment(selectedDay).subtract(1, 'w').toDate()
@@ -129,6 +130,7 @@ export class UnconnectedResourceCalendar extends Component {
           </Overlay>
         </div>
         <button
+          aria-label={t('ResourceCalendar.nextWeek')}
           className="app-ResourceCalendar__week-button app-ResourceCalendar__week-button--next"
           onClick={() => this.handleDateChange(
             moment(selectedDay).add(1, 'w').toDate()

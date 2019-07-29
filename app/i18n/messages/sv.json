@@ -233,6 +233,8 @@
   "ResourceAvailability.closed": "Stängt",
   "ResourceAvailability.reserved": "Bokat hela dagen",
   "ResourceAvailability.reservingRestricted": "Kan inte bokas",
+  "ResourceCalendar.nextWeek": "Nästa vecka",
+  "ResourceCalendar.previousWeek": "Förra veckan",
   "ResourceCard.peopleCapacity": "{people} personer",
   "ResourceHeader.purpose": "Ändamål",
   "ResourceHeader.capacity": "Kapacitet",

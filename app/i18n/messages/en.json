@@ -229,6 +229,8 @@
   "ResourceAvailability.closed": "Closed",
   "ResourceAvailability.reserved": "Reserved for the whole day",
   "ResourceAvailability.reservingRestricted": "Not available for reservation",
+  "ResourceCalendar.nextWeek": "Next week",
+  "ResourceCalendar.previousWeek": "Previous week",
   "ResourceCard.peopleCapacity": "{people} people",
   "ResourceHeader.purpose": "Purpose",
   "ResourceHeader.capacity": "Capacity",

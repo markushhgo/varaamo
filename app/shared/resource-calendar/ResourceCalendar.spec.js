@@ -246,6 +246,18 @@ describe('shared/resource-calendar/ResourceCalendar', () => {
         expect(buttons.length).toBe(2);
       }
     );
+
+    test('previous week button has correct aria-label prop', () => {
+      const button = resourceCalWrapper.find('.app-ResourceCalendar__week-button--prev');
+      expect(button.length).toBe(1);
+      expect(button.prop('aria-label')).toBe('ResourceCalendar.previousWeek');
+    });
+
+    test('previous week button has correct aria-label prop', () => {
+      const button = resourceCalWrapper.find('.app-ResourceCalendar__week-button--next');
+      expect(button.length).toBe(1);
+      expect(button.prop('aria-label')).toBe('ResourceCalendar.nextWeek');
+    });
     test(
       'calls handleDateChange method when the previous week button is clicked',
       () => {
