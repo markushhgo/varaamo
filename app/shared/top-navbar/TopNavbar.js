@@ -66,7 +66,7 @@ class TopNavbar extends Component {
     const logo = (currentLanguage === 'sv') ? 'turku-logo-sv' : 'turku-logo';
     return (
       <div>
-        <MobileNavbar toggle={this.state.expandMobileNavbar} />
+        <MobileNavbar contrast={contrast} toggle={this.state.expandMobileNavbar} />
         <Navbar className={classNames('app-TopNavbar', highContrastNav)} expanded={this.state.expanded} fluid onToggle={() => this.toggleCollapse()}>
 
           <Navbar.Header>
