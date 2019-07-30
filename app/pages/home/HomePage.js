@@ -85,11 +85,11 @@ class UnconnectedHomePage extends Component {
       <div className="app-HomePage">
         <div className={`app-HomePage__content container ${highContrast}`}>
           <h1><FormattedHTMLMessage id="HomePage.contentTitle" /></h1>
-          <h5>{t('HomePage.contentSubTitle')}</h5>
+          <h2>{t('HomePage.contentSubTitle')}</h2>
           <HomeSearchBox onSearch={this.handleSearch} />
         </div>
         <PageWrapper className="app-HomePageContent" title={t('HomePage.title')}>
-          <h4>{t('HomePage.bannersTitle')}</h4>
+          <h2>{t('HomePage.bannersTitle')}</h2>
           <Loader loaded={!isFetchingPurposes}>
             <div className="app-HomePageContent__banners">
               <Row>

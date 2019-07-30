@@ -2,15 +2,16 @@
     background-color: $white;
     margin-bottom: 0;
     color: $black;
+    min-height: 95px;
+    @media(max-width:$screen-sm-max) {
+      min-height: 72px;
+    }
 
     > div.container-fluid {
 
       .navbar-brand {
         margin-left: 0;
         font-size: inherit;
-        &#main {
-//          padding-left: 0;
-        }
       }
     }
 
@@ -22,8 +23,7 @@
 
       &-sv {
         display: block;
-        height: 1.875rem;
-        width: 120px;
+
         background-image: url('../../assets/pictures/logo_sv.png');
         background-size: contain;
         background-repeat: no-repeat;
@@ -32,16 +32,22 @@
     }
     .turku-logo, .turku-logo-sv {
 
-      @media (max-width:$screen-sm-max) {
+      @media (max-width:$screen-xs - 100) {
         display: block;
-        height: 1.875em;
-        width: 5.5em;
+        height: 40px;
+        width: 70px;
       }
 
-      @media (min-width:$screen-md-min) {
+      @media (min-width:$screen-xs - 99) {
         display: block;
-        height: 1.875em;
-        width: 5.5em;
+        height: 40px;
+        width: 120px;
+      }
+
+      @media (min-width:$screen-sm-max) {
+        display: block;
+        height: 60px;
+        width: 180px;
       }
 
       &.high-contrast {
@@ -294,11 +300,18 @@
     }
     .dropdown-menu {
       min-width: 10px;
+      right: -20px;
+      left:-20px;
+      text-align: center;
+      padding: 0;
 
       > li >a:hover {
         color: $black;
         text-decoration: none;
         background-color: $white;
+      }
+      > li > a{
+        padding: 0.875em 0;
       }
     }
   }
@@ -320,6 +333,5 @@
     @media(max-width: $screen-sm-max) {
       display: none;
     }
-
-
   }
+
