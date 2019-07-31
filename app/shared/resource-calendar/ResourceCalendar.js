@@ -5,8 +5,9 @@ import DayPicker from 'react-day-picker';
 import MomentLocaleUtils from 'react-day-picker/moment';
 import FormControl from 'react-bootstrap/lib/FormControl';
 import FormGroup from 'react-bootstrap/lib/FormGroup';
-import Glyphicon from 'react-bootstrap/lib/Glyphicon';
 import InputGroup from 'react-bootstrap/lib/InputGroup';
+import ControlLabel from 'react-bootstrap/lib/ControlLabel';
+import Button from 'react-bootstrap/lib/Button';
 import Overlay from 'react-bootstrap/lib/Overlay';
 import moment from 'moment';
 
@@ -19,11 +20,21 @@ export class UnconnectedResourceCalendar extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      textInputDate: '',
       visible: false,
     };
 
     this.calendarWrapper = null;
     this.now = moment();
+
+    this.handleDateTextChange = this.handleDateTextChange.bind(this);
+    this.handleDateButtonClick = this.handleDateButtonClick.bind(this);
+    this.handleDateTextSubmit = this.handleDateTextSubmit.bind(this);
+  }
+
+  componentDidMount() {
+    const formattedDate = moment(this.props.selectedDate).format('L');
+    this.setState({ textInputDate: formattedDate });
   }
 
   setCalendarWrapper = (element) => {
@@ -39,6 +50,8 @@ export class UnconnectedResourceCalendar extends Component {
 
   handleDateChange = (newDate) => {
     this.hideOverlay();
+    const formattedDate = moment(newDate).format('L');
+    this.setState({ textInputDate: formattedDate });
     this.props.onDateChange(newDate);
   }
 
@@ -50,6 +63,36 @@ export class UnconnectedResourceCalendar extends Component {
     this.setState({ visible: true });
   }
 
+  handleDateTextChange(event) {
+    this.setState({ textInputDate: event.target.value });
+  }
+
+  handleDateButtonClick() {
+    if (this.state.visible === true) {
+      this.hideOverlay();
+    } else {
+      this.showOverlay();
+    }
+  }
+
+  handleDateTextSubmit(event) {
+    event.preventDefault();
+
+    const date = this.state.textInputDate;
+    if (moment(date, 'L').isValid() === false) {
+      const todaysDate = moment().format('L');
+      this.setState({ textInputDate: todaysDate });
+      this.handleDateChange(moment().toDate());
+    } else {
+      const selectedMoment = moment(date, 'L');
+      const formattedDate = new Date();
+      formattedDate.setFullYear(selectedMoment.year(),
+        selectedMoment.month(),
+        selectedMoment.date());
+      this.handleDateChange(formattedDate);
+    }
+  }
+
   render() {
     const {
       availability,
@@ -57,10 +100,10 @@ export class UnconnectedResourceCalendar extends Component {
       selectedDate,
       t,
     } = this.props;
+
     const [year, month, dayNumber] = selectedDate.split('-');
     const selectedDay = new Date();
     selectedDay.setFullYear(year, month - 1, dayNumber);
-    const selectedDateText = moment(selectedDate).format('dddd D. MMMM YYYY');
     const modifiers = {
       available: (day) => {
         const dayDate = day.toISOString().substring(0, 10);
@@ -91,17 +134,24 @@ export class UnconnectedResourceCalendar extends Component {
           type="button"
         />
         <div className="app-ResourceCalendar__wrapper" ref={this.setCalendarWrapper}>
-          <FormGroup onClick={this.showOverlay}>
-            <InputGroup>
-              <InputGroup.Addon>
-                <img alt="" className="app-ResourceCalendar__icon" src={iconCalendar} />
-              </InputGroup.Addon>
-              <FormControl disabled type="text" value={selectedDateText} />
-              <InputGroup.Addon>
-                <Glyphicon glyph="triangle-bottom" />
-              </InputGroup.Addon>
-            </InputGroup>
-          </FormGroup>
+          <form onSubmit={this.handleDateTextSubmit}>
+            <FormGroup controlId="dateField">
+              <ControlLabel>{t('ResourceCalendar.form.label')}</ControlLabel>
+              <InputGroup>
+                <FormControl
+                  onChange={this.handleDateTextChange}
+                  type="text"
+                  value={this.state.textInputDate}
+                />
+                <InputGroup.Button>
+                  <Button className="app-ResourceCalendar__wrapper__button" onClick={this.handleDateButtonClick}>
+                    <img alt={t('ResourceCalendar.button.imageAlt')} className="app-ResourceCalendar__icon" src={iconCalendar} />
+                  </Button>
+                </InputGroup.Button>
+              </InputGroup>
+            </FormGroup>
+          </form>
+
           <Overlay
             container={this.calendarWrapper}
             onHide={this.hideOverlay}

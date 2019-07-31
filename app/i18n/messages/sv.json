@@ -233,6 +233,8 @@
   "ResourceAvailability.closed": "Stängt",
   "ResourceAvailability.reserved": "Bokat hela dagen",
   "ResourceAvailability.reservingRestricted": "Kan inte bokas",
+  "ResourceCalendar.button.imageAlt": "Datumnväljare",
+  "ResourceCalendar.form.label": "Välj datumn (t.ex. 2019-07-30)",
   "ResourceCalendar.nextWeek": "Nästa vecka",
   "ResourceCalendar.previousWeek": "Förra veckan",
   "ResourceCard.peopleCapacity": "{people} personer",

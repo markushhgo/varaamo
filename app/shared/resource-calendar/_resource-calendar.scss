@@ -19,6 +19,7 @@
     margin: 0;
     width: 40px;
     height: 40px;
+    align-self: flex-end;
 
     &--prev {
       @include icon-angle-left($black);
@@ -46,12 +47,9 @@
       transition: all 0s ease 0s;
     }
 
-    .input-group-addon {
-      background-color: transparent;
-    }
-
-    .glyphicon-triangle-bottom {
-      font-size: 10px;
+    &__button {
+      border-left-width: 2px !important;
+      height: 40px !important;
     }
 
     .form-control[disabled] {
@@ -65,7 +63,7 @@
       width: 100%;
 
       &:focus {
-        outline: none;
+        outline: initial;
       }
     }
 
@@ -117,7 +115,7 @@
       font-size: 1.6rem;
 
       &:focus {
-        outline: none;
+        outline: initial;
       }
 
       &--disabled {

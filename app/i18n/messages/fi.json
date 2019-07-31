@@ -231,6 +231,8 @@
   "ResourceAvailability.closed": "Suljettu",
   "ResourceAvailability.reserved": "Varattu koko päivän",
   "ResourceAvailability.reservingRestricted": "Ei varattavissa",
+  "ResourceCalendar.button.imageAlt": "Päivämäärävalitsin",
+  "ResourceCalendar.form.label": "Valitse päivämäärä (esim. 30.07.2019)",
   "ResourceCalendar.nextWeek": "Seuraava viikko",
   "ResourceCalendar.previousWeek": "Viime viikko",
   "ResourceCard.peopleCapacity": "{people} henkilöä",
