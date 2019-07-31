@@ -84,11 +84,15 @@ $cellHeight: 50%;
       margin-right: 10px;
     }
 
-    display: inline-flex;
+    @media (min-width: $screen-xs-max) {
+      display: inline-flex;
+    }
     align-items: center;
 
     &-labels {
-      display: inline-flex;
+      @media (min-width: $screen-xs-max) {
+        display: inline-flex;
+      }
     }
   }
 
