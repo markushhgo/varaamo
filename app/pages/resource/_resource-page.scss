@@ -17,6 +17,7 @@ $content-padding: 10px;
 
   a {
     color: $blue;
+    overflow-wrap: break-word;
   }
 
   &__content {
