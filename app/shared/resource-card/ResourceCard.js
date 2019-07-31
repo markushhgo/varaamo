@@ -119,7 +119,7 @@ class ResourceCard extends Component {
         </div>
 
         <div className="app-ResourceCard__info">
-          <Col md={4} sm={4} xs={6}>
+          <Col md={4} sm={4} xs={isLargerFontSizeUsed ? 12 : 6}>
             <ResourceCardInfoCell
               alt=""
               icon={iconHome}
@@ -137,7 +137,7 @@ class ResourceCard extends Component {
             </ResourceCardInfoCell>
           </Col>
 
-          <Col md={4} sm={4} xs={6}>
+          <Col md={4} sm={4} xs={isLargerFontSizeUsed ? 12 : 6}>
             <ResourceCardInfoCell
               alt=""
               icon={iconUser}
@@ -156,7 +156,7 @@ class ResourceCard extends Component {
           </Col>
 
 
-          <Col md={4} sm={4} xs={6}>
+          <Col md={4} sm={4} xs={isLargerFontSizeUsed ? 12 : 6}>
             <ResourceCardInfoCell
               alt=""
               icon={iconTicket}
@@ -174,7 +174,7 @@ class ResourceCard extends Component {
           </Col>
 
 
-          <Col md={4} sm={4} xs={6}>
+          <Col md={4} sm={4} xs={isLargerFontSizeUsed ? 12 : 6}>
             <ResourceCardInfoCell
               alt=""
               icon={iconMap}
@@ -196,7 +196,7 @@ class ResourceCard extends Component {
           </Col>
 
 
-          <Col md={4} sm={4} xs={6}>
+          <Col md={4} sm={4} xs={isLargerFontSizeUsed ? 12 : 6}>
             <ResourceCardInfoCell
               alt=""
               icon={iconMapMarker}
@@ -217,7 +217,7 @@ class ResourceCard extends Component {
 
           {isLoggedIn
             && (
-              <Col md={4} sm={4} xs={6}>
+              <Col md={4} sm={4} xs={isLargerFontSizeUsed ? 12 : 6}>
                 <ResourceCardInfoCell
                   alt=""
                   icon={resource.isFavorite ? iconHeartFilled : iconHeart}
