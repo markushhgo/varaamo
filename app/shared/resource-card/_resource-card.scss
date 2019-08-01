@@ -66,18 +66,16 @@ $cellHeight: 50%;
   }
 
   h4 {
-    font-size: 1.4em;
+
     margin-top: 0;
     margin-bottom: 0;
     @media screen and (max-width: $screen-xs-min) {
-      font-size: 1em;
-      line-height: 1;
+
     }
   }
 
   &__unit-name {
-    font-size: 0.9em;
-    font-weight: bold;
+
     margin-bottom: 5px;
     text-decoration: none;
     span:first-child {
@@ -103,8 +101,7 @@ $cellHeight: 50%;
     text-align: center;
   }
   &__description {
-    font-size: 1.1em;
-    line-height: 2rem;
+
     max-height: 2*3rem;
     margin-top: 15px;
     overflow: hidden;
@@ -120,7 +117,7 @@ $cellHeight: 50%;
   &__info {
     display: flex;
     flex-wrap: wrap;
-    font-size: 0.5em;
+
 
     &-cell {
       border: none;
@@ -129,7 +126,7 @@ $cellHeight: 50%;
       flex-direction: column;
       width: 100%;
       align-items: center;
-      font-size: 2em;
+
       &:hover,
       &:focus {
         &:active {
@@ -142,14 +139,18 @@ $cellHeight: 50%;
         width: $line-height-computed*1.2;
       }
 
+      &.btn {
+        font-size: 1em;
+      }
+
       span {
-        font-size: 0.8em;
-        font-weight: bold;
+
         text-align: center;
         text-transform: capitalize;
         white-space: initial;
       }
-    }  @media (min-width: $screen-xs-min) {
+    }
+    @media (min-width: $screen-xs-min) {
       display: inline-block;
       width: 100%;
     }
