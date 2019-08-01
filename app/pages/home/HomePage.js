@@ -62,7 +62,7 @@ class UnconnectedHomePage extends Component {
               : <FAIcon icon={image} />}
           </div>
 
-          <h5>{purpose.label}</h5>
+          <h3>{purpose.label}</h3>
           <div className="app-HomePageContent__banner-action">
             <Button
               bsStyle="primary"

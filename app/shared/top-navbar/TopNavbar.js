@@ -67,7 +67,7 @@ class TopNavbar extends Component {
     return (
       <div>
         <MobileNavbar contrast={contrast} toggle={this.state.expandMobileNavbar} />
-        <Navbar className={classNames('app-TopNavbar', highContrastNav)} expanded={this.state.expanded} fluid onToggle={() => this.toggleCollapse()}>
+        <Navbar className={classNames('app-TopNavbar', highContrastNav)} expanded={this.state.expanded} onToggle={() => this.toggleCollapse()}>
 
           <Navbar.Header>
             <Navbar.Toggle data-target="#navCollapse">
@@ -103,9 +103,9 @@ class TopNavbar extends Component {
           </Navbar.Header>
           <Navbar.Collapse id="navCollapse">
             <Nav pullRight>
-              <FontChanger />
-
               <ContrastChanger />
+
+              <FontChanger />
 
               <NavDropdown
                 className="app-TopNavbar__language"
