@@ -1,4 +1,5 @@
 import React from 'react';
+import simple from 'simple-mock';
 
 import ContrastChanger from './TopNavbarContrast';
 import { shallowWithIntl } from 'utils/testUtils';
@@ -30,5 +31,15 @@ describe('shared/top-navbar/accessability/TopNavbarContrast', () => {
   test('renders contrast_button', () => {
     const element = content.find('.contrast_button');
     expect(element.length).toBe(1);
+  });
+
+  describe('button reacts to', () => {
+    test('onKeyDown', () => {
+      const changeContrast = simple.mock();
+      const instance = getWrapper({ changeContrast }).instance();
+      const kbEvent = { keyCode: 13 };
+      instance.handleKeyDown(kbEvent);
+      expect(changeContrast.callCount).toBe(1);
+    });
   });
 });
