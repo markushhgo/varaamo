@@ -4,6 +4,7 @@ $font-size-h3: 1.17em;
 $font-size-h4: 1em;
 $font-size-h5: .83em;
 $font-size-h6: .75em;
+$focus-highlight: black ;
 $turku-blue: #006bb6;
 $turku-blue-dark: #37475e;
 $turku-black: black;
@@ -17,6 +18,17 @@ $turku-orange: #f26522;
 $turku-gray: #c3c4b7;
 $turku-darkgreen: #00a97a;
 $turku-darkgray: #404040;
+
 $fontSize-1: 16px;
 $fontSize-2: 18px;
 $fontSize-3: 22px;
+
+
+$screen-xl: 1400px !default;
+$screen-xl-min: $screen-xl !default;
+$screen-lg-max: ($screen-xl-min - 1) !default;
+
+
+@mixin focusElement {
+  outline: $focus-highlight auto 2px;
+}

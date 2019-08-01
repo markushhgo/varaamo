@@ -8,9 +8,12 @@ $externalIconMarginLeft: 5px;
     a {
       color: $white;
     }
-    a:hover,
+    a:hover {
+      color: $white;
+    }
     a:focus {
       color: $white;
+
     }
     a:after,
     a:before,
@@ -22,12 +25,15 @@ $externalIconMarginLeft: 5px;
   }
   .navbar-brand,
   .navbar-brand:hover,
-  .navbar-brand:focus,
   .navbar-toggle .icon-bar {
     color: $white;
   }
   .navbar-brand {
     font-size: inherit;
+    &:focus {
+      color: $white;
+//      @include focusElement;
+    }
   }
 
   .navbar-nav {
@@ -36,6 +42,9 @@ $externalIconMarginLeft: 5px;
         display: flex;
         align-items: center;
         font-size: inherit;
+        &:focus {
+//          @include focusElement;
+        }
       }
     }
   }
