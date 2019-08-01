@@ -67,6 +67,7 @@ class UnconnectedHomePage extends Component {
             <Button
               bsStyle="primary"
               className="app-HomePageContent__button"
+              tabIndex="-1"
             >
               {t('HomePage.buttonText')}
             </Button>
