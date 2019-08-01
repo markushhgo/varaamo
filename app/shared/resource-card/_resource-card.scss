@@ -111,6 +111,9 @@ $cellHeight: 50%;
     width: -moz-available;
     width: -webkit-fill-available;
     width: fill-available;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
   }
 
 
