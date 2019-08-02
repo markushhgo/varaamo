@@ -3,8 +3,8 @@ import React from 'react';
 import classNames from 'classnames';
 import { Col, Row } from 'react-bootstrap';
 
-import FontChanger from 'shared/top-navbar/accessability/TopNavbarFontContainer';
-import ContrastChanger from 'shared/top-navbar/accessability/TopNavbarContrastContainer';
+import FontChanger from 'shared/top-navbar/accessibility/TopNavbarFontContainer';
+import ContrastChanger from 'shared/top-navbar/accessibility/TopNavbarContrastContainer';
 
 class MobileNavbar extends React.Component {
   static propTypes = {

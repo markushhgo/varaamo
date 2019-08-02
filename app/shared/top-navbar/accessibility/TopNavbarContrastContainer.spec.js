@@ -1,11 +1,11 @@
 import { selector } from './TopNavbarContrastContainer';
 
-describe('shared/top-navbar/accessability/TopNavbarContrastContainer', () => {
+describe('shared/top-navbar/accessibility/TopNavbarContrastContainer', () => {
   describe('selector', () => {
     function getState() {
       return {
         ui: {
-          accessability: { isNormalContrast: true }
+          accessibility: { isNormalContrast: true }
         }
       };
     }

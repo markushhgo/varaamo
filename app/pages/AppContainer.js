@@ -18,7 +18,7 @@ import Notifications from 'shared/notifications';
 import { getCustomizationClassName } from 'utils/customizationUtils';
 
 const userIdSelector = state => state.auth.userId;
-const fontSizeSelector = state => state.ui.accessability.fontSize;
+const fontSizeSelector = state => state.ui.accessibility.fontSize;
 
 
 export const selector = createStructuredSelector({

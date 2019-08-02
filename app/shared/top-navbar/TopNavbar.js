@@ -13,8 +13,8 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 import MobileNavbar from 'shared/top-navbar/mobile/MobileNavbar';
-import FontChanger from './accessability/TopNavbarFontContainer';
-import ContrastChanger from './accessability/TopNavbarContrastContainer';
+import FontChanger from './accessibility/TopNavbarFontContainer';
+import ContrastChanger from './accessibility/TopNavbarContrastContainer';
 import { injectT } from 'i18n';
 
 class TopNavbar extends Component {
@@ -75,8 +75,8 @@ class TopNavbar extends Component {
                 <FontAwesomeIcon icon={faUserAlt} />
               </div>
             </Navbar.Toggle>
-            <div aria-label="accessability" className="navbar-toggle">
-              <div className="mobile_accessability" onClick={() => this.toggleMobileNavbar()} type="button">
+            <div aria-label="accessibility" className="navbar-toggle">
+              <div className="mobile_accessibility" onClick={() => this.toggleMobileNavbar()} type="button">
                 <FontAwesomeIcon icon={faWheelchair} />
               </div>
             </div>
@@ -101,7 +101,7 @@ class TopNavbar extends Component {
               </Link>
             </Navbar.Brand>
           </Navbar.Header>
-          <Navbar.Collapse id="navCollapse">
+          <Navbar.Collapse id="navCollapse" role="presentation">
             <Nav aria-label="Vaihtoehdot" pullRight>
               <ContrastChanger />
 

@@ -21,7 +21,7 @@ Footer.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  contrast: state.ui.accessability.isNormalContrast,
+  contrast: state.ui.accessibility.isNormalContrast,
   currentLanguage: state.intl.locale,
 });
 

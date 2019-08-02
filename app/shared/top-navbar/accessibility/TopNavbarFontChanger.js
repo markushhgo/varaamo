@@ -54,7 +54,7 @@ class FontSizeChanger extends Component {
     const spanID = this.getActiveFontButton(fontSize);
     return (
       <li className="navbar__font" role="presentation">
-        <div aria-label={t('Nav.FontSize.title')} className="accessability__buttonGroup">
+        <div aria-label={t('Nav.FontSize.title')} className="accessibility__buttonGroup">
           {t('Nav.FontSize.title')}
           <span className={((spanID === this.firstA) ? 'active' : '')} id={this.firstA} onClick={() => this.handleFontSizeClick(ACC.FONT_SIZES.SMALL)} onKeyDown={ev => this.handleKeyDown(ACC.FONT_SIZES.SMALL, ev)} tabIndex="0">A</span>
           <span className={((spanID === this.secondA) ? 'active' : '')} id={this.secondA} onClick={() => this.handleFontSizeClick(ACC.FONT_SIZES.MEDIUM)} onKeyDown={ev => this.handleKeyDown(ACC.FONT_SIZES.MEDIUM, ev)} tabIndex="0">A</span>
