@@ -67,21 +67,21 @@ class TopNavbar extends Component {
     return (
       <div>
         <MobileNavbar contrast={contrast} toggle={this.state.expandMobileNavbar} />
-        <Navbar aria-label="Vaihtoehdot" className={classNames('app-TopNavbar', highContrastNav)} expanded={this.state.expanded} onToggle={() => this.toggleCollapse()}>
+        <Navbar aria-label={t('Navbar.aria.topNavbar.title')} className={classNames('app-TopNavbar', highContrastNav)} expanded={this.state.expanded} onToggle={() => this.toggleCollapse()}>
 
           <Navbar.Header>
-            <Navbar.Toggle aria-label="mobile login" data-target="#navCollapse">
+            <Navbar.Toggle aria-label={t('Navbar.aria.topNavbar.mobileLogin')} data-target="#navCollapse">
               <div className="mobile_login" type="button">
                 <FontAwesomeIcon icon={faUserAlt} />
               </div>
             </Navbar.Toggle>
-            <div aria-label="accessibility" className="navbar-toggle">
+            <div aria-label={t('Navbar.aria.topNavbar.mobileAccessibility')} className="navbar-toggle">
               <div className="mobile_accessibility" onClick={() => this.toggleMobileNavbar()} type="button">
                 <FontAwesomeIcon icon={faWheelchair} />
               </div>
             </div>
             <div className="navbar-toggle lang" data-target="#login" data-toggle="collapse">
-              <div aria-label="kielenvaihto" className="mobile_lang" type="button">
+              <div aria-label={t('Navbar.aria.topNavbar.mobileLocale')} className="mobile_lang" type="button">
                 <NavDropdown
                   className="mobile_lang_dropdown"
                   eventKey="lang"
@@ -96,13 +96,13 @@ class TopNavbar extends Component {
               </div>
             </div>
             <Navbar.Brand>
-              <Link aria-label="etusivulle" id="main" to="/">
+              <Link aria-label={t('Navbar.aria.topNavbar.frontpage')} id="main" to="/">
                 <span aria-label="Turun vaakuna" className={`${logo}`} title="Etusivu" />
               </Link>
             </Navbar.Brand>
           </Navbar.Header>
           <Navbar.Collapse id="navCollapse" role="presentation">
-            <Nav aria-label="Vaihtoehdot" pullRight>
+            <Nav aria-label={t('Navbar.aria.topNavbar.options')} pullRight role="navigation">
               <ContrastChanger />
 
               <FontChanger />
