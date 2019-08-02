@@ -18,6 +18,7 @@ import {
   getTimeSlots,
   getTimeDiff,
   isPastDate,
+  isValidDateString,
   padLeft,
   prettifyHours,
   periodToMinute,
@@ -564,6 +565,26 @@ describe('Utils: timeUtils', () => {
     test('returns false if date is in the future', () => {
       const date = '2016-11-11';
       expect(isPastDate(date)).toBe(false);
+    });
+  });
+
+  describe('isValidDateString', () => {
+    test('returns true if date string is valid', () => {
+      const dateOne = '2.8.2019';
+      const dateTwo = '02.08.2019';
+      const dateThree = '02.8.2019';
+      expect(isValidDateString(dateOne)).toBe(true);
+      expect(isValidDateString(dateTwo)).toBe(true);
+      expect(isValidDateString(dateThree)).toBe(true);
+    });
+
+    test('returns false if date string is not valid', () => {
+      const dateOne = '33.13.300';
+      const dateTwo = '33.1.2019';
+      const dateThree = '2019-01-01';
+      expect(isValidDateString(dateOne)).toBe(false);
+      expect(isValidDateString(dateTwo)).toBe(false);
+      expect(isValidDateString(dateThree)).toBe(false);
     });
   });
 
