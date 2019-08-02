@@ -20,6 +20,7 @@ class FontSizeChanger extends Component {
   constructor(props) {
     super(props);
     this.handleFontSizeClick = this.handleFontSizeClick.bind(this);
+    this.handleKeyDown = this.handleKeyDown.bind(this);
   }
 
   getActiveFontButton(size) {
@@ -35,10 +36,16 @@ class FontSizeChanger extends Component {
     }
   }
 
+
+  handleKeyDown(size, ev) {
+    if (ev.keyCode === 13) {
+      this.props.changeFontSize(size);
+    }
+  }
+
   handleFontSizeClick(size) {
     this.props.changeFontSize(size);
   }
-
 
   render() {
     const {
@@ -49,9 +56,9 @@ class FontSizeChanger extends Component {
       <li className="navbar__font" role="presentation">
         <div className="accessability__buttonGroup">
           {t('Nav.FontSize.title')}
-          <span className={((spanID === this.firstA) ? 'active' : '')} id={this.firstA} onClick={() => this.handleFontSizeClick(ACC.FONT_SIZES.SMALL)} tabIndex="0">A</span>
-          <span className={((spanID === this.secondA) ? 'active' : '')} id={this.secondA} onClick={() => this.handleFontSizeClick(ACC.FONT_SIZES.MEDIUM)} tabIndex="0">A</span>
-          <span className={((spanID === this.thirdA) ? 'active' : '')} id={this.thirdA} onClick={() => this.handleFontSizeClick(ACC.FONT_SIZES.LARGE)} tabIndex="0">A</span>
+          <span className={((spanID === this.firstA) ? 'active' : '')} id={this.firstA} onClick={() => this.handleFontSizeClick(ACC.FONT_SIZES.SMALL)} onKeyDown={ev => this.handleKeyDown(ACC.FONT_SIZES.SMALL, ev)} tabIndex="0">A</span>
+          <span className={((spanID === this.secondA) ? 'active' : '')} id={this.secondA} onClick={() => this.handleFontSizeClick(ACC.FONT_SIZES.MEDIUM)} onKeyDown={ev => this.handleKeyDown(ACC.FONT_SIZES.MEDIUM, ev)} tabIndex="0">A</span>
+          <span className={((spanID === this.thirdA) ? 'active' : '')} id={this.thirdA} onClick={() => this.handleFontSizeClick(ACC.FONT_SIZES.LARGE)} onKeyDown={ev => this.handleKeyDown(ACC.FONT_SIZES.LARGE, ev)} tabIndex="0">A</span>
         </div>
       </li>
 

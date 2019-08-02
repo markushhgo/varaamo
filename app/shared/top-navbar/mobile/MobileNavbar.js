@@ -9,6 +9,8 @@ import ContrastChanger from 'shared/top-navbar/accessability/TopNavbarContrastCo
 class MobileNavbar extends React.Component {
   static propTypes = {
     toggle: PropTypes.bool,
+    contrast: PropTypes.bool,
+
   };
 
   getFontChanger() {
@@ -21,16 +23,17 @@ class MobileNavbar extends React.Component {
 
   render() {
     const element = this.props.toggle ? '' : 'is-collapsed';
+    const contrast = this.props.contrast ? '' : 'high-contrast';
     const fontComponent = this.getFontChanger();
     const contrastComponent = this.getContrastChanger();
     return (
-      <div className={classNames('mobile-Navbar_mobile', element)}>
+      <div className={classNames('mobile-Navbar_mobile', element, contrast)}>
         <div className="container">
           <Row>
-            <Col className="col-xs-12">
+            <Col sm={6} smOffset={6} xs={12}>
               <ul>
-                {fontComponent}
                 {contrastComponent}
+                {fontComponent}
               </ul>
             </Col>
           </Row>

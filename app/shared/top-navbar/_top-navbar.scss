@@ -2,15 +2,21 @@
     background-color: $white;
     margin-bottom: 0;
     color: $black;
+    min-height: 95px;
+    @media(max-width:$screen-sm-max) {
+      min-height: 72px;
+    }
 
     > div.container-fluid {
 
       .navbar-brand {
         margin-left: 0;
-        &#main {
-//          padding-left: 0;
-        }
+        font-size: inherit;
       }
+    }
+
+    .navbar-brand:focus {
+      @include focusElement;
     }
 
     .turku-logo {
@@ -21,26 +27,30 @@
 
       &-sv {
         display: block;
-        height: 1.875rem;
-        width: 120px;
         background-image: url('../../assets/pictures/logo_sv.png');
         background-size: contain;
         background-repeat: no-repeat;
         filter: brightness(0);
       }
     }
-    .turku-logo, .turku-logo-sv {
 
-      @media (max-width:$screen-sm-max) {
+    .turku-logo, .turku-logo-sv {
+      @media (max-width:$screen-400) {
         display: block;
-        height: 1.875em;
-        width: 5.5em;
+        height: 40px;
+        width: 70px;
       }
 
-      @media (min-width:$screen-md-min) {
+      @media (min-width:$screen-400) {
         display: block;
-        height: 1.875em;
-        width: 5.5em;
+        height: 40px;
+        width: 120px;
+      }
+
+      @media (min-width:$screen-sm-max) {
+        display: block;
+        height: 60px;
+        width: 180px;
       }
 
       &.high-contrast {
@@ -71,9 +81,11 @@
       display: block;
     }
 
+    // Accessability
+
     .accessability{
       &__buttonGroup {
-        padding-top: 10px;
+        padding-top: 15px;
         padding-bottom: 14px;
         margin-right: 15px;
         margin-left: 15px;
@@ -81,27 +93,40 @@
         border-bottom: none;
         display: block;
         cursor: default;
+
         span {
           padding-left: 0px;
           margin-left: 5px;
           cursor: pointer;
+
+          &:focus {
+            @include focusElement;
+          }
+
           &:hover {
             text-decoration: none;
           }
+
           &.active {
             text-decoration: underline;
           }
         }
+
         span#firstA {
           font-size: 1em;
         }
+
         span#secondA {
           font-size: 1.25em;
+          line-height: 1.2;
         }
+
         span#thirdA {
           font-size: 1.5em;
+          line-height: 1;
         }
       }
+
       &__contrast {
         padding-top: 18px;
         padding-bottom: 18px;
@@ -116,30 +141,47 @@
           float: right;
           cursor: pointer;
           filter: invert(0%);
+
+          &:focus {
+            @include focusElement;
+          }
+
         }
       }
     }
+
+    // ----------
 
     &__name > a {
       @media (max-width: $screen-xs-max) {
         font-size: 0 !important;
       }
+
       &::before {
         @include hel-background-icon('user-o');
       }
     }
 
     .nav {
+
       li {
+
         a {
           padding-left: 2px;
           margin-left: 2px;
         }
+
         a#language-nav-dropdown {
           text-transform: uppercase;
-          margin: 0 15px 0 15px;
+          padding-right:5px;
+          margin: 0 10px 0 15px;
+
+          &:focus{
+            @include focusElement;
+          }
         }
       }
+
       li.disabled > a {
         padding-left: 0;
         margin-right: 0;
@@ -158,6 +200,7 @@
       }
     }
 
+    // TopNavbar navbar-nav
 
     .navbar-nav {
       float: left;
@@ -167,6 +210,7 @@
 
       > li {
         float: left;
+
         > a {
           padding-top: 18px;
           padding-bottom: 18px;
@@ -178,14 +222,18 @@
           font-size: inherit;
           line-height: 1.5;
           color: $black;
+
           &:hover {
             color: $black;
           }
+
           &:active {
             color: $black;
           }
+
           &:focus {
             color: $black;
+            @include focusElement;
           }
         }
       }
@@ -205,10 +253,16 @@
         border: 1px solid rgba(0, 0, 0, 0.15);
         box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
         min-width: 10px;
+
         li > a:hover,
-        li > a:focus,
         li > a.active {
           text-decoration: underline;
+          background-color: transparent;
+        }
+
+        li > a:focus {
+          @include focusElement;
+          background-color: transparent;
         }
       }
       > .open > a,
@@ -218,6 +272,7 @@
         color: inherit;
       }
     }
+    // ----------
 
     .navbar-right {
       float: right;
@@ -233,12 +288,17 @@
       background-color: $white;
     }
 
+
+
+    // High-contrast
+
     &.high-contrast {
     background-color: $white;
     color: $black;
     border-bottom: 1px solid $black;
 
       .navbar-brand {
+
         span {
           filter: brightness(0);
         }
@@ -249,20 +309,26 @@
       }
 
       .navbar-nav {
+
         li {
+
           a {
             color: $black;
+
             &:hover {
               color: $black;
             }
+
             &:active {
               color: $black;
             }
+
             &:focus {
               color: $black;
             }
           }
         }
+
         > .active > a:after,
         > li > a:hover:after {
           content: '';
@@ -270,6 +336,7 @@
           bottom: 21px;
         }
       }
+
       > .open > a,
       > .open > a:hover,
       > .open > a:focus,
@@ -278,9 +345,9 @@
         }
     }
   }
+    // ----------
 
-
-
+    // Mobile
 
   .mobile_lang_dropdown {
     list-style: none;
@@ -291,13 +358,22 @@
     a:focus {
       color: $black;
     }
+
     .dropdown-menu {
       min-width: 10px;
+      right: -20px;
+      left:-20px;
+      text-align: center;
+      padding: 0;
 
       > li >a:hover {
         color: $black;
         text-decoration: none;
         background-color: $white;
+      }
+
+      > li > a{
+        padding: 0.875em 0;
       }
     }
   }
@@ -319,6 +395,6 @@
     @media(max-width: $screen-sm-max) {
       display: none;
     }
-
-
   }
+
+    // ----------

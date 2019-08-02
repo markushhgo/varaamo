@@ -34,7 +34,7 @@ class FooterContent extends React.Component {
             </div>
           </Col>
           <Col lg={6} md={6}>
-            <h5>Varaamo</h5>
+            <h2>Varaamo</h2>
             <p>
               <FormattedHTMLMessage id="Footer.turkuText" />
             </p>
