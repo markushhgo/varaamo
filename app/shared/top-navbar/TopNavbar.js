@@ -67,21 +67,21 @@ class TopNavbar extends Component {
     return (
       <div>
         <MobileNavbar contrast={contrast} toggle={this.state.expandMobileNavbar} />
-        <Navbar className={classNames('app-TopNavbar', highContrastNav)} expanded={this.state.expanded} onToggle={() => this.toggleCollapse()}>
+        <Navbar aria-label="Vaihtoehdot" className={classNames('app-TopNavbar', highContrastNav)} expanded={this.state.expanded} onToggle={() => this.toggleCollapse()}>
 
           <Navbar.Header>
-            <Navbar.Toggle data-target="#navCollapse">
+            <Navbar.Toggle aria-label="mobile login" data-target="#navCollapse">
               <div className="mobile_login" type="button">
                 <FontAwesomeIcon icon={faUserAlt} />
               </div>
             </Navbar.Toggle>
-            <div className="navbar-toggle">
+            <div aria-label="accessability" className="navbar-toggle">
               <div className="mobile_accessability" onClick={() => this.toggleMobileNavbar()} type="button">
                 <FontAwesomeIcon icon={faWheelchair} />
               </div>
             </div>
             <div className="navbar-toggle lang" data-target="#login" data-toggle="collapse">
-              <div className="mobile_lang" type="button">
+              <div aria-label="kielenvaihto" className="mobile_lang" type="button">
                 <NavDropdown
                   className="mobile_lang_dropdown"
                   eventKey="lang"
@@ -102,7 +102,7 @@ class TopNavbar extends Component {
             </Navbar.Brand>
           </Navbar.Header>
           <Navbar.Collapse id="navCollapse">
-            <Nav pullRight>
+            <Nav aria-label="Vaihtoehdot" pullRight>
               <ContrastChanger />
 
               <FontChanger />

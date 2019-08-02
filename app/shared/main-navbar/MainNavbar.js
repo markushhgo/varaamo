@@ -39,7 +39,7 @@ class MainNavbar extends React.Component {
     } = this.props;
     const highContrastNav = contrast ? '' : 'high-contrast';
     return (
-      <Navbar className={classNames('app-MainNavbar', highContrastNav)} expanded={this.state.expanded} onToggle={() => this.toggleCollapse()}>
+      <Navbar aria-label="Sivu valikko" className={classNames('app-MainNavbar', highContrastNav)} expanded={this.state.expanded} onToggle={() => this.toggleCollapse()}>
         <Navbar.Header>
           <Navbar.Toggle />
           <Navbar.Brand>

@@ -19,7 +19,7 @@ class ContrastChanger extends Component {
     const { t, changeContrast } = this.props;
     return (
       <li className="navbar__contrast" role="presentation">
-        <div className="accessability__contrast">
+        <div aria-label={t('Nav.Contrast.title')} className="accessability__contrast">
           {t('Nav.Contrast.title')}
           <div className="contrast_button" onClick={() => changeContrast()} onKeyDown={this.handleKeyDown} tabIndex="0" />
         </div>

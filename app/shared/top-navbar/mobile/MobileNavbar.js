@@ -24,10 +24,11 @@ class MobileNavbar extends React.Component {
   render() {
     const element = this.props.toggle ? '' : 'is-collapsed';
     const contrast = this.props.contrast ? '' : 'high-contrast';
+    const ariaHide = this.props.toggle ? 'false' : 'true';
     const fontComponent = this.getFontChanger();
     const contrastComponent = this.getContrastChanger();
     return (
-      <div className={classNames('mobile-Navbar_mobile', element, contrast)}>
+      <div aria-hidden={ariaHide} className={classNames('mobile-Navbar_mobile', element, contrast)}>
         <div className="container">
           <Row>
             <Col sm={6} smOffset={6} xs={12}>
