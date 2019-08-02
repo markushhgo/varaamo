@@ -295,8 +295,6 @@ describe('pages/search/controls/SearchControlsContainer', () => {
   });
 
   describe('handleDateChange', () => {
-    const { date } = defaultProps.filters;
-    const expected = { date };
     let instance;
 
     beforeAll(() => {
@@ -310,6 +308,10 @@ describe('pages/search/controls/SearchControlsContainer', () => {
     });
 
     test('calls handleFiltersChange with given filters', () => {
+      const { date } = defaultProps.filters;
+      const dateInCorrectFormat = moment(date, 'L').format(constants.DATE_FORMAT);
+      const expected = { date: dateInCorrectFormat };
+
       expect(instance.handleFiltersChange.callCount).toBe(1);
       expect(instance.handleFiltersChange.lastCall.args[0]).toEqual(expected);
     });

@@ -37,6 +37,9 @@ moment.defineLocale('varaamo-fi', {
 
 moment.defineLocale('varaamo-se', {
   parentLocale: 'sv',
+  longDateFormat: {
+    L: 'DD.MM.YYYY',
+  },
 });
 
 addLocaleData([...en, ...fi, ...se]);

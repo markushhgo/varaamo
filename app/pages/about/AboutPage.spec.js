@@ -1,9 +1,12 @@
+import constants from 'constants/AppConstants';
+
 import React from 'react';
+import { FormattedHTMLMessage } from 'react-intl';
+
 
 import PageWrapper from 'pages/PageWrapper';
 import { shallowWithIntl } from 'utils/testUtils';
 import AboutPage from './AboutPage';
-import AboutPageContent from './AboutPageContent';
 
 describe('pages/about/AboutPage', () => {
   function getWrapper() {
@@ -17,7 +20,24 @@ describe('pages/about/AboutPage', () => {
     expect(pageWrapper.prop('title')).toBe('AboutPage.title');
   });
 
-  test('renders AboutPageContent component', () => {
-    expect(getWrapper().find(AboutPageContent).length).toBe(1);
+  test('renders AboutPageContent.defaultHeader', () => {
+    const text = getWrapper().find('h1').text();
+    expect(text).toBe('AboutPageContent.defaultHeader');
+  });
+  test('renders correct amount of <p> elements', () => {
+    const p = getWrapper().find('p');
+    expect(p.length).toBe(10);
+  });
+  test('render correct amount of <FormattedHTMLMessage>', () => {
+    const elements = getWrapper().find(FormattedHTMLMessage);
+    expect(elements.length).toBe(5);
+  });
+
+  test('render feedbacklink according to currentLanguage ', () => {
+    const lan = {
+      currentLanguage: 'fi'
+    };
+    const elements = getWrapper({ lan }).find('a');
+    expect(elements.prop('href')).toBe(constants.FEEDBACK_URL.FI);
   });
 });
