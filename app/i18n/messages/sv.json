@@ -80,7 +80,7 @@
   "ConfirmReservationModal.regularReservationTitle": "Boka",
   "DatePickerControl.buttonLabel": "Datum",
   "DatePickerControl.header": "Välj dag",
-  "DatePickerControl.label": "När? (t.ex. 2019-06-27)",
+  "DatePickerControl.label": "När? (t.ex. 27.06.2019)",
   "DatePickerControl.button.imageAlt" : "Datumnväljare",
   "DatePickerControl.timeRangeTitle": "Tidsurval och minsta reserveringstid",
   "DatePickerControl.title": "{date} kl. {start}-{end} {hours}h bokning",
