@@ -7,7 +7,7 @@ import { createSelector, createStructuredSelector } from 'reselect';
 import { purposesSelector } from 'state/selectors/dataSelectors';
 import requestIsActiveSelectorFactory from 'state/selectors/factories/requestIsActiveSelectorFactory';
 
-const contrastSelector = state => state.ui.accessability.isNormalContrast;
+const contrastSelector = state => state.ui.accessibility.isNormalContrast;
 const purposeOptionsSelector = createSelector(
   purposesSelector,
   (purposes) => {

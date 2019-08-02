@@ -3,9 +3,9 @@ import types from 'constants/ActionTypes';
 import Immutable from 'seamless-immutable';
 
 import APP from '../../../constants/AppConstants';
-import reducer from './accessabilityReducer';
+import reducer from './accessibilityReducer';
 
-describe('state/reducers/ui/accessabilityReducer', () => {
+describe('state/reducers/ui/accessibilityReducer', () => {
   const initialState = Immutable({
     isNormalContrast: true,
     fontSize: APP.FONT_SIZES.SMALL

@@ -83,7 +83,7 @@
 
     // Accessability
 
-    .accessability{
+    .accessibility{
       &__buttonGroup {
         padding-top: 15px;
         padding-bottom: 14px;
@@ -304,7 +304,7 @@
         }
       }
 
-      .navbar__contrast > .accessability__contrast > .contrast_button {
+      .navbar__contrast > .accessibility__contrast > .contrast_button {
         filter: invert(0%);
       }
 
@@ -384,7 +384,7 @@
       margin-left: 0;
     }
 
-    .mobile_accessability {
+    .mobile_accessibility {
       cursor: pointer;
     }
   }

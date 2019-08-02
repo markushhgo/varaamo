@@ -18,7 +18,7 @@ import Notifications from 'shared/notifications';
 import { getCustomizationClassName } from 'utils/customizationUtils';
 
 const userIdSelector = state => state.auth.userId;
-const fontSizeSelector = state => state.ui.accessability.fontSize;
+const fontSizeSelector = state => state.ui.accessibility.fontSize;
 
 
 export const selector = createStructuredSelector({
@@ -65,7 +65,7 @@ export class UnconnectedAppContainer extends Component {
           <Favicon />
           <TestSiteMessage />
         </Header>
-        <div className={classNames('app-content')}>
+        <div aria-label="Main" className={classNames('app-content')}>
           <Grid>
             <Notifications />
           </Grid>

@@ -21,7 +21,7 @@ const userNameSelector = createSelector(
   }
 );
 
-const contrastSelector = state => state.ui.accessability.isNormalContrast;
+const contrastSelector = state => state.ui.accessibility.isNormalContrast;
 
 export const selector = createStructuredSelector({
   isLoggedIn: isLoggedInSelector,

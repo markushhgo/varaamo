@@ -1,12 +1,10 @@
 import React from 'react';
-import Navitem from 'react-bootstrap/lib/NavItem';
-import MenuItem from 'react-bootstrap/lib/MenuItem';
-import { exportAllDeclaration } from '@babel/types';
+
 
 import { shallowWithIntl } from 'utils/testUtils';
 import MobileNavbar from './MobileNavbar';
-import TopNavbarContrastContainer from '../accessability/TopNavbarContrastContainer';
-import TopNavbarFontContainer from '../accessability/TopNavbarFontContainer';
+import TopNavbarContrastContainer from '../accessibility/TopNavbarContrastContainer';
+import TopNavbarFontContainer from '../accessibility/TopNavbarFontContainer';
 
 
 describe('shared/top-navbar/mobile/MobileNavbar', () => {
