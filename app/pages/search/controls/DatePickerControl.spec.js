@@ -13,7 +13,7 @@ import SearchControlOverlay from './SearchControlOverlay';
 
 const defaults = {
   currentLanguage: 'fi',
-  date: '2017-01-01',
+  date: '01.01.2017',
   duration: 30,
   end: '16:00',
   onConfirm: () => null,
@@ -70,7 +70,7 @@ describe('pages/search/controls/DatePickerControl', () => {
   });
 
   test('renders DayPicker for selecting date', () => {
-    const expected = moment(defaults.date)
+    const expected = moment(defaults.date, 'L')
       .startOf('day')
       .toDate();
     const wrapper = getWrapper();
