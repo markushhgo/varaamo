@@ -62,6 +62,20 @@ describe('shared/resource-calendar/ResourceCalendar', () => {
     expect(controlLabel.length).toBe(1);
   });
 
+  test('renders date-input-error with correct props if state.inputErrorVisible is true', () => {
+    wrapper.setState({ textInputErrorVisible: true });
+    const errorText = wrapper.find('#date-input-error');
+    expect(errorText.length).toBe(1);
+    expect(errorText.prop('role')).toBe('alert');
+    expect(errorText.text()).toBe('ResourceCalendar.form.error.feedback');
+  });
+
+  test('doesnt render date-input-error if state.inputErrorVisible is false', () => {
+    wrapper.setState({ textInputErrorVisible: false });
+    const errorText = wrapper.find('#date-input-error');
+    expect(errorText.length).toBe(0);
+  });
+
   test('renders FormControl with correct props', () => {
     const expected = moment('2015-10-11').format('L');
     wrapper.setState({ textInputDate: expected });
@@ -216,17 +230,26 @@ describe('shared/resource-calendar/ResourceCalendar', () => {
   });
 
   describe('handleDateChange', () => {
-    test('sets state visible false, updates state textInputDate and calls prop onDateChange', () => {
+    test('calls prop onDateChange', () => {
       const onDateChange = simple.stub();
       const date = new Date('2015-10-01');
       const instance = getWrapper({ onDateChange }).instance();
+      instance.handleDateChange(date);
+
+      expect(onDateChange.callCount).toBe(1);
+      expect(onDateChange.lastCall.args).toEqual([date]);
+    });
+
+    test('sets state visible false, textInputErrorVisible false and updates textInputDate', () => {
+      const date = new Date('2015-10-01');
+      const instance = getWrapper().instance();
       instance.state.visible = true;
+      instance.state.textInputErrorVisible = true;
       instance.handleDateChange(date);
 
       expect(instance.state.visible).toBe(false);
+      expect(instance.state.textInputErrorVisible).toBe(false);
       expect(instance.state.textInputDate).toBe(moment(date).format('L'));
-      expect(onDateChange.callCount).toBe(1);
-      expect(onDateChange.lastCall.args).toEqual([date]);
     });
   });
 
@@ -260,12 +283,42 @@ describe('shared/resource-calendar/ResourceCalendar', () => {
   });
 
   describe('handleDateTextSubmit', () => {
-    test('calls handleDateChange', () => {
+    describe('date is valid', () => {
       const instance = getWrapper().instance();
-      instance.handleDateChange = simple.mock();
-      instance.handleDateTextSubmit({ preventDefault: () => undefined });
+      instance.state.textInputDate = '2.8.2019';
 
-      expect(instance.handleDateChange.callCount).toBe(1);
+      test('handleDateChange is called', () => {
+        instance.handleDateChange = simple.mock();
+        instance.handleDateTextSubmit({ preventDefault: () => undefined });
+
+        expect(instance.handleDateChange.callCount).toBe(1);
+      });
+
+      test('state.textInputErrorVisible is set to false', () => {
+        instance.state.textInputErrorVisible = true;
+        instance.handleDateTextSubmit({ preventDefault: () => undefined });
+
+        expect(instance.state.textInputErrorVisible).toBe(false);
+      });
+    });
+
+    describe('date is not valid', () => {
+      const instance = getWrapper().instance();
+      instance.state.textInputDate = '33.2.2019';
+
+      test('handleDateChange is not called', () => {
+        instance.handleDateChange = simple.mock();
+        instance.handleDateTextSubmit({ preventDefault: () => undefined });
+
+        expect(instance.handleDateChange.callCount).toBe(0);
+      });
+
+      test('state.textInputErrorVisible is set to true', () => {
+        instance.state.textInputErrorVisible = false;
+        instance.handleDateTextSubmit({ preventDefault: () => undefined });
+
+        expect(instance.state.textInputErrorVisible).toBe(true);
+      });
     });
   });
 

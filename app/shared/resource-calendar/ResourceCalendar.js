@@ -11,6 +11,7 @@ import Button from 'react-bootstrap/lib/Button';
 import Overlay from 'react-bootstrap/lib/Overlay';
 import moment from 'moment';
 
+import { isValidDateString } from 'utils/timeUtils';
 import { injectT } from 'i18n';
 import iconCalendar from 'assets/icons/calendar.svg';
 import ResourceCalendarOverlay from './ResourceCalendarOverlay';
@@ -21,6 +22,7 @@ export class UnconnectedResourceCalendar extends Component {
     super(props);
     this.state = {
       textInputDate: '',
+      textInputErrorVisible: false,
       visible: false,
     };
 
@@ -51,7 +53,10 @@ export class UnconnectedResourceCalendar extends Component {
   handleDateChange = (newDate) => {
     this.hideOverlay();
     const formattedDate = moment(newDate).format('L');
-    this.setState({ textInputDate: formattedDate });
+    this.setState({
+      textInputDate: formattedDate,
+      textInputErrorVisible: false,
+    });
     this.props.onDateChange(newDate);
   }
 
@@ -79,11 +84,10 @@ export class UnconnectedResourceCalendar extends Component {
     event.preventDefault();
 
     const date = this.state.textInputDate;
-    if (moment(date, 'L').isValid() === false) {
-      const todaysDate = moment().format('L');
-      this.setState({ textInputDate: todaysDate });
-      this.handleDateChange(moment().toDate());
+    if (isValidDateString(date) === false) {
+      this.setState({ textInputErrorVisible: true });
     } else {
+      this.setState({ textInputErrorVisible: false });
       const selectedMoment = moment(date, 'L');
       const formattedDate = new Date();
       formattedDate.setFullYear(selectedMoment.year(),
@@ -137,8 +141,11 @@ export class UnconnectedResourceCalendar extends Component {
           <form onSubmit={this.handleDateTextSubmit}>
             <FormGroup controlId="dateField">
               <ControlLabel>{t('ResourceCalendar.form.label')}</ControlLabel>
+              {this.state.textInputErrorVisible
+              && <p id="date-input-error" role="alert">{t('ResourceCalendar.form.error.feedback')}</p>}
               <InputGroup>
                 <FormControl
+                  aria-describedby={this.state.textInputErrorVisible ? 'date-input-error' : null}
                   onChange={this.handleDateTextChange}
                   type="text"
                   value={this.state.textInputDate}

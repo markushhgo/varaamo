@@ -230,6 +230,7 @@
   "ResourceAvailability.reserved": "Reserved for the whole day",
   "ResourceAvailability.reservingRestricted": "Not available for reservation",
   "ResourceCalendar.button.imageAlt": "Date picker",
+  "ResourceCalendar.form.error.feedback": "Check the date",
   "ResourceCalendar.form.label": "Select a date (e.g. 30/07/2019)",
   "ResourceCalendar.nextWeek": "Next week",
   "ResourceCalendar.previousWeek": "Previous week",
