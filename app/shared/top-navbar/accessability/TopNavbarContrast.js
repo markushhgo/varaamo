@@ -9,13 +9,19 @@ class ContrastChanger extends Component {
     changeContrast: PropTypes.func,
   };
 
+  handleKeyDown = (ev) => {
+    if (ev.keyCode === 13) {
+      this.props.changeContrast();
+    }
+  }
+
   render() {
     const { t, changeContrast } = this.props;
     return (
-      <li className="app-TopNavbar__contrast" role="presentation">
+      <li className="navbar__contrast" role="presentation">
         <div className="accessability__contrast">
           {t('Nav.Contrast.title')}
-          <div className="contrast_button" onClick={() => changeContrast()} tabIndex="0" />
+          <div className="contrast_button" onClick={() => changeContrast()} onKeyDown={this.handleKeyDown} tabIndex="0" />
         </div>
       </li>
     );

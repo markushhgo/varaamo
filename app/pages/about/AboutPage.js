@@ -32,7 +32,7 @@ class AboutPage extends React.Component {
             {t('AboutPageContent.feedbackLink')}
           </a>
         </p>
-        <h3>{t('AboutPageContent.customerRegisterHeader')}</h3>
+        <h2>{t('AboutPageContent.customerRegisterHeader')}</h2>
         <p>
           <FormattedHTMLMessage id="AboutPageContent.customerRegisterParagraph" />
         </p>

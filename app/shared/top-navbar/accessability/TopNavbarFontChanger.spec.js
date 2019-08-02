@@ -85,4 +85,14 @@ describe('shared/top-navbar/accessability/TopNavbarFontChanger', () => {
       expect(changeFontSize.lastCall.args).toEqual([ACC.FONT_SIZES.SMALL]);
     });
   });
+
+  describe('span onKeyDown works', () => {
+    test('calls props.changeFontSize ', () => {
+      const changeFontSize = simple.mock();
+      const instance = getWrapper({ changeFontSize }).instance();
+      const kbEvent = { keyCode: 13 };
+      instance.handleKeyDown(ACC.FONT_SIZES.SMALL, kbEvent);
+      expect(changeFontSize.lastCall.args).toEqual([ACC.FONT_SIZES.SMALL]);
+    });
+  });
 });
