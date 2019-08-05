@@ -9,19 +9,37 @@ class ContrastChanger extends Component {
     changeContrast: PropTypes.func,
   };
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      ariaState: false,
+    };
+  }
+
+
   handleKeyDown = (ev) => {
     if (ev.keyCode === 13) {
       this.props.changeContrast();
+      this.toggleAriaState();
     }
   }
 
+  handleOnClick = () => {
+    this.props.changeContrast();
+    this.toggleAriaState();
+  }
+
+  toggleAriaState() {
+    this.setState(prevState => ({ ariaState: !prevState.ariaState }));
+  }
+
   render() {
-    const { t, changeContrast } = this.props;
+    const { t } = this.props;
     return (
       <li className="navbar__contrast" role="presentation">
         <div aria-label={t('Nav.Contrast.title')} className="accessibility__contrast">
           {t('Nav.Contrast.title')}
-          <div className="contrast_button" onClick={() => changeContrast()} onKeyDown={this.handleKeyDown} tabIndex="0" />
+          <div aria-pressed={this.state.ariaState} className="contrast_button" onClick={this.handleOnClick} onKeyDown={this.handleKeyDown} role="button" tabIndex="0" />
         </div>
       </li>
     );
