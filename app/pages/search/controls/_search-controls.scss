@@ -72,6 +72,11 @@
   .form-group {
     margin-bottom: 0;
   }
+
+  .form-group label{
+    padding-right: 6px;
+  }
+
   .form-control {
     color: $black;
     font-size: 1em;
@@ -186,10 +191,6 @@
     font-weight: bold;
     display: inline;
     white-space: nowrap;
-
-    @media (min-width: $screen-md-max) {
-      padding-left: 12px;
-    }
 
   }
 
