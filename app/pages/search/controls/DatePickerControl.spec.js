@@ -31,10 +31,33 @@ describe('pages/search/controls/DatePickerControl', () => {
     expect(wrapper.is('div.app-DatePickerControl')).toBe(true);
   });
 
+  test('renders form with correct props', () => {
+    const wrapper = getWrapper();
+    const dateForm = wrapper.find('form');
+    expect(dateForm.length).toBe(1);
+    expect(dateForm.prop('onSubmit')).toBe(wrapper.instance().handleDateInputSubmit);
+  });
+
   test('renders ControlLabel with correct text', () => {
     const wrapper = getWrapper();
     const controlLabel = wrapper.find(ControlLabel);
     expect(controlLabel).toHaveLength(1);
+  });
+
+  test('renders date-input-error with correct props if state.inputErrorVisible is false', () => {
+    const wrapper = getWrapper();
+    wrapper.setState({ textInputErrorVisible: true });
+    const errorText = wrapper.find('#date-input-error');
+    expect(errorText.length).toBe(1);
+    expect(errorText.prop('role')).toBe('alert');
+    expect(errorText.text()).toBe('DatePickerControl.form.error.feedback');
+  });
+
+  test('doesnt render date-input-error if state.inputErrorVisible is false', () => {
+    const wrapper = getWrapper();
+    wrapper.setState({ textInputErrorVisible: false });
+    const errorText = wrapper.find('#date-input-error');
+    expect(errorText.length).toBe(0);
   });
 
   test('renders FormGroup with correct props', () => {
@@ -44,14 +67,27 @@ describe('pages/search/controls/DatePickerControl', () => {
     expect(formGroup.prop('controlId')).toBe('datePickerField');
   });
 
-  test('renders FormControl with correct props', () => {
-    const wrapper = getWrapper();
-    const formControl = wrapper.find(FormControl);
-    expect(formControl).toHaveLength(1);
-    expect(formControl.prop('onChange')).toBe(wrapper.instance().handleDateInputChange);
-    expect(formControl.prop('type')).toBe('text');
-    expect(formControl.prop('value')).toBe(defaults.date);
-    expect(formControl.prop('onBlur')).toBe(wrapper.instance().handleDateInputFocusOut);
+  describe('FormControl', () => {
+    test('renders with correct props', () => {
+      const wrapper = getWrapper();
+      const formControl = wrapper.find(FormControl);
+      expect(formControl).toHaveLength(1);
+      expect(formControl.prop('onChange')).toBe(wrapper.instance().handleDateInputChange);
+      expect(formControl.prop('type')).toBe('text');
+      expect(formControl.prop('value')).toBe(defaults.date);
+    });
+    test('prop aria-describedby is null if state.textInputErrorVisible is false', () => {
+      const wrapper = getWrapper();
+      wrapper.setState({ textInputErrorVisible: false });
+      const formControl = wrapper.find(FormControl);
+      expect(formControl.prop('aria-describedby')).toBe(null);
+    });
+    test('prop aria-describedby is date-input-error if state.textInputErrorVisible is true', () => {
+      const wrapper = getWrapper();
+      wrapper.setState({ textInputErrorVisible: true });
+      const formControl = wrapper.find(FormControl);
+      expect(formControl.prop('aria-describedby')).toBe('date-input-error');
+    });
   });
 
   test('renders Button with correct props', () => {
@@ -163,6 +199,13 @@ describe('pages/search/controls/DatePickerControl', () => {
       expect(onConfirm.lastCall.args).toEqual([expected]);
     });
 
+    test('sets state.textInputErrorVisible to false', () => {
+      const instance = getWrapper().instance();
+      instance.state.textInputErrorVisible = true;
+      instance.handleConfirm();
+      expect(instance.state.textInputErrorVisible).toBe(false);
+    });
+
     test('calls hideOverlay', () => {
       const instance = getWrapper().instance();
       simple.mock(instance, 'hideOverlay');
@@ -199,39 +242,36 @@ describe('pages/search/controls/DatePickerControl', () => {
     });
   });
 
-  describe('handleDateInputFocusOut', () => {
-    describe('if state.date is not a valid date', () => {
-      const todaysDate = moment().format('L');
+  describe('handleDateInputSubmit', () => {
+    describe('date is valid', () => {
+      const instance = getWrapper().instance();
+      instance.state.date = '2.8.2019';
 
-      test('sets state.date to todays date', () => {
-        const instance = getWrapper().instance();
-        instance.state.date = '';
-        instance.handleDateInputFocusOut();
-        expect(instance.state.date).toBe(todaysDate);
-      });
+      test('handleConfirm is called', () => {
+        instance.handleConfirm = simple.mock();
+        instance.handleDateInputSubmit({ preventDefault: () => undefined });
 
-      test('calls handleConfirm with todays date', () => {
-        const onConfirm = simple.mock();
-        const instance = getWrapper({ onConfirm }).instance();
-        instance.state.date = '';
-        const expected = { date: todaysDate };
-        instance.handleDateInputFocusOut();
-        expect(onConfirm.callCount).toBe(1);
-        expect(onConfirm.lastCall.args).toEqual([expected]);
+        expect(instance.handleConfirm.callCount).toBe(1);
       });
     });
-  });
 
-  describe('if state.date is a valid date', () => {
-    test('calls handleConfirm with state.date', () => {
-      const onConfirm = simple.mock();
-      const instance = getWrapper({ onConfirm }).instance();
-      const someValidDate = '12.06.2019';
-      instance.state.date = someValidDate;
-      const expected = { date: someValidDate };
-      instance.handleDateInputFocusOut();
-      expect(onConfirm.callCount).toBe(1);
-      expect(onConfirm.lastCall.args).toEqual([expected]);
+    describe('date is not valid', () => {
+      const instance = getWrapper().instance();
+      instance.state.date = '34.8.2019';
+
+      test('handleConfirm is not called', () => {
+        instance.handleConfirm = simple.mock();
+        instance.handleDateInputSubmit({ preventDefault: () => undefined });
+
+        expect(instance.handleConfirm.callCount).toBe(0);
+      });
+
+      test('state.textInputErrorVisible is set to true', () => {
+        instance.state.textInputErrorVisible = true;
+        instance.handleDateInputSubmit({ preventDefault: () => undefined });
+
+        expect(instance.state.textInputErrorVisible).toBe(true);
+      });
     });
   });
 

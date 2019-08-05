@@ -13,6 +13,7 @@ import MomentLocaleUtils from 'react-day-picker/moment';
 import { injectT } from 'i18n';
 import SearchControlOverlay from './SearchControlOverlay';
 import iconCalendar from './images/calendar.svg';
+import { isValidDateString } from '../../../utils/timeUtils';
 
 class DatePickerControl extends React.Component {
   static propTypes = {
@@ -28,11 +29,12 @@ class DatePickerControl extends React.Component {
     this.state = {
       date,
       visible: false,
+      textInputErrorVisible: false
     };
 
     this.handleDateInputChange = this.handleDateInputChange.bind(this);
+    this.handleDateInputSubmit = this.handleDateInputSubmit.bind(this);
     this.handleDateButtonClick = this.handleDateButtonClick.bind(this);
-    this.handleDateInputFocusOut = this.handleDateInputFocusOut.bind(this);
   }
 
   componentWillUpdate(nextProps) {
@@ -54,6 +56,8 @@ class DatePickerControl extends React.Component {
 
   handleConfirm = (value) => {
     const date = value;
+
+    this.setState({ textInputErrorVisible: false });
     this.props.onConfirm({ date });
     this.hideOverlay();
   };
@@ -63,12 +67,12 @@ class DatePickerControl extends React.Component {
     this.setState({ date });
   }
 
-  handleDateInputFocusOut() {
+  handleDateInputSubmit(event) {
+    event.preventDefault();
+
     const date = this.state.date;
-    if (moment(date, 'L').isValid() === false) {
-      const todaysDate = moment().format('L');
-      this.handleConfirm(todaysDate);
-      this.setState({ date: todaysDate });
+    if (isValidDateString(date) === false) {
+      this.setState({ textInputErrorVisible: true });
     } else {
       this.handleConfirm(date);
     }
@@ -92,26 +96,26 @@ class DatePickerControl extends React.Component {
 
     return (
       <div className="app-DatePickerControl">
-        <FormGroup controlId="datePickerField">
-          <ControlLabel>{t('DatePickerControl.label')}</ControlLabel>
-          <InputGroup>
-            <FormControl
-              onBlur={this.handleDateInputFocusOut}
-              onChange={this.handleDateInputChange}
-              type="text"
-              value={localDate}
-            />
-
-
-            <InputGroup.Button>
-              <Button className="app-DatePickerControl__button" onClick={this.handleDateButtonClick}>
-                <img alt={t('DatePickerControl.button.imageAlt')} className="app-DatePickerControl__icon" src={iconCalendar} />
-              </Button>
-            </InputGroup.Button>
-
-
-          </InputGroup>
-        </FormGroup>
+        <form onSubmit={this.handleDateInputSubmit}>
+          <FormGroup controlId="datePickerField">
+            <ControlLabel>{t('DatePickerControl.label')}</ControlLabel>
+            {this.state.textInputErrorVisible
+            && <p id="date-input-error" role="alert">{t('DatePickerControl.form.error.feedback')}</p>}
+            <InputGroup>
+              <FormControl
+                aria-describedby={this.state.textInputErrorVisible ? 'date-input-error' : null}
+                onChange={this.handleDateInputChange}
+                type="text"
+                value={localDate}
+              />
+              <InputGroup.Button>
+                <Button className="app-DatePickerControl__button" onClick={this.handleDateButtonClick}>
+                  <img alt={t('DatePickerControl.button.imageAlt')} className="app-DatePickerControl__icon" src={iconCalendar} />
+                </Button>
+              </InputGroup.Button>
+            </InputGroup>
+          </FormGroup>
+        </form>
         <Overlay
           container={this}
           onHide={this.hideOverlay}

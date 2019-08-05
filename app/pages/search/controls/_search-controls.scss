@@ -180,6 +180,14 @@
   &__triangle {
     text-align: right;
   }
+  #date-input-error{
+    margin: 0;
+    color: #c80000;
+    font-weight: bold;
+    display: inline;
+    white-space: nowrap;
+  }
+
   .app-SearchControlOverlay__overlay {
     border-top: none;
   }

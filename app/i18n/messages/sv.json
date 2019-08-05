@@ -79,6 +79,7 @@
   "ConfirmReservationModal.regularReservationText": "Är du säker på att du vill göra en bokning för {reservationsCount, plural, one {tidpunkten} other {tidpunkterna}}:",
   "ConfirmReservationModal.regularReservationTitle": "Boka",
   "DatePickerControl.buttonLabel": "Datum",
+  "DatePickerControl.form.error.feedback": "Kontrollera datum",
   "DatePickerControl.header": "Välj dag",
   "DatePickerControl.label": "När? (t.ex. 27.06.2019)",
   "DatePickerControl.button.imageAlt" : "Datumnväljare",

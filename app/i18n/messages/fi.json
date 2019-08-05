@@ -79,6 +79,7 @@
   "ConfirmReservationModal.regularReservationText": "Oletko varma että haluat tehdä varauksen {reservationsCount, plural, one {ajalle} other {ajoille}}:",
   "ConfirmReservationModal.regularReservationTitle": "Varauksen tekeminen",
   "DatePickerControl.buttonLabel": "Päivämäärä",
+  "DatePickerControl.form.error.feedback": "Tarkista päivämäärä",
   "DatePickerControl.header": "Valitse aika",
   "DatePickerControl.label": "Milloin? (esim. 27.06.2019)",
   "DatePickerControl.button.imageAlt" : "Päivämäärävalitsin",
