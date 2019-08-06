@@ -32,7 +32,7 @@
 
   .app-ResourceCalendar__wrapper {
     display: block;
-    max-width: 400px;
+    max-width: 550px;
     flex-grow: 1;
     position: relative;
 
@@ -120,6 +120,11 @@
       border-radius: 0;
       font-size: 1.6rem;
 
+      @media (max-width: $screen-xs-max) {
+        padding-left: 0px;
+        padding-right: 0px;
+      }
+
       &:focus {
         outline: initial;
       }
@@ -131,7 +136,7 @@
         color: $dark-gray;
       }
       &--available:not(.DayPicker-Day--disabled) {
-        background-color: $copper;
+        background-color: $turku-yellow;
         &.DayPicker-Day--selected {
           background-color: $available-color;
         }
@@ -174,6 +179,7 @@
     }
     .DayPicker-Weekday {
       color: $black;
+      padding: 0px;
     }
 
     .DayPicker-WeekNumber {
@@ -243,12 +249,13 @@
 
       &__content {
         background-color: $white;
-        padding: 20px;
+        padding: 10px;
       }
     }
     @media (max-width: $screen-xs-max) {
       order: -1;
       width: 100%;
+      padding: 0px;
     }
   }
 }
