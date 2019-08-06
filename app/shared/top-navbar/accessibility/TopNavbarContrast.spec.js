@@ -33,13 +33,23 @@ describe('shared/top-navbar/accessibility/TopNavbarContrast', () => {
     expect(element.length).toBe(1);
   });
 
-  describe('button reacts to', () => {
-    test('onKeyDown', () => {
+  describe('button', () => {
+    test('reacts to onKeyDown', () => {
       const changeContrast = simple.mock();
       const instance = getWrapper({ changeContrast }).instance();
       const kbEvent = { keyCode: 13 };
       instance.handleKeyDown(kbEvent);
       expect(changeContrast.callCount).toBe(1);
+    });
+
+    test('aria-pressed toggles from false -> true -> false', () => {
+      const toggleAria = simple.mock();
+      const instance = getWrapper({ toggleAria }).instance();
+      expect(instance.state.ariaState).toBe(false);
+      instance.toggleAriaState();
+      expect(instance.state.ariaState).toBe(true);
+      instance.toggleAriaState();
+      expect(instance.state.ariaState).toBe(false);
     });
   });
 });

@@ -71,16 +71,16 @@ class TopNavbar extends Component {
 
           <Navbar.Header>
             <Navbar.Toggle aria-label={t('Navbar.aria.topNavbar.mobileLogin')} data-target="#navCollapse">
-              <div className="mobile_login" type="button">
+              <div className="mobile_login" tabIndex="0" type="button">
                 <FontAwesomeIcon icon={faUserAlt} />
               </div>
             </Navbar.Toggle>
-            <div aria-label={t('Navbar.aria.topNavbar.mobileAccessibility')} className="navbar-toggle">
-              <div className="mobile_accessibility" onClick={() => this.toggleMobileNavbar()} type="button">
+            <button aria-controls="mobileNavbar" aria-label={t('Navbar.aria.topNavbar.mobileAccessibility')} className="navbar-toggle" type="button">
+              <div className="mobile_accessibility" onClick={() => this.toggleMobileNavbar()} onKeyDown={ev => ((ev.keyCode === 13) ? (this.toggleMobileNavbar()) : '')} tabIndex="0" type="button">
                 <FontAwesomeIcon icon={faWheelchair} />
               </div>
-            </div>
-            <div className="navbar-toggle lang" data-target="#login" data-toggle="collapse">
+            </button>
+            <button className="navbar-toggle lang" data-target="#login" data-toggle="collapse" type="button">
               <div aria-label={t('Navbar.aria.topNavbar.mobileLocale')} className="mobile_lang" type="button">
                 <NavDropdown
                   className="mobile_lang_dropdown"
@@ -88,13 +88,14 @@ class TopNavbar extends Component {
                   id="mobile"
                   noCaret
                   onSelect={changeLocale}
+                  tabIndex="0"
                   title={currentLanguage}
                 >
                   {currentLanguage !== 'fi' && <MenuItem eventKey="fi">FI</MenuItem>}
                   {currentLanguage !== 'sv' && <MenuItem eventKey="sv">SV</MenuItem>}
                 </NavDropdown>
               </div>
-            </div>
+            </button>
             <Navbar.Brand>
               <Link aria-label={t('Navbar.aria.topNavbar.frontpage')} id="main" to="/">
                 <span aria-label="Turun vaakuna" className={`${logo}`} title="Etusivu" />
@@ -113,6 +114,7 @@ class TopNavbar extends Component {
                 id="language-nav-dropdown"
                 noCaret
                 onSelect={changeLocale}
+                tabIndex="0"
                 title={currentLanguage}
               >
                 {currentLanguage !== 'fi' && <MenuItem eventKey="fi">FI</MenuItem>}

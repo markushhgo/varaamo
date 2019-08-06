@@ -28,7 +28,7 @@ class MobileNavbar extends React.Component {
     const fontComponent = this.getFontChanger();
     const contrastComponent = this.getContrastChanger();
     return (
-      <div aria-hidden={ariaHide} className={classNames('mobile-Navbar_mobile', element, contrast)}>
+      <div aria-hidden={ariaHide} aria-live="polite" className={classNames('mobile-Navbar_mobile', element, contrast)} id="mobileNavbar">
         <div className="container">
           <Row>
             <Col sm={6} smOffset={6} xs={12}>

@@ -39,7 +39,7 @@ class ContrastChanger extends Component {
       <li className="navbar__contrast" role="presentation">
         <div aria-label={t('Nav.Contrast.title')} className="accessibility__contrast">
           {t('Nav.Contrast.title')}
-          <div aria-pressed={this.state.ariaState} className="contrast_button" onClick={this.handleOnClick} onKeyDown={this.handleKeyDown} role="button" tabIndex="0" />
+          <div aria-pressed={this.state.ariaState} className="contrast_button" id="contrastButton" onClick={this.handleOnClick} onKeyDown={this.handleKeyDown} role="button" tabIndex="0" />
         </div>
       </li>
     );
