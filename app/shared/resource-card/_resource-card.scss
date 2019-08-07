@@ -14,7 +14,6 @@ $cellHeight: 50%;
       display: flex;
       flex-flow: row nowrap;
       justify-content: flex-start;
-      //height: $app-ResourceCard-height;
     }
   }
 
@@ -65,33 +64,22 @@ $cellHeight: 50%;
     }
   }
 
-  h4 {
-
-    margin-top: 0;
+  h2 {
+    font-size: 1.2em;
+    overflow-wrap: break-word;
+    margin-top: 8px;
     margin-bottom: 0;
-    @media screen and (max-width: $screen-xs-min) {
-
-    }
   }
 
   &__unit-name {
-
     margin-bottom: 5px;
     text-decoration: none;
+    overflow-wrap: break-word;
     span:first-child {
       margin-right: 10px;
     }
 
-    @media (min-width: $screen-xs-max) {
-      display: inline-flex;
-    }
     align-items: center;
-
-    &-labels {
-      @media (min-width: $screen-xs-max) {
-        display: inline-flex;
-      }
-    }
   }
 
   .resource-availability {

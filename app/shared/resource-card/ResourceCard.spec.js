@@ -291,8 +291,8 @@ describe('shared/resource-card/ResourceCard', () => {
     expect(links.at(0).prop('aria-label')).toEqual(expected);
   });
 
-  test('renders the name of the resource inside a h4 header', () => {
-    const header = getWrapper().find('h4');
+  test('renders the name of the resource inside a h2 header', () => {
+    const header = getWrapper().find('h2');
     const expected = defaultProps.resource.name;
 
     expect(header.html()).toContain(expected);
