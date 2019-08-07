@@ -32,11 +32,12 @@
 
   .app-ResourceCalendar__wrapper {
     display: block;
-    max-width: 550px;
+    max-width: 630px;
     flex-grow: 1;
     position: relative;
     @media only screen and (min-width: 1080px) {
       margin-left: 15px;
+      max-width: 900px;
     }
 
     #dateField {
@@ -46,6 +47,12 @@
     .form-group {
       margin-bottom: 0;
     }
+
+    .form-group label {
+      margin-right: 10px;
+    }
+
+
     .form-control[disabled] {
       background-color: transparent;
       border-color: $black;
@@ -64,13 +71,7 @@
       color: rgb(200, 0, 0);
       font-weight: bold;
       display: inline;
-      margin-left: 10px;
-
-      @media (max-width: $screen-xs-max){
-
-        margin-left: 0;
-
-      }
+      white-space: nowrap;
     }
 
     .form-control[disabled] {
