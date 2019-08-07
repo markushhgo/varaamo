@@ -102,22 +102,20 @@ class ResourceCard extends Component {
           <BackgroundImage height={420} image={getMainImage(resource.images)} width={700} />
         </Link>
         <div className="app-ResourceCard__content">
-          <Link onClick={this.handleLinkClick} to={linkTo}>
+          <Link
+            aria-label={`${resource.name}, ${unit.name}`}
+            onClick={this.handleLinkClick}
+            to={linkTo}
+          >
             <h2>{resource.name}</h2>
-          </Link>
-          <div className="app-ResourceCard__unit-name">
-            <a
-              className="app-ResourceCard__unit-name-link"
-              onClick={this.handleSearchByUnit}
-              role="button"
-              tabIndex="-1"
-            >
+            <div className="app-ResourceCard__unit-name">
               <span>{unit.name}</span>
-            </a>
-            <div>
-              <ResourceAvailability date={date} resource={resource} />
-              {!resource.public && <UnpublishedLabel />}
             </div>
+          </Link>
+
+          <div>
+            <ResourceAvailability date={date} resource={resource} />
+            {!resource.public && <UnpublishedLabel />}
           </div>
           <div className="app-ResourceCard__description">{resource.description}</div>
         </div>

@@ -296,6 +296,12 @@ describe('shared/resource-card/ResourceCard', () => {
     expect(links.at(0).prop('tabIndex')).toBe('-1');
   });
 
+  test('main link contains correct props', () => {
+    const links = getWrapper().find(Link);
+    const expected = `${defaultProps.resource.name}, ${defaultProps.unit.name}`;
+    expect(links.at(1).prop('aria-label')).toEqual(expected);
+  });
+
   test('renders the name of the resource inside a h2 header', () => {
     const header = getWrapper().find('h2');
     const expected = defaultProps.resource.name;
@@ -322,13 +328,6 @@ describe('shared/resource-card/ResourceCard', () => {
     expect(zipAddress).toHaveLength(1);
     expect(zipAddress.html()).toContain(defaultProps.unit.addressZip);
     expect(zipAddress.html()).toContain(defaultProps.unit.municipality);
-  });
-
-  test('renders an anchor that calls handleSearchByUnitName on click', () => {
-    const wrapper = getWrapper();
-    const unitAnchor = wrapper.find('.app-ResourceCard__unit-name-link');
-    expect(unitAnchor).toHaveLength(1);
-    expect(unitAnchor.prop('onClick')).toBe(wrapper.instance().handleSearchByUnit);
   });
 
   test('renders the type of the given resource in props', () => {
