@@ -77,8 +77,11 @@ describe('shared/resource-card/ResourceCard', () => {
     return shallowWithIntl(<UnconnectedResourceCard {...defaultProps} {...extraProps} />);
   }
 
-  test('renders an div element', () => {
-    expect(getWrapper().is('div')).toBe(true);
+  test('renders wrapping div element with correct props', () => {
+    const wrapper = getWrapper();
+    expect(wrapper.is('div')).toBe(true);
+    expect(wrapper.prop('aria-label')).toBe(defaultProps.resource.name);
+    expect(wrapper.prop('role')).toBe('listitem');
   });
 
   test('renders stacked className if stacked prop is passed', () => {

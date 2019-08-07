@@ -80,11 +80,13 @@ class ResourceCard extends Component {
 
     return (
       <div
+        aria-label={resource.name}
         className={classNames(
           'app-ResourceCard',
           !isLargerFontSizeUsed && 'app-ResourceCard__normal-font-size',
           { 'app-ResourceCard__stacked': this.props.stacked, }
         )}
+        role="listitem"
       >
         <Link
           aria-hidden="true"

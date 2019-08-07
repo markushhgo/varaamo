@@ -16,6 +16,7 @@ describe('shared/resource-list/ResourceList', () => {
     },
     resourceIds: Immutable(['resource-1', 'resource-2']),
     date: '2017-01-01',
+    label: 'some label',
   };
 
   function getWrapper(extraProps) {
@@ -29,8 +30,10 @@ describe('shared/resource-list/ResourceList', () => {
       wrapper = getWrapper();
     });
 
-    test('renders a div', () => {
+    test('renders wrapping div with correct props', () => {
       expect(wrapper.is('div')).toBe(true);
+      expect(wrapper.prop('role')).toBe('list');
+      expect(wrapper.prop('aria-label')).toBe(defaultProps.label);
     });
 
     test('does not render the empty message', () => {
