@@ -59,7 +59,18 @@ class FontSizeChanger extends Component {
 
   renderFontButton(spanID, fontSize) {
     return (
-      <span aria-pressed={this.setAriaPressed(spanID)} className={this.setActiveClass(spanID)} id={spanID} onClick={() => this.handleFontSizeClick(fontSize)} onKeyDown={ev => this.handleKeyDown(fontSize, ev)} role="button" tabIndex="0">A</span>
+      <span
+        aria-pressed={this.setAriaPressed(spanID)}
+        className={this.setActiveClass(spanID)}
+        id={spanID}
+        onClick={() => this.handleFontSizeClick(fontSize)}
+        onKeyDown={ev => this.handleKeyDown(fontSize, ev)}
+        role="button"
+        tabIndex="0"
+      >
+A
+
+      </span>
     );
   }
 

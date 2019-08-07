@@ -76,12 +76,18 @@ class TopNavbar extends Component {
               </div>
             </Navbar.Toggle>
             <button aria-controls="mobileNavbar" aria-label={t('Navbar.aria.topNavbar.mobileAccessibility')} className="navbar-toggle" type="button">
-              <div className="mobile_accessibility" onClick={() => this.toggleMobileNavbar()} onKeyDown={ev => ((ev.keyCode === 13) ? (this.toggleMobileNavbar()) : '')} tabIndex="0" type="button">
+              <div
+                className="mobile_accessibility"
+                onClick={() => this.toggleMobileNavbar()}
+                onKeyDown={ev => ((ev.keyCode === 13) ? (this.toggleMobileNavbar()) : '')}
+                tabIndex="0"
+                type="button"
+              >
                 <FontAwesomeIcon icon={faWheelchair} />
               </div>
             </button>
             <button className="navbar-toggle lang" data-target="#login" data-toggle="collapse" type="button">
-              <div aria-label={t('Navbar.aria.topNavbar.mobileLocale')} className="mobile_lang" type="button">
+              <div aria-label={t('Navbar.aria.topNavbar.mobileLocale')} className="mobile_lang" role="list" type="button">
                 <NavDropdown
                   className="mobile_lang_dropdown"
                   eventKey="lang"
@@ -103,7 +109,7 @@ class TopNavbar extends Component {
             </Navbar.Brand>
           </Navbar.Header>
           <Navbar.Collapse id="navCollapse" role="presentation">
-            <Nav aria-label={t('Navbar.aria.topNavbar.options')} pullRight role="navigation">
+            <Nav aria-label={t('Navbar.aria.topNavbar.options')} pullRight role="list">
               <ContrastChanger />
 
               <FontChanger />

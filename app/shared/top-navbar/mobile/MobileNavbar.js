@@ -13,6 +13,13 @@ class MobileNavbar extends React.Component {
 
   };
 
+
+  getCollapseStatus = () => (this.props.toggle ? '' : 'is-collapsed')
+
+  getAriaVisibility = () => (!this.props.toggle)
+
+  getContrastStatus = () => (this.props.contrast ? '' : 'high-contrast')
+
   getFontChanger() {
     return <FontChanger />;
   }
@@ -22,9 +29,9 @@ class MobileNavbar extends React.Component {
   }
 
   render() {
-    const element = this.props.toggle ? '' : 'is-collapsed';
-    const contrast = this.props.contrast ? '' : 'high-contrast';
-    const ariaHide = this.props.toggle ? 'false' : 'true';
+    const element = this.getCollapseStatus();
+    const contrast = this.getContrastStatus();
+    const ariaHide = this.getAriaVisibility();
     const fontComponent = this.getFontChanger();
     const contrastComponent = this.getContrastChanger();
     return (
