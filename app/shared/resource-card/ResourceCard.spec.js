@@ -285,10 +285,12 @@ describe('shared/resource-card/ResourceCard', () => {
     expect(links.at(1).props().to).toEqual(expected);
   });
 
-  test('image link contains correct aria-label', () => {
+  test('image link contains correct props', () => {
     const links = getWrapper().find(Link);
     const expected = defaultProps.resource.name;
     expect(links.at(0).prop('aria-label')).toEqual(expected);
+    expect(links.at(0).prop('aria-hidden')).toBe('true');
+    expect(links.at(0).prop('tabIndex')).toBe('-1');
   });
 
   test('renders the name of the resource inside a h2 header', () => {

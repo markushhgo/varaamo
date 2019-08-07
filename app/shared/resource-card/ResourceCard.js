@@ -87,12 +87,14 @@ class ResourceCard extends Component {
         )}
       >
         <Link
+          aria-hidden="true"
           aria-label={resource.name}
           className={classNames(
             'app-ResourceCard__image-link',
             isLargerFontSizeUsed && 'app-ResourceCard__image-link__large-font-size'
           )}
           onClick={this.handleLinkClick}
+          tabIndex="-1"
           to={linkTo}
         >
           <BackgroundImage height={420} image={getMainImage(resource.images)} width={700} />
