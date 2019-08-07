@@ -63,6 +63,14 @@
       margin: 0;
       color: rgb(200, 0, 0);
       font-weight: bold;
+      display: inline;
+      margin-left: 10px;
+
+      @media (max-width: $screen-xs-max){
+
+        margin-left: 0;
+
+      }
     }
 
     .form-control[disabled] {
