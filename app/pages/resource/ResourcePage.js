@@ -198,7 +198,7 @@ class UnconnectedResourcePage extends Component {
                         {/* Show reservation max period text */}
                         {resource.maxPeriod && (
                           <div className="app-ResourcePage__content-max-period">
-                            {`${t('ReservationInfo.reservationMaxLength')} ${maxPeriodText}`}
+                            <p>{`${t('ReservationInfo.reservationMaxLength')} ${maxPeriodText}`}</p>
                           </div>
                         )}
 

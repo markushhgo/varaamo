@@ -6,6 +6,9 @@
   align-content: flex-start;
   margin-bottom: 30px;
   text-align: center;
+  @media only screen and (min-width: 767px) {
+    margin-left: 15px;
+  }
 
   &--date {
     flex: 0 0 14%;
