@@ -46,7 +46,7 @@ $screen-lg-max: ($screen-xl-min - 1) !default;
 // Mixins
 
 @mixin focusElement {
-  outline: $focus-highlight auto 2px;
+  outline: auto 2px;
 }
 
 // ----------

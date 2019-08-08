@@ -13,6 +13,13 @@ class MobileNavbar extends React.Component {
 
   };
 
+
+  getCollapseStatus = () => (this.props.toggle ? '' : 'is-collapsed')
+
+  getAriaVisibility = () => (!this.props.toggle)
+
+  getContrastStatus = () => (this.props.contrast ? '' : 'high-contrast')
+
   getFontChanger() {
     return <FontChanger />;
   }
@@ -22,13 +29,13 @@ class MobileNavbar extends React.Component {
   }
 
   render() {
-    const element = this.props.toggle ? '' : 'is-collapsed';
-    const contrast = this.props.contrast ? '' : 'high-contrast';
-    const ariaHide = this.props.toggle ? 'false' : 'true';
+    const element = this.getCollapseStatus();
+    const contrast = this.getContrastStatus();
+    const ariaHide = this.getAriaVisibility();
     const fontComponent = this.getFontChanger();
     const contrastComponent = this.getContrastChanger();
     return (
-      <div aria-hidden={ariaHide} className={classNames('mobile-Navbar_mobile', element, contrast)}>
+      <div aria-hidden={ariaHide} aria-live="polite" className={classNames('mobile-Navbar_mobile', element, contrast)} id="mobileNavbar">
         <div className="container">
           <Row>
             <Col sm={6} smOffset={6} xs={12}>

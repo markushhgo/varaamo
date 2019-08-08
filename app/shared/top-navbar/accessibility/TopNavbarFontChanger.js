@@ -37,6 +37,16 @@ class FontSizeChanger extends Component {
   }
 
 
+  setActiveClass(spanID) {
+    const span = this.getActiveFontButton(this.props.fontSize);
+    return ((span === spanID) ? 'active' : '');
+  }
+
+  setAriaPressed(spanID) {
+    const span = this.getActiveFontButton(this.props.fontSize);
+    return ((span === spanID));
+  }
+
   handleKeyDown(size, ev) {
     if (ev.keyCode === 13) {
       this.props.changeFontSize(size);
@@ -47,18 +57,35 @@ class FontSizeChanger extends Component {
     this.props.changeFontSize(size);
   }
 
+  renderFontButton(spanID, fontSize) {
+    return (
+      <span
+        aria-pressed={this.setAriaPressed(spanID)}
+        className={this.setActiveClass(spanID)}
+        id={spanID}
+        onClick={() => this.handleFontSizeClick(fontSize)}
+        onKeyDown={ev => this.handleKeyDown(fontSize, ev)}
+        role="button"
+        tabIndex="0"
+      >
+A
+
+      </span>
+    );
+  }
+
   render() {
     const {
-      t, fontSize
+      t
     } = this.props;
-    const spanID = this.getActiveFontButton(fontSize);
+
     return (
       <li className="navbar__font" role="presentation">
         <div aria-label={t('Nav.FontSize.title')} className="accessibility__buttonGroup">
           {t('Nav.FontSize.title')}
-          <span className={((spanID === this.firstA) ? 'active' : '')} id={this.firstA} onClick={() => this.handleFontSizeClick(ACC.FONT_SIZES.SMALL)} onKeyDown={ev => this.handleKeyDown(ACC.FONT_SIZES.SMALL, ev)} tabIndex="0">A</span>
-          <span className={((spanID === this.secondA) ? 'active' : '')} id={this.secondA} onClick={() => this.handleFontSizeClick(ACC.FONT_SIZES.MEDIUM)} onKeyDown={ev => this.handleKeyDown(ACC.FONT_SIZES.MEDIUM, ev)} tabIndex="0">A</span>
-          <span className={((spanID === this.thirdA) ? 'active' : '')} id={this.thirdA} onClick={() => this.handleFontSizeClick(ACC.FONT_SIZES.LARGE)} onKeyDown={ev => this.handleKeyDown(ACC.FONT_SIZES.LARGE, ev)} tabIndex="0">A</span>
+          {this.renderFontButton(this.firstA, ACC.FONT_SIZES.SMALL)}
+          {this.renderFontButton(this.secondA, ACC.FONT_SIZES.MEDIUM)}
+          {this.renderFontButton(this.thirdA, ACC.FONT_SIZES.LARGE)}
         </div>
       </li>
 

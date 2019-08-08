@@ -39,7 +39,7 @@ $externalIconMarginLeft: 5px;
 
     &:focus {
       color: $white;
-//      @include focusElement;
+      @include focusElement;
     }
   }
 
@@ -54,7 +54,7 @@ $externalIconMarginLeft: 5px;
         font-size: inherit;
 
         &:focus {
-//          @include focusElement;
+          @include focusElement;
         }
       }
     }
