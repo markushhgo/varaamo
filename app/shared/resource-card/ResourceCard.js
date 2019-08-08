@@ -123,15 +123,13 @@ class ResourceCard extends Component {
         <div className="app-ResourceCard__info">
           <Col md={4} sm={4} xs={isLargerFontSizeUsed ? 12 : 6}>
             <ResourceCardInfoCell
-              alt=""
+              alt={t('ResourceCard.infoTitle.purpose')}
               className="info-cell-purpose"
               icon={iconHome}
               onClick={this.handleSearchByType}
+              titleText={t('ResourceCard.infoTitle.purpose')}
             >
               <Fragment>
-                <span className="app-ResourceCard__infoTitle__purpose">
-                  {t('ResourceCard.infoTitle.purpose')}
-                </span>
                 <span>
                   {resource.type ? resource.type.name : '\u00A0'}
                 </span>
@@ -142,15 +140,13 @@ class ResourceCard extends Component {
 
           <Col md={4} sm={4} xs={isLargerFontSizeUsed ? 12 : 6}>
             <ResourceCardInfoCell
-              alt=""
+              alt={t('ResourceCard.infoTitle.peopleCapacity')}
               className="info-cell-capacity"
               icon={iconUser}
               onClick={this.handleSearchByPeopleCapacity}
+              titleText={t('ResourceCard.infoTitle.peopleCapacity')}
             >
               <Fragment>
-                <span className="app-ResourceCard__infoTitle__capacity">
-                  {t('ResourceCard.infoTitle.peopleCapacity')}
-                </span>
                 <span className="app-ResourceCard__peopleCapacity">
                   {t('ResourceCard.peopleCapacity', { people: resource.peopleCapacity })}
                 </span>
@@ -162,14 +158,12 @@ class ResourceCard extends Component {
 
           <Col md={4} sm={4} xs={isLargerFontSizeUsed ? 12 : 6}>
             <ResourceCardInfoCell
-              alt=""
+              alt={t('ResourceCard.infoTitle.price')}
               className="info-cell-price"
               icon={iconTicket}
+              titleText={t('ResourceCard.infoTitle.price')}
             >
               <Fragment>
-                <span className="app-ResourceCard__infoTitle__price">
-                  {t('ResourceCard.infoTitle.price')}
-                </span>
                 <span className="app-ResourceCard__hourly-price">
                   {getHourlyPrice(t, resource) || '\u00A0'}
                 </span>
@@ -180,14 +174,12 @@ class ResourceCard extends Component {
 
           <Col md={4} sm={4} xs={isLargerFontSizeUsed ? 12 : 6}>
             <ResourceCardInfoCell
-              alt=""
+              alt={t('ResourceCard.infoTitle.address')}
               className="info-cell-address"
               icon={iconMap}
+              titleText={t('ResourceCard.infoTitle.address')}
             >
               <Fragment>
-                <span className="app-ResourceCard__infoTitle__address">
-                  {t('ResourceCard.infoTitle.address')}
-                </span>
                 <span className="app-ResourceCard__street-address">
                   {unit.streetAddress}
                 </span>
@@ -204,20 +196,17 @@ class ResourceCard extends Component {
             && (
             <Col md={4} sm={4} xs={isLargerFontSizeUsed ? 12 : 6}>
               <ResourceCardInfoCell
-                alt=""
+                alt={t('ResourceCard.infoTitle.distance')}
                 className="info-cell-distance"
                 icon={iconMapMarker}
                 onClick={this.handleSearchByDistance}
+                titleText={t('ResourceCard.infoTitle.distance')}
               >
                 <Fragment>
-                  <span className="app-ResourceCard__infoTitle__distance">
-                    {t('ResourceCard.infoTitle.distance')}
-                  </span>
                   <span className="app-ResourceCard__distance">
                     {resource.distance ? this.renderDistance(resource.distance) : t('ResourceCard.unknown')}
                   </span>
                 </Fragment>
-
               </ResourceCardInfoCell>
             </Col>
             )}

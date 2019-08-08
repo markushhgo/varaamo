@@ -115,127 +115,155 @@ describe('shared/resource-card/ResourceCard', () => {
       expect(cells.length).toEqual(4);
     });
 
-    test('render with first ResourceCardInfoCell', () => {
-      const info = getWrapper().find('.app-ResourceCard__info');
-      const cell = info.find(ResourceCardInfoCell).first();
-
-      expect(cell.prop('alt')).toEqual('');
-      expect(cell.prop('icon')).toBeDefined();
-      expect(cell.prop('onClick')).toBeDefined();
+    describe('purpose info cell', () => {
+      test('renders with correct props', () => {
+        const info = getWrapper().find('.info-cell-purpose');
+        expect(info.prop('alt')).toBe('ResourceCard.infoTitle.purpose');
+        expect(info.prop('icon')).toBeDefined();
+        expect(info.prop('onClick')).toBeDefined();
+        expect(info.prop('titleText')).toBe('ResourceCard.infoTitle.purpose');
+      });
     });
 
-    test('will not render distance icon by default if location not in use', () => {
-      const info = getWrapper().find('.info-cell-distance');
-      expect(info.length).toBe(0);
-    });
-    test('render distance if location is in use', () => {
-      const info = getWrapper({ resource: { distance: true } }).find('.info-cell-distance');
-      expect(info.length).toBe(1);
-    });
-
-    test('will not render favorite icon as default if user not logged in', () => {
-      const info = getWrapper().find('.info-cell-favorite');
-      expect(info.length).toBe(0);
+    describe('distance info cell', () => {
+      test('will not render by default if location not in use', () => {
+        const info = getWrapper().find('.info-cell-distance');
+        expect(info.length).toBe(0);
+      });
+      test('renders if location is in use', () => {
+        const info = getWrapper({ resource: { distance: true } }).find('.info-cell-distance');
+        expect(info.length).toBe(1);
+      });
     });
 
-    test('render with favorite icon as default if user logged in', () => {
-      const info = getWrapper({ isLoggedIn: true }).find('.info-cell-favorite');
-      expect(info.length).toBe(1);
-      expect(info.prop('alt')).toEqual('');
-      expect(info.prop('icon')).toEqual(iconHeart);
-      expect(info.prop('onClick')).toBeDefined();
-    });
+    describe('favorite info cell', () => {
+      test('will not render by default if user is not logged in', () => {
+        const info = getWrapper().find('.info-cell-favorite');
+        expect(info.length).toBe(0);
+      });
 
-    test('render add to favorites label if not already favorite and user is logged in', () => {
-      const favoriteTitle = getWrapper({ isLoggedIn: true, resource: getResource({ isFavorite: false }) }).find('.app-ResourceCard__infoTitle__favorite');
-      expect(favoriteTitle).toHaveLength(1);
-      expect(favoriteTitle.text()).toContain('ResourceCard.infoTitle.addFavorite');
-    });
+      test('renders if user is logged in', () => {
+        const info = getWrapper({ isLoggedIn: true }).find('.info-cell-favorite');
+        expect(info.length).toBe(1);
+        expect(info.prop('alt')).toEqual('');
+        expect(info.prop('icon')).toEqual(iconHeart);
+        expect(info.prop('onClick')).toBeDefined();
+      });
 
-    test('render remove from favorites label if already favorite and user is logged in', () => {
-      const favoriteTitle = getWrapper({ isLoggedIn: true, resource: getResource({ isFavorite: true }) }).find('.app-ResourceCard__infoTitle__favorite');
-      expect(favoriteTitle).toHaveLength(1);
-      expect(favoriteTitle.text()).toContain('ResourceCard.infoTitle.removeFavorite');
-    });
+      test('render add to favorites label if not already favorite and user is logged in', () => {
+        const favoriteTitle = getWrapper({ isLoggedIn: true, resource: getResource({ isFavorite: false }) }).find('.app-ResourceCard__infoTitle__favorite');
+        expect(favoriteTitle).toHaveLength(1);
+        expect(favoriteTitle.text()).toContain('ResourceCard.infoTitle.addFavorite');
+      });
 
-    test('render with unfavorite icon when isFavorite is true, user logged in', () => {
-      const info = getWrapper({
-        isLoggedIn: true,
-        resource: getResource({ isFavorite: true })
-      }).find('.info-cell-favorite');
+      test('render remove from favorites label if already favorite and user is logged in', () => {
+        const favoriteTitle = getWrapper({ isLoggedIn: true, resource: getResource({ isFavorite: true }) }).find('.app-ResourceCard__infoTitle__favorite');
+        expect(favoriteTitle).toHaveLength(1);
+        expect(favoriteTitle.text()).toContain('ResourceCard.infoTitle.removeFavorite');
+      });
 
-      expect(info.prop('alt')).toEqual('');
-      expect(info.prop('icon')).toEqual(iconHeartWhite);
-      expect(info.prop('onClick')).toBeDefined();
-    });
+      test('render with unfavorite icon when isFavorite is true, user logged in', () => {
+        const info = getWrapper({
+          isLoggedIn: true,
+          resource: getResource({ isFavorite: true })
+        }).find('.info-cell-favorite');
 
-    test('invoke favorite func when favorite icon is clicked as default, user logged in', () => {
-      const info = getWrapper({ isLoggedIn: true }).find('.app-ResourceCard__info');
-      const cell = info.find(ResourceCardInfoCell).last();
-      cell.simulate('click');
-      expect(defaultProps.actions.favoriteResource).toHaveBeenCalledTimes(1);
-    });
+        expect(info.prop('alt')).toEqual('');
+        expect(info.prop('icon')).toEqual(iconHeartWhite);
+        expect(info.prop('onClick')).toBeDefined();
+      });
 
-    test('invoke set unfavorite func when favorite icon is clicked, user logged in', () => {
-      const info = getWrapper({
-        resource: getResource({ isFavorite: true }),
-        isLoggedIn: true
-      }).find('.app-ResourceCard__info');
-      const cell = info.find(ResourceCardInfoCell).last();
-      cell.simulate('click');
-      expect(defaultProps.actions.unfavoriteResource).toHaveBeenCalledTimes(1);
+      test('invoke favorite func when favorite icon is clicked as default, user logged in', () => {
+        const info = getWrapper({ isLoggedIn: true }).find('.app-ResourceCard__info');
+        const cell = info.find(ResourceCardInfoCell).last();
+        cell.simulate('click');
+        expect(defaultProps.actions.favoriteResource).toHaveBeenCalledTimes(1);
+      });
+
+      test('invoke set unfavorite func when favorite icon is clicked, user logged in', () => {
+        const info = getWrapper({
+          resource: getResource({ isFavorite: true }),
+          isLoggedIn: true
+        }).find('.app-ResourceCard__info');
+        const cell = info.find(ResourceCardInfoCell).last();
+        cell.simulate('click');
+        expect(defaultProps.actions.unfavoriteResource).toHaveBeenCalledTimes(1);
+      });
     });
   });
 
   describe('people capacity', () => {
-    test('renders people capacity title', () => {
-      const peopleCapacityTitle = getWrapper().find('.app-ResourceCard__infoTitle__capacity');
-      expect(peopleCapacityTitle).toHaveLength(1);
-      expect(peopleCapacityTitle.text()).toContain('ResourceCard.infoTitle.peopleCapacity');
+    test('renders with correct props', () => {
+      const peopleCapacity = getWrapper().find('.info-cell-capacity');
+      expect(peopleCapacity).toHaveLength(1);
+      expect(peopleCapacity.prop('alt')).toBe('ResourceCard.infoTitle.peopleCapacity');
+      expect(peopleCapacity.prop('icon')).toBeDefined();
+      expect(peopleCapacity.prop('onClick')).toBeDefined();
+      expect(peopleCapacity.prop('titleText')).toBe('ResourceCard.infoTitle.peopleCapacity');
     });
 
-    test('renders people capacity', () => {
+    test('renders correct text', () => {
       const peopleCapacity = getWrapper().find('.app-ResourceCard__peopleCapacity');
-
-      expect(peopleCapacity).toHaveLength(1);
+      expect(peopleCapacity.length).toBe(1);
       expect(peopleCapacity.text()).toContain('ResourceCard.peopleCapacity');
     });
   });
 
+  describe('address', () => {
+    test('renders with correct props', () => {
+      const address = getWrapper().find('.info-cell-address');
+      expect(address).toHaveLength(1);
+      expect(address.prop('alt')).toBe('ResourceCard.infoTitle.address');
+      expect(address.prop('icon')).toBeDefined();
+      expect(address.prop('titleText')).toBe('ResourceCard.infoTitle.address');
+    });
+  });
+
   describe('distance', () => {
-    test('renders distance title if location is in use', () => {
-      const distanceTitle = getWrapper({ resource: { distance: true } }).find('.app-ResourceCard__infoTitle__distance');
-      expect(distanceTitle).toHaveLength(1);
-      expect(distanceTitle.text()).toContain('ResourceCard.infoTitle.distance');
-    });
+    describe('when distance is defined', () => {
+      test('renders with correct props', () => {
+        const distance = getWrapper({ resource: getResource({ distance: 11123 }) })
+          .find('.info-cell-distance');
+        expect(distance).toHaveLength(1);
+        expect(distance.prop('alt')).toBe('ResourceCard.infoTitle.distance');
+        expect(distance.prop('icon')).toBeDefined();
+        expect(distance.prop('onClick')).toBeDefined();
+        expect(distance.prop('titleText')).toBe('ResourceCard.infoTitle.distance');
+      });
 
-    test('renders distance', () => {
-      const distanceLabel = getWrapper({
-        resource: getResource({ distance: 11123 }),
-      }).find('.app-ResourceCard__distance');
+      test('renders correct text', () => {
+        const distanceLabel = getWrapper({
+          resource: getResource({ distance: 11123 }),
+        }).find('.app-ResourceCard__distance');
 
-      expect(distanceLabel).toHaveLength(1);
-      expect(distanceLabel.text()).toBe('11 km');
-    });
+        expect(distanceLabel).toHaveLength(1);
+        expect(distanceLabel.text()).toBe('11 km');
+      });
 
-    test(
-      'renders distance with a decimal if distance is smaller than 10 km',
-      () => {
+      test('renders distance with a decimal if distance is smaller than 10 km', () => {
         const distanceLabel = getWrapper({
           resource: getResource({ distance: 123 }),
         }).find('.app-ResourceCard__distance');
 
         expect(distanceLabel).toHaveLength(1);
         expect(distanceLabel.text()).toBe('0.1 km');
-      }
-    );
+      });
+    });
+    describe('when distance is not defined', () => {
+      test('will not render', () => {
+        const distance = getWrapper().find('.info-cell-distance');
+        expect(distance.length).toBe(0);
+      });
+    });
   });
 
   describe('price', () => {
-    test('renders price title', () => {
-      const priceTitle = getWrapper().find('.app-ResourceCard__infoTitle__price');
-      expect(priceTitle).toHaveLength(1);
-      expect(priceTitle.text()).toContain('ResourceCard.infoTitle.price');
+    test('renders with correct props', () => {
+      const price = getWrapper().find('.info-cell-price');
+      expect(price).toHaveLength(1);
+      expect(price.prop('alt')).toBe('ResourceCard.infoTitle.price');
+      expect(price.prop('icon')).toBeDefined();
+      expect(price.prop('titleText')).toBe('ResourceCard.infoTitle.price');
     });
 
     test('renders a hourly price', () => {

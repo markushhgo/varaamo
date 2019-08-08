@@ -22,6 +22,11 @@ describe('/shared/resource-card/info/ResourceCardInfoCell', () => {
     expect(wrapper).toBeDefined();
   });
 
+  test('contains correct title prop', () => {
+    const wrapper = getWrapper({ titleText: 'some title text' });
+    expect(wrapper.prop('title')).toBe('some title text');
+  });
+
   test('contains default className, joined with passed className prop', () => {
     const wrapper = getWrapper({ className: 'foo' });
     const classnames = wrapper.prop('className');
