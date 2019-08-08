@@ -124,6 +124,7 @@ class ResourceCard extends Component {
           <Col md={4} sm={4} xs={isLargerFontSizeUsed ? 12 : 6}>
             <ResourceCardInfoCell
               alt=""
+              className="info-cell-purpose"
               icon={iconHome}
               onClick={this.handleSearchByType}
             >
@@ -142,6 +143,7 @@ class ResourceCard extends Component {
           <Col md={4} sm={4} xs={isLargerFontSizeUsed ? 12 : 6}>
             <ResourceCardInfoCell
               alt=""
+              className="info-cell-capacity"
               icon={iconUser}
               onClick={this.handleSearchByPeopleCapacity}
             >
@@ -161,6 +163,7 @@ class ResourceCard extends Component {
           <Col md={4} sm={4} xs={isLargerFontSizeUsed ? 12 : 6}>
             <ResourceCardInfoCell
               alt=""
+              className="info-cell-price"
               icon={iconTicket}
             >
               <Fragment>
@@ -175,10 +178,10 @@ class ResourceCard extends Component {
             </ResourceCardInfoCell>
           </Col>
 
-
           <Col md={4} sm={4} xs={isLargerFontSizeUsed ? 12 : 6}>
             <ResourceCardInfoCell
               alt=""
+              className="info-cell-address"
               icon={iconMap}
             >
               <Fragment>
@@ -197,31 +200,34 @@ class ResourceCard extends Component {
             </ResourceCardInfoCell>
           </Col>
 
+          {resource.distance
+            && (
+            <Col md={4} sm={4} xs={isLargerFontSizeUsed ? 12 : 6}>
+              <ResourceCardInfoCell
+                alt=""
+                className="info-cell-distance"
+                icon={iconMapMarker}
+                onClick={this.handleSearchByDistance}
+              >
+                <Fragment>
+                  <span className="app-ResourceCard__infoTitle__distance">
+                    {t('ResourceCard.infoTitle.distance')}
+                  </span>
+                  <span className="app-ResourceCard__distance">
+                    {resource.distance ? this.renderDistance(resource.distance) : t('ResourceCard.unknown')}
+                  </span>
+                </Fragment>
 
-          <Col md={4} sm={4} xs={isLargerFontSizeUsed ? 12 : 6}>
-            <ResourceCardInfoCell
-              alt=""
-              icon={iconMapMarker}
-              onClick={this.handleSearchByDistance}
-            >
-              <Fragment>
-                <span className="app-ResourceCard__infoTitle__distance">
-                  {t('ResourceCard.infoTitle.distance')}
-                </span>
-                <span className="app-ResourceCard__distance">
-                  {resource.distance ? this.renderDistance(resource.distance) : t('ResourceCard.unknown')}
-                </span>
-              </Fragment>
-
-            </ResourceCardInfoCell>
-          </Col>
-
+              </ResourceCardInfoCell>
+            </Col>
+            )}
 
           {isLoggedIn
             && (
               <Col md={4} sm={4} xs={isLargerFontSizeUsed ? 12 : 6}>
                 <ResourceCardInfoCell
                   alt=""
+                  className="info-cell-favorite"
                   icon={resource.isFavorite ? iconHeartFilled : iconHeart}
                   onClick={
                     resource.isFavorite
@@ -234,7 +240,6 @@ class ResourceCard extends Component {
                   </span>
                 </ResourceCardInfoCell>
               </Col>
-
             )
           }
         </div>

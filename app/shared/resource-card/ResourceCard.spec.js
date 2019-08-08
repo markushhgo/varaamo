@@ -109,10 +109,10 @@ describe('shared/resource-card/ResourceCard', () => {
   });
 
   describe('info box', () => {
-    test('render with 5 ResourceCardInfoCell cells', () => {
+    test('render 4 ResourceCardInfoCell cells by default', () => {
       const info = getWrapper().find('.app-ResourceCard__info');
       const cells = info.find(ResourceCardInfoCell);
-      expect(cells.length).toEqual(5);
+      expect(cells.length).toEqual(4);
     });
 
     test('render with first ResourceCardInfoCell', () => {
@@ -124,20 +124,26 @@ describe('shared/resource-card/ResourceCard', () => {
       expect(cell.prop('onClick')).toBeDefined();
     });
 
-    test('will not render favorite icon as default if user not logged in', () => {
-      const info = getWrapper().find('.app-ResourceCard__info');
-      const cell = info.find(ResourceCardInfoCell)[5];
+    test('will not render distance icon by default if location not in use', () => {
+      const info = getWrapper().find('.info-cell-distance');
+      expect(info.length).toBe(0);
+    });
+    test('render distance if location is in use', () => {
+      const info = getWrapper({ resource: { distance: true } }).find('.info-cell-distance');
+      expect(info.length).toBe(1);
+    });
 
-      expect(cell).toBeUndefined();
+    test('will not render favorite icon as default if user not logged in', () => {
+      const info = getWrapper().find('.info-cell-favorite');
+      expect(info.length).toBe(0);
     });
 
     test('render with favorite icon as default if user logged in', () => {
-      const info = getWrapper({ isLoggedIn: true }).find('.app-ResourceCard__info');
-      const cell = info.find(ResourceCardInfoCell).last();
-
-      expect(cell.prop('alt')).toEqual('');
-      expect(cell.prop('icon')).toEqual(iconHeart);
-      expect(cell.prop('onClick')).toBeDefined();
+      const info = getWrapper({ isLoggedIn: true }).find('.info-cell-favorite');
+      expect(info.length).toBe(1);
+      expect(info.prop('alt')).toEqual('');
+      expect(info.prop('icon')).toEqual(iconHeart);
+      expect(info.prop('onClick')).toBeDefined();
     });
 
     test('render add to favorites label if not already favorite and user is logged in', () => {
@@ -154,13 +160,13 @@ describe('shared/resource-card/ResourceCard', () => {
 
     test('render with unfavorite icon when isFavorite is true, user logged in', () => {
       const info = getWrapper({
-        resource: getResource({ isFavorite: true, isLoggedIn: true })
-      }).find('.app-ResourceCard__info');
-      const cell = info.find(ResourceCardInfoCell).last();
+        isLoggedIn: true,
+        resource: getResource({ isFavorite: true })
+      }).find('.info-cell-favorite');
 
-      expect(cell.prop('alt')).toEqual('');
-      expect(cell.prop('icon')).toEqual(iconHeartWhite);
-      expect(cell.prop('onClick')).toBeDefined();
+      expect(info.prop('alt')).toEqual('');
+      expect(info.prop('icon')).toEqual(iconHeartWhite);
+      expect(info.prop('onClick')).toBeDefined();
     });
 
     test('invoke favorite func when favorite icon is clicked as default, user logged in', () => {
@@ -197,16 +203,10 @@ describe('shared/resource-card/ResourceCard', () => {
   });
 
   describe('distance', () => {
-    test('renders distance title', () => {
-      const distanceTitle = getWrapper().find('.app-ResourceCard__infoTitle__distance');
+    test('renders distance title if location is in use', () => {
+      const distanceTitle = getWrapper({ resource: { distance: true } }).find('.app-ResourceCard__infoTitle__distance');
       expect(distanceTitle).toHaveLength(1);
       expect(distanceTitle.text()).toContain('ResourceCard.infoTitle.distance');
-    });
-
-    test('does not render distance if not available', () => {
-      const distanceLabel = getWrapper().find('.app-ResourceCard__distance');
-      expect(distanceLabel).toHaveLength(1);
-      expect(distanceLabel.text()).toBe('ResourceCard.unknown');
     });
 
     test('renders distance', () => {
