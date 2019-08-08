@@ -144,6 +144,7 @@ $cellHeight: 50%;
     }
     @media (min-width: $screen-md-min) {
       flex: 1 2 40%;
+      display: flex;
     }
   }
 
