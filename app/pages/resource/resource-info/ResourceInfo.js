@@ -27,9 +27,9 @@ function ResourceInfo({
         <Panel defaultExpanded header={t('ResourceInfo.additionalInfoTitle')}>
           <Row>
             <Col className="app-ResourceInfo__address" lg={6} md={6} sm={6} xs={12}>
-              {unit && unit.name && <span2>{unit.name}</span2>}
+              {unit && unit.name && <span>{unit.name}</span>}
               {unit && unit.streetAddress && <span>{unit.streetAddress}</span>}
-              {unit && <span3>{`${unit.addressZip} ${upperFirst(unit.municipality)}`.trim()}</span3>}
+              {unit && <span>{`${unit.addressZip} ${upperFirst(unit.municipality)}`.trim()}</span>}
             </Col>
             <Col className="app-ResourceInfo__web" lg={6} md={6} sm={6} xs={12}>
               {serviceMapUrl && (
