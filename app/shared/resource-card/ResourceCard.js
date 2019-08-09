@@ -58,6 +58,14 @@ class ResourceCard extends Component {
     history.replace({ pathname, search, state: { scrollTop } });
   };
 
+  createTextSnippet(text, maxCharacters) {
+    if (text.length <= maxCharacters) {
+      return text;
+    }
+
+    return `${text.substring(0, maxCharacters)}...`;
+  }
+
   renderDistance(distance) {
     const km = distance / 1000;
     let formatedDistance = round(km);
@@ -121,7 +129,7 @@ class ResourceCard extends Component {
             aria-label={t('ResourceCard.description.label')}
             className="app-ResourceCard__description"
           >
-            {resource.description.substring(0, 351)}
+            {this.createTextSnippet(resource.description, 348)}
           </div>
         </div>
 

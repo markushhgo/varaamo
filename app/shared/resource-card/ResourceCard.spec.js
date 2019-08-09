@@ -390,9 +390,25 @@ describe('shared/resource-card/ResourceCard', () => {
   });
 
   test('renders resource description snippet', () => {
-    const description = getWrapper().find('.app-ResourceCard__description');
+    const wrapper = getWrapper();
+    const description = wrapper.find('.app-ResourceCard__description');
     expect(description.length).toBe(1);
-    expect(description.text()).toContain(defaultProps.resource.description.substring(0, 351));
+    expect(description.text()).toEqual(
+      wrapper.instance().createTextSnippet(getResource().description, 348)
+    );
+  });
+
+  describe('createTextSnippet', () => {
+    test('if given string is shorter than given length, returns same given string', () => {
+      const instance = getWrapper().instance();
+      const testString = 'this is a test string';
+      expect(instance.createTextSnippet(testString, 100)).toEqual(testString);
+    });
+    test('if given string is longer than given length, returns string of given length with added dots', () => {
+      const instance = getWrapper().instance();
+      const testString = 'this is a test string';
+      expect(instance.createTextSnippet(testString, 4)).toEqual('this...');
+    });
   });
 
   describe('handleSearchByType', () => {
