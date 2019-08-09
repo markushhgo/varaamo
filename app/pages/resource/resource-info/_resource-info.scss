@@ -67,7 +67,19 @@ $horizontal-margin: 20px;
       display: block;
       margin-left: -30px;
       width: 320px;
-      margin-bottom: 15px;
+      margin-bottom: 0px;
+    }
+    span2 {
+    display: block;
+    margin-left: -30px;
+    width: 320px;
+    margin-bottom: 10px;
+    }
+    span3 {
+    display: block;
+    margin-left: -30px;
+    width: 320px;
+    margin-bottom: 10px;
     }
   }
 
@@ -114,4 +126,7 @@ $horizontal-margin: 20px;
       margin-right: 10px;
     }
   }
+ .app-ResourceInfo__www {
+   margin-top: 10px;
+ }
 }
