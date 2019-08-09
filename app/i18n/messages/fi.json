@@ -233,6 +233,7 @@
   "ResourceAvailability.closed": "Suljettu",
   "ResourceAvailability.reserved": "Varattu koko päivän",
   "ResourceAvailability.reservingRestricted": "Ei varattavissa",
+  "ResourceCard.description.label": "Katkelma kuvauksesta",
   "ResourceCard.peopleCapacity": "{people} henkilöä",
   "ResourceCard.unknown": "Tuntematon",
   "ResourceCard.infoTitle.purpose": "Käyttötarkoitus",

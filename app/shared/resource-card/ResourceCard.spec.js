@@ -36,6 +36,7 @@ describe('shared/resource-card/ResourceCard', () => {
         type: {
           name: 'workplace',
         },
+        description: 'some description text',
         ...extra,
       })
     );
@@ -131,7 +132,7 @@ describe('shared/resource-card/ResourceCard', () => {
         expect(info.length).toBe(0);
       });
       test('renders if location is in use', () => {
-        const info = getWrapper({ resource: { distance: true } }).find('.info-cell-distance');
+        const info = getWrapper({ resource: getResource({ distance: true }) }).find('.info-cell-distance');
         expect(info.length).toBe(1);
       });
     });
@@ -216,6 +217,18 @@ describe('shared/resource-card/ResourceCard', () => {
       expect(address.prop('alt')).toBe('ResourceCard.infoTitle.address');
       expect(address.prop('icon')).toBeDefined();
       expect(address.prop('titleText')).toBe('ResourceCard.infoTitle.address');
+    });
+
+    test('renders the street address of the given unit in props', () => {
+      const wrapper = getWrapper();
+      const streetAddress = wrapper.find('.app-ResourceCard__street-address');
+      const zipAddress = wrapper.find('.app-ResourceCard__zip-address');
+
+      expect(streetAddress).toHaveLength(1);
+      expect(streetAddress.html()).toContain(defaultProps.unit.streetAddress);
+      expect(zipAddress).toHaveLength(1);
+      expect(zipAddress.html()).toContain(defaultProps.unit.addressZip);
+      expect(zipAddress.html()).toContain(defaultProps.unit.municipality);
     });
   });
 
@@ -346,18 +359,6 @@ describe('shared/resource-card/ResourceCard', () => {
     expect(unitName.text()).toContain(expected);
   });
 
-  test('renders the street address of the given unit in props', () => {
-    const wrapper = getWrapper();
-    const streetAddress = wrapper.find('.app-ResourceCard__street-address');
-    const zipAddress = wrapper.find('.app-ResourceCard__zip-address');
-
-    expect(streetAddress).toHaveLength(1);
-    expect(streetAddress.html()).toContain(defaultProps.unit.streetAddress);
-    expect(zipAddress).toHaveLength(1);
-    expect(zipAddress.html()).toContain(defaultProps.unit.addressZip);
-    expect(zipAddress.html()).toContain(defaultProps.unit.municipality);
-  });
-
   test('renders the type of the given resource in props', () => {
     const typeLabel = getWrapper()
       .find('.app-ResourceCard__unit-name')
@@ -386,6 +387,12 @@ describe('shared/resource-card/ResourceCard', () => {
     ).find(UnpublishedLabel);
 
     expect(unpublishedLabel.length).toEqual(0);
+  });
+
+  test('renders resource description snippet', () => {
+    const description = getWrapper().find('.app-ResourceCard__description');
+    expect(description.length).toBe(1);
+    expect(description.text()).toContain(defaultProps.resource.description.substring(0, 351));
   });
 
   describe('handleSearchByType', () => {

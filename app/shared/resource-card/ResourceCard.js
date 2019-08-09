@@ -117,7 +117,12 @@ class ResourceCard extends Component {
             <ResourceAvailability date={date} resource={resource} />
             {!resource.public && <UnpublishedLabel />}
           </div>
-          <div className="app-ResourceCard__description">{resource.description}</div>
+          <div
+            aria-label={t('ResourceCard.description.label')}
+            className="app-ResourceCard__description"
+          >
+            {resource.description.substring(0, 351)}
+          </div>
         </div>
 
         <div className="app-ResourceCard__info">

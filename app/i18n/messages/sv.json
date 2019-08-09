@@ -235,6 +235,7 @@
   "ResourceAvailability.closed": "Stängt",
   "ResourceAvailability.reserved": "Bokat hela dagen",
   "ResourceAvailability.reservingRestricted": "Kan inte bokas",
+  "ResourceCard.description.label": "Information",
   "ResourceCard.peopleCapacity": "{people} personer",
   "ResourceCard.unknown": "Okänt",
   "ResourceCard.infoTitle.purpose": "Ändamål",

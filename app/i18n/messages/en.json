@@ -231,6 +231,7 @@
   "ResourceAvailability.closed": "Closed",
   "ResourceAvailability.reserved": "Reserved for the whole day",
   "ResourceAvailability.reservingRestricted": "Not available for reservation",
+  "ResourceCard.description.label": "Description snippet",
   "ResourceCard.peopleCapacity": "{people} people",
   "ResourceCard.unknown": "Unknown",
   "ResourceCard.infoTitle.purpose": "Purpose",
