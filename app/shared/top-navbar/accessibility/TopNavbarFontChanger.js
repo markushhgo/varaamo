@@ -62,7 +62,6 @@ class FontSizeChanger extends Component {
       <span
         aria-pressed={this.setAriaPressed(spanID)}
         className={this.setActiveClass(spanID)}
-        id={spanID}
         onClick={() => this.handleFontSizeClick(fontSize)}
         onKeyDown={ev => this.handleKeyDown(fontSize, ev)}
         role="button"

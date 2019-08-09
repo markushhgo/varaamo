@@ -7,9 +7,14 @@ $font-size-h4: 1em;
 $font-size-h5: .83em;
 $font-size-h6: .75em;
 
-$fontSize-1: 16px;
-$fontSize-2: 18px;
-$fontSize-3: 22px;
+$fontSize-small: 16px;
+$fontSize-medium: 18px;
+$fontSize-large: 22px;
+
+$fontSize-mobile-small: 15px;
+$fontSize-mobile-medium: 16px;
+$fontSize-mobile-large: 18px;
+
 
 // ----------
 
@@ -45,8 +50,9 @@ $screen-lg-max: ($screen-xl-min - 1) !default;
 
 // Mixins
 
-@mixin focusElement {
-  outline: auto 2px;
+@mixin focusElement($width: 2px, $color: currentColor) {
+  outline: auto $width $color;
 }
+
 
 // ----------

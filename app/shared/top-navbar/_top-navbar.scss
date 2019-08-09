@@ -15,6 +15,10 @@
       }
     }
 
+    .navbar-brand {
+      min-height: 90px;
+    }
+
     .navbar-brand:focus {
       @include focusElement;
     }
@@ -111,20 +115,23 @@
             text-decoration: underline;
           }
         }
-
-        span#firstA {
+        // firstA
+        span:nth-child(1) {
           font-size: 1em;
         }
 
-        span#secondA {
+        //secondA
+        span:nth-child(2) {
           font-size: 1.25em;
           line-height: 1.2;
         }
 
-        span#thirdA {
+        //thirdA
+        span:nth-child(3) {
           font-size: 1.5em;
           line-height: 1;
         }
+
       }
 
       &__contrast {
