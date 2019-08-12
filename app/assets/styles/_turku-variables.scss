@@ -54,5 +54,20 @@ $screen-lg-max: ($screen-xl-min - 1) !default;
   outline: auto $width $color;
 }
 
+@mixin addFocus($width: 2px, $color: currentColor) {
+  &:focus {
+    outline: auto $width $color;
+    @content;
+  }
+}
+
+@mixin highContrast {
+  &.high-contrast {
+    background-color: $white;
+    color: $black;
+    @content;
+  }
+}
+
 
 // ----------
