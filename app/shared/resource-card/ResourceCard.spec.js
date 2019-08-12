@@ -399,6 +399,11 @@ describe('shared/resource-card/ResourceCard', () => {
   });
 
   describe('createTextSnippet', () => {
+    test('if given string is null, returns empty string', () => {
+      const instance = getWrapper().instance();
+      const nullString = null;
+      expect(instance.createTextSnippet(nullString, 100)).toEqual('');
+    });
     test('if given string is shorter than given length, returns same given string', () => {
       const instance = getWrapper().instance();
       const testString = 'this is a test string';

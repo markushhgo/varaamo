@@ -59,6 +59,9 @@ class ResourceCard extends Component {
   };
 
   createTextSnippet(text, maxCharacters) {
+    if (text === null) {
+      return '';
+    }
     if (text.length <= maxCharacters) {
       return text;
     }
