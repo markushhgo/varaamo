@@ -2,12 +2,12 @@ import ACC from 'constants/AppConstants';
 
 import { selector } from './TopNavbarFontContainer';
 
-describe('shared/top-navbar/accessability/TopNavbarFontContainer', () => {
+describe('shared/top-navbar/accessibility/TopNavbarFontContainer', () => {
   describe('selector', () => {
     function getState() {
       return {
         ui: {
-          accessability: { fontSize: ACC.FONT_SIZES.SMALL }
+          accessibility: { fontSize: ACC.FONT_SIZES.SMALL }
         }
       };
     }

@@ -18,7 +18,7 @@ function changeFontSize(state, data) {
   return { ...state, fontSize: data };
 }
 
-function accessabilityReducer(state = initialState, action) {
+function accessibilityReducer(state = initialState, action) {
   switch (action.type) {
     case types.UI.CHANGE_CONTRAST: {
       return toggleContrast(state);
@@ -32,4 +32,4 @@ function accessabilityReducer(state = initialState, action) {
   }
 }
 
-export default accessabilityReducer;
+export default accessibilityReducer;

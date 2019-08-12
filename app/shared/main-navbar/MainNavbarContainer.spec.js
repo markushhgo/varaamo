@@ -15,7 +15,7 @@ describe('shared/main-navbar/MainNavbarContainer', () => {
           locale,
         },
         ui: {
-          accessability: { isNormalContrast: true },
+          accessibility: { isNormalContrast: true },
         },
       };
     }

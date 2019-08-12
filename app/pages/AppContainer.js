@@ -1,4 +1,3 @@
-import MobileDetect from 'mobile-detect';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import classNames from 'classnames';
@@ -9,7 +8,6 @@ import { createStructuredSelector } from 'reselect';
 import { withRouter } from 'react-router-dom';
 
 import { fetchUser } from 'actions/userActions';
-import { enableGeoposition } from 'actions/uiActions';
 import Favicon from 'shared/favicon';
 import Footer from 'shared/footer';
 import Header from 'shared/header';
@@ -18,7 +16,7 @@ import Notifications from 'shared/notifications';
 import { getCustomizationClassName } from 'utils/customizationUtils';
 
 const userIdSelector = state => state.auth.userId;
-const fontSizeSelector = state => state.ui.accessability.fontSize;
+const fontSizeSelector = state => state.ui.accessibility.fontSize;
 
 
 export const selector = createStructuredSelector({
@@ -27,14 +25,6 @@ export const selector = createStructuredSelector({
 });
 
 export class UnconnectedAppContainer extends Component {
-  constructor(props) {
-    super(props);
-    const mobileDetect = new MobileDetect(window.navigator.userAgent);
-    if (mobileDetect.mobile()) {
-      props.enableGeoposition();
-    }
-  }
-
   componentDidMount() {
     if (this.props.userId) {
       this.props.fetchUser(this.props.userId);
@@ -65,12 +55,12 @@ export class UnconnectedAppContainer extends Component {
           <Favicon />
           <TestSiteMessage />
         </Header>
-        <div className={classNames('app-content')}>
+        <main aria-label="Main" className={classNames('app-content')}>
           <Grid>
             <Notifications />
           </Grid>
           {this.props.children}
-        </div>
+        </main>
         <Footer />
       </div>
     );
@@ -79,14 +69,13 @@ export class UnconnectedAppContainer extends Component {
 
 UnconnectedAppContainer.propTypes = {
   children: PropTypes.node,
-  enableGeoposition: PropTypes.func.isRequired,
   fetchUser: PropTypes.func.isRequired,
   location: PropTypes.object.isRequired,
   userId: PropTypes.string,
   fontSize: PropTypes.string,
 };
 
-const actions = { enableGeoposition, fetchUser };
+const actions = { fetchUser };
 
 export default withRouter(
   connect(

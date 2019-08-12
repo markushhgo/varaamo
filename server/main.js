@@ -7,6 +7,7 @@ import morgan from 'morgan';
 import webpack from 'webpack';
 import webpackMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
+import compression from 'compression';
 
 import auth from './auth';
 import webpackConfig from '../config/webpack.development';
@@ -19,6 +20,9 @@ const port = serverConfig.port;
 
 if (serverConfig.isProduction) {
   console.log('Starting production server...');
+
+  // Apply gzip compression
+  app.use(compression());
 
   // Serve the static assets. We can cache them as they include hashes.
   app.use('/_assets', express.static(path.resolve(__dirname, '../dist'), { maxAge: '200d' }));
