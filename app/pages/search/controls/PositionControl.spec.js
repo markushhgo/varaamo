@@ -48,14 +48,6 @@ describe('pages/search/controls/PositionControl', () => {
     expect(modal).toHaveLength(0);
   });
 
-  test('distance is set to initial value if geolocation toggle is turned off in a later update', () => {
-    const wrapper = getWrapper();
-    const initialValue = wrapper.instance().state.distance;
-    wrapper.setState({ distance: 3000 });
-    wrapper.setProps({ geolocated: false });
-    expect(wrapper.instance().state.distance).toEqual(initialValue);
-  });
-
   describe('handleConfirm', () => {
     test('calls onConfirm with correct value', () => {
       const onConfirm = simple.mock();
@@ -85,6 +77,21 @@ describe('pages/search/controls/PositionControl', () => {
       const instance = getWrapper({ onPositionSwitch }).instance();
       instance.handleToggleChange(true);
       expect(onPositionSwitch.callCount).toBe(1);
+    });
+
+    test('updates state.distance to props.value if props.value is not empty', () => {
+      const expectedValue = 14000;
+      const instance = getWrapper({ value: expectedValue }).instance();
+      instance.state.distance = 20000;
+      instance.handleToggleChange();
+      expect(instance.state.distance).toBe(expectedValue);
+    });
+    test('updates state.distance to initial value if props.value is empty', () => {
+      const expectedValue = 21000;
+      const instance = getWrapper({ value: parseInt('', 10) }).instance();
+      instance.state.distance = 10000;
+      instance.handleToggleChange();
+      expect(instance.state.distance).toBe(expectedValue);
     });
   });
 

@@ -28,24 +28,12 @@ class PositionControl extends React.Component {
     };
   }
 
-  // if geolocation is turned off, distance is set back to the initial value.
-  static getDerivedStateFromProps(props) {
-    if (props.geolocated === false) {
-      return {
-        distance: initialDistance
-      };
-    }
-    return null;
-  }
-
-  // if geolocation was turned off, call to confirm no distance value is used.
-  componentDidUpdate(prevProps) {
-    if (prevProps.geolocated === true && this.props.geolocated === false) {
-      this.props.onConfirm('');
-    }
-  }
-
   handleToggleChange = () => {
+    if (this.props.value) {
+      this.setState({ distance: this.props.value });
+    } else {
+      this.setState({ distance: initialDistance });
+    }
     this.props.onPositionSwitch();
   };
 
