@@ -28,9 +28,10 @@ describe('pages/search/controls/SelectControl', () => {
     simple.restore();
   });
 
-  test('renders a div.app-SelectControl', () => {
+  test('renders a section.app-SelectControl with correct props', () => {
     const wrapper = getWrapper({});
-    expect(wrapper.is('div.app-SelectControl')).toBe(true);
+    expect(wrapper.is('section.app-SelectControl')).toBe(true);
+    expect(wrapper.prop('aria-label')).toBe(defaults.label);
   });
 
   test('renders a FormGroup with correct props', () => {
@@ -67,6 +68,7 @@ describe('pages/search/controls/SelectControl', () => {
     expect(select.prop('isSearchable')).toBe(true);
     expect(select.prop('value')).toBe(defaults.options[0]);
   });
+
 
   test(
     'renders a Select with props className contain app-Select, so the styling will work',

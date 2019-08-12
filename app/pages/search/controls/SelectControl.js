@@ -40,7 +40,7 @@ class SelectControl extends React.Component {
       ...rest
     } = this.props;
     return (
-      <div className="app-SelectControl">
+      <section aria-label={label} className="app-SelectControl">
         <FormGroup controlId={id}>
           {label && <ControlLabel>{label}</ControlLabel>}
           {!isLoading
@@ -76,7 +76,7 @@ class SelectControl extends React.Component {
             />
             )}
         </FormGroup>
-      </div>
+      </section>
     );
   }
 }

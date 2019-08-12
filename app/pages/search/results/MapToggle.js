@@ -18,11 +18,11 @@ function MapToggle({
   mapVisible, onClick, resultCount, t
 }) {
   return (
-    <div className="app-MapToggle">
+    <section className="app-MapToggle" role="presentation">
       <Grid>
         <Row>
           <Col sm={6}>
-            <div className="app-MapToggle__results-count">
+            <div className="app-MapToggle__results-count" role="presentation">
               {resultCount ? t('MapToggle.resultsText', { count: resultCount }) : t('MapToggle.noResultsText')}
             </div>
           </Col>
@@ -46,7 +46,7 @@ function MapToggle({
           </Col>
         </Row>
       </Grid>
-    </div>
+    </section>
   );
 }
 

@@ -269,6 +269,7 @@
   "ResourceTypeFilter.title": "Visa",
   "SearchBox.buttonText": "Sök",
   "SearchBox.placeholder": "Sök rum genom att mata in uppgifter om rummet",
+  "SearchControlsContainer.section.name": "Sök",
   "SearchControlsContainer.title": "Vad vill du göra?",
   "SearchControlsContainer.advancedSearch": "Avancerad sökning",
   "SearchControlsContainer.chargeLabel": "Avgiftsfri utrym",

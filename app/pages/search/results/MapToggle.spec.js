@@ -13,14 +13,23 @@ describe('pages/search/results/MapToggle', () => {
     return shallowWithIntl(<MapToggle {...defaults} {...props} />);
   }
 
-  test('renders div.app-MapToggle', () => {
-    expect(getWrapper().is('div.app-MapToggle')).toBe(true);
+  test('renders section.app-MapToggle with correct props', () => {
+    const wrapper = getWrapper();
+    expect(wrapper).toHaveLength(1);
+    expect(wrapper.is('section.app-MapToggle')).toBe(true);
+    expect(wrapper.prop('role')).toBe('presentation');
   });
 
   describe('result count text', () => {
     function getResultsCountText(resultCount) {
       return getWrapper({ resultCount }).find('.app-MapToggle__results-count').text();
     }
+
+    test('renders app-MapToggle__results-count with correct props', () => {
+      const countElement = getWrapper().find('.app-MapToggle__results-count');
+      expect(countElement).toHaveLength(1);
+      expect(countElement.prop('role')).toBe('presentation');
+    });
 
     test('renders correct string if there are results', () => {
       expect(getResultsCountText(12)).toBe('MapToggle.resultsText');

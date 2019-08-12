@@ -267,6 +267,7 @@
   "ResourceTypeFilter.title": "Näytä",
   "SearchBox.buttonText": "Hae",
   "SearchBox.placeholder": "Etsi tilaa syöttämällä tilaan liittyvää tietoa",
+  "SearchControlsContainer.section.name": "Hakualue",
   "SearchControlsContainer.title": "Mitä haluat tehdä?",
   "SearchControlsContainer.advancedSearch": "Tarkennettu haku",
   "SearchControlsContainer.chargeLabel": "Maksuton tila",

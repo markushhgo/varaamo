@@ -158,7 +158,7 @@ class UnconnectedSearchControlsContainer extends Component {
     const hasFilters = this.hasAdvancedFilters();
 
     return (
-      <div className="app-SearchControlsContainer">
+      <section aria-label={t('SearchControlsContainer.section.name')} className="app-SearchControlsContainer">
         <Grid>
           <div className="app-SearchControlsContainer__content">
             <h1>{t('SearchControlsContainer.title')}</h1>
@@ -275,7 +275,7 @@ class UnconnectedSearchControlsContainer extends Component {
             </Row>
           </div>
         </Grid>
-      </div>
+      </section>
     );
   }
 }

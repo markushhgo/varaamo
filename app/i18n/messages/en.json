@@ -265,6 +265,7 @@
   "ResourceTypeFilter.title": "Show",
   "SearchBox.buttonText": "Search",
   "SearchBox.placeholder": "Search for premises by entering their information",
+  "SearchControlsContainer.section.name": "Search options",
   "SearchControlsContainer.title": "What do you want to do?",
   "SearchControlsContainer.advancedSearch": "Advanced search",
   "SearchControlsContainer.chargeLabel": "Premises free of charge",

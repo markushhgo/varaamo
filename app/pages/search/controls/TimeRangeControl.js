@@ -132,7 +132,7 @@ class TimeRangeControl extends React.Component {
     const durationOptions = this.getDurationOptions();
 
     return (
-      <div className="app-TimeRangeControl">
+      <section aria-label={t('TimeRangeControl.timeRangeTitle')} className="app-TimeRangeControl">
         <CheckboxControl
           id="timerange-status"
           label={t('TimeRangeControl.timeRangeTitle')}
@@ -180,7 +180,7 @@ class TimeRangeControl extends React.Component {
             value={duration}
           />
         </div>
-      </div>
+      </section>
     );
   }
 }

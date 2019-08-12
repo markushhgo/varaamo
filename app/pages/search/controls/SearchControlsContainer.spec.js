@@ -77,6 +77,12 @@ describe('pages/search/controls/SearchControlsContainer', () => {
       expect(searchBox.prop('value')).toBe(filters.search);
     });
 
+    test('renders Section with correct props', () => {
+      const wrapper = getWrapper();
+      expect(wrapper).toHaveLength(1);
+      expect(wrapper.prop('aria-label')).toBe('SearchControlsContainer.section.name');
+    });
+
     test('renders DatePickerControl with correct props', () => {
       const filters = { ...defaultProps.filters, date: '2015-10-10' };
       const wrapper = getWrapper({ filters });
