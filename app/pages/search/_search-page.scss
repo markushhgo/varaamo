@@ -31,6 +31,8 @@
       border-color: $turku-yellow;
       color: $black;
       font-size: 1em;
+      @include addFocus($width: 2px, $color: currentColor) {
+      }
     }
     button:hover,
     button:active {
