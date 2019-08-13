@@ -4,10 +4,11 @@ import sortBy from 'lodash/sortBy';
 import values from 'lodash/values';
 import { createSelector, createStructuredSelector } from 'reselect';
 
+import { contrastSelector } from 'state/selectors/accessibilitySelectors';
 import { purposesSelector } from 'state/selectors/dataSelectors';
 import requestIsActiveSelectorFactory from 'state/selectors/factories/requestIsActiveSelectorFactory';
 
-const contrastSelector = state => state.ui.accessibility.isNormalContrast;
+const contrastOptionsSelector = state => contrastSelector(state);
 const purposeOptionsSelector = createSelector(
   purposesSelector,
   (purposes) => {
@@ -24,7 +25,7 @@ const purposeOptionsSelector = createSelector(
 const homePageSelector = createStructuredSelector({
   isFetchingPurposes: requestIsActiveSelectorFactory(ActionTypes.API.PURPOSES_GET_REQUEST),
   purposes: purposeOptionsSelector,
-  contrast: contrastSelector,
+  contrast: contrastOptionsSelector,
 });
 
 export default homePageSelector;
