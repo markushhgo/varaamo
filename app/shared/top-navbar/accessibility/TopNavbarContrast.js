@@ -44,7 +44,6 @@ class ContrastChanger extends Component {
             aria-label={t('Nav.Contrast.title')}
             aria-pressed={this.state.ariaState}
             className="contrast_button"
-            id="contrastButton"
             onClick={this.handleOnClick}
             onKeyDown={this.handleKeyDown}
             role="button"
