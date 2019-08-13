@@ -9,8 +9,10 @@ import uiSearchFiltersSelector from 'state/selectors/uiSearchFiltersSelector';
 import urlSearchFiltersSelector from 'state/selectors/urlSearchFiltersSelector';
 import requestIsActiveSelectorFactory from 'state/selectors/factories/requestIsActiveSelectorFactory';
 import { currentLanguageSelector } from 'state/selectors/translationSelectors';
+import { contrastSelector } from 'state/selectors/accessibilitySelectors';
 
 const positionSelector = state => state.ui.search.position;
+const contrastOptionsSelector = state => contrastSelector(state);
 
 const purposeOptionsSelector = createSelector(
   purposesSelector,
@@ -46,6 +48,7 @@ const searchControlsSelector = createStructuredSelector({
   purposeOptions: purposeOptionsSelector,
   unitOptions: unitOptionsSelector,
   urlSearchFilters: urlSearchFiltersSelector,
+  contrast: contrastOptionsSelector,
 });
 
 export default searchControlsSelector;
