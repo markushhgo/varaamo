@@ -9,16 +9,13 @@ import ContrastChanger from 'shared/top-navbar/accessibility/TopNavbarContrastCo
 class MobileNavbar extends React.Component {
   static propTypes = {
     toggle: PropTypes.bool,
-    contrast: PropTypes.bool,
-
+    contrast: PropTypes.string
   };
 
 
   getCollapseStatus = () => (this.props.toggle ? '' : 'is-collapsed')
 
   getAriaVisibility = () => (!this.props.toggle)
-
-  getContrastStatus = () => (this.props.contrast ? '' : 'high-contrast')
 
   getFontChanger() {
     return <FontChanger />;
@@ -30,12 +27,11 @@ class MobileNavbar extends React.Component {
 
   render() {
     const element = this.getCollapseStatus();
-    const contrast = this.getContrastStatus();
     const ariaHide = this.getAriaVisibility();
     const fontComponent = this.getFontChanger();
     const contrastComponent = this.getContrastChanger();
     return (
-      <div aria-hidden={ariaHide} aria-live="polite" className={classNames('mobile-Navbar_mobile', element, contrast)} id="mobileNavbar">
+      <div aria-hidden={ariaHide} aria-live="polite" className={classNames('mobile-Navbar_mobile', element, this.props.contrast)} id="mobileNavbar">
         <div className="container">
           <Row>
             <Col sm={6} smOffset={6} xs={12}>

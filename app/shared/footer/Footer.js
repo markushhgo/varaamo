@@ -2,12 +2,12 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 
+import { contrastSelector } from 'state/selectors/accessibilitySelectors';
 import FooterContent from './FooterContent';
 
 export function Footer(props) {
-  const style = props.contrast ? 'normal-contrast' : 'high-contrast';
   return (
-    <footer aria-label="Footer" className={style}>
+    <footer aria-label="Footer" className={props.contrast}>
       <FooterContent currentLang={props.currentLanguage} onLinkClick={props.onLinkClick} />
     </footer>
   );
@@ -15,13 +15,13 @@ export function Footer(props) {
 
 Footer.propTypes = {
   onLinkClick: PropTypes.func,
-  contrast: PropTypes.bool,
+  contrast: PropTypes.string,
   currentLanguage: PropTypes.string,
 
 };
 
 const mapStateToProps = state => ({
-  contrast: state.ui.accessibility.isNormalContrast,
+  contrast: contrastSelector(state),
   currentLanguage: state.intl.locale,
 });
 

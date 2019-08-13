@@ -299,11 +299,8 @@
 
     // High-contrast
 
-    &.high-contrast {
-    background-color: $white;
-    color: $black;
-    border-bottom: 1px solid $black;
-
+    @include highContrast {
+      border-bottom: 1px solid $black;
       .navbar-brand {
 
         span {

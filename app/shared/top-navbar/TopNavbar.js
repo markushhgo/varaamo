@@ -24,7 +24,7 @@ class TopNavbar extends Component {
     isLoggedIn: PropTypes.bool.isRequired,
     t: PropTypes.func.isRequired,
     userName: PropTypes.string.isRequired,
-    contrast: PropTypes.bool,
+    contrast: PropTypes.string,
   };
 
   constructor(props) {
@@ -62,12 +62,11 @@ class TopNavbar extends Component {
       userName,
       contrast,
     } = this.props;
-    const highContrastNav = contrast ? '' : 'high-contrast';
     const logo = (currentLanguage === 'sv') ? 'turku-logo-sv' : 'turku-logo';
     return (
       <div>
         <MobileNavbar contrast={contrast} toggle={this.state.expandMobileNavbar} />
-        <Navbar aria-label={t('Navbar.aria.topNavbar.title')} className={classNames('app-TopNavbar', highContrastNav)} expanded={this.state.expanded} onToggle={() => this.toggleCollapse()}>
+        <Navbar aria-label={t('Navbar.aria.topNavbar.title')} className={classNames('app-TopNavbar', contrast)} expanded={this.state.expanded} onToggle={() => this.toggleCollapse()}>
 
           <Navbar.Header>
             <Navbar.Toggle aria-label={t('Navbar.aria.topNavbar.mobileLogin')} data-target="#navCollapse">

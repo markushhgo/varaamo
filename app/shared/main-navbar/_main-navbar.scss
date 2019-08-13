@@ -69,11 +69,10 @@ $externalIconMarginLeft: 5px;
 
 .app-MainNavbar {
 
-  &.high-contrast {
-  background-color: $white;
-  border-bottom: 1px solid $black;
+  @include highContrast{
+    border-bottom: 1px solid $black;
 
-  .navbar-nav li,
+    .navbar-nav li,
     .navbar-nav > .active {
 
       a {
@@ -99,6 +98,7 @@ $externalIconMarginLeft: 5px;
       color: $black;
     }
   }
+
 
 }
 // ----------

@@ -5,7 +5,7 @@ describe('shared/top-navbar/accessibility/TopNavbarContrastContainer', () => {
     function getState() {
       return {
         ui: {
-          accessibility: { isNormalContrast: true }
+          accessibility: { isHighContrast: false }
         }
       };
     }
