@@ -5,7 +5,7 @@ import { changeContrast } from 'actions/uiActions';
 import ContrastChanger from './TopNavbarContrast';
 
 
-const contrastSelector = state => state.ui.accessability.isNormalContrast;
+const contrastSelector = state => state.ui.accessibility.isHighContrast;
 
 export const selector = createStructuredSelector({
   contrast: contrastSelector,

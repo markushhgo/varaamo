@@ -4,7 +4,7 @@ import simple from 'simple-mock';
 import ContrastChanger from './TopNavbarContrast';
 import { shallowWithIntl } from 'utils/testUtils';
 
-describe('shared/top-navbar/accessability/TopNavbarContrast', () => {
+describe('shared/top-navbar/accessibility/TopNavbarContrast', () => {
   function getWrapper(props) {
     return shallowWithIntl(<ContrastChanger {...props} />);
   }
@@ -18,13 +18,13 @@ describe('shared/top-navbar/accessability/TopNavbarContrast', () => {
     expect(element.length).toBe(1);
   });
 
-  test('renders accessability__contrast div', () => {
-    const element = content.find('.accessability__contrast');
+  test('renders accessibility__contrast div', () => {
+    const element = content.find('.accessibility__contrast');
     expect(element.length).toBe(1);
   });
 
   test('renders contrast title', () => {
-    const text = content.find('.accessability__contrast').text();
+    const text = content.find('.accessibility__contrast').text();
     expect(text).toBe('Nav.Contrast.title');
   });
 
@@ -33,13 +33,23 @@ describe('shared/top-navbar/accessability/TopNavbarContrast', () => {
     expect(element.length).toBe(1);
   });
 
-  describe('button reacts to', () => {
-    test('onKeyDown', () => {
+  describe('button', () => {
+    test('reacts to onKeyDown', () => {
       const changeContrast = simple.mock();
       const instance = getWrapper({ changeContrast }).instance();
       const kbEvent = { keyCode: 13 };
       instance.handleKeyDown(kbEvent);
       expect(changeContrast.callCount).toBe(1);
+    });
+
+    test('aria-pressed toggles from false -> true -> false', () => {
+      const toggleAria = simple.mock();
+      const instance = getWrapper({ toggleAria }).instance();
+      expect(instance.state.ariaState).toBe(false);
+      instance.toggleAriaState();
+      expect(instance.state.ariaState).toBe(true);
+      instance.toggleAriaState();
+      expect(instance.state.ariaState).toBe(false);
     });
   });
 });

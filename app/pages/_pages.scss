@@ -20,14 +20,27 @@
 // Fontsize classes, applied when changing the fontsize.
 
 .__font-size-small {
-  font-size: $fontSize-1;
+  font-size: $fontSize-small;
 }
 
 .__font-size-medium {
-  font-size: $fontSize-2;
+  font-size: $fontSize-medium;
 }
 
 .__font-size-large {
-  font-size: $fontSize-3;
+  font-size: $fontSize-large;
 }
 
+@media(max-width:$screen-md-min){
+  .__font-size-small {
+    font-size: $fontSize-mobile-small;
+  }
+
+  .__font-size-medium {
+    font-size: $fontSize-mobile-medium;
+  }
+
+  .__font-size-large {
+    font-size: $fontSize-mobile-large;
+  }
+}

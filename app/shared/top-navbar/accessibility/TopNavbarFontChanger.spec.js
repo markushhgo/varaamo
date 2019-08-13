@@ -5,7 +5,7 @@ import FontSizeChanger from './TopNavbarFontChanger';
 import { shallowWithIntl } from 'utils/testUtils';
 import ACC from '../../../constants/AppConstants';
 
-describe('shared/top-navbar/accessability/TopNavbarFontChanger', () => {
+describe('shared/top-navbar/accessibility/TopNavbarFontChanger', () => {
   function getWrapper(props) {
     return shallowWithIntl(<FontSizeChanger {...props} />);
   }
@@ -19,13 +19,13 @@ describe('shared/top-navbar/accessability/TopNavbarFontChanger', () => {
     expect(element.length).toBe(1);
   });
 
-  test('renders accessability__buttonGroup div', () => {
-    const element = content.find('.accessability__buttonGroup');
+  test('renders accessibility__buttonGroup div', () => {
+    const element = content.find('.accessibility__buttonGroup');
     expect(element.length).toBe(1);
   });
 
   test('renders FontSize title', () => {
-    const text = content.find('.accessability__buttonGroup').text();
+    const text = content.find('.accessibility__buttonGroup').text();
     expect(text).toContain('Nav.FontSize.title');
   });
 

@@ -5,7 +5,7 @@ import { changeFontSize } from 'actions/uiActions';
 import FontSizeChanger from './TopNavbarFontChanger';
 
 
-const fontSizeSelector = state => state.ui.accessability.fontSize;
+const fontSizeSelector = state => state.ui.accessibility.fontSize;
 
 export const selector = createStructuredSelector({
   fontSize: fontSizeSelector,

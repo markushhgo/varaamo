@@ -50,11 +50,10 @@ class UnconnectedHomePage extends Component {
   renderPurposeBanner(purpose) {
     const { t, contrast } = this.props;
     const image = purposeIcons[camelCase(purpose.value)];
-    const highContrast = contrast ? '' : 'high-contrast';
 
     return (
       <Col className="app-HomePageContent__banner" key={purpose.value} md={3} sm={6} xs={12}>
-        <Link className={`app-HomePageContent__banner__linkWrapper ${highContrast}`} to={`/search?purpose=${purpose.value}`}>
+        <Link className={`app-HomePageContent__banner__linkWrapper ${contrast}`} to={`/search?purpose=${purpose.value}`}>
           <div className="app-HomePageContent__banner-icon">
             {typeof image === 'string' ? <img alt={purpose.label} src={image} />
             // TODO: VAR-80 | VAR-81 Replace those icon with designed icon.
@@ -72,6 +71,7 @@ class UnconnectedHomePage extends Component {
               {t('HomePage.buttonText')}
             </Button>
           </div>
+
         </Link>
       </Col>
     );
@@ -81,10 +81,9 @@ class UnconnectedHomePage extends Component {
     const {
       isFetchingPurposes, purposes, t, contrast
     } = this.props;
-    const highContrast = contrast ? '' : 'high-contrast';
     return (
       <div className="app-HomePage">
-        <div className={`app-HomePage__content container ${highContrast}`}>
+        <div className={`app-HomePage__content container ${contrast}`}>
           <h1><FormattedHTMLMessage id="HomePage.contentTitle" /></h1>
           <h2>{t('HomePage.contentSubTitle')}</h2>
           <HomeSearchBox onSearch={this.handleSearch} />
@@ -110,7 +109,8 @@ UnconnectedHomePage.propTypes = {
   purposes: PropTypes.array.isRequired,
   history: PropTypes.object.isRequired,
   t: PropTypes.func.isRequired,
-  contrast: PropTypes.bool,
+  contrast: PropTypes.string,
+
 };
 
 UnconnectedHomePage = injectT(UnconnectedHomePage); // eslint-disable-line
