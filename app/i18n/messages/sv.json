@@ -253,6 +253,8 @@
   "ResourceCard.infoTitle.distance": "Avstånd",
   "ResourceCard.infoTitle.addFavorite": "Lägg till favoriter",
   "ResourceCard.infoTitle.removeFavorite": "Ta bort från favoriter",
+  "ResourceCompactList.button.label.next": "Nästa utrymme",
+  "ResourceCompactList.button.label.previous": "Förra utrymme",
   "ResourceHeader.backButton": "Tillbaka till sökresultat",
   "ResourceHeader.maxPeriodDays": "max {days} dag",
   "ResourceHeader.maxPeriodHours": "max {hours}h",

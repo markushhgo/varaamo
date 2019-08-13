@@ -249,6 +249,8 @@
   "ResourceCard.infoTitle.distance": "Distance",
   "ResourceCard.infoTitle.addFavorite": "Add to favorites",
   "ResourceCard.infoTitle.removeFavorite": "Remove from favorites",
+  "ResourceCompactList.button.label.next": "Next premise",
+  "ResourceCompactList.button.label.previous": "Previous premise",
   "ResourceHeader.backButton": "Back to search results",
   "ResourceHeader.maxPeriodDays": "max {days} days",
   "ResourceHeader.maxPeriodHours": "max {hours} h",

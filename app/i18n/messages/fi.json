@@ -251,6 +251,8 @@
   "ResourceCard.infoTitle.distance": "Etäisyys",
   "ResourceCard.infoTitle.addFavorite": "Lisää suosikkeihin",
   "ResourceCard.infoTitle.removeFavorite": "Poista suosikeista",
+  "ResourceCompactList.button.label.next": "Seuraava tila",
+  "ResourceCompactList.button.label.previous": "Edellinen tila",
   "ResourceHeader.backButton": "Takaisin hakutuloksiin",
   "ResourceHeader.maxPeriodDays": "max {days}pv",
   "ResourceHeader.maxPeriodHours": "max {hours}h",

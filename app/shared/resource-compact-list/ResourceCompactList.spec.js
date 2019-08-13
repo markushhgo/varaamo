@@ -2,6 +2,7 @@ import { shallow } from 'enzyme';
 import React from 'react';
 import Immutable from 'seamless-immutable';
 
+import { shallowWithIntl } from 'utils/testUtils';
 import ResourceCard from 'shared/resource-card';
 import { UnconnectedResourceCompactList as ResourceCompactList } from './ResourceCompactList';
 
@@ -14,7 +15,7 @@ describe('shared/resource-list/ResourceCompactList', () => {
   };
 
   function getWrapper(extraProps) {
-    return shallow(<ResourceCompactList {...defaultProps} {...extraProps} />);
+    return shallowWithIntl(<ResourceCompactList {...defaultProps} {...extraProps} />);
   }
 
   describe('with resourceIds', () => {
@@ -95,6 +96,16 @@ describe('shared/resource-list/ResourceCompactList', () => {
       expect(leftArrow.prop('onClick')).toBe(instance.onPreviousResource);
     });
 
+    test('left arrow has correct aria-label prop', () => {
+      const instance = wrapper.instance();
+      instance.setState({
+        resourcePosition: 1,
+      });
+      wrapper.update();
+      const leftArrow = wrapper.find('.app-ResourceCompactList_arrow-left');
+      expect(leftArrow.prop('aria-label')).toBe('ResourceCompactList.button.label.previous');
+    });
+
     test('renders right arrow if resourcePosition state is 0', () => {
       const instance = wrapper.instance();
       instance.setState({
@@ -126,6 +137,16 @@ describe('shared/resource-list/ResourceCompactList', () => {
       wrapper.update();
       const rightArrow = wrapper.find('.app-ResourceCompactList_arrow-right');
       expect(rightArrow.prop('onClick')).toBe(instance.onNextResource);
+    });
+
+    test('right arrow has correct aria-label prop', () => {
+      const instance = wrapper.instance();
+      instance.setState({
+        resourcePosition: 0,
+      });
+      wrapper.update();
+      const rightArrow = wrapper.find('.app-ResourceCompactList_arrow-right');
+      expect(rightArrow.prop('aria-label')).toBe('ResourceCompactList.button.label.next');
     });
   });
 
