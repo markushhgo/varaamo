@@ -44,7 +44,6 @@ export class UnconnectedSearchResults extends Component {
                 location={location}
                 resourceIds={searchResultIds}
               />
-              <SearchResultsPaging filters={filters} history={history} resultCount={resultCount} />
             </div>
           )}
           {showMap && selectedUnitId && (
@@ -56,6 +55,7 @@ export class UnconnectedSearchResults extends Component {
               unitId={selectedUnitId}
             />
           )}
+          <SearchResultsPaging filters={filters} history={history} resultCount={resultCount} />
         </Loader>
       </div>
     );
