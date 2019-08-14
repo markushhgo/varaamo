@@ -21,6 +21,8 @@
     height: 40px;
     align-self: flex-end;
 
+    @include addFocus;
+
     &--prev {
       @include icon-angle-left($black);
     }
@@ -64,6 +66,8 @@
     &__button {
       border-left-width: 2px !important;
       height: 40px !important;
+
+      @include addFocus($width: 4px);
     }
 
     #date-input-error {
