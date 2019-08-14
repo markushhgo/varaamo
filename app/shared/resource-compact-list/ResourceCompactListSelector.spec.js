@@ -1,7 +1,7 @@
 import selector from './ResourceCompactListSelector';
 
 function getState({ resources = {} }) {
-  return { data: { resources } };
+  return { data: { resources }, ui: { accessibility: {} } };
 }
 
 function createResource(id, unitId) {
@@ -29,5 +29,12 @@ describe('shared/resource-compact-list/ResourceCompactListSelector', () => {
     const props = { resourceIds: ['123', '321'], unitId: 'unitId2' };
     const data = selector(state, props);
     expect(data.resourceIds).toEqual(['321']);
+  });
+
+  test('returns isLargerFontSizeUsed', () => {
+    const state = getState({});
+    const props = { };
+    const data = selector(state, props);
+    expect(data.isLargerFontSizeUsed).toBeDefined();
   });
 });

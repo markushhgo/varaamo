@@ -1,4 +1,3 @@
-import { shallow } from 'enzyme';
 import React from 'react';
 import Immutable from 'seamless-immutable';
 
@@ -28,6 +27,22 @@ describe('shared/resource-list/ResourceCompactList', () => {
     test('renders a div with correct className', () => {
       const div = wrapper.find('div.app-ResourceCompactList');
       expect(div.length).toBe(1);
+    });
+
+    describe('larger than normal font size is used', () => {
+      test('wrapping div has className app-ResourceCompactList__large-font-size', () => {
+        const div = getWrapper({ isLargerFontSizeUsed: true })
+          .find('div.app-ResourceCompactList__large-font-size');
+        expect(div.length).toBe(1);
+      });
+    });
+
+    describe('normal font size is used', () => {
+      test('wrapping div doesnt have className app-ResourceCompactList__large-font-size', () => {
+        const div = getWrapper({ isLargerFontSizeUsed: false })
+          .find('div.app-ResourceCompactList__large-font-size');
+        expect(div.length).toBe(0);
+      });
     });
 
     test('renders first ResourceCard', () => {
