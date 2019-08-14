@@ -137,9 +137,7 @@ $purposeCellHeight: 350px;
       button {
         text-transform: uppercase;
         font-size: 1em;
-        &:focus {
-          @include focusElement;
-        }
+        @include addFocus;
       }
     }
   }
