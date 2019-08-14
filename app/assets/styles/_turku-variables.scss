@@ -56,7 +56,7 @@ $screen-lg-max: ($screen-xl-min - 1) !default;
 
 @mixin addFocus($width: 2px, $color: currentColor) {
   &:focus {
-    outline: auto $width $color;
+    outline: solid $width $color;
     @content;
   }
 }
