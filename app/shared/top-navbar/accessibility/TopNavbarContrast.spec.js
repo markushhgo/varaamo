@@ -51,5 +51,14 @@ describe('shared/top-navbar/accessibility/TopNavbarContrast', () => {
       instance.toggleAriaState();
       expect(instance.state.ariaState).toBe(false);
     });
+
+    test('has correct props', () => {
+      const element = content.find('div').last();
+      expect(element.prop('aria-label')).toBe('Nav.Contrast.title');
+      expect(element.prop('aria-pressed')).toBe(false);
+      expect(element.prop('className')).toBe('contrast_button');
+      expect(element.prop('role')).toBe('button');
+      expect(element.prop('tabIndex')).toBe('0');
+    });
   });
 });
