@@ -20,6 +20,10 @@ describe('pages/search/controls/searchControlsSelector', () => {
     expect(getSelected().isFetchingPurposes).toBeDefined();
   });
 
+  test('returns contrast', () => {
+    expect(getSelected().contrast).toBeDefined();
+  });
+
   describe('purposeOptions', () => {
     function getPurposeOptions(purposes) {
       return getSelected({

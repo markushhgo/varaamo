@@ -37,10 +37,10 @@ $externalIconMarginLeft: 5px;
   .navbar-brand {
     font-size: inherit;
 
-    &:focus {
+    @include addFocus(){
       color: $white;
-      @include focusElement;
-    }
+    };
+
   }
 
 
@@ -53,9 +53,7 @@ $externalIconMarginLeft: 5px;
         align-items: center;
         font-size: inherit;
 
-        &:focus {
-          @include focusElement;
-        }
+        @include addFocus;
       }
     }
   }
