@@ -9,25 +9,37 @@
 .app-PageWrapper {
   position: relative;
 
-  background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 99.5%, rgba(255,255,255,0) 100%);
-
   &__transparent {
     background: transparent;
     min-height: auto;
   }
 }
 
+
 // Fontsize classes, applied when changing the fontsize.
 
 .__font-size-small {
-  font-size: $fontSize-1;
+  font-size: $fontSize-small;
 }
 
 .__font-size-medium {
-  font-size: $fontSize-2;
+  font-size: $fontSize-medium;
 }
 
 .__font-size-large {
-  font-size: $fontSize-3;
+  font-size: $fontSize-large;
 }
 
+@media(max-width:$screen-md-min){
+  .__font-size-small {
+    font-size: $fontSize-mobile-small;
+  }
+
+  .__font-size-medium {
+    font-size: $fontSize-mobile-medium;
+  }
+
+  .__font-size-large {
+    font-size: $fontSize-mobile-large;
+  }
+}

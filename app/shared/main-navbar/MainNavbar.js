@@ -37,11 +37,10 @@ class MainNavbar extends React.Component {
       t,
       contrast,
     } = this.props;
-    const highContrastNav = contrast ? '' : 'high-contrast';
     return (
-      <Navbar className={classNames('app-MainNavbar', highContrastNav)} expanded={this.state.expanded} onToggle={() => this.toggleCollapse()}>
+      <Navbar aria-label={t('Navbar.aria.mainNavbar.title')} className={classNames('app-MainNavbar', contrast)} expanded={this.state.expanded} onToggle={() => this.toggleCollapse()}>
         <Navbar.Header>
-          <Navbar.Toggle />
+          <Navbar.Toggle aria-label={t('Navbar.aria.topNavbar.mobileToggle')} />
           <Navbar.Brand>
             <Link to="/">Varaamo</Link>
           </Navbar.Brand>
@@ -106,7 +105,7 @@ MainNavbar.propTypes = {
   isAdmin: PropTypes.bool.isRequired,
   isLoggedIn: PropTypes.bool.isRequired,
   t: PropTypes.func.isRequired,
-  contrast: PropTypes.bool,
+  contrast: PropTypes.string,
 };
 
 export default injectT(MainNavbar);

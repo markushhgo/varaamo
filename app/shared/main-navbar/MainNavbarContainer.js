@@ -3,15 +3,16 @@ import { connect } from 'react-redux';
 
 import { clearSearchResults } from 'actions/searchActions';
 import { isAdminSelector, isLoggedInSelector } from 'state/selectors/authSelectors';
+import { contrastSelector } from 'state/selectors/accessibilitySelectors';
 import { changeLocale } from 'i18n';
 import MainNavbar from './MainNavbar';
 
-const contrastSelector = state => state.ui.accessability.isNormalContrast;
+const contrastOptionsSelector = state => contrastSelector(state);
 
 export const selector = createStructuredSelector({
   isAdmin: isAdminSelector,
   isLoggedIn: isLoggedInSelector,
-  contrast: contrastSelector,
+  contrast: contrastOptionsSelector,
 });
 
 const actions = {

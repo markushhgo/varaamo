@@ -19,6 +19,7 @@
     "@fortawesome/react-fontawesome": "^0.1.4",
     "bootstrap-sass": "3.4.1",
     "classnames": "2.2.5",
+    "compression": "1.7.4",
     "dotenv": "7.0.0",
     "dragscroll": "0.0.8",
     "hash-file": "3.0.0",

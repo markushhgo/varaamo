@@ -15,8 +15,10 @@
       }
     }
 
-    .navbar-brand:focus {
-      @include focusElement;
+    .navbar-brand {
+      min-height: 90px;
+
+      @include addFocus;
     }
 
     .turku-logo {
@@ -83,7 +85,7 @@
 
     // Accessability
 
-    .accessability{
+    .accessibility{
       &__buttonGroup {
         padding-top: 15px;
         padding-bottom: 14px;
@@ -99,9 +101,8 @@
           margin-left: 5px;
           cursor: pointer;
 
-          &:focus {
-            @include focusElement;
-          }
+          @include addFocus;
+
 
           &:hover {
             text-decoration: none;
@@ -111,20 +112,23 @@
             text-decoration: underline;
           }
         }
-
-        span#firstA {
+        // firstA
+        span:nth-child(1) {
           font-size: 1em;
         }
 
-        span#secondA {
+        // secondA
+        span:nth-child(2) {
           font-size: 1.25em;
           line-height: 1.2;
         }
 
-        span#thirdA {
+        // thirdA
+        span:nth-child(3) {
           font-size: 1.5em;
           line-height: 1;
         }
+
       }
 
       &__contrast {
@@ -142,9 +146,8 @@
           cursor: pointer;
           filter: invert(0%);
 
-          &:focus {
-            @include focusElement;
-          }
+          @include addFocus;
+
 
         }
       }
@@ -176,9 +179,7 @@
           padding-right:5px;
           margin: 0 10px 0 15px;
 
-          &:focus{
-            @include focusElement;
-          }
+          @include addFocus;
         }
       }
 
@@ -231,10 +232,10 @@
             color: $black;
           }
 
-          &:focus {
+          @include addFocus(){
             color: $black;
-            @include focusElement;
           }
+
         }
       }
 
@@ -260,10 +261,12 @@
           background-color: transparent;
         }
 
-        li > a:focus {
-          @include focusElement;
-          background-color: transparent;
+        li > a {
+          @include addFocus(){
+            background-color: transparent;
+          }
         }
+
       }
       > .open > a,
       > .open > a:hover,
@@ -280,6 +283,7 @@
       .dropdown-menu {
         right: 0;
         left: auto;
+        font-size: 1em;
       }
     }
     // End: Remove responsive features
@@ -292,11 +296,8 @@
 
     // High-contrast
 
-    &.high-contrast {
-    background-color: $white;
-    color: $black;
-    border-bottom: 1px solid $black;
-
+    @include highContrast {
+      border-bottom: 1px solid $black;
       .navbar-brand {
 
         span {
@@ -304,7 +305,7 @@
         }
       }
 
-      .navbar__contrast > .accessability__contrast > .contrast_button {
+      .navbar__contrast > .accessibility__contrast > .contrast_button {
         filter: invert(0%);
       }
 
@@ -357,6 +358,10 @@
     a:active,
     a:focus {
       color: $black;
+      background-color: transparent;
+    }
+    a:focus{
+
     }
 
     .dropdown-menu {
@@ -365,8 +370,9 @@
       left:-20px;
       text-align: center;
       padding: 0;
+      font-size: 1em;
 
-      > li >a:hover {
+      > li >a:hover,a:active,a:focus {
         color: $black;
         text-decoration: none;
         background-color: $white;
@@ -383,10 +389,21 @@
     &.lang {
       margin-left: 0;
     }
+    &:hover,
+    &:active,
+    &:focus {
 
-    .mobile_accessability {
+    }
+
+    .mobile_accessibility {
       cursor: pointer;
     }
+  }
+
+  .dropdown-toggle:focus{
+    outline: 5px auto -webkit-focus-ring-color;
+    outline-offset: -2px;
+    @include focusElement;
   }
 
   .navbar-collapse > ul li.app-TopNavbar__language.dropdown,

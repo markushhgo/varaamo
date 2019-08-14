@@ -15,13 +15,13 @@ describe('shared/footer/Footer', () => {
   });
 
   test('renders highcontrast to footerclass', () => {
-    const footerStyle = getWrapper({ contrast: false }).find('.high-contrast');
-    expect(footerStyle.length).toBe(1);
+    const footerClass = getWrapper({ contrast: 'high-contrast' }).find('footer').hasClass('high-contrast');
+    expect(footerClass).toBe(true);
   });
 
   test('renders normalcontrast to footerclass', () => {
-    const footerStyle = getWrapper({ contrast: true }).find('.normal-contrast');
-    expect(footerStyle.length).toBe(1);
+    const footerClass = getWrapper({ contrast: '' }).find('footer').hasClass('');
+    expect(footerClass).toBe(true);
   });
 
   test('renders FooterContent component', () => {

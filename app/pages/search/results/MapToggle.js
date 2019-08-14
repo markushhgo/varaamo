@@ -12,13 +12,14 @@ MapToggle.propTypes = {
   onClick: PropTypes.func.isRequired,
   resultCount: PropTypes.number.isRequired,
   t: PropTypes.func.isRequired,
+  contrast: PropTypes.string
 };
 
 function MapToggle({
-  mapVisible, onClick, resultCount, t
+  mapVisible, onClick, resultCount, t, contrast
 }) {
   return (
-    <section className="app-MapToggle" role="presentation">
+    <section className={`app-MapToggle ${contrast}`} role="presentation">
       <Grid>
         <Row>
           <Col sm={6}>

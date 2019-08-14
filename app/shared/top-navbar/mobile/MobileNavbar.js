@@ -3,37 +3,28 @@ import React from 'react';
 import classNames from 'classnames';
 import { Col, Row } from 'react-bootstrap';
 
-import FontChanger from 'shared/top-navbar/accessability/TopNavbarFontContainer';
-import ContrastChanger from 'shared/top-navbar/accessability/TopNavbarContrastContainer';
+import FontChanger from 'shared/top-navbar/accessibility/TopNavbarFontContainer';
+import ContrastChanger from 'shared/top-navbar/accessibility/TopNavbarContrastContainer';
 
 class MobileNavbar extends React.Component {
   static propTypes = {
     toggle: PropTypes.bool,
-    contrast: PropTypes.bool,
-
+    contrast: PropTypes.string
   };
 
-  getFontChanger() {
-    return <FontChanger />;
-  }
 
-  getContrastChanger() {
-    return <ContrastChanger />;
-  }
+  getCollapseStatus = () => (this.props.toggle ? '' : 'is-collapsed')
 
   render() {
-    const element = this.props.toggle ? '' : 'is-collapsed';
-    const contrast = this.props.contrast ? '' : 'high-contrast';
-    const fontComponent = this.getFontChanger();
-    const contrastComponent = this.getContrastChanger();
+    const element = this.getCollapseStatus();
     return (
-      <div className={classNames('mobile-Navbar_mobile', element, contrast)}>
+      <div aria-hidden={!this.props.toggle} aria-live="polite" className={classNames('mobile-Navbar_mobile', element, this.props.contrast)} id="mobileNavbar">
         <div className="container">
           <Row>
             <Col sm={6} smOffset={6} xs={12}>
               <ul>
-                {contrastComponent}
-                {fontComponent}
+                <ContrastChanger />
+                <FontChanger />
               </ul>
             </Col>
           </Row>

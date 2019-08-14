@@ -3,11 +3,11 @@ import types from 'constants/ActionTypes';
 import Immutable from 'seamless-immutable';
 
 import APP from '../../../constants/AppConstants';
-import reducer from './accessabilityReducer';
+import reducer from './accessibilityReducer';
 
-describe('state/reducers/ui/accessabilityReducer', () => {
+describe('state/reducers/ui/accessibilityReducer', () => {
   const initialState = Immutable({
-    isNormalContrast: true,
+    isHighContrast: false,
     fontSize: APP.FONT_SIZES.SMALL
   });
 
@@ -21,12 +21,12 @@ describe('state/reducers/ui/accessabilityReducer', () => {
       type: types.UI.CHANGE_CONTRAST,
     };
     test('toggles contrast true to false', () => {
-      const actual = reducer(Immutable({ isNormalContrast: true }), action);
-      expect(actual.isNormalContrast).toBe(false);
+      const actual = reducer(Immutable({ isHighContrast: true }), action);
+      expect(actual.isHighContrast).toBe(false);
     });
     test('toggles contrast false to true', () => {
-      const actual = reducer(Immutable({ isNormalContrast: false }), action);
-      expect(actual.isNormalContrast).toBe(true);
+      const actual = reducer(Immutable({ isHighlContrast: false }), action);
+      expect(actual.isHighContrast).toBe(true);
     });
   });
 

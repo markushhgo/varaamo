@@ -152,13 +152,17 @@ class UnconnectedSearchControlsContainer extends Component {
       purposeOptions,
       t,
       unitOptions,
+      contrast,
     } = this.props;
     const peopleCapacityOptions = this.getPeopleCapacityOptions();
     const searchBoxOptions = purposeOptions.concat(unitOptions);
     const hasFilters = this.hasAdvancedFilters();
 
     return (
-      <section aria-label={t('SearchControlsContainer.section.name')} className="app-SearchControlsContainer">
+      <section
+        aria-label={t('SearchControlsContainer.section.name')}
+        className={`app-SearchControlsContainer ${contrast}`}
+      >
         <Grid>
           <div className="app-SearchControlsContainer__content">
             <h1>{t('SearchControlsContainer.title')}</h1>
@@ -292,6 +296,7 @@ UnconnectedSearchControlsContainer.propTypes = {
   unitOptions: PropTypes.array.isRequired,
   urlSearchFilters: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
+  contrast: PropTypes.string,
 };
 
 UnconnectedSearchControlsContainer = injectT(UnconnectedSearchControlsContainer); // eslint-disable-line

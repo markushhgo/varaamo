@@ -13,8 +13,8 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 import MobileNavbar from 'shared/top-navbar/mobile/MobileNavbar';
-import FontChanger from './accessability/TopNavbarFontContainer';
-import ContrastChanger from './accessability/TopNavbarContrastContainer';
+import FontChanger from './accessibility/TopNavbarFontContainer';
+import ContrastChanger from './accessibility/TopNavbarContrastContainer';
 import { injectT } from 'i18n';
 
 class TopNavbar extends Component {
@@ -24,7 +24,7 @@ class TopNavbar extends Component {
     isLoggedIn: PropTypes.bool.isRequired,
     t: PropTypes.func.isRequired,
     userName: PropTypes.string.isRequired,
-    contrast: PropTypes.bool,
+    contrast: PropTypes.string,
   };
 
   constructor(props) {
@@ -62,47 +62,53 @@ class TopNavbar extends Component {
       userName,
       contrast,
     } = this.props;
-    const highContrastNav = contrast ? '' : 'high-contrast';
-    const logo = (currentLanguage === 'sv') ? 'turku-logo-sv' : 'turku-logo';
+    const currentLogo = (currentLanguage === 'sv') ? 'turku-logo-sv' : 'turku-logo';
     return (
       <div>
         <MobileNavbar contrast={contrast} toggle={this.state.expandMobileNavbar} />
-        <Navbar className={classNames('app-TopNavbar', highContrastNav)} expanded={this.state.expanded} onToggle={() => this.toggleCollapse()}>
+        <Navbar aria-label={t('Navbar.aria.topNavbar.title')} className={classNames('app-TopNavbar', contrast)} expanded={this.state.expanded} onToggle={() => this.toggleCollapse()}>
 
           <Navbar.Header>
-            <Navbar.Toggle data-target="#navCollapse">
-              <div className="mobile_login" type="button">
+            <Navbar.Toggle aria-label={t('Navbar.aria.topNavbar.mobileLogin')} data-target="#navCollapse">
+              <div className="mobile_login" tabIndex="0" type="button">
                 <FontAwesomeIcon icon={faUserAlt} />
               </div>
             </Navbar.Toggle>
-            <div className="navbar-toggle">
-              <div className="mobile_accessability" onClick={() => this.toggleMobileNavbar()} type="button">
+            <button aria-controls="mobileNavbar" aria-label={t('Navbar.aria.topNavbar.mobileAccessibility')} className="navbar-toggle" type="button">
+              <div
+                className="mobile_accessibility"
+                onClick={() => this.toggleMobileNavbar()}
+                onKeyDown={ev => ((ev.keyCode === 13) ? (this.toggleMobileNavbar()) : '')}
+                tabIndex="0"
+                type="button"
+              >
                 <FontAwesomeIcon icon={faWheelchair} />
               </div>
-            </div>
-            <div className="navbar-toggle lang" data-target="#login" data-toggle="collapse">
-              <div className="mobile_lang" type="button">
+            </button>
+            <button className="navbar-toggle lang" data-target="#login" data-toggle="collapse" type="button">
+              <div aria-label={t('Navbar.aria.topNavbar.mobileLocale')} className="mobile_lang" role="list" type="button">
                 <NavDropdown
                   className="mobile_lang_dropdown"
                   eventKey="lang"
                   id="mobile"
                   noCaret
                   onSelect={changeLocale}
+                  tabIndex="0"
                   title={currentLanguage}
                 >
                   {currentLanguage !== 'fi' && <MenuItem eventKey="fi">FI</MenuItem>}
                   {currentLanguage !== 'sv' && <MenuItem eventKey="sv">SV</MenuItem>}
                 </NavDropdown>
               </div>
-            </div>
+            </button>
             <Navbar.Brand>
-              <Link aria-label="etusivulle" id="main" to="/">
-                <span aria-label="Turun vaakuna" className={`${logo}`} title="Etusivu" />
+              <Link aria-label={t('Navbar.aria.topNavbar.frontpage')} id="main" to="/">
+                <span aria-label="Turun vaakuna" className={`${currentLogo}`} title="Etusivu" />
               </Link>
             </Navbar.Brand>
           </Navbar.Header>
-          <Navbar.Collapse id="navCollapse">
-            <Nav pullRight>
+          <Navbar.Collapse id="navCollapse" role="presentation">
+            <Nav aria-label={t('Navbar.aria.topNavbar.options')} pullRight role="list">
               <ContrastChanger />
 
               <FontChanger />
@@ -113,6 +119,7 @@ class TopNavbar extends Component {
                 id="language-nav-dropdown"
                 noCaret
                 onSelect={changeLocale}
+                tabIndex="0"
                 title={currentLanguage}
               >
                 {currentLanguage !== 'fi' && <MenuItem eventKey="fi">FI</MenuItem>}
