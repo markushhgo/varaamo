@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { clearSearchResults } from 'actions/searchActions';
 import { currentUserSelector, isLoggedInSelector } from 'state/selectors/authSelectors';
 import { currentLanguageSelector } from 'state/selectors/translationSelectors';
+import { contrastSelector } from 'state/selectors/accessibilitySelectors';
 import { changeLocale } from 'i18n';
 import TopNavbar from './TopNavbar';
 
@@ -21,13 +22,13 @@ const userNameSelector = createSelector(
   }
 );
 
-const contrastSelector = state => state.ui.accessibility.isNormalContrast;
+const contrastOptionsSelector = state => contrastSelector(state);
 
 export const selector = createStructuredSelector({
   isLoggedIn: isLoggedInSelector,
   currentLanguage: currentLanguageSelector,
   userName: userNameSelector,
-  contrast: contrastSelector,
+  contrast: contrastOptionsSelector,
 });
 
 const actions = {

@@ -6,12 +6,12 @@ import APP from '../../../constants/AppConstants';
 
 
 const initialState = Immutable({
-  isNormalContrast: true,
+  isHighContrast: false,
   fontSize: APP.FONT_SIZES.SMALL
 });
 
 function toggleContrast(state) {
-  return { ...state, isNormalContrast: !state.isNormalContrast };
+  return { ...state, isHighContrast: !state.isHighContrast };
 }
 
 function changeFontSize(state, data) {
