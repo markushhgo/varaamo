@@ -130,13 +130,20 @@ class ResourceCard extends Component {
           </div>
           <div
             aria-label={t('ResourceCard.description.label')}
-            className="app-ResourceCard__description"
+            className={classNames(
+              'app-ResourceCard__description',
+              isLargerFontSizeUsed && 'app-ResourceCard__description__large-font-size'
+            )}
           >
             {this.createTextSnippet(resource.description, 348)}
           </div>
         </div>
 
-        <div className="app-ResourceCard__info">
+        <div className={classNames(
+          'app-ResourceCard__info',
+          isLargerFontSizeUsed && 'app-ResourceCard__info__large-font-size'
+        )}
+        >
           <Col md={4} sm={4} xs={isLargerFontSizeUsed ? 12 : 6}>
             <ResourceCardInfoCell
               alt={t('ResourceCard.infoTitle.purpose')}

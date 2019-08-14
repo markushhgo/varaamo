@@ -56,9 +56,13 @@
     }
     &__image-link{
       display: block;
-      height: 100px;
+      height: $app-ResourceCard-height;
       width: 100%;
-      @media (min-width: $screen-md-min) {
+
+      &__large-font-size {
+        height: 100px;
+      }
+      @media (max-width: $screen-lg-min) {
         height: $app-ResourceCard-height;
       }
     }
@@ -69,18 +73,26 @@
       }
 
       .app-ResourceCard__description {
-        display: none;
-        @media (min-width: $screen-md-min) {
-          display: block;
+        display: block;
+
+        &__large-font-size {
+          display: none;
+        }
+        @media (max-width: $screen-lg-min) {
+          display: none;
         }
       }
     }
     &__info {
-      display: none;
-      @media (min-width: $screen-md-min) {
-        display: block;
-        flex: 1 2 30%;
-        overflow: hidden;
+      display: block;
+      flex: 1 2 30%;
+      overflow: hidden;
+
+      &__large-font-size {
+        display: none;
+      }
+      @media (max-width: $screen-lg-min) {
+        display: none;
       }
     }
   }
