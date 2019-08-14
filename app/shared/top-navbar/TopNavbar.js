@@ -62,7 +62,7 @@ class TopNavbar extends Component {
       userName,
       contrast,
     } = this.props;
-    const logo = (currentLanguage === 'sv') ? 'turku-logo-sv' : 'turku-logo';
+    const currentLogo = (currentLanguage === 'sv') ? 'turku-logo-sv' : 'turku-logo';
     return (
       <div>
         <MobileNavbar contrast={contrast} toggle={this.state.expandMobileNavbar} />
@@ -103,7 +103,7 @@ class TopNavbar extends Component {
             </button>
             <Navbar.Brand>
               <Link aria-label={t('Navbar.aria.topNavbar.frontpage')} id="main" to="/">
-                <span aria-label="Turun vaakuna" className={`${logo}`} title="Etusivu" />
+                <span aria-label="Turun vaakuna" className={`${currentLogo}`} title="Etusivu" />
               </Link>
             </Navbar.Brand>
           </Navbar.Header>
