@@ -120,13 +120,13 @@
           font-size: 1em;
         }
 
-        //secondA
+        // secondA
         span:nth-child(2) {
           font-size: 1.25em;
           line-height: 1.2;
         }
 
-        //thirdA
+        // thirdA
         span:nth-child(3) {
           font-size: 1.5em;
           line-height: 1;
@@ -287,6 +287,7 @@
       .dropdown-menu {
         right: 0;
         left: auto;
+        font-size: 1em;
       }
     }
     // End: Remove responsive features
@@ -373,6 +374,7 @@
       left:-20px;
       text-align: center;
       padding: 0;
+      font-size: 1em;
 
       > li >a:hover,a:active,a:focus {
         color: $black;
