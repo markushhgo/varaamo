@@ -24,6 +24,7 @@ function ResourceHeader({
   showMap,
   unit,
   t,
+  contrast,
 }) {
   const formatDistance = (distance) => {
     if (!distance) {
@@ -47,7 +48,7 @@ function ResourceHeader({
   const distance = formatDistance(resource.distance);
 
   return (
-    <section aria-label={t('ResourceHeader.title')} className="app-ResourceHeader">
+    <section aria-label={t('ResourceHeader.title')} className={`app-ResourceHeader ${contrast}`}>
       <Grid>
         <div className="app-ResourceHeader__content">
           {showBackButton && (
@@ -120,6 +121,7 @@ ResourceHeader.propTypes = {
   showMap: PropTypes.bool.isRequired,
   t: PropTypes.func.isRequired,
   unit: PropTypes.object.isRequired,
+  contrast: PropTypes.string,
 };
 
 ResourceHeader = injectT(ResourceHeader); // eslint-disable-line
