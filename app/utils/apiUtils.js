@@ -47,7 +47,17 @@ function getHeadersCreator(headers) {
   return (state) => {
     const authorizationHeaders = {};
     if (state.auth.token) {
-      authorizationHeaders.Authorization = `JWT ${state.auth.token}`;
+      // UNCOMMENT ME
+      // authorizationHeaders.Authorization = `JWT ${state.auth.token}`;
+
+      // REMOVE BELOW
+      if (SETTINGS.TEMP_USERNAME && SETTINGS.TEMP_PASSWORD) {
+        const auth = `Basic ${Buffer.from(`${SETTINGS.TEMP_USERNAME}:${SETTINGS.TEMP_PASSWORD}`).toString('base64')}`;
+        authorizationHeaders.Authorization = auth;
+      } else {
+        authorizationHeaders.Authorization = `JWT ${state.auth.token}`;
+      }
+      // REMOVE ABOVE
     }
     return Object.assign({}, constants.REQUIRED_API_HEADERS, headers, authorizationHeaders);
   };
