@@ -32,10 +32,12 @@ footer {
 
   a {
     color: $white;
+
+    @include addFocus;
   }
 
-  a:hover {
-    color: #eee;
+  a:hover,a:focus {
+    color: $white;
   }
 
   @include highContrast {
