@@ -10,7 +10,7 @@ const initialState = Immutable({
 */
 
 // REMOVE ME
-const initialState = SETTINGS.TEMP_USER_ID !== undefined
+const initialState = SETTINGS.TEMP_USER_ID
   ? Immutable({ token: 'null', userId: SETTINGS.TEMP_USER_ID, })
   : Immutable({ token: null, userId: null, });
 
