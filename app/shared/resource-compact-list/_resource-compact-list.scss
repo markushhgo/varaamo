@@ -21,7 +21,7 @@
     position: absolute;
     top: 0px;
     width: $button-size;
-    height: $app-ResourceCard-height;
+    height: 100%;
     border: none;
     margin-left: -24px;
     margin-right: -24px;
@@ -75,7 +75,6 @@
       }
 
       .app-ResourceCard__description {
-        display: block;
 
         &__large-font-size {
           display: none;
