@@ -12,3 +12,9 @@ html {
 p {
   margin: 0 0 2em;
 }
+
+a {
+  @include addFocus{
+    outline-offset: 0;
+  };
+}
