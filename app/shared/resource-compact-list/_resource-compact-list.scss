@@ -2,28 +2,30 @@
   $button-size: $line-height-computed;
   $button-offset: 10px;
   $button-offset-mobile: 2px;
-  position: absolute; //fixed
+  position: sticky; //fixed
   bottom: 100px;
   left: 0;
   margin: 0 15px 15px 15px;
   width: 100%;
-  max-width: $app-SearchPage-max-width;
 
   @media (min-width: $screen-xs-min) {
     width: 50%;
   }
 
   @media (min-width: $screen-md-min) {
-    position: absolute;
+    position: sticky;
     width: calc(100% - 30px);
   }
 
   &_arrow {
     position: absolute;
-    top: $app-ResourceCard-height / 2 - $button-size / 2;
+    top: 0px;
     width: $button-size;
-    height: $button-size;
+    height: $app-ResourceCard-height;
     border: none;
+    margin-left: -24px;
+    margin-right: -24px;
+    background-position: center;
     z-index: 1;
 
     img {
