@@ -26,9 +26,10 @@ function getWrapper(props) {
 }
 
 describe('pages/search/controls/DatePickerControl', () => {
-  test('renders a div.app-DatePickerControl', () => {
+  test('renders a section.app-DatePickerControl and correct props', () => {
     const wrapper = getWrapper();
-    expect(wrapper.is('div.app-DatePickerControl')).toBe(true);
+    expect(wrapper.is('section.app-DatePickerControl')).toBe(true);
+    expect(wrapper.prop('aria-label')).toBe('DatePickerControl.label');
   });
 
   test('renders form with correct props', () => {
