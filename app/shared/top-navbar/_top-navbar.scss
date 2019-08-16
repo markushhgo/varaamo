@@ -85,6 +85,8 @@
 
     // Accessability
 
+
+
     .accessibility{
       &__buttonGroup {
         padding-top: 15px;
@@ -157,7 +159,7 @@
 
     &__name > a {
       @media (max-width: $screen-xs-max) {
-        font-size: 0 !important;
+//        font-size: 0 !important;
       }
 
       &::before {
@@ -211,6 +213,10 @@
 
       > li {
         float: left;
+
+        @media(max-width: $screen-sm-max) {
+          float: right;
+        }
 
         > a {
           padding-top: 18px;
@@ -273,6 +279,41 @@
       > .open > a:focus,
       > .open > a:active {
         color: inherit;
+      }
+    }
+
+    .TEST {
+      display: none;
+      @media(max-width: $screen-sm-max){
+        display: flex;
+        padding: 0;
+//        justify-content: space-between;
+        p {
+          margin: 0;
+          padding-top: 8px;
+//          max-width: 70%;
+          &::before {
+            @include hel-background-icon('user-o');
+          }
+
+
+        }
+        .mobile_logout {
+          align-self: center;
+        }
+      }
+      > a#ME {
+        padding: 0;
+        align-self: center;
+        margin-right: 0;
+      }
+
+      &.logout {
+//        width: 30%;
+        margin-left: auto;
+      }
+      &.username-text {
+//        width: 70%;
       }
     }
     // ----------
@@ -345,7 +386,15 @@
         color: inherit;
         }
     }
-  }
+
+    .navbar-collapse > ul {
+      @media(max-width: $screen-sm-max) {
+        width: 100%;
+        display: flex;
+
+      }
+    }
+
     // ----------
 
     // Mobile
@@ -406,12 +455,38 @@
     @include focusElement;
   }
 
+
+
   .navbar-collapse > ul li.app-TopNavbar__language.dropdown,
   .navbar-collapse > ul li.navbar__font,
+  .navbar-collapse > ul li.app-TopNavbar__name,
   .navbar-collapse > ul li.navbar__contrast  {
     @media(max-width: $screen-sm-max) {
       display: none;
     }
   }
 
+  .navbar-collapse > ul li.login-button {
+    flex: auto;
+  }
+
+  .navbar-collapse > ul li a#app-TopNavbar__login {
+    float: right;
+
+  }
+}
+/*
+  .navbar-collapse > ul li.app-TopNavbar__name.dropdown {
+    @media(max-width: $screen-sm-max) {
+      display: flex;
+      flex-direction: row-reverse;
+
+      &.open {
+        .dropdown-menu {
+          position: inherit;
+        }
+      }
+    }
+  }
+*/
     // ----------
