@@ -22,4 +22,8 @@ describe('pages/user-reservations/userReservationsPageSelector', () => {
   test('returns resourcesLoaded', () => {
     expect(getSelected().resourcesLoaded).toBeDefined();
   });
+
+  test('returns contrast', () => {
+    expect(getSelected().contrast).toBeDefined();
+  });
 });
