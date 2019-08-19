@@ -11,7 +11,7 @@ import Marker from './Marker';
 import UserMarker from './UserMarker';
 
 const defaultPosition = {
-  null: [60.18952, 24.99545],
+  null: [60.451389, 22.266667],
   ESPOO: [60.205490, 24.755899],
   VANTAA: [60.29414, 25.14099],
 };
