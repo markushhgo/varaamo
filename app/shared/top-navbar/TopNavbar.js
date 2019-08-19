@@ -16,6 +16,7 @@ import MobileNavbar from 'shared/top-navbar/mobile/MobileNavbar';
 import FontChanger from './accessibility/TopNavbarFontContainer';
 import ContrastChanger from './accessibility/TopNavbarContrastContainer';
 import { injectT } from 'i18n';
+import LoginForm from './temp/LoginForm';
 
 class TopNavbar extends Component {
   static propTypes = {
@@ -32,7 +33,10 @@ class TopNavbar extends Component {
     this.state = {
       expanded: false,
       expandMobileNavbar: false,
+      tempShowForm: false,
     };
+
+    this.handleLoginClick = this.handleLoginClick.bind(this);
   }
 
   collapseItem() {
@@ -43,10 +47,22 @@ class TopNavbar extends Component {
     this.setState(prevState => ({ expanded: !prevState.expanded }));
   }
 
-
   handleLoginClick() {
-    const next = encodeURIComponent(window.location.href);
-    window.location.assign(`${window.location.origin}/login?next=${next}`);
+    /* UNCOMMENT ME
+      const next = encodeURIComponent(window.location.href);
+      window.location.assign(`${window.location.origin}/login?next=${next}`);
+    */
+
+    // TEMP BYPASS
+    if (SETTINGS.TEMP_BYPASS) {
+      this.setState(prevState => ({
+        tempShowForm: !prevState.tempShowForm
+      }));
+    } else {
+      const next = encodeURIComponent(window.location.href);
+      window.location.assign(`${window.location.origin}/login?next=${next}`);
+    }
+    // TEMP BYPASS
   }
 
   toggleMobileNavbar() {
@@ -149,6 +165,9 @@ class TopNavbar extends Component {
             </Nav>
           </Navbar.Collapse>
         </Navbar>
+
+        {this.state.tempShowForm
+          && <LoginForm hideForm={() => this.setState({ tempShowForm: false })} />}
       </div>
     );
   }
