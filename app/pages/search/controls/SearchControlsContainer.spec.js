@@ -28,6 +28,7 @@ describe('pages/search/controls/SearchControlsContainer', () => {
       fetchPurposes: () => null,
       searchResources: () => null,
     },
+    contrast: '',
     currentLanguage: 'fi',
     isFetchingPurposes: false,
     isFetchingUnits: false,
@@ -63,6 +64,16 @@ describe('pages/search/controls/SearchControlsContainer', () => {
   function getWrapper(props) {
     return shallowWithIntl(<SearchControlsContainer {...defaultProps} {...props} />);
   }
+
+  describe('renders SearchControlsContainer correctly when', () => {
+    test('isHighContrast is false', () => {
+      expect(getWrapper().hasClass('high-contrast')).toBe(false);
+    });
+
+    test('isHighContrast is true', () => {
+      expect(getWrapper({ contrast: 'high-contrast' }).hasClass('high-contrast')).toBe(true);
+    });
+  });
 
   describe('render', () => {
     test('renders SearchBox with correct props', () => {

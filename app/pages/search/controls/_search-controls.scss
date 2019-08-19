@@ -7,6 +7,8 @@
   position: relative;
   z-index: 3;
 
+  @include highContrast;
+
   &__content {
     padding: 30px 0;
   }

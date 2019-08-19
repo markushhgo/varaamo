@@ -92,12 +92,18 @@ class UnconnectedSearchPage extends Component {
       showMap,
       filters,
       t,
+      contrast,
     } = this.props;
     return (
       <div className="app-SearchPage">
         <SearchControls location={location} params={match.params} />
         {!isFetchingSearchResults && (
-          <MapToggle mapVisible={showMap} onClick={actions.toggleMap} resultCount={resultCount} />
+          <MapToggle
+            contrast={contrast}
+            mapVisible={showMap}
+            onClick={actions.toggleMap}
+            resultCount={resultCount}
+          />
         )}
         {showMap && (
           <ResourceMap
@@ -150,6 +156,7 @@ UnconnectedSearchPage.propTypes = {
   showMap: PropTypes.bool.isRequired,
   t: PropTypes.func.isRequired,
   uiFilters: PropTypes.object.isRequired,
+  contrast: PropTypes.string,
 };
 
 UnconnectedSearchPage = injectT(UnconnectedSearchPage); // eslint-disable-line

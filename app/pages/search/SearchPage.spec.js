@@ -21,6 +21,7 @@ describe('pages/search/SearchPage', () => {
       searchResources: simple.stub(),
       toggleMap: () => {},
     },
+    contrast: '',
     isLoggedIn: false,
     isFetchingSearchResults: false,
     filters: {
@@ -71,7 +72,19 @@ describe('pages/search/SearchPage', () => {
         mapVisible: defaultProps.showMap,
         onClick: defaultProps.actions.toggleMap,
         resultCount: defaultProps.resultCount,
+        contrast: defaultProps.contrast
       });
+    });
+
+
+    test('contrast prop when isHighContrast: false', () => {
+      const mapToggle = getWrapper().find(MapToggle);
+      expect(mapToggle.prop('contrast')).toBe('');
+    });
+
+    test('contrast prop when isHighContrast: true', () => {
+      const mapToggle = getWrapper({ contrast: 'high-contrast' }).find(MapToggle);
+      expect(mapToggle.prop('contrast')).toBe('high-contrast');
     });
 
     test('renders a ResourceMap with correct props', () => {

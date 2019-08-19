@@ -26,6 +26,18 @@
     &__results-count {
       padding-top: 8px;
     }
+    @include highContrast{
+      button {
+        background-color: inherit;
+        border-color: transparent;
+      }
+      button:hover,
+      button:active {
+        background-color: transparent;
+        border-color: black;
+        box-shadow: none;
+      }
+    };
     button {
       background-color: $hel-copper;
       border-color: $hel-copper;

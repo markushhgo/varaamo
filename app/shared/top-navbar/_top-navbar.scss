@@ -85,6 +85,8 @@
 
     // Accessability
 
+
+
     .accessibility{
       &__buttonGroup {
         padding-top: 15px;
@@ -117,13 +119,13 @@
           font-size: 1em;
         }
 
-        //secondA
+        // secondA
         span:nth-child(2) {
           font-size: 1.25em;
           line-height: 1.2;
         }
 
-        //thirdA
+        // thirdA
         span:nth-child(3) {
           font-size: 1.5em;
           line-height: 1;
@@ -157,7 +159,7 @@
 
     &__name > a {
       @media (max-width: $screen-xs-max) {
-        font-size: 0 !important;
+//        font-size: 0 !important;
       }
 
       &::before {
@@ -211,6 +213,10 @@
 
       > li {
         float: left;
+
+        @media(max-width: $screen-sm-max) {
+          float: right;
+        }
 
         > a {
           padding-top: 18px;
@@ -275,6 +281,39 @@
         color: inherit;
       }
     }
+
+    &__mobile.username,
+    &__mobile.logout {
+      display: none;
+      @media(max-width: $screen-sm-max) {
+        display: flex;
+        padding: 0;
+      }
+
+       > p {
+        margin: 0;
+        padding-top: 8px;
+        user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        -webkit-user-select: none;
+
+        &::before {
+          @include hel-background-icon('user-o');
+        }
+      }
+    }
+
+    &__mobile.logout {
+      margin-left: auto;
+
+      > a#mobile_logout {
+        padding: 0;
+        align-self: center;
+        margin-right: 0;
+      }
+    }
+
     // ----------
 
     .navbar-right {
@@ -283,6 +322,7 @@
       .dropdown-menu {
         right: 0;
         left: auto;
+        font-size: 1em;
       }
     }
     // End: Remove responsive features
@@ -344,7 +384,15 @@
         color: inherit;
         }
     }
-  }
+
+    .navbar-collapse > ul {
+      @media(max-width: $screen-sm-max) {
+        width: 100%;
+        display: flex;
+
+      }
+    }
+
     // ----------
 
     // Mobile
@@ -369,6 +417,7 @@
       left:-20px;
       text-align: center;
       padding: 0;
+      font-size: 1em;
 
       > li >a:hover,a:active,a:focus {
         color: $black;
@@ -404,12 +453,25 @@
     @include focusElement;
   }
 
+
+
   .navbar-collapse > ul li.app-TopNavbar__language.dropdown,
   .navbar-collapse > ul li.navbar__font,
+  .navbar-collapse > ul li.app-TopNavbar__name,
   .navbar-collapse > ul li.navbar__contrast  {
     @media(max-width: $screen-sm-max) {
       display: none;
     }
   }
+
+  .navbar-collapse > ul li.login-button {
+    flex: auto;
+  }
+
+  .navbar-collapse > ul li a#app-TopNavbar__login {
+    float: right;
+
+  }
+}
 
     // ----------

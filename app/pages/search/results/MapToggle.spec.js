@@ -9,12 +9,21 @@ describe('pages/search/results/MapToggle', () => {
       mapVisible: false,
       onClick: () => null,
       resultCount: 0,
+      contrast: ''
     };
     return shallowWithIntl(<MapToggle {...defaults} {...props} />);
   }
 
   test('renders div.app-MapToggle', () => {
     expect(getWrapper().is('div.app-MapToggle')).toBe(true);
+  });
+
+  test('div.app-MapToggle has no additional classes when isHighContrast = false', () => {
+    expect(getWrapper().hasClass('high-contrast')).toBe(false);
+  });
+
+  test('div.app-MapToggle has high-contrast class when isHighContrast = true', () => {
+    expect(getWrapper({ contrast: 'high-contrast' }).hasClass('high-contrast')).toBe(true);
   });
 
   describe('result count text', () => {

@@ -10,8 +10,8 @@ import FAIcon from 'shared/fontawesome-icon';
 
 describe('shared/main-navbar/MainNavbar', () => {
   const pathname = 'somepath';
-  const gitbookURL = 'https://cityofhelsinki.gitbook.io/varaamo';
-  const respaURL = 'https://api.hel.fi/respa/ra/';
+  const gitbookURL = 'https://digipoint-turku.gitbook.io/varaamo-turku/';
+  const respaURL = 'http://testivaraamo.turku.fi:8010/ra/';
 
   function getWrapper(props) {
     const defaults = {
