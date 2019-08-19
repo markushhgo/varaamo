@@ -27,6 +27,11 @@ export default () => (
         path="/admin-resources"
       />
       <PrivateRoute
+        component={AdminResourcesPage}
+        componentName="AdminResources"
+        path="/favourites"
+      />
+      <PrivateRoute
         component={UserReservationsPage}
         componentName="MyReservations"
         path="/my-reservations"
