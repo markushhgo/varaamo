@@ -2,17 +2,11 @@ import types from 'constants/ActionTypes';
 
 import Immutable from 'seamless-immutable';
 
-/* UNCOMMENT ME
+
 const initialState = Immutable({
   token: null,
   userId: null,
 });
-*/
-
-// REMOVE ME
-const initialState = SETTINGS.TEMP_USER_ID
-  ? Immutable({ token: 'null', userId: SETTINGS.TEMP_USER_ID, })
-  : Immutable({ token: null, userId: null, });
 
 function authReducer(state = initialState, action) {
   switch (action.type) {
