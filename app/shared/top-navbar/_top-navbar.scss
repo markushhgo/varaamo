@@ -282,40 +282,38 @@
       }
     }
 
-    .TEST {
+    &__mobile.username,
+    &__mobile.logout {
       display: none;
-      @media(max-width: $screen-sm-max){
+      @media(max-width: $screen-sm-max) {
         display: flex;
         padding: 0;
-//        justify-content: space-between;
-        p {
-          margin: 0;
-          padding-top: 8px;
-//          max-width: 70%;
-          &::before {
-            @include hel-background-icon('user-o');
-          }
+      }
 
+       > p {
+        margin: 0;
+        padding-top: 8px;
+        user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        -webkit-user-select: none;
 
-        }
-        .mobile_logout {
-          align-self: center;
+        &::before {
+          @include hel-background-icon('user-o');
         }
       }
-      > a#ME {
+    }
+
+    &__mobile.logout {
+      margin-left: auto;
+
+      > a#mobile_logout {
         padding: 0;
         align-self: center;
         margin-right: 0;
       }
-
-      &.logout {
-//        width: 30%;
-        margin-left: auto;
-      }
-      &.username-text {
-//        width: 70%;
-      }
     }
+
     // ----------
 
     .navbar-right {
@@ -475,18 +473,5 @@
 
   }
 }
-/*
-  .navbar-collapse > ul li.app-TopNavbar__name.dropdown {
-    @media(max-width: $screen-sm-max) {
-      display: flex;
-      flex-direction: row-reverse;
 
-      &.open {
-        .dropdown-menu {
-          position: inherit;
-        }
-      }
-    }
-  }
-*/
     // ----------

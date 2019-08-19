@@ -149,13 +149,13 @@ class TopNavbar extends Component {
               )}
               {isLoggedIn && (
                 <Fragment>
-                  <li className="TEST username-text">
+                  <li className="app-TopNavbar__mobile username">
                     <Navbar.Text>{userName}</Navbar.Text>
                   </li>
 
-                  <NavItem className="TEST logout" href={`/logout?next=${window.location.origin}`} id="ME">
+                  <NavItem className="app-TopNavbar__mobile logout" href={`/logout?next=${window.location.origin}`} id="mobile_logout">
 
-                    <Button className="mobile_logout" type="button">
+                    <Button type="button">
                       {t('Navbar.logout')}
                     </Button>
 
