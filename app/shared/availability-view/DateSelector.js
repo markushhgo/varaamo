@@ -40,7 +40,7 @@ export class UninjectedDateSelector extends React.Component {
         </a>
         <div className="current-value">
           <DatePicker
-            dateFormat="dd D.M.YYYY"
+            dateFormat="D.M.YYYY"
             onChange={date => this.handleChange(date)}
             value={this.props.value}
           />

@@ -1,4 +1,36 @@
 .admin-resources-page {
+  min-height: 600px;
+
+  .loadedContent{
+
+    .availability-view .date-selector {
+      font-size: 1em;
+       .date-picker {
+         > input {
+           min-width: 140px;
+         }
+        .DayPicker-WeekDaysRow,
+        .DayPicker-Day {
+          font-size: 1em;
+        }
+
+        .date-picker-overlay {
+          padding: 15px;
+        }
+      }
+
+      .previous,
+      .next {
+        text-decoration: none;
+      }
+    }
+
+
+  }
+  .date-picker .DayPicker-WeekDaysRow {
+    font-size: 1em;
+  }
+
   @include highContrast{
     .loadedContent {
 
@@ -32,6 +64,32 @@
           }
         }
       }
+    }
+  }
+
+  @media(max-width: $screen-sm-max) {
+    .availability-view .date-selector .current-value .date-picker{
+      > div {
+      margin-left: -150%;
+    }
+      > input {
+        min-width: 120px;
+      }
+    }
+
+  }
+
+  @media(max-width: $screen-xs-max) {
+    .availability-view  .date-selector {
+      justify-content: center;
+
+      .previous,
+      .next {
+        display: none;
+      }
+
+
+
     }
   }
 }

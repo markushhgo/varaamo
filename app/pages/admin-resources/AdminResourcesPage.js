@@ -68,7 +68,7 @@ class UnconnectedAdminResourcesPage extends Component {
       contrast,
     } = this.props;
     return (
-      <PageWrapper className={`admin-resources-page ${contrast}`} fluid title={(t('AdminResourcesPage.adminTitle'))}>
+      <PageWrapper className={`admin-resources-page ${contrast}`} title={(t('AdminResourcesPage.adminTitle'))}>
         {isAdmin && <h1>{t('AdminResourcesPage.adminTitle')}</h1>}
         {!isAdmin && <h1>{t('AdminResourcesPage.favoriteTitle')}</h1>}
         <Loader loaded={Boolean(!isFetchingResources || resources.length)}>
