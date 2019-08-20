@@ -1,6 +1,7 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 import Grid from 'react-bootstrap/lib/Grid';
+import { Helmet } from 'react-helmet';
 
 import PageWrapper from './PageWrapper';
 
@@ -18,9 +19,10 @@ describe('pages/PageWrapper', () => {
     );
   }
 
-  test('renders Helmet title', () => {
-    const title = getWrapper().find('title');
-    expect(title.text()).toBe('Test title - Varaamo');
+  test('renders Helmet with correct title prop', () => {
+    const helmet = getWrapper().find(Helmet);
+    expect(helmet).toHaveLength(1);
+    expect(helmet.prop('title')).toBe('Test title - Varaamo');
   });
 
   test('renders a div with the className given in props', () => {

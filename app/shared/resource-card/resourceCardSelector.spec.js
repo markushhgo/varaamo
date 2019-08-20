@@ -27,4 +27,8 @@ describe('shared/resource-list/resourceCardSelector', () => {
   test('returns correct unit from state', () => {
     expect(getSelected().unit).toEqual(unit);
   });
+
+  test('returns isLargerFontSizeUsed', () => {
+    expect(getSelected().isLargerFontSizeUsed).toBeDefined();
+  });
 });

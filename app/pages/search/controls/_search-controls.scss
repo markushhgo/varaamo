@@ -1,9 +1,9 @@
+
 .tooltip_class {
   z-index: 9999999;
 }
-
 .app-SearchControlsContainer {
-  background-color: $copper;
+  background-color: $turku-yellow;
   position: relative;
   z-index: 3;
 
@@ -22,6 +22,8 @@
     min-width: 120px;
     font-size: 1em;
     text-transform: uppercase;
+    @include addFocus($width: 2px, $color: currentColor) {
+    }
   }
   &__reset-button {
     img {
@@ -68,19 +70,21 @@
       padding: 0;
     }
   }
-
   .select:before {
     background-color: $copper;
   }
-
   .form-group {
     margin-bottom: 0;
   }
 
-  .form-control {
-    color: $black;
+  .form-group label{
+    padding-right: 6px;
   }
 
+  .form-control {
+    color: $black;
+    font-size: 1em;
+  }
   .form-control[disabled] {
     background-color: transparent;
     border-color: $black;
@@ -88,19 +92,18 @@
     cursor: default;
     transition: all 0s ease 0s;
   }
-
   .glyphicon-triangle-bottom {
     font-size: 10px;
   }
-
   .btn.btn-link {
     color: $black;
+    @include addFocus($width: 2px, $color: currentColor) {
+    }
+
   }
 }
-
 // SearchBox
 //
-
 .app-SearchBox {
   position: relative;
   .app-SearchControlOverlay__content {
@@ -116,28 +119,22 @@
     }
   }
 }
-
 // PurposeControl styles
 // ---------------------
-
 .app-PurposeControl {
   display: inline-block;
   margin-left: 0;
   position: relative;
   width: 100%;
-
   &__show-button {
     @include search-control-button($blue);
   }
-
   .app-SearchControlOverlay__header {
     background-color: $blue;
   }
 }
-
 // PositionControl styles
 // ---------------------
-
 .app-PositionControl {
   &__toggle-content > label {
     display: flex;
@@ -145,7 +142,6 @@
     font-weight: normal;
     white-space: normal;
   }
-
   &__distance_slider {
     margin-top: 15px;
     &_tooltip {
@@ -162,31 +158,31 @@
       box-shadow: none;
     }
   }
-
   .app-SearchControlOverlay__header {
     background-color: $copper;
   }
 }
-
 // DatePickerControl styles
 // ------------------------
-
 .app-DatePickerControl {
   display: inline-block;
   margin-bottom: 0;
   position: relative;
   width: 100%;
-
   &__icon {
     width: 22px;
   }
-
+  &__button {
+    height: 40px !important;
+    border-left-width: 2px !important;
+    @include addFocus($color: currentColor) {
+    }
+  }
   &__title {
     border-right-width: 0;
     text-align: left;
     vertical-align: middle;
     font-size: 1em;
-
     img {
       margin-right: 6px;
     }
@@ -195,39 +191,40 @@
       vertical-align: middle;
     }
   }
-
   &__triangle {
     text-align: right;
+  }
+  #date-input-error{
+    margin: 0;
+    color: #c80000;
+    font-weight: bold;
+    display: inline;
+    white-space: nowrap;
+
   }
 
   .app-SearchControlOverlay__overlay {
     border-top: none;
   }
-
   .app-SearchControlOverlay__header {
     background-color: $green;
   }
-
   .DayPicker {
     display: block;
     padding: 0;
-    overflow-x: hidden;
     max-width: 400px;
     margin: 0 auto;
     width: 100%;
-
     &:focus {
       outline: none;
     }
   }
-
   .DayPicker-NavBar {
     position: absolute;
     display: flex;
     width: 100%;
     justify-content: space-between;
   }
-
   .DayPicker-Caption {
     height: auto;
     font-weight: 600;
@@ -236,7 +233,6 @@
     text-transform: capitalize;
     text-align: center;
   }
-
   .DayPicker-NavButton--prev {
     @include icon-angle-left($black);
     width: $line-height-computed;
@@ -244,20 +240,17 @@
     position: static;
     margin-right: 0;
   }
-
   .DayPicker-NavButton--next {
     @include icon-angle-right($black);
     width: $line-height-computed;
     height: $line-height-computed;
     position: static;
   }
-
   .DayPicker-Month {
-    margin: 0;
+    margin:0 10px 0 0;
     border-collapse: separate;
-    width: 100%;
+    width: 400px;
   }
-
   .DayPicker-Day {
     border: 2px solid $white;
     margin: 1px;
@@ -265,11 +258,14 @@
     color: $black;
     background-color: $light-gray;
     border-radius: 0;
-    font-size: 1.6rem;
+    font-size: 1em;
 
-    &:focus {
-      outline: none;
+    @media screen and (max-width: 330px){
+
+      padding: 5px;
+
     }
+
     &--available:not(.DayPicker-Day--disabled) {
       background-color: $light-gray;
       &.DayPicker-Day--selected {
@@ -290,16 +286,13 @@
       background-color: $dark-gray;
     }
   }
-
   .DayPicker-Day--today {
     border: 2px solid $black;
   }
-
   .DayPicker-WeekdaysRow {
     padding: 0.2rem;
     font-size: 1.4rem;
   }
-
   .DayPicker-Weekdays {
     text-transform: uppercase;
     font-weight: normal;
@@ -309,76 +302,73 @@
       vertical-align: text-top;
     }
   }
-
   .DayPicker-Weekday {
     color: $black;
+    padding: 0;
   }
-
   .DayPicker-WeekNumber {
-    font-size: 14px;
+    font-size: 1em;
   }
 }
-
 .app-TimeRangeControl {
-  max-width: 400px;
+  display: block;
+  @media (min-width: 768px) {
+    &__range {
+      align-items: baseline;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      margin-top: 8px;
 
-  @media (min-width: $screen-sm-min) {
-    margin: 0 auto;
-  }
+      @media screen and (max-width: 767px) {
+        flex-direction: column;
+        display: block;
+      }
+      &-separator {
+        padding: 0;
+        margin: 30px 15px 0 15px;
+        align-self: end;
+      }
+      .app-SelectControl {
+        flex: 1 2 25%;
+        margin: 0 15px;
 
-  &__range {
-    align-items: baseline;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin-top: 8px;
+        &:last-child{
+          margin-right: 0;
+        }
 
-    &-separator {
-      padding: 0;
-      margin: 0 6px;
-    }
-
-    .app-SelectControl {
-      flex: 1 2 25%;
-
-      &:last-child {
-        margin-left: 15px;
+        &:first-child{
+          margin-left: 0;
+        }
       }
     }
   }
 }
-
 .app-CheckboxControl {
   padding-top: 15px;
-
   &__label {
     font-weight: normal;
   }
 }
-
 .app-SearchControlOverlay {
   position: absolute;
   width: 100%;
   z-index: 2;
-
   &__overlay {
     border: 2px solid $black;
   }
-
   &__hide {
     color: $white;
     right: 0;
     position: absolute;
     top: 5px;
   }
-
   &__hide:active,
   &__hide:focus,
   &__hide:hover {
     color: $medium-gray;
     text-decoration: none;
   }
-
   &__header {
     color: $white;
     height: 40px;
@@ -389,19 +379,16 @@
       font-weight: $font-weight-light;
     }
   }
-
   &__content {
     background-color: $white;
     padding: 20px;
   }
 }
-
 .app-SearchControlsCheckbox {
   @media (max-width: $screen-md-max) {
     &__toggle {
       float: left;
     }
-
     &__label {
       display: block;
       padding-left: 60px;

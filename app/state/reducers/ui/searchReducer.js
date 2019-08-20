@@ -67,7 +67,13 @@ function searchReducer(state = initialState, action) {
     }
 
     case types.UI.DISABLE_TIME_RANGE: {
-      const filters = pickSupportedFilters({ useTimeRange: false });
+      const duration = 0;
+      const end = '';
+      const start = '';
+      const useTimeRange = false;
+      const filters = pickSupportedFilters({
+        duration, end, start, useTimeRange
+      });
       return state.merge({ filters }, { deep: true });
     }
 

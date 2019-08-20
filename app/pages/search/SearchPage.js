@@ -105,14 +105,6 @@ class UnconnectedSearchPage extends Component {
             resultCount={resultCount}
           />
         )}
-        {showMap && (
-          <ResourceMap
-            location={location}
-            resourceIds={searchResultIds}
-            selectedUnitId={selectedUnitId}
-            showMap={showMap}
-          />
-        )}
 
         <PageWrapper className="app-SearchPage__wrapper" title={t('SearchPage.title')} transparent>
           <Row className="app-SearchPage__sortControlRow">
@@ -121,6 +113,15 @@ class UnconnectedSearchPage extends Component {
             </Col>
           </Row>
           <div className="app-SearchPage__content">
+            {showMap && (
+            <ResourceMap
+              location={location}
+              resourceIds={searchResultIds}
+              selectedUnitId={selectedUnitId}
+              showMap={showMap}
+            />
+            )}
+
             {(searchDone || isFetchingSearchResults) && (
               <SearchResults
                 history={history}

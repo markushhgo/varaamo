@@ -2,28 +2,31 @@
   $button-size: $line-height-computed;
   $button-offset: 10px;
   $button-offset-mobile: 2px;
-  position: absolute; //fixed
-  bottom: 0;
+  position: sticky; //fixed
+  bottom: 100px;
   left: 0;
-  margin: 0 15px 15px 15px;
+  margin: auto;
+  padding: 0 8px 0 8px;
   width: 100%;
-  max-width: $app-SearchPage-max-width;
 
   @media (min-width: $screen-xs-min) {
-    width: 50%;
+    width: 100%;
   }
 
   @media (min-width: $screen-md-min) {
-    position: absolute;
+    position: sticky;
     width: calc(100% - 30px);
   }
 
   &_arrow {
     position: absolute;
-    top: $app-ResourceCard-height / 2 - $button-size / 2;
-    width: $button-size;
-    height: $button-size;
+    top: 0px;
+    width: 30px;
+    height: 100%;
     border: none;
+    margin-left: -24px;
+    margin-right: -24px;
+    background-position: center;
     z-index: 1;
 
     img {
@@ -51,15 +54,41 @@
   }
   .app-ResourceCard {
     margin: 0;
-    @media (min-width: $screen-md-min) {
-      height: $app-ResourceCard-height + 4px;
+
+
+    &.app-ResourceCard__stacked {
+      border: 0;
     }
+
+
+    .resource-availability {
+      padding-bottom: 12px;
+    }
+
     &__image-link{
       display: block;
-      height: 100px;
+      height: $app-ResourceCard-height + 10px;
       width: 100%;
-      @media (min-width: $screen-md-min) {
+
+      &__large-font-size {
+        display: block;
+        height: 100px;
+      }
+      @media (max-width: $screen-lg-min) {
         height: $app-ResourceCard-height;
+      }
+      @media (min-width: $screen-lg-min) {
+        margin-left: 8px;
+        width: 1228px;
+        height: 200px;
+      }
+      @media (min-width: $screen-md-min) and (max-width: $screen-lg-min) {
+        margin-left: 8px;
+        width: 878px;
+      }
+      @media (min-width: $screen-sm-min) and (max-width: $screen-md-min) {
+        margin-left: 8px;
+        width: 688px;
       }
     }
     &__content {
@@ -69,18 +98,25 @@
       }
 
       .app-ResourceCard__description {
-        display: none;
-        @media (min-width: $screen-md-min) {
-          display: block;
+        &__large-font-size {
+          display: none;
+        }
+        @media (max-width: $screen-lg-min) {
+          display: none;
         }
       }
     }
     &__info {
-      display: none;
-      @media (min-width: $screen-md-min) {
-        display: block;
-        flex: 1 2 30%;
-        overflow: hidden;
+      display: block;
+      flex: 1 2 30%;
+      overflow: hidden;
+
+      @media (max-width: $screen-lg-min) {
+        display: none;
+      }
+
+      &__large-font-size {
+        display: none;
       }
     }
   }

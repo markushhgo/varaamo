@@ -56,10 +56,11 @@ class UnconnectedUserReservationsPage extends Component {
       reservationsFetchCount,
       resourcesLoaded,
       t,
+      contrast,
     } = this.props;
 
     return (
-      <div className="app-UserReservationPage">
+      <div className={`app-UserReservationPage ${contrast}`}>
         <PageWrapper className="app-UserReservationPage__wrapper" title={t('UserReservationsPage.title')} transparent={false}>
           <Loader loaded={resourcesLoaded}>
 
@@ -107,6 +108,7 @@ UnconnectedUserReservationsPage.propTypes = {
   reservationsFetchCount: PropTypes.number.isRequired,
   resourcesLoaded: PropTypes.bool.isRequired,
   t: PropTypes.func.isRequired,
+  contrast: PropTypes.string,
 };
 UnconnectedUserReservationsPage = injectT(UnconnectedUserReservationsPage);  // eslint-disable-line
 

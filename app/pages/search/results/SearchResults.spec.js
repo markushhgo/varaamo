@@ -1,8 +1,8 @@
-import { shallow } from 'enzyme';
 import React from 'react';
 import Loader from 'react-loader';
 import Immutable from 'seamless-immutable';
 
+import { shallowWithIntl } from 'utils/testUtils';
 import ResourceCompactList from 'shared/resource-compact-list';
 import ResourceList from 'shared/resource-list';
 import { UnconnectedSearchResults as SearchResults } from './SearchResults';
@@ -27,7 +27,7 @@ describe('pages/search/results/SearchResults', () => {
   };
 
   function getWrapper(extraProps) {
-    return shallow(<SearchResults {...defaultProps} {...extraProps} />);
+    return shallowWithIntl(<SearchResults {...defaultProps} {...extraProps} />);
   }
 
   describe('rendering', () => {
@@ -54,6 +54,7 @@ describe('pages/search/results/SearchResults', () => {
       expect(resourceList.props().resourceIds).toEqual(defaultProps.searchResultIds);
       expect(resourceList.props().date).toEqual(defaultProps.filters.date);
       expect(resourceList.props().location).toEqual(defaultProps.location);
+      expect(resourceList.props().label).toEqual('SearchResults.label');
     });
 
     describe('with showMap', () => {
