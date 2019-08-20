@@ -297,6 +297,7 @@
   "TimeRangeControl.timeRangeTitle": "Time range and minimum duration",
   "TimeRangeControl.title": "{date} at {start}-{end} {hours}h booking",
   "TimeSlot.available": "Free",
+  "TimeSlot.label.removeSelection": "Remove selection",
   "TimeSlot.editing": "Edited",
   "TimeSlot.ownReservation": "My reservation",
   "TimeSlot.reserved": "Reserved",

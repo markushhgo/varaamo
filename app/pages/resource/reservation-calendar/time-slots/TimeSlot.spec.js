@@ -43,8 +43,11 @@ describe('pages/resource/reservation-calendar/time-slots/TimeSlot', () => {
     expect(getWrapper().find('button.app-TimeSlot__clear')).toHaveLength(0);
   });
 
-  test('renders clear button when clearing enabled', () => {
-    expect(getWrapper({ showClear: true }).find('button.app-TimeSlot__clear')).toHaveLength(1);
+  test('renders clear button when clearing enabled with correct props', () => {
+    const clearButton = getWrapper({ showClear: true }).find('button.app-TimeSlot__clear');
+    expect(clearButton).toHaveLength(1);
+    expect(clearButton.prop('type')).toBe('button');
+    expect(clearButton.prop('aria-label')).toBe('TimeSlot.label.removeSelection');
   });
 
   test('renders slot start time as button text', () => {

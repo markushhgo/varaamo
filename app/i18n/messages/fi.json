@@ -299,6 +299,7 @@
   "TimeRangeControl.title": "{date} klo {start}-{end} {hours}h varaus",
   "TestSiteMessage.text": "Tämä on Varaamon testiversio",
   "TimeSlot.available": "Vapaa",
+  "TimeSlot.label.removeSelection": "Poista valinta",
   "TimeSlot.editing": "Muokataan",
   "TimeSlot.ownReservation": "Oma varaus",
   "TimeSlot.reserved": "Varattu",

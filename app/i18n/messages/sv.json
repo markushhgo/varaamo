@@ -301,6 +301,7 @@
   "TimeRangeControl.timeRangeTitle": "Tidsurval och minsta reserveringstid",
   "TimeRangeControl.title": "{date} kl. {start}-{end} {hours}h bokning",
   "TimeSlot.available": "Ledigt",
+  "TimeSlot.label.removeSelection": "Ta bort val",
   "TimeSlot.editing": "Redigeras",
   "TimeSlot.ownReservation": "Egen bokning",
   "TimeSlot.reserved": "Bokat",
