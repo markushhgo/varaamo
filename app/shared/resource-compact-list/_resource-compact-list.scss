@@ -80,6 +80,7 @@
       @media (min-width: $screen-lg-min) {
         margin-left: 8px;
         width: 1228px;
+        height: 200px;
       }
       @media (min-width: $screen-md-min) and (max-width: $screen-lg-min) {
         margin-left: 8px;
@@ -97,6 +98,9 @@
       }
 
       .app-ResourceCard__description {
+        &__large-font-size {
+          display: none;
+        }
         @media (max-width: $screen-lg-min) {
           display: none;
         }
@@ -108,6 +112,10 @@
       overflow: hidden;
 
       @media (max-width: $screen-lg-min) {
+        display: none;
+      }
+
+      &__large-font-size {
         display: none;
       }
     }
