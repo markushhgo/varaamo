@@ -8,6 +8,7 @@ import { createSelector, createStructuredSelector } from 'reselect';
 
 import { isAdminSelector, isLoggedInSelector } from 'state/selectors/authSelectors';
 import { resourcesSelector } from 'state/selectors/dataSelectors';
+import { contrastSelector } from 'state/selectors/accessibilitySelectors';
 import requestIsActiveSelectorFactory from 'state/selectors/factories/requestIsActiveSelectorFactory';
 
 const dateSelector = state => state.ui.pages.adminResources.date || moment().format('YYYY-MM-DD');
@@ -40,6 +41,7 @@ const filteredAdminResourcesIdsSelector = createSelector(
 );
 
 const adminResourcesPageSelector = createStructuredSelector({
+  contrast: contrastSelector,
   date: dateSelector,
   selectedResourceTypes: selectedResourceTypesSelector,
   isAdmin: isAdminSelector,

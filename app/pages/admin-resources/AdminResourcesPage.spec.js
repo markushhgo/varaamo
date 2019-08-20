@@ -32,6 +32,7 @@ describe('pages/admin-resources/AdminResourcesPage', () => {
     location: { id: '123' },
     resources: [],
     resourceTypes: ['a', 'b', 'c'],
+    contrast: '',
   };
 
   function getWrapper(extraProps = {}) {
@@ -39,10 +40,18 @@ describe('pages/admin-resources/AdminResourcesPage', () => {
   }
 
   describe('rendering', () => {
-    test('renders PageWrapper with correct props', () => {
+    test('renders PageWrapper with correct props, no high-contrast', () => {
       const pageWrapper = getWrapper().find(PageWrapper);
       expect(pageWrapper).toHaveLength(1);
-      expect(pageWrapper.prop('className')).toBe('admin-resources-page');
+      expect(pageWrapper.prop('className')).toBe('admin-resources-page ');
+      expect(pageWrapper.prop('title')).toBe('AdminResourcesPage.adminTitle');
+      expect(pageWrapper.prop('fluid')).toBe(true);
+    });
+
+    test('renders PageWrapper with correct props, wit high-contrast', () => {
+      const pageWrapper = getWrapper({ contrast: 'high-contrast' }).find(PageWrapper);
+      expect(pageWrapper).toHaveLength(1);
+      expect(pageWrapper.prop('className')).toBe('admin-resources-page high-contrast');
       expect(pageWrapper.prop('title')).toBe('AdminResourcesPage.adminTitle');
       expect(pageWrapper.prop('fluid')).toBe(true);
     });
