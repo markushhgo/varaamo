@@ -21,8 +21,8 @@
   &_arrow {
     position: absolute;
     top: 0px;
-    width: $button-size;
-    height: calc(100% - 1px);
+    width: 30px;
+    height: 100%;
     border: none;
     margin-left: -24px;
     margin-right: -24px;
@@ -67,7 +67,7 @@
 
     &__image-link{
       display: block;
-      height: $app-ResourceCard-height;
+      height: $app-ResourceCard-height + 10px;
       width: 100%;
 
       &__large-font-size {
@@ -76,6 +76,18 @@
       }
       @media (max-width: $screen-lg-min) {
         height: $app-ResourceCard-height;
+      }
+      @media (min-width: $screen-lg-min) {
+        margin-left: 8px;
+        width: 1228px;
+      }
+      @media (min-width: $screen-md-min) and (max-width: $screen-lg-min) {
+        margin-left: 8px;
+        width: 878px;
+      }
+      @media (min-width: $screen-sm-min) and (max-width: $screen-md-min) {
+        margin-left: 8px;
+        width: 688px;
       }
     }
     &__content {
