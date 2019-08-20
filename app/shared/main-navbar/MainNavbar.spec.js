@@ -57,10 +57,16 @@ describe('shared/main-navbar/MainNavbar', () => {
       expect(myReservationsLink).toHaveLength(1);
     });
 
-    test('renders a link to resources page when logged in', () => {
+    test('renders a link to favourites page when logged in', () => {
+      const myReservationsLink = getLoggedInNotAdminWrapper()
+        .find(LinkContainer).filter({ to: '/favourites' });
+      expect(myReservationsLink).toHaveLength(1);
+    });
+
+    test('does not render a link to admin resources page', () => {
       const myReservationsLink = getLoggedInNotAdminWrapper()
         .find(LinkContainer).filter({ to: '/admin-resources' });
-      expect(myReservationsLink).toHaveLength(1);
+      expect(myReservationsLink).toHaveLength(0);
     });
 
     test('does not render a link to respa admin UI', () => {
@@ -151,6 +157,12 @@ describe('shared/main-navbar/MainNavbar', () => {
     test('does not render a link to admin resources page', () => {
       const myReservationsLink = getNotLoggedInWrapper()
         .find(LinkContainer).filter({ to: '/admin-resources' });
+      expect(myReservationsLink).toHaveLength(0);
+    });
+
+    test('does not render a link to favourites page', () => {
+      const myReservationsLink = getNotLoggedInWrapper()
+        .find(LinkContainer).filter({ to: '/favourites' });
       expect(myReservationsLink).toHaveLength(0);
     });
 

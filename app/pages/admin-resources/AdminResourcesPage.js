@@ -65,9 +65,10 @@ class UnconnectedAdminResourcesPage extends Component {
       resources,
       t,
       resourceTypes,
+      contrast,
     } = this.props;
     return (
-      <PageWrapper className="admin-resources-page" fluid title={(t('AdminResourcesPage.adminTitle'))}>
+      <PageWrapper className={`admin-resources-page ${contrast}`} title={(t('AdminResourcesPage.adminTitle'))}>
         {isAdmin && <h1>{t('AdminResourcesPage.adminTitle')}</h1>}
         {!isAdmin && <h1>{t('AdminResourcesPage.favoriteTitle')}</h1>}
         <Loader loaded={Boolean(!isFetchingResources || resources.length)}>
@@ -118,6 +119,7 @@ UnconnectedAdminResourcesPage.propTypes = {
   resources: PropTypes.array.isRequired,
   t: PropTypes.func.isRequired,
   resourceTypes: PropTypes.array.isRequired,
+  contrast: PropTypes.string,
 };
 
 UnconnectedAdminResourcesPage = injectT(UnconnectedAdminResourcesPage);  // eslint-disable-line
