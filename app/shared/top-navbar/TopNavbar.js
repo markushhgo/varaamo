@@ -1,10 +1,11 @@
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 import MenuItem from 'react-bootstrap/lib/MenuItem';
 import Navbar from 'react-bootstrap/lib/Navbar';
 import Nav from 'react-bootstrap/lib/Nav';
+import Button from 'react-bootstrap/lib/Button';
 import NavDropdown from 'react-bootstrap/lib/NavDropdown';
 import NavItem from 'react-bootstrap/lib/NavItem';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -16,6 +17,7 @@ import MobileNavbar from 'shared/top-navbar/mobile/MobileNavbar';
 import FontChanger from './accessibility/TopNavbarFontContainer';
 import ContrastChanger from './accessibility/TopNavbarContrastContainer';
 import { injectT } from 'i18n';
+import LoginForm from './temp/LoginForm';
 
 class TopNavbar extends Component {
   static propTypes = {
@@ -32,7 +34,10 @@ class TopNavbar extends Component {
     this.state = {
       expanded: false,
       expandMobileNavbar: false,
+      tempShowForm: false,
     };
+
+    this.handleLoginClick = this.handleLoginClick.bind(this);
   }
 
   collapseItem() {
@@ -43,10 +48,22 @@ class TopNavbar extends Component {
     this.setState(prevState => ({ expanded: !prevState.expanded }));
   }
 
-
   handleLoginClick() {
-    const next = encodeURIComponent(window.location.href);
-    window.location.assign(`${window.location.origin}/login?next=${next}`);
+    /* UNCOMMENT ME
+      const next = encodeURIComponent(window.location.href);
+      window.location.assign(`${window.location.origin}/login?next=${next}`);
+    */
+
+    // TEMP BYPASS
+    if (SETTINGS.TEMP_BYPASS) {
+      this.setState(prevState => ({
+        tempShowForm: !prevState.tempShowForm
+      }));
+    } else {
+      const next = encodeURIComponent(window.location.href);
+      window.location.assign(`${window.location.origin}/login?next=${next}`);
+    }
+    // TEMP BYPASS
   }
 
   toggleMobileNavbar() {
@@ -85,7 +102,7 @@ class TopNavbar extends Component {
                 <FontAwesomeIcon icon={faWheelchair} />
               </div>
             </button>
-            <button className="navbar-toggle lang" data-target="#login" data-toggle="collapse" type="button">
+            <button className="navbar-toggle lang" data-target="#mobile" data-toggle="collapse" type="button">
               <div aria-label={t('Navbar.aria.topNavbar.mobileLocale')} className="mobile_lang" role="list" type="button">
                 <NavDropdown
                   className="mobile_lang_dropdown"
@@ -142,13 +159,33 @@ class TopNavbar extends Component {
               )}
 
               {!isLoggedIn && (
-              <NavItem id="app-TopNavbar__login" onClick={this.handleLoginClick}>
+              <NavItem className="login-button" id="app-TopNavbar__login" onClick={this.handleLoginClick}>
                 {t('Navbar.login')}
               </NavItem>
               )}
+              {isLoggedIn && (
+                <Fragment>
+                  <li className="app-TopNavbar__mobile username">
+                    <Navbar.Text>{userName}</Navbar.Text>
+                  </li>
+
+                  <NavItem className="app-TopNavbar__mobile logout" href={`/logout?next=${window.location.origin}`} id="mobile_logout">
+
+                    <Button type="button">
+                      {t('Navbar.logout')}
+                    </Button>
+
+                  </NavItem>
+                </Fragment>
+              )
+
+              }
             </Nav>
           </Navbar.Collapse>
         </Navbar>
+
+        {this.state.tempShowForm
+          && <LoginForm hideForm={() => this.setState({ tempShowForm: false })} />}
       </div>
     );
   }
