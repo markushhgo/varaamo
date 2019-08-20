@@ -55,6 +55,7 @@ describe('pages/resource/ResourcePage', () => {
     resource: Immutable(resource),
     showMap: false,
     unit: Immutable(unit),
+    contrast: ''
   };
 
   function getWrapper(props) {
@@ -79,6 +80,7 @@ describe('pages/resource/ResourcePage', () => {
       expect(resourceInfo.prop('resource')).toEqual(defaultProps.resource);
       expect(resourceInfo.prop('showMap')).toEqual(defaultProps.showMap);
       expect(resourceInfo.prop('unit')).toEqual(defaultProps.unit);
+      expect(resourceInfo.prop('contrast')).toEqual(defaultProps.contrast);
     });
 
     test('renders ResourceInfo with correct props', () => {

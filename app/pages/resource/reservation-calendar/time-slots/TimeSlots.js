@@ -161,9 +161,9 @@ class TimeSlots extends Component {
 
       return (
         <div className={className} key={`dateslot-${index}`}>
-          <h6 className="app-TimeSlots--date--header">
+          <h2 className="app-TimeSlots--date--header">
             {slot && slot.start ? moment(slot.start).format('dd D.M') : ''}
-          </h6>
+          </h2>
 
           {!!placeholderSize && (
             <TimeSlotPlaceholder mobileOffset={mobilePlaceholderOffset} size={placeholderSize} />
@@ -200,9 +200,9 @@ class TimeSlots extends Component {
     const { hoveredTimeSlot } = this.state;
     if (!slot.end) {
       return (
-        <h6 className="app-TimeSlots--closed" key={slot.start}>
+        <p className="app-TimeSlots--closed" key={slot.start}>
           {t('TimeSlots.closedMessage')}
-        </h6>
+        </p>
       );
     }
     const scrollTo = time && time === slot.start;

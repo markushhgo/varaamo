@@ -17,7 +17,7 @@ function FavoriteButton({ favorited, onClick, t }) {
   return (
     <Button className={buttonClassNames} onClick={onClick}>
       <img
-        alt={buttonText}
+        alt=""
         className="favorite-button__icon"
         src={favorited ? iconHeartWhite : iconHeart}
       />
