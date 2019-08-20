@@ -45,7 +45,6 @@ describe('pages/admin-resources/AdminResourcesPage', () => {
       expect(pageWrapper).toHaveLength(1);
       expect(pageWrapper.prop('className')).toBe('admin-resources-page ');
       expect(pageWrapper.prop('title')).toBe('AdminResourcesPage.adminTitle');
-      expect(pageWrapper.prop('fluid')).toBe(true);
     });
 
     test('renders PageWrapper with correct props, wit high-contrast', () => {
@@ -53,7 +52,6 @@ describe('pages/admin-resources/AdminResourcesPage', () => {
       expect(pageWrapper).toHaveLength(1);
       expect(pageWrapper.prop('className')).toBe('admin-resources-page high-contrast');
       expect(pageWrapper.prop('title')).toBe('AdminResourcesPage.adminTitle');
-      expect(pageWrapper.prop('fluid')).toBe(true);
     });
 
     describe('when user is not admin', () => {

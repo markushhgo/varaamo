@@ -52,7 +52,7 @@ describe('shared/availability-view/DateSelector', () => {
     }
 
     test('gets dateFormat prop', () => {
-      expect(getDatePickerWrapper().prop('dateFormat')).toBe('dd D.M.YYYY');
+      expect(getDatePickerWrapper().prop('dateFormat')).toBe('D.M.YYYY');
     });
 
     test('gets correct value', () => {
