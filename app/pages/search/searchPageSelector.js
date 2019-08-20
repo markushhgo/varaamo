@@ -3,6 +3,7 @@ import ActionTypes from 'constants/ActionTypes';
 import orderBy from 'lodash/orderBy';
 import { createStructuredSelector, createSelector } from 'reselect';
 
+import { contrastSelector } from 'state/selectors/accessibilitySelectors';
 import { isLoggedInSelector } from 'state/selectors/authSelectors';
 import uiSearchFiltersSelector from 'state/selectors/uiSearchFiltersSelector';
 import urlSearchFiltersSelector from 'state/selectors/urlSearchFiltersSelector';
@@ -15,6 +16,7 @@ const showMapSelector = state => state.ui.search.showMap;
 const selectedUnitIdSelector = state => state.ui.search.unitId;
 const positionSelector = state => state.ui.search.position;
 const resultCountSelector = state => state.ui.search.resultCount;
+const contrastOptionsSelector = state => contrastSelector(state);
 
 const orderedSearchResultIdsSelector = createSelector(
   searchResultIdsSelector,
@@ -37,6 +39,7 @@ const searchPageSelector = createStructuredSelector({
   selectedUnitId: selectedUnitIdSelector,
   showMap: showMapSelector,
   uiFilters: uiSearchFiltersSelector,
+  contrast: contrastOptionsSelector
 });
 
 export default searchPageSelector;

@@ -74,4 +74,8 @@ describe('pages/search/searchPageSelector', () => {
   test('returns uiFilters', () => {
     expect(getSelected().uiFilters).toBeDefined();
   });
+
+  test('returns contrast', () => {
+    expect(getSelected().contrast).toBeDefined();
+  });
 });

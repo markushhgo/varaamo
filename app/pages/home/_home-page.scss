@@ -11,6 +11,12 @@ $purposeCellHeight: 350px;
     background-size: auto;
   }
 
+
+  .app-PageWrapper {
+    background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 99.5%, rgba(255,255,255,0) 100%);
+
+  }
+
   &__content {
     color: $white;
     padding-top: 30px;
@@ -49,11 +55,6 @@ $purposeCellHeight: 350px;
       margin-left: 12px;
       text-transform: uppercase;
       @include addFocus($color: white){}
-//      font-size: 1em;
-/*      &:focus {
-        color: white;
-        @include focusElement;
-      } */
     }
   }
 
@@ -104,7 +105,7 @@ $purposeCellHeight: 350px;
           color: $black;
           background-color: $turku-yellow;
         }
-        @include addFocus(4px){}
+        @include addFocus(4px);
         img {
           height: 100%;
           width: 100%;
@@ -137,9 +138,7 @@ $purposeCellHeight: 350px;
       button {
         text-transform: uppercase;
         font-size: 1em;
-        &:focus {
-          @include focusElement;
-        }
+        @include addFocus;
       }
     }
   }

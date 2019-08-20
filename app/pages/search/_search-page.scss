@@ -26,11 +26,25 @@
     &__results-count {
       padding-top: 8px;
     }
+    @include highContrast{
+      button {
+        background-color: inherit;
+        border-color: transparent;
+      }
+      button:hover,
+      button:active {
+        background-color: transparent;
+        border-color: black;
+        box-shadow: none;
+      }
+    };
     button {
       background-color: $turku-yellow;
       border-color: $turku-yellow;
       color: $black;
       font-size: 1em;
+      @include addFocus($width: 2px, $color: currentColor) {
+      }
     }
     button:hover,
     button:active {

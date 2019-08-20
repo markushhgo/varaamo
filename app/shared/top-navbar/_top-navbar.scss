@@ -17,10 +17,8 @@
 
     .navbar-brand {
       min-height: 90px;
-    }
 
-    .navbar-brand:focus {
-      @include focusElement;
+      @include addFocus;
     }
 
     .turku-logo {
@@ -103,9 +101,8 @@
           margin-left: 5px;
           cursor: pointer;
 
-          &:focus {
-            @include focusElement;
-          }
+          @include addFocus;
+
 
           &:hover {
             text-decoration: none;
@@ -120,13 +117,13 @@
           font-size: 1em;
         }
 
-        //secondA
+        // secondA
         span:nth-child(2) {
           font-size: 1.25em;
           line-height: 1.2;
         }
 
-        //thirdA
+        // thirdA
         span:nth-child(3) {
           font-size: 1.5em;
           line-height: 1;
@@ -149,9 +146,8 @@
           cursor: pointer;
           filter: invert(0%);
 
-          &:focus {
-            @include focusElement;
-          }
+          @include addFocus;
+
 
         }
       }
@@ -183,9 +179,7 @@
           padding-right:5px;
           margin: 0 10px 0 15px;
 
-          &:focus{
-            @include focusElement;
-          }
+          @include addFocus;
         }
       }
 
@@ -238,10 +232,10 @@
             color: $black;
           }
 
-          &:focus {
+          @include addFocus(){
             color: $black;
-            @include focusElement;
           }
+
         }
       }
 
@@ -267,10 +261,12 @@
           background-color: transparent;
         }
 
-        li > a:focus {
-          @include focusElement;
-          background-color: transparent;
+        li > a {
+          @include addFocus(){
+            background-color: transparent;
+          }
         }
+
       }
       > .open > a,
       > .open > a:hover,
@@ -287,6 +283,7 @@
       .dropdown-menu {
         right: 0;
         left: auto;
+        font-size: 1em;
       }
     }
     // End: Remove responsive features
@@ -373,6 +370,7 @@
       left:-20px;
       text-align: center;
       padding: 0;
+      font-size: 1em;
 
       > li >a:hover,a:active,a:focus {
         color: $black;
