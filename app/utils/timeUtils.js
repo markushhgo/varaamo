@@ -169,6 +169,27 @@ function isPastDate(date) {
   return moment(date).isBefore(now, 'day');
 }
 
+/**
+ * Tells whether date string is formatted correctly or not.
+ * Expects string to be 8-10 characters long and written in the following format:
+ * DD.MM.YYYY, where days and months can also be written with only one number.
+ *
+ * @param {string} dateString
+ */
+function isValidDateString(dateString) {
+  if (dateString.length < 8 || dateString.length > 10) {
+    return false;
+  }
+
+  // eslint-disable-next-line
+  const regex = /\d{1,2}[.]\d{1,2}[.]\d{4}/;
+  if (regex.test(dateString) && moment(dateString, 'L').isValid()) {
+    return true;
+  }
+
+  return false;
+}
+
 function prettifyHours(hours, showMinutes = false) {
   if (showMinutes && hours < 0.5) {
     const minutes = moment.duration(hours, 'hours').minutes();
@@ -236,6 +257,7 @@ export {
   getStartTimeString,
   getTimeSlots,
   isPastDate,
+  isValidDateString,
   prettifyHours,
   padLeft,
   periodToMinute,

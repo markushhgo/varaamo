@@ -11,6 +11,7 @@ import iconMapMarker from 'hel-icons/dist/shapes/map-marker.svg';
 import iconTicket from 'hel-icons/dist/shapes/ticket.svg';
 import iconUser from 'hel-icons/dist/shapes/user-o.svg';
 import iconHeart from 'hel-icons/dist/shapes/heart-o.svg';
+import Col from 'react-bootstrap/lib/Col';
 
 import { injectT } from 'i18n';
 import iconHeartFilled from 'assets/icons/heart-filled.svg';
@@ -57,6 +58,17 @@ class ResourceCard extends Component {
     history.replace({ pathname, search, state: { scrollTop } });
   };
 
+  createTextSnippet(text, maxCharacters) {
+    if (text === null) {
+      return '';
+    }
+    if (text.length <= maxCharacters) {
+      return text;
+    }
+
+    return `${text.substring(0, maxCharacters)}...`;
+  }
+
   renderDistance(distance) {
     const km = distance / 1000;
     let formatedDistance = round(km);
@@ -68,7 +80,7 @@ class ResourceCard extends Component {
 
   render() {
     const {
-      date, resource, t, unit, actions, isLoggedIn
+      date, resource, t, unit, actions, isLoggedIn, isLargerFontSizeUsed
     } = this.props;
     const { pathname, query } = getResourcePageUrlComponents(resource, date);
     const linkTo = {
@@ -79,101 +91,167 @@ class ResourceCard extends Component {
 
     return (
       <div
-        className={classNames('app-ResourceCard', {
-          'app-ResourceCard__stacked': this.props.stacked,
-        })}
+        aria-label={resource.name}
+        className={classNames(
+          'app-ResourceCard',
+          !isLargerFontSizeUsed && 'app-ResourceCard__normal-font-size',
+          { 'app-ResourceCard__stacked': this.props.stacked, }
+        )}
+        role="listitem"
       >
-        <Link className="app-ResourceCard__image-link" onClick={this.handleLinkClick} to={linkTo}>
+        <Link
+          aria-hidden="true"
+          aria-label={resource.name}
+          className={classNames(
+            'app-ResourceCard__image-link',
+            isLargerFontSizeUsed && 'app-ResourceCard__image-link__large-font-size'
+          )}
+          onClick={this.handleLinkClick}
+          tabIndex="-1"
+          to={linkTo}
+        >
           <BackgroundImage height={420} image={getMainImage(resource.images)} width={700} />
         </Link>
         <div className="app-ResourceCard__content">
-          <div className="app-ResourceCard__unit-name">
-            <a
-              className="app-ResourceCard__unit-name-link"
-              onClick={this.handleSearchByUnit}
-              role="button"
-              tabIndex="-1"
-            >
+          <Link
+            aria-label={`${resource.name}, ${unit.name}`}
+            onClick={this.handleLinkClick}
+            to={linkTo}
+          >
+            <h2>{resource.name}</h2>
+            <div className="app-ResourceCard__unit-name">
               <span>{unit.name}</span>
-            </a>
-            <div className="app-ResourceCard__unit-name-labels">
-              <ResourceAvailability date={date} resource={resource} />
-              {!resource.public && <UnpublishedLabel />}
             </div>
-          </div>
-          <Link onClick={this.handleLinkClick} to={linkTo}>
-            <h4>{resource.name}</h4>
           </Link>
-          <div className="app-ResourceCard__description">{resource.description}</div>
+
+          <div>
+            <ResourceAvailability date={date} resource={resource} />
+            {!resource.public && <UnpublishedLabel />}
+          </div>
+          <div
+            aria-label={t('ResourceCard.description.label')}
+            className={classNames(
+              'app-ResourceCard__description',
+              isLargerFontSizeUsed && 'app-ResourceCard__description__large-font-size'
+            )}
+          >
+            {this.createTextSnippet(resource.description, 348)}
+          </div>
         </div>
 
-        <div className="app-ResourceCard__info">
-          <ResourceCardInfoCell
-            alt={resource.type.name}
-            icon={iconHome}
-            onClick={this.handleSearchByType}
-          >
-            <span>
-              {resource.type ? resource.type.name : '\u00A0'}
-            </span>
-          </ResourceCardInfoCell>
+        <div className={classNames(
+          'app-ResourceCard__info',
+          isLargerFontSizeUsed && 'app-ResourceCard__info__large-font-size'
+        )}
+        >
+          <Col md={4} sm={4} xs={isLargerFontSizeUsed ? 12 : 6}>
+            <ResourceCardInfoCell
+              alt={t('ResourceCard.infoTitle.purpose')}
+              className="info-cell-purpose"
+              icon={iconHome}
+              onClick={this.handleSearchByType}
+              titleText={t('ResourceCard.infoTitle.purpose')}
+            >
+              <Fragment>
+                <span>
+                  {resource.type ? resource.type.name : '\u00A0'}
+                </span>
+              </Fragment>
 
-          <ResourceCardInfoCell
-            alt={resource.type.name}
-            icon={iconUser}
-            onClick={this.handleSearchByPeopleCapacity}
-          >
-            <span className="app-ResourceCard__peopleCapacity">
-              {t('ResourceCard.peopleCapacity', { people: resource.peopleCapacity })}
-            </span>
-          </ResourceCardInfoCell>
+            </ResourceCardInfoCell>
+          </Col>
 
-          <ResourceCardInfoCell
-            alt={resource.type.name}
-            icon={iconTicket}
-          >
-            <span className="app-ResourceCard__hourly-price">
-              {getHourlyPrice(t, resource) || '\u00A0'}
-            </span>
-          </ResourceCardInfoCell>
+          <Col md={4} sm={4} xs={isLargerFontSizeUsed ? 12 : 6}>
+            <ResourceCardInfoCell
+              alt={t('ResourceCard.infoTitle.peopleCapacity')}
+              className="info-cell-capacity"
+              icon={iconUser}
+              onClick={this.handleSearchByPeopleCapacity}
+              titleText={t('ResourceCard.infoTitle.peopleCapacity')}
+            >
+              <Fragment>
+                <span className="app-ResourceCard__peopleCapacity">
+                  {t('ResourceCard.peopleCapacity', { people: resource.peopleCapacity })}
+                </span>
+              </Fragment>
 
-          <ResourceCardInfoCell
-            alt={resource.type.name}
-            icon={iconMap}
-          >
-            <Fragment>
-              <span className="app-ResourceCard__street-address">
-                {unit.streetAddress}
-              </span>
-              <span className="app-ResourceCard__zip-address">
-                {unit.addressZip}
-                {' '}
-                {unit.municipality}
-              </span>
-            </Fragment>
-          </ResourceCardInfoCell>
+            </ResourceCardInfoCell>
+          </Col>
 
-          <ResourceCardInfoCell
-            alt={resource.type.name}
-            icon={iconMapMarker}
-            onClick={this.handleSearchByDistance}
-          >
-            <span className="app-ResourceCard__distance">
-              {resource.distance ? this.renderDistance(resource.distance) : '\u00A0'}
-            </span>
-          </ResourceCardInfoCell>
+
+          <Col md={4} sm={4} xs={isLargerFontSizeUsed ? 12 : 6}>
+            <ResourceCardInfoCell
+              alt={t('ResourceCard.infoTitle.price')}
+              className="info-cell-price"
+              icon={iconTicket}
+              titleText={t('ResourceCard.infoTitle.price')}
+            >
+              <Fragment>
+                <span className="app-ResourceCard__hourly-price">
+                  {getHourlyPrice(t, resource) || '\u00A0'}
+                </span>
+              </Fragment>
+
+            </ResourceCardInfoCell>
+          </Col>
+
+          <Col md={4} sm={4} xs={isLargerFontSizeUsed ? 12 : 6}>
+            <ResourceCardInfoCell
+              alt={t('ResourceCard.infoTitle.address')}
+              className="info-cell-address"
+              icon={iconMap}
+              titleText={t('ResourceCard.infoTitle.address')}
+            >
+              <Fragment>
+                <span className="app-ResourceCard__street-address">
+                  {unit.streetAddress}
+                </span>
+                <span className="app-ResourceCard__zip-address">
+                  {unit.addressZip}
+                  {' '}
+                  {unit.municipality}
+                </span>
+              </Fragment>
+            </ResourceCardInfoCell>
+          </Col>
+
+          {resource.distance
+            && (
+            <Col md={4} sm={4} xs={isLargerFontSizeUsed ? 12 : 6}>
+              <ResourceCardInfoCell
+                alt={t('ResourceCard.infoTitle.distance')}
+                className="info-cell-distance"
+                icon={iconMapMarker}
+                onClick={this.handleSearchByDistance}
+                titleText={t('ResourceCard.infoTitle.distance')}
+              >
+                <Fragment>
+                  <span className="app-ResourceCard__distance">
+                    {resource.distance ? this.renderDistance(resource.distance) : t('ResourceCard.unknown')}
+                  </span>
+                </Fragment>
+              </ResourceCardInfoCell>
+            </Col>
+            )}
 
           {isLoggedIn
             && (
-            <ResourceCardInfoCell
-              alt={resource.type.name}
-              icon={resource.isFavorite ? iconHeartFilled : iconHeart}
-              onClick={
-              resource.isFavorite
-                ? () => actions.unfavoriteResource(resource.id)
-                : () => actions.favoriteResource(resource.id)
-            }
-            />
+              <Col md={4} sm={4} xs={isLargerFontSizeUsed ? 12 : 6}>
+                <ResourceCardInfoCell
+                  alt=""
+                  className="info-cell-favorite"
+                  icon={resource.isFavorite ? iconHeartFilled : iconHeart}
+                  onClick={
+                    resource.isFavorite
+                      ? () => actions.unfavoriteResource(resource.id)
+                      : () => actions.favoriteResource(resource.id)
+                  }
+                >
+                  <span className="app-ResourceCard__infoTitle__favorite do-not-capitalize">
+                    {resource.isFavorite ? t('ResourceCard.infoTitle.removeFavorite') : t('ResourceCard.infoTitle.addFavorite')}
+                  </span>
+                </ResourceCardInfoCell>
+              </Col>
             )
           }
         </div>
@@ -192,6 +270,7 @@ ResourceCard.propTypes = {
   unit: PropTypes.object.isRequired,
   actions: PropTypes.object,
   isLoggedIn: PropTypes.bool,
+  isLargerFontSizeUsed: PropTypes.bool,
 };
 
 const UnconnectedResourceCard = injectT(ResourceCard);

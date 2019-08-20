@@ -8,6 +8,8 @@ import CheckboxControl from './CheckboxControl';
 
 const TooltipSlider = createSliderWithTooltip(Slider);
 
+const initialDistance = 21000;
+
 class PositionControl extends React.Component {
   static propTypes = {
     geolocated: PropTypes.bool,
@@ -20,15 +22,18 @@ class PositionControl extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      distance: this.props.value || 21000,
+      distance: this.props.value || initialDistance,
       maxDistance: 20000,
       step: 1000,
-      toggled: this.props.geolocated,
     };
   }
 
-  handleToggleChange = (value) => {
-    this.setState({ toggled: value });
+  handleToggleChange = () => {
+    if (this.props.value) {
+      this.setState({ distance: this.props.value });
+    } else {
+      this.setState({ distance: initialDistance });
+    }
     this.props.onPositionSwitch();
   };
 
@@ -63,10 +68,10 @@ class PositionControl extends React.Component {
           toggleClassName="app-SearchControlsCheckbox__toggle"
           value={geolocated}
         />
-        {this.state.toggled && (
+        {geolocated && (
           <TooltipSlider
             className="app-PositionControl__distance_slider"
-            disabled={!this.state.toggled}
+            disabled={!geolocated}
             max={this.state.maxDistance + this.state.step}
             min={this.state.step}
             onAfterChange={this.handleConfirm}
@@ -77,7 +82,7 @@ class PositionControl extends React.Component {
             value={this.state.distance}
           />
         )}
-        {this.state.toggled && (
+        {geolocated && (
           <div>
             {`${t('PositionControl.maxDistance')} : ${this.distanceFormatter(this.state.distance)}`}
           </div>

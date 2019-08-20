@@ -4,7 +4,7 @@ import React from 'react';
 import ResourceCard from 'shared/resource-card';
 
 function ResourceList({
-  date, emptyMessage, location, resourceIds, history
+  date, emptyMessage, location, resourceIds, history, label
 }) {
   function renderResourceListItem(resourceId) {
     return (
@@ -21,7 +21,16 @@ function ResourceList({
     return emptyMessage ? <p>{emptyMessage}</p> : <div />;
   }
 
-  return <div className="resource-list">{resourceIds.map(renderResourceListItem)}</div>;
+  return (
+    <div
+      aria-label={label}
+      className="resource-list"
+      role="list"
+    >
+      {resourceIds.map(renderResourceListItem)}
+
+    </div>
+  );
 }
 
 ResourceList.propTypes = {
@@ -30,6 +39,7 @@ ResourceList.propTypes = {
   emptyMessage: PropTypes.string,
   location: PropTypes.object.isRequired,
   resourceIds: PropTypes.array.isRequired,
+  label: PropTypes.string.isRequired,
 };
 
 export default ResourceList;

@@ -1,5 +1,6 @@
 import { createSelector, createStructuredSelector } from 'reselect';
 
+import { isLargerFontSizeSelector } from 'state/selectors/accessibilitySelectors';
 import { resourcesSelector } from 'state/selectors/dataSelectors';
 
 const resourceIdsSelector = (state, props) => props.resourceIds;
@@ -18,4 +19,5 @@ const filteredResourceIdsSelector = createSelector(
 
 export default createStructuredSelector({
   resourceIds: filteredResourceIdsSelector,
+  isLargerFontSizeUsed: isLargerFontSizeSelector,
 });

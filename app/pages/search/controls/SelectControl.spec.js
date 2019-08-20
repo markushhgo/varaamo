@@ -28,9 +28,10 @@ describe('pages/search/controls/SelectControl', () => {
     simple.restore();
   });
 
-  test('renders a div.app-SelectControl', () => {
+  test('renders a section.app-SelectControl with correct props', () => {
     const wrapper = getWrapper({});
-    expect(wrapper.is('div.app-SelectControl')).toBe(true);
+    expect(wrapper.is('section.app-SelectControl')).toBe(true);
+    expect(wrapper.prop('aria-label')).toBe(defaults.label);
   });
 
   test('renders a FormGroup with correct props', () => {
@@ -60,13 +61,14 @@ describe('pages/search/controls/SelectControl', () => {
     const select = getWrapper({}).find(Select);
     expect(select).toHaveLength(1);
     expect(select.prop('isClearable')).toBe(true);
-    expect(select.prop('id')).toBe(defaults.id);
+    expect(select.prop('inputId')).toBe(defaults.id);
     expect(select.prop('name')).toBe(defaults.name);
     expect(typeof select.prop('onChange')).toBe('function');
     expect(select.prop('placeholder')).toBe('common.select');
     expect(select.prop('isSearchable')).toBe(true);
     expect(select.prop('value')).toBe(defaults.options[0]);
   });
+
 
   test(
     'renders a Select with props className contain app-Select, so the styling will work',
@@ -141,10 +143,10 @@ describe('pages/search/controls/SelectControl', () => {
       expect(selectedOption).toEqual(defaults.options[0]);
     });
 
-    test('return underfined if value is not exist in any options', () => {
+    test('return an empty string if value is not found in options ', () => {
       const wrapper = getWrapper({});
       const selectedOption = wrapper.instance().getValue('foo', defaults.options);
-      expect(selectedOption).toBeUndefined();
+      expect(selectedOption).toBe('');
     });
 
     test('return array of options if value is array', () => {

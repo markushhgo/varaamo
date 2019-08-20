@@ -12,9 +12,7 @@ function PageWrapper({
       <Grid
         fluid={fluid}
       >
-        <Helmet>
-          <title>{`${title} - Varaamo`}</title>
-        </Helmet>
+        <Helmet title={`${title} - Varaamo`} />
 
         <div className={className}>
           {children}

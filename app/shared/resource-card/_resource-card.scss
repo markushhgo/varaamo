@@ -6,18 +6,27 @@ $cellHeight: 50%;
 
 .app-ResourceCard {
   margin: 20px 0;
-  background-color: white;
+  background-color: $white;
   display: flow-root;
+  @include addFocus($width: 2px, $color: currentColor) {
+  }
 
-  @media (min-width: $screen-md-min) {
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: flex-start;
-    height: $app-ResourceCard-height;
+  &__normal-font-size {
+    @media (min-width: $screen-md-min) {
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: flex-start;
+    }
   }
 
   a {
     text-decoration: none;
+    display:inline-block;
+    margin: 2px 2px 0 0;
+    @include addFocus($width: 2px, $color: currentColor) {
+      outline-offset: 1px;
+    }
+
   }
 
   &__image-link{
@@ -26,15 +35,21 @@ $cellHeight: 50%;
       height: $app-ResourceCard-height;
       width: 100%;
     }
+    @media screen and (max-width: $screen-md-min) {
+      height: $app-ResourceCard-height;
+      width: 100%;
+    }
     @media (min-width: $screen-md-min) {
       flex: 1 1;
       min-width: $app-ResourceCard-height;
       max-width: 200px;
-      height: 100%;
-    }
-    @media (max-width: $screen-md-min) {
-      height: $app-ResourceCard-height;
-      width: 100%;
+      height: inherit;
+
+      &__large-font-size {
+        height: $app-ResourceCard-height;
+        width: 100%;
+        max-width: none;
+      }
     }
   }
 
@@ -46,39 +61,40 @@ $cellHeight: 50%;
     background-repeat: no-repeat;
     background-position: 50% 50%;
     background-size: cover;
-  }
-
-  &__content {
-    padding: $resourceCardPadding;
-    @media (min-width: $screen-md-min) {
-      flex: 1 2 40%;
-      overflow: hidden;
+    outline-width: 7px;
+    @include addFocus($width: 2px, $color: currentColor) {
     }
   }
 
-  h4 {
-    margin-top: 0;
+  &__content {
+    padding-left: $resourceCardPadding;
+    @media (min-width: $screen-md-min) {
+      flex: 1 2 40%;
+      overflow: hidden;
+      @include addFocus($width: 2px, $color: currentColor) {
+      }
+    }
+  }
+
+  h2 {
+    font-size: 1.2em;
+    overflow-wrap: break-word;
+    margin-top: 8px;
     margin-bottom: 0;
-    @media (max-width: $screen-xs-max) {
-      font-size: 1.6rem;
-      line-height: 1;
+    @include addFocus($width: 2px, $color: currentColor) {
     }
   }
 
   &__unit-name {
-    font-size: 1.5rem;
-    font-weight: bold;
     margin-bottom: 5px;
     text-decoration: none;
+    overflow-wrap: break-word;
     span:first-child {
       margin-right: 10px;
     }
 
-    display: inline-flex;
     align-items: center;
-
-    &-labels {
-      display: inline-flex;
+    @include addFocus($width: 2px, $color: currentColor) {
     }
   }
 
@@ -89,29 +105,39 @@ $cellHeight: 50%;
     text-align: center;
   }
   &__description {
-    font-size: 1.4rem;
-    line-height: 2rem;
+
     max-height: 2*3rem;
     margin-top: 15px;
     overflow: hidden;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    margin-right: 8px;
+    width: -moz-available;
+    width: -webkit-fill-available;
+    width: fill-available;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
   }
 
+
   &__info {
-    padding: $resourceCardPadding;
     display: flex;
     flex-wrap: wrap;
+
 
     &-cell {
       border: none;
       background: transparent;
       display: inline-flex;
       flex-direction: column;
-      width: $cellWidth;
-      height: $cellHeight;
+      width: 100%;
       align-items: center;
+      @include addFocus($width: 2px, $color: currentColor) {
+      }
+
       &:hover,
       &:focus {
-        outline: none;
         &:active {
           outline: none;
         }
@@ -122,31 +148,39 @@ $cellHeight: 50%;
         width: $line-height-computed*1.2;
       }
 
+      &.btn {
+        font-size: 1em;
+      }
+
       span {
-        font-size: 1.2rem;
-        font-weight: bold;
+
         text-align: center;
         text-transform: capitalize;
+        white-space: initial;
       }
     }
-    
     @media (min-width: $screen-xs-min) {
       display: inline-block;
       width: 100%;
     }
     @media (min-width: $screen-md-min) {
-      flex: 1 2 30%;
+      flex: 1 2 40%;
+      display: flex;
     }
   }
 
   .label-success {
-    background-color: $hel-tram;
+    background-color: #008540;
   }
   .label-danger {
-    background-color: $hel-brick;
+    background-color: #bd2719;
   }
 
   &.app-ResourceCard__stacked {
     border: 2px solid $hel-silver;
+  }
+
+  .do-not-capitalize {
+    text-transform: none;
   }
 }
