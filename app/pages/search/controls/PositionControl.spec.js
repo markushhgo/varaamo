@@ -79,18 +79,25 @@ describe('pages/search/controls/PositionControl', () => {
       expect(onPositionSwitch.callCount).toBe(1);
     });
 
-    test('sets toggled state', () => {
-      const instance = getWrapper().instance();
-      expect(instance.state.toggled).toBe(false);
-      const value = true;
-      instance.handleToggleChange(value);
-      expect(instance.state.toggled).toBe(true);
+    test('updates state.distance to props.value if props.value is not empty', () => {
+      const expectedValue = 14000;
+      const instance = getWrapper({ value: expectedValue }).instance();
+      instance.state.distance = 20000;
+      instance.handleToggleChange();
+      expect(instance.state.distance).toBe(expectedValue);
+    });
+    test('updates state.distance to initial value if props.value is empty', () => {
+      const expectedValue = 21000;
+      const instance = getWrapper({ value: parseInt('', 10) }).instance();
+      instance.state.distance = 10000;
+      instance.handleToggleChange();
+      expect(instance.state.distance).toBe(expectedValue);
     });
   });
 
   describe('handleDistanceSliderChange', () => {
     test('sets distance state', () => {
-      const instance = getWrapper().instance();
+      const instance = getWrapper({ geolocated: true }).instance();
       expect(instance.state.distance).toBe(21000);
       const value = 100;
       instance.handleDistanceSliderChange(value);

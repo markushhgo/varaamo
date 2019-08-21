@@ -136,6 +136,7 @@ class UnconnectedResourcePage extends Component {
       t,
       unit,
       history,
+      contrast
     } = this.props;
     const { params } = match;
     const { isOpen, photoIndex } = this.state;
@@ -156,6 +157,7 @@ class UnconnectedResourcePage extends Component {
       <div className="app-ResourcePage">
         <Loader loaded={!isEmpty(resource)}>
           <ResourceHeader
+            contrast={contrast}
             isLoggedIn={isLoggedIn}
             onBackClick={this.handleBackButton}
             onMapClick={actions.toggleResourceMap}
@@ -176,14 +178,14 @@ class UnconnectedResourcePage extends Component {
           {!showMap && (
             <PageWrapper title={resource.name || ''} transparent>
               <div>
-                <Col className="app-ResourcePage__content" lg={8} md={8} xs={12}>
+                <Col className="app-ResourcePage__content" lg={9} md={9} xs={12}>
                   {mainImage
                     && this.renderImage(mainImage, mainImageIndex, {
                       mainImageMobileVisibility: true,
                     })}
                   <ResourceInfo isLoggedIn={isLoggedIn} resource={resource} unit={unit} />
 
-                  <Panel defaultExpanded header={t('ResourceInfo.reserveTitle')}>
+                  <Panel aria-label={t('ResourcePage.timeTable')} defaultExpanded header={t('ResourceInfo.reserveTitle')} role="region">
                     {resource.externalReservationUrl && (
                       <form action={resource.externalReservationUrl}>
                         <input
@@ -198,7 +200,7 @@ class UnconnectedResourcePage extends Component {
                         {/* Show reservation max period text */}
                         {resource.maxPeriod && (
                           <div className="app-ResourcePage__content-max-period">
-                            {`${t('ReservationInfo.reservationMaxLength')} ${maxPeriodText}`}
+                            <p>{`${t('ReservationInfo.reservationMaxLength')} ${maxPeriodText}`}</p>
                           </div>
                         )}
 
@@ -227,7 +229,9 @@ class UnconnectedResourcePage extends Component {
                   </Panel>
                 </Col>
                 <Col className="app-ResourceInfo__images" lg={3} md={3} xs={12}>
-                  {images.map(this.renderImage)}
+                  <section>
+                    {images.map(this.renderImage)}
+                  </section>
                 </Col>
               </div>
             </PageWrapper>
@@ -272,6 +276,7 @@ UnconnectedResourcePage.propTypes = {
   t: PropTypes.func.isRequired,
   unit: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
+  contrast: PropTypes.string,
 };
 UnconnectedResourcePage = injectT(UnconnectedResourcePage); // eslint-disable-line
 

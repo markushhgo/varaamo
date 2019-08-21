@@ -88,6 +88,12 @@ describe('pages/search/controls/SearchControlsContainer', () => {
       expect(searchBox.prop('value')).toBe(filters.search);
     });
 
+    test('renders Section with correct props', () => {
+      const wrapper = getWrapper();
+      expect(wrapper).toHaveLength(1);
+      expect(wrapper.prop('aria-label')).toBe('SearchControlsContainer.section.name');
+    });
+
     test('renders DatePickerControl with correct props', () => {
       const filters = { ...defaultProps.filters, date: '2015-10-10' };
       const wrapper = getWrapper({ filters });
@@ -98,36 +104,26 @@ describe('pages/search/controls/SearchControlsContainer', () => {
       expect(datePickerControl.prop('onConfirm')).toBe(wrapper.instance().handleDateChange);
     });
 
-    test('renders SelectControl for municipality with correct props', () => {
-      const selectControl = getWrapper({}).find(SelectControl);
-      expect(selectControl).toHaveLength(4);
-      expect(selectControl.at(0).prop('id')).toBe('municipality');
-      expect(selectControl.at(0).prop('label')).toBe('SearchControlsContainer.municipalityLabel');
-      expect(selectControl.at(0).prop('onChange')).toBeDefined();
-      expect(selectControl.at(1).prop('options')).toBeDefined();
-      expect(selectControl.at(0).prop('value')).toBe(defaultProps.filters.municipality);
-    });
-
     test('renders SelectControl for purpose with correct props', () => {
       const selectControl = getWrapper({}).find(SelectControl);
-      expect(selectControl).toHaveLength(4);
-      expect(selectControl.at(1).prop('id')).toBe('purpose');
-      expect(selectControl.at(1).prop('isLoading')).toBe(defaultProps.isFetchingPurposes);
-      expect(selectControl.at(1).prop('label')).toBe('SearchControlsContainer.purposeLabel');
-      expect(selectControl.at(1).prop('onChange')).toBeDefined();
-      expect(selectControl.at(1).prop('options')).toEqual(defaultProps.purposeOptions);
-      expect(selectControl.at(1).prop('value')).toBe(defaultProps.filters.purpose);
+      expect(selectControl).toHaveLength(3);
+      expect(selectControl.at(0).prop('id')).toBe('purpose');
+      expect(selectControl.at(0).prop('isLoading')).toBe(defaultProps.isFetchingPurposes);
+      expect(selectControl.at(0).prop('label')).toBe('SearchControlsContainer.purposeLabel');
+      expect(selectControl.at(0).prop('onChange')).toBeDefined();
+      expect(selectControl.at(0).prop('options')).toEqual(defaultProps.purposeOptions);
+      expect(selectControl.at(0).prop('value')).toBe(defaultProps.filters.purpose);
     });
 
     test('renders SelectControl for unit with correct props', () => {
       const selectControl = getWrapper({}).find(SelectControl);
-      expect(selectControl).toHaveLength(4);
-      expect(selectControl.at(2).prop('id')).toBe('unit');
-      expect(selectControl.at(2).prop('isLoading')).toBe(defaultProps.isFetchingUnits);
-      expect(selectControl.at(2).prop('label')).toBe('SearchControlsContainer.unitLabel');
-      expect(selectControl.at(2).prop('onChange')).toBeDefined();
-      expect(selectControl.at(2).prop('options')).toEqual(defaultProps.unitOptions);
-      expect(selectControl.at(2).prop('value')).toBe(defaultProps.filters.unit);
+      expect(selectControl).toHaveLength(3);
+      expect(selectControl.at(1).prop('id')).toBe('unit');
+      expect(selectControl.at(1).prop('isLoading')).toBe(defaultProps.isFetchingUnits);
+      expect(selectControl.at(1).prop('label')).toBe('SearchControlsContainer.unitLabel');
+      expect(selectControl.at(1).prop('onChange')).toBeDefined();
+      expect(selectControl.at(1).prop('options')).toEqual(defaultProps.unitOptions);
+      expect(selectControl.at(1).prop('value')).toBe(defaultProps.filters.unit);
     });
 
     test('renders SelectControl for people with correct props', () => {
@@ -148,13 +144,13 @@ describe('pages/search/controls/SearchControlsContainer', () => {
         { value: '30', label: '30+' },
       ];
       const selectControl = getWrapper({}).find(SelectControl);
-      expect(selectControl).toHaveLength(4);
-      expect(selectControl.at(3).prop('id')).toBe('people');
-      expect(selectControl.at(3).prop('isLoading')).toBe(defaultProps.isFetchingPurposes);
-      expect(selectControl.at(3).prop('label')).toBe('SearchControlsContainer.peopleCapacityLabel');
-      expect(selectControl.at(3).prop('onChange')).toBeDefined();
-      expect(selectControl.at(3).prop('options')).toEqual(peopleOptions);
-      expect(selectControl.at(3).prop('value')).toBe(defaultProps.filters.people);
+      expect(selectControl).toHaveLength(3);
+      expect(selectControl.at(2).prop('id')).toBe('people');
+      expect(selectControl.at(2).prop('isLoading')).toBe(defaultProps.isFetchingPurposes);
+      expect(selectControl.at(2).prop('label')).toBe('SearchControlsContainer.peopleCapacityLabel');
+      expect(selectControl.at(2).prop('onChange')).toBeDefined();
+      expect(selectControl.at(2).prop('options')).toEqual(peopleOptions);
+      expect(selectControl.at(2).prop('value')).toBe(defaultProps.filters.people);
     });
 
     test('renders PositionControl with correct props', () => {
@@ -231,25 +227,11 @@ describe('pages/search/controls/SearchControlsContainer', () => {
       instance.handleFiltersChange.reset();
     });
 
-    test('calls handleFiltersChange on miniciple SelectControl onChange', () => {
-      const municipalities = [{
-        value: 'some-municipality',
-        label: 'some-municipality',
-      }];
-      expect(selectControl).toHaveLength(4);
-      expect(typeof selectControl.at(0).prop('onChange')).toBe('function');
-      selectControl.at(0).prop('onChange')(municipalities, {});
-      expect(instance.handleFiltersChange.callCount).toBe(1);
-      expect(instance.handleFiltersChange.lastCall.args[0]).toEqual({
-        municipality: [municipalities[0].value],
-      });
-    });
-
     test('calls handleFiltersChange on purpose SelectControl onChange', () => {
       const purpose = defaultProps.purposeOptions[0];
-      expect(selectControl).toHaveLength(4);
-      expect(typeof selectControl.at(1).prop('onChange')).toBe('function');
-      selectControl.at(1).prop('onChange')(purpose);
+      expect(selectControl).toHaveLength(3);
+      expect(typeof selectControl.at(0).prop('onChange')).toBe('function');
+      selectControl.at(0).prop('onChange')(purpose);
       expect(instance.handleFiltersChange.callCount).toBe(1);
       expect(instance.handleFiltersChange.lastCall.args[0]).toEqual({
         purpose: purpose.value,
@@ -259,18 +241,18 @@ describe('pages/search/controls/SearchControlsContainer', () => {
     test('calls handleFiltersChange on unit SelectControl onChange', () => {
       const unit = defaultProps.unitOptions[0];
 
-      expect(selectControl).toHaveLength(4);
-      expect(typeof selectControl.at(2).prop('onChange')).toBe('function');
-      selectControl.at(2).prop('onChange')(unit);
+      expect(selectControl).toHaveLength(3);
+      expect(typeof selectControl.at(1).prop('onChange')).toBe('function');
+      selectControl.at(1).prop('onChange')(unit);
       expect(instance.handleFiltersChange.callCount).toBe(1);
       expect(instance.handleFiltersChange.lastCall.args[0]).toEqual({ unit: unit.value });
     });
 
     test('calls handleFiltersChange on people SelectControl onChange', () => {
       const people = defaultProps.peopleOptions[0];
-      expect(selectControl).toHaveLength(4);
-      expect(typeof selectControl.at(3).prop('onChange')).toBe('function');
-      selectControl.at(3).prop('onChange')(people);
+      expect(selectControl).toHaveLength(3);
+      expect(typeof selectControl.at(2).prop('onChange')).toBe('function');
+      selectControl.at(2).prop('onChange')(people);
       expect(instance.handleFiltersChange.callCount).toBe(1);
       expect(instance.handleFiltersChange.lastCall.args[0]).toEqual({ people: people.value });
     });

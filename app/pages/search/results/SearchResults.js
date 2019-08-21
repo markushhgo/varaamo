@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import Loader from 'react-loader';
 import { connect } from 'react-redux';
 
+import { injectT } from 'i18n';
 import ResourceCompactList from 'shared/resource-compact-list';
 import ResourceList from 'shared/resource-list';
 import { scrollTo } from 'utils/domUtils';
@@ -29,6 +30,7 @@ export class UnconnectedSearchResults extends Component {
       searchResultIds,
       selectedUnitId,
       showMap,
+      t,
     } = this.props;
     return (
       <div className="app-SearchResults" id="search-results" ref={this.searchResultsComponent}>
@@ -38,10 +40,10 @@ export class UnconnectedSearchResults extends Component {
               <ResourceList
                 date={filters.date}
                 history={history}
+                label={t('SearchResults.label')}
                 location={location}
                 resourceIds={searchResultIds}
               />
-              <SearchResultsPaging filters={filters} history={history} resultCount={resultCount} />
             </div>
           )}
           {showMap && selectedUnitId && (
@@ -53,6 +55,7 @@ export class UnconnectedSearchResults extends Component {
               unitId={selectedUnitId}
             />
           )}
+          <SearchResultsPaging filters={filters} history={history} resultCount={resultCount} />
         </Loader>
       </div>
     );
@@ -68,6 +71,9 @@ UnconnectedSearchResults.propTypes = {
   searchResultIds: PropTypes.array.isRequired,
   selectedUnitId: PropTypes.string,
   showMap: PropTypes.bool.isRequired,
+  t: PropTypes.func.isRequired,
 };
+
+UnconnectedSearchResults = injectT(UnconnectedSearchResults); // eslint-disable-line
 
 export default connect(searchResultsSelector)(UnconnectedSearchResults);

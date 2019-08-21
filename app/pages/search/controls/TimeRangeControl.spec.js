@@ -17,9 +17,10 @@ function getWrapper(props) {
 }
 
 describe('pages/search/controls/TimeRangeControl', () => {
-  test('renders a div.app-TimeRangeControl', () => {
+  test('renders a section.app-TimeRangeControl', () => {
     const wrapper = getWrapper();
-    expect(wrapper.is('div.app-TimeRangeControl')).toBe(true);
+    expect(wrapper.is('section.app-TimeRangeControl')).toBe(true);
+    expect(wrapper.prop('aria-label')).toBe('TimeRangeControl.timeRangeTitle');
   });
 
   test('renders start select control with correct props', () => {
@@ -83,6 +84,7 @@ describe('pages/search/controls/TimeRangeControl', () => {
     expect(startSelect.prop('placeholder')).toHaveLength(0);
     expect(startSelect.prop('isSearchable')).toBe(false);
     expect(startSelect.prop('value')).toBe(defaults.start);
+    expect(startSelect.prop('label')).toBe('TimeRangeControl.start.label');
   });
 
   test('renders end select control with correct props', () => {
@@ -126,11 +128,12 @@ describe('pages/search/controls/TimeRangeControl', () => {
     expect(endSelect.prop('placeholder')).toHaveLength(0);
     expect(endSelect.prop('isSearchable')).toBe(false);
     expect(endSelect.prop('value')).toBe(defaults.end);
+    expect(endSelect.prop('label')).toBe('TimeRangeControl.end.label');
   });
 
   test('renders duration select control for 12h with correct props', () => {
     const wrapper = getWrapper({ end: '23:30', start: '08:00' });
-    const endSelect = wrapper.find('.app-TimeRangeControl__range-duration');
+    const durationSelect = wrapper.find('.app-TimeRangeControl__range-duration');
     const expectedOptions = [
       { label: '0.5 h', value: 30 },
       { label: '1 h', value: 60 },
@@ -158,14 +161,15 @@ describe('pages/search/controls/TimeRangeControl', () => {
       { label: '12 h', value: 720 },
     ];
 
-    expect(endSelect).toHaveLength(1);
-    expect(endSelect.prop('isClearable')).toBe(false);
-    expect(endSelect.prop('id')).toBe('time-filter-duration-select');
-    expect(endSelect.prop('onChange')).toBe(wrapper.instance().handleDuration);
-    expect(endSelect.prop('options')).toEqual(expectedOptions);
-    expect(endSelect.prop('placeholder')).toHaveLength(0);
-    expect(endSelect.prop('isSearchable')).toBe(false);
-    expect(endSelect.prop('value')).toBe(defaults.duration);
+    expect(durationSelect).toHaveLength(1);
+    expect(durationSelect.prop('isClearable')).toBe(false);
+    expect(durationSelect.prop('id')).toBe('time-filter-duration-select');
+    expect(durationSelect.prop('onChange')).toBe(wrapper.instance().handleDuration);
+    expect(durationSelect.prop('options')).toEqual(expectedOptions);
+    expect(durationSelect.prop('placeholder')).toHaveLength(0);
+    expect(durationSelect.prop('isSearchable')).toBe(false);
+    expect(durationSelect.prop('value')).toBe(defaults.duration);
+    expect(durationSelect.prop('label')).toBe('TimeRangeControl.duration.label');
   });
 
   test(

@@ -13,6 +13,7 @@ class SearchResultsPaging extends React.Component {
     filters: PropTypes.object.isRequired,
     resultCount: PropTypes.number.isRequired,
     history: PropTypes.object.isRequired,
+    t: PropTypes.func.isRequired,
   };
 
   handleClick(page) {
@@ -46,19 +47,21 @@ class SearchResultsPaging extends React.Component {
   }
 
   render() {
-    const { resultCount } = this.props;
+    const { resultCount, t } = this.props;
     if (!resultCount) {
-      return <div />;
+      return <section />;
     }
 
     const { page } = this.props.filters || 1;
     const pages = Math.ceil(resultCount / constants.SEARCH_PAGE_SIZE);
 
     return (
-      <div className="app-SearchResultsPaging">
+      <section aria-label={t('SearchResultsPaging.section.name')} className="app-SearchResultsPaging">
         <Button
+          aria-label={t('SearchResultsPaging.previous')}
           className="app-SearchResultsPaging__prev"
           disabled={page === 1}
+          id="Previous page"
           onClick={() => this.handleClick(page - 1)}
         >
 
@@ -67,17 +70,18 @@ class SearchResultsPaging extends React.Component {
         </Button>
         {this.renderPageButtons(pages, page)}
         <Button
+          aria-label={t('SearchResultsPaging.next')}
           className="app-SearchResultsPaging__next"
           disabled={page >= pages}
+          id="Next page"
           onClick={() => this.handleClick(page + 1)}
         >
 
 
           &raquo;
         </Button>
-      </div>
+      </section>
     );
   }
 }
-
 export default injectT(SearchResultsPaging);

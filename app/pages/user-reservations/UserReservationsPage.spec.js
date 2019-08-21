@@ -24,6 +24,7 @@ describe('pages/user-reservations/UserReservationsPage', () => {
     isAdmin: false,
     reservationsFetchCount: 1,
     resourcesLoaded: true,
+    contrast: '',
   };
 
   function getWrapper(extraProps = {}) {
@@ -32,6 +33,16 @@ describe('pages/user-reservations/UserReservationsPage', () => {
   }
 
   describe('render', () => {
+    test('renders UserReservationPage with high-contrast', () => {
+      const element = getWrapper({ contrast: 'high-contrast' }).find('div').first();
+      expect(element.hasClass('high-contrast')).toBe(true);
+    });
+
+    test('renders UserReservationPage without high-contrast', () => {
+      const element = getWrapper().find('div').first();
+      expect(element.hasClass('high-contrast')).toBe(false);
+    });
+
     test('renders PageWrapper with correct title', () => {
       const pageWrapper = getWrapper().find(PageWrapper);
       expect(pageWrapper).toHaveLength(1);

@@ -1,6 +1,7 @@
 import { createStructuredSelector } from 'reselect';
 
 import { isAdminSelector } from 'state/selectors/authSelectors';
+import { contrastSelector } from 'state/selectors/accessibilitySelectors';
 
 const adminReservationFiltersSelector = state => state.ui.reservations.adminReservationFilters;
 const reservationsFetchCountSelector = state => state.api.fetchCounts.reservations;
@@ -11,6 +12,7 @@ const userReservationsPageSelector = createStructuredSelector({
   isAdmin: isAdminSelector,
   reservationsFetchCount: reservationsFetchCountSelector,
   resourcesLoaded: resourcesLoadedSelector,
+  contrast: contrastSelector
 });
 
 export default userReservationsPageSelector;

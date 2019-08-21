@@ -134,6 +134,10 @@ class UnconnectedSearchControlsContainer extends Component {
     ['freeOfCharge', 'end', 'distance', 'duration', 'purpose', 'start', 'unit', 'municipality'].forEach((key) => {
       if (!isEmpty(filters[key])) {
         hasFilters = true;
+      } else if (typeof filters[key] === 'boolean') {
+        if (filters[key] === true) {
+          hasFilters = true;
+        }
       }
     });
     return hasFilters;
@@ -155,7 +159,10 @@ class UnconnectedSearchControlsContainer extends Component {
     const hasFilters = this.hasAdvancedFilters();
 
     return (
-      <div className={`app-SearchControlsContainer ${contrast}`}>
+      <section
+        aria-label={t('SearchControlsContainer.section.name')}
+        className={`app-SearchControlsContainer ${contrast}`}
+      >
         <Grid>
           <div className="app-SearchControlsContainer__content">
             <h1>{t('SearchControlsContainer.title')}</h1>
@@ -181,22 +188,6 @@ class UnconnectedSearchControlsContainer extends Component {
               header={t('SearchControlsContainer.advancedSearch')}
             >
               <Row>
-                <Col md={12}>
-                  <SelectControl
-                    id="municipality"
-                    isLoading={isFetchingUnits}
-                    isMulti
-                    label={t('SearchControlsContainer.municipalityLabel')}
-                    name="app-SearchControls-municipality-select"
-                    onChange={municipalities => this.handleFiltersChange(
-                      { municipality: municipalities.map(mun => mun.value) }
-                    )}
-                    options={this.getMunicipalityOptions()}
-                    value={filters.municipality}
-                  />
-                </Col>
-              </Row>
-              <Row>
                 <Col className="app-SearchControlsContainer__control" md={4} sm={12}>
                   <SelectControl
                     id="purpose"
@@ -208,7 +199,7 @@ class UnconnectedSearchControlsContainer extends Component {
                     value={filters.purpose}
                   />
                 </Col>
-                <Col className="app-SearchControlsContainer__control" md={4} sm={6}>
+                <Col className="app-SearchControlsContainer__control" md={4} sm={12}>
                   <SelectControl
                     id="unit"
                     isLoading={isFetchingUnits}
@@ -219,7 +210,7 @@ class UnconnectedSearchControlsContainer extends Component {
                     value={filters.unit}
                   />
                 </Col>
-                <Col className="app-SearchControlsContainer__control" md={4} sm={6}>
+                <Col className="app-SearchControlsContainer__control" md={4} sm={12}>
                   <SelectControl
                     id="people"
                     isLoading={isFetchingUnits}
@@ -232,15 +223,7 @@ class UnconnectedSearchControlsContainer extends Component {
                 </Col>
               </Row>
               <Row>
-                <Col className="app-SearchControlsContainer__control" md={4} sm={6}>
-                  <PositionControl
-                    geolocated={Boolean(this.props.position)}
-                    onConfirm={distance => this.handleFiltersChange({ distance })}
-                    onPositionSwitch={this.handlePositionSwitch}
-                    value={parseInt(filters.distance, 10)}
-                  />
-                </Col>
-                <Col className="app-SearchControlsContainer__control" md={4} sm={6}>
+                <Col className="app-SearchControlsContainer__control" md={12} sm={12}>
                   <TimeRangeControl
                     duration={parseInt(filters.duration, 10)}
                     end={filters.end}
@@ -250,7 +233,15 @@ class UnconnectedSearchControlsContainer extends Component {
                     useTimeRange={filters.useTimeRange}
                   />
                 </Col>
-                <Col className="app-SearchControlsContainer__control" md={4} sm={12}>
+                <Col className="app-SearchControlsContainer__control" md={6} sm={12}>
+                  <PositionControl
+                    geolocated={Boolean(this.props.position)}
+                    onConfirm={distance => this.handleFiltersChange({ distance })}
+                    onPositionSwitch={this.handlePositionSwitch}
+                    value={parseInt(filters.distance, 10)}
+                  />
+                </Col>
+                <Col className="app-SearchControlsContainer__control" md={6} sm={12}>
                   <CheckboxControl
                     id="charge"
                     label={t('SearchControlsContainer.chargeLabel')}
@@ -288,7 +279,7 @@ class UnconnectedSearchControlsContainer extends Component {
             </Row>
           </div>
         </Grid>
-      </div>
+      </section>
     );
   }
 }
