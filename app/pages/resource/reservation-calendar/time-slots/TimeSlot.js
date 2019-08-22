@@ -79,6 +79,25 @@ class TimeSlot extends PureComponent {
     }
   }
 
+  getSelectButtonStatusLabel(isDisabled, isPast, isOwnReservation, isReserved, isSelected) {
+    const { t } = this.props;
+
+    if (isOwnReservation) {
+      return t('TimeSlot.ownReservation');
+    }
+    if (isReserved) {
+      return t('TimeSlot.reserved');
+    }
+    if (isSelected) {
+      return t('TimeSlot.selected');
+    }
+    if (isDisabled || isPast) {
+      return t('TimeSlot.notSelectable');
+    }
+
+    return t('TimeSlot.available');
+  }
+
   getReservationInfoNotification(isLoggedIn, resource, slot, t) {
     if (new Date(slot.end) < new Date() || slot.reserved) {
       return null;
@@ -181,8 +200,14 @@ class TimeSlot extends PureComponent {
           onMouseLeave={() => !disabled && onMouseLeave()}
           type="button"
         >
-          <span className="app-TimeSlot__icon" />
+          <span aria-hidden="true" className="app-TimeSlot__icon" />
           <time dateTime={slot.asISOString}>{startTime}</time>
+          <span
+            aria-label={this.getSelectButtonStatusLabel(
+              disabled, isPast, isOwnReservation, slot.reserved, selected
+            )}
+            className="app-TimeSlot__status"
+          />
         </button>
         {showClear && (
           <button
