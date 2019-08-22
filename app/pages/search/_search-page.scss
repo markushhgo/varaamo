@@ -66,6 +66,10 @@
       border-color: $hel-silver;
     }
   }
+  .react-toggle-screenreader-only{
+    width: 0;
+    height: 0;
+  }
   @media (max-width: $screen-xs-max) {
        /* fix for map */
      .app-ResourceCompactList {
