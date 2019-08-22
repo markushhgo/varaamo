@@ -14,7 +14,12 @@ class SelectControl extends React.Component {
       return value.map(item => options.find(option => option.value === item));
     }
 
-    return options.find(option => option.value === value);
+    const foundValue = options.find(option => option.value === value);
+    if (foundValue === undefined) {
+      return '';
+    }
+
+    return foundValue;
   };
 
   noOptionsMessage = () => this.props.t('SelectControl.noOptions')
@@ -35,7 +40,7 @@ class SelectControl extends React.Component {
       ...rest
     } = this.props;
     return (
-      <div className="app-SelectControl">
+      <section aria-label={label} className="app-SelectControl">
         <FormGroup controlId={id}>
           {label && <ControlLabel>{label}</ControlLabel>}
           {!isLoading
@@ -44,7 +49,7 @@ class SelectControl extends React.Component {
               {...rest}
               className={classNames('app-Select', className)}
               classNamePrefix="app-Select"
-              id={id}
+              inputId={id}
               isClearable={isClearable}
               isMulti={isMulti}
               isSearchable={isSearchable}
@@ -55,7 +60,13 @@ class SelectControl extends React.Component {
                     onChange(isMulti ? [] : {}, action);
                     break;
                   default:
-                    onChange(selected, action);
+                    if (!selected && isMulti) {
+                      onChange([], selected);
+                    } else if (!selected && !isMulti) {
+                      onChange({}, action);
+                    } else {
+                      onChange(selected, action);
+                    }
                     break;
                 }
               }}
@@ -65,7 +76,7 @@ class SelectControl extends React.Component {
             />
             )}
         </FormGroup>
-      </div>
+      </section>
     );
   }
 }

@@ -17,6 +17,7 @@ $content-padding: 10px;
 
   a {
     color: $blue;
+    overflow-wrap: break-word;
   }
 
   &__content {
@@ -24,7 +25,23 @@ $content-padding: 10px;
     background-color: $white;
     box-sizing: content-box;
     margin-bottom: 30px;
+    @media only screen and (min-width: 767px) {
+    margin-left: -25px;
+    }
   }
+
+  p {
+    margin: 8px 0 8px 0;
+  }
+
+  .app-ResourcePage__content-max-period {
+    margin-left: 15px;
+  }
+
+  .app-ResourcePage__content-min-period {
+    margin-left: 15px;
+  }
+
   .date-header {
     margin-bottom: 20px;
     font-size: 1.8rem;
@@ -87,7 +104,6 @@ $content-padding: 10px;
     }
 
     &:hover, &:focus, &:active {
-      outline: none;
       background-color: $white;
     }
   }
@@ -143,7 +159,11 @@ $content-padding: 10px;
     /* Fix for resource page */
       /* Padding for turquise area */
       .app-ResourceHeader__content {
-         padding: 15px 15px 15px 15px;
+        padding: 15px 15px 15px 15px;
+        @media only screen and (min-width: 767px) {
+         padding: 15px 0 15px 0;
+         margin-left: -15px;
+        }
       }
       /*smaller header*/
       .h1, h1 {

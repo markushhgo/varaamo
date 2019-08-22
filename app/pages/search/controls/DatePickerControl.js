@@ -2,8 +2,9 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import ControlLabel from 'react-bootstrap/lib/ControlLabel';
 import FormGroup from 'react-bootstrap/lib/FormGroup';
-import Glyphicon from 'react-bootstrap/lib/Glyphicon';
 import InputGroup from 'react-bootstrap/lib/InputGroup';
+import FormControl from 'react-bootstrap/lib/FormControl';
+import Button from 'react-bootstrap/lib/Button';
 import Overlay from 'react-bootstrap/lib/Overlay';
 import DayPicker from 'react-day-picker';
 import moment from 'moment';
@@ -12,6 +13,7 @@ import MomentLocaleUtils from 'react-day-picker/moment';
 import { injectT } from 'i18n';
 import SearchControlOverlay from './SearchControlOverlay';
 import iconCalendar from './images/calendar.svg';
+import { isValidDateString } from '../../../utils/timeUtils';
 
 class DatePickerControl extends React.Component {
   static propTypes = {
@@ -27,7 +29,12 @@ class DatePickerControl extends React.Component {
     this.state = {
       date,
       visible: false,
+      textInputErrorVisible: false
     };
+
+    this.handleDateInputChange = this.handleDateInputChange.bind(this);
+    this.handleDateInputSubmit = this.handleDateInputSubmit.bind(this);
+    this.handleDateButtonClick = this.handleDateButtonClick.bind(this);
   }
 
   componentWillUpdate(nextProps) {
@@ -49,31 +56,66 @@ class DatePickerControl extends React.Component {
 
   handleConfirm = (value) => {
     const date = value;
+
+    this.setState({ textInputErrorVisible: false });
     this.props.onConfirm({ date });
     this.hideOverlay();
   };
 
+  handleDateInputChange(event) {
+    const date = event.target.value;
+    this.setState({ date });
+  }
+
+  handleDateInputSubmit(event) {
+    event.preventDefault();
+
+    const date = this.state.date;
+    if (isValidDateString(date) === false) {
+      this.setState({ textInputErrorVisible: true });
+    } else {
+      this.handleConfirm(date);
+    }
+  }
+
+  handleDateButtonClick() {
+    if (this.state.visible === true) {
+      this.hideOverlay();
+    } else {
+      this.showOverlay();
+    }
+  }
+
   render() {
     const { currentLanguage, t } = this.props;
-    const { date } = this.state;
+    const localDate = this.state.date;
+    const { date } = this.props;
     const selectedDay = moment(date, 'L')
       .startOf('day')
       .toDate();
 
     return (
-      <div className="app-DatePickerControl">
-        <ControlLabel>{t('DatePickerControl.label')}</ControlLabel>
-        <FormGroup onClick={this.showOverlay}>
-          <InputGroup>
-            <InputGroup.Addon className="app-DatePickerControl__title">
-              <img alt="" className="app-DatePickerControl__icon" src={iconCalendar} />
-              <span>{date}</span>
-            </InputGroup.Addon>
-            <InputGroup.Addon className="app-DatePickerControl__triangle">
-              <Glyphicon glyph="triangle-bottom" />
-            </InputGroup.Addon>
-          </InputGroup>
-        </FormGroup>
+      <section aria-label={t('DatePickerControl.label')} className="app-DatePickerControl">
+        <form onSubmit={this.handleDateInputSubmit}>
+          <FormGroup controlId="datePickerField">
+            <ControlLabel>{t('DatePickerControl.label')}</ControlLabel>
+            {this.state.textInputErrorVisible
+            && <p id="date-input-error" role="alert">{t('DatePickerControl.form.error.feedback')}</p>}
+            <InputGroup>
+              <FormControl
+                aria-describedby={this.state.textInputErrorVisible ? 'date-input-error' : null}
+                onChange={this.handleDateInputChange}
+                type="text"
+                value={localDate}
+              />
+              <InputGroup.Button>
+                <Button className="app-DatePickerControl__button" onClick={this.handleDateButtonClick}>
+                  <img alt={t('DatePickerControl.button.imageAlt')} className="app-DatePickerControl__icon" src={iconCalendar} />
+                </Button>
+              </InputGroup.Button>
+            </InputGroup>
+          </FormGroup>
+        </form>
         <Overlay
           container={this}
           onHide={this.hideOverlay}
@@ -94,7 +136,7 @@ class DatePickerControl extends React.Component {
             />
           </SearchControlOverlay>
         </Overlay>
-      </div>
+      </section>
     );
   }
 }

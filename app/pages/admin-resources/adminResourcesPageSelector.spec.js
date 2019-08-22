@@ -29,6 +29,10 @@ describe('pages/admin-resources/adminResourcesPageSelector', () => {
     expect(getSelected().resourceTypes).toBeDefined();
   });
 
+  test('returns contrast', () => {
+    expect(getSelected().contrast).toBeDefined();
+  });
+
   test('returns date', () => {
     const selected = getSelected({ 'ui.pages.adminResources': { date: '2017-02-01' } });
     expect(selected.date).toBe('2017-02-01');

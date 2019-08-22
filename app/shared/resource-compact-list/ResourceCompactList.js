@@ -2,7 +2,9 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import Button from 'react-bootstrap/lib/Button';
 import { connect } from 'react-redux';
+import classNames from 'classnames';
 
+import { injectT } from 'i18n';
 import ResourceCard from 'shared/resource-card';
 import selector from './ResourceCompactListSelector';
 
@@ -12,6 +14,8 @@ export class UnconnectedResourceCompactList extends React.Component {
     location: PropTypes.object.isRequired,
     history: PropTypes.object.isRequired,
     resourceIds: PropTypes.array.isRequired,
+    t: PropTypes.func.isRequired,
+    isLargerFontSizeUsed: PropTypes.bool,
   };
 
   state = {
@@ -44,13 +48,18 @@ export class UnconnectedResourceCompactList extends React.Component {
   render() {
     const { resourcePosition } = this.state;
     const {
-      resourceIds, location, history, date
+      resourceIds, location, history, date, t, isLargerFontSizeUsed
     } = this.props;
     const resourceIdsLength = resourceIds.length;
     return (
-      <div className="app-ResourceCompactList">
+      <div className={classNames(
+        'app-ResourceCompactList',
+        isLargerFontSizeUsed && 'app-ResourceCompactList__large-font-size'
+      )}
+      >
         {Boolean(resourceIds.length - 1) && (
           <Button
+            aria-label={t('ResourceCompactList.button.label.previous')}
             bsStyle="primary"
             className="app-ResourceCompactList_arrow app-ResourceCompactList_arrow-left"
             disabled={resourcePosition === 0}
@@ -66,6 +75,7 @@ export class UnconnectedResourceCompactList extends React.Component {
         />
         {Boolean(resourceIdsLength - 1) && (
           <Button
+            aria-label={t('ResourceCompactList.button.label.next')}
             bsStyle="primary"
             className="app-ResourceCompactList_arrow app-ResourceCompactList_arrow-right"
             disabled={resourcePosition === resourceIdsLength - 1}
@@ -76,5 +86,7 @@ export class UnconnectedResourceCompactList extends React.Component {
     );
   }
 }
+
+UnconnectedResourceCompactList = injectT(UnconnectedResourceCompactList); // eslint-disable-line
 
 export default connect(selector)(UnconnectedResourceCompactList);

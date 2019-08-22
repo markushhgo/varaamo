@@ -18,7 +18,7 @@
   }
 
   .app-MapToggle {
-    background-color: $hel-copper;
+    background-color: $turku-yellow;
     display: block;
     margin: 0;
     position: relative;
@@ -39,15 +39,17 @@
       }
     };
     button {
-      background-color: $hel-copper;
-      border-color: $hel-copper;
+      background-color: $turku-yellow;
+      border-color: $turku-yellow;
       color: $black;
       font-size: 1em;
+      @include addFocus($width: 2px, $color: currentColor) {
+      }
     }
     button:hover,
     button:active {
-      background-color: darken($hel-copper, 5);
-      border-color: darken($hel-copper, 5);
+      background-color: darken($turku-yellow, 5);
+      border-color: darken($turku-yellow, 5);
       box-shadow: none;
     }
     .btn.disabled,

@@ -1,5 +1,9 @@
 .app-ResourceHeader {
-  background-color: $copper;
+  background-color: $turku-yellow;
+
+  @include highContrast{
+    border-bottom: 1px solid black;
+  };
 
   &__content {
     padding: 15px 0;

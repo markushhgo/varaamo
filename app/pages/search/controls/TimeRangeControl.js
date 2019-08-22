@@ -132,7 +132,7 @@ class TimeRangeControl extends React.Component {
     const durationOptions = this.getDurationOptions();
 
     return (
-      <div className="app-TimeRangeControl">
+      <section aria-label={t('TimeRangeControl.timeRangeTitle')} className="app-TimeRangeControl">
         <CheckboxControl
           id="timerange-status"
           label={t('TimeRangeControl.timeRangeTitle')}
@@ -148,18 +148,19 @@ class TimeRangeControl extends React.Component {
             isClearable={false}
             isDisabled={!useTimeRange}
             isSearchable={false}
+            label={t('TimeRangeControl.start.label')}
             onChange={this.handleStart}
             options={startTimeOptions}
             placeholder=""
             value={start}
           />
-          <div className="app-TimeRangeControl__range-separator">-</div>
           <SelectControl
             className="app-TimeRangeControl__range-end"
             id="time-filter-end-select"
             isClearable={false}
             isDisabled={!useTimeRange}
             isSearchable={false}
+            label={t('TimeRangeControl.end.label')}
             onChange={this.handleEnd}
             options={endTimeOptions}
             placeholder=""
@@ -172,13 +173,14 @@ class TimeRangeControl extends React.Component {
             isClearable={false}
             isDisabled={!useTimeRange}
             isSearchable={false}
+            label={t('TimeRangeControl.duration.label')}
             onChange={this.handleDuration}
             options={durationOptions}
             placeholder=""
             value={duration}
           />
         </div>
-      </div>
+      </section>
     );
   }
 }

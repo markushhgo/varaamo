@@ -26,6 +26,9 @@ function getState(resources = [], units = [], user = defaultUser) {
       resourceMap: Immutable({
         showMap: true,
       }),
+      accessibility: Immutable({
+        isHighContrast: false,
+      })
     }),
   };
 }
@@ -99,6 +102,14 @@ describe('pages/resource/resourcePageSelector', () => {
     const selected = resourcePageSelector(state, props);
 
     expect(selected.showMap).toBeDefined();
+  });
+
+  test('returns contrast', () => {
+    const state = getState();
+    const props = getProps();
+    const selected = resourcePageSelector(state, props);
+
+    expect(selected.contrast).toBeDefined();
   });
 
   test('returns the unit corresponding to the resource.unit', () => {

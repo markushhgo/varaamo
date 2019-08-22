@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import ControlLabel from 'react-bootstrap/lib/ControlLabel';
+import FormGroup from 'react-bootstrap/lib/FormGroup';
 import FormControl from 'react-bootstrap/lib/FormControl';
 import ListGroup from 'react-bootstrap/lib/ListGroup';
 import ListGroupItem from 'react-bootstrap/lib/ListGroupItem';
@@ -54,14 +55,17 @@ class SearchBox extends React.Component {
   render() {
     const { t, value } = this.props;
     return (
-      <form className="app-SearchBox" onSubmit={this.handleSubmit}>
-        <ControlLabel>{t('SearchBox.placeholder')}</ControlLabel>
-        <FormControl
-          className="app-SearchBox__text-field"
-          onChange={this.handleChange}
-          type="text"
-          value={value}
-        />
+      <form aria-label={t('SearchBox.placeholder')} className="app-SearchBox" onSubmit={this.handleSubmit}>
+        <FormGroup controlId="mainTextField">
+          <ControlLabel>{t('SearchBox.placeholder')}</ControlLabel>
+          <FormControl
+            className="app-SearchBox__text-field"
+            onChange={this.handleChange}
+            type="text"
+            value={value}
+          />
+        </FormGroup>
+
         <Overlay
           container={this}
           onHide={this.hideOverlay}

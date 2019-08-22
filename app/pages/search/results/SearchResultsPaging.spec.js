@@ -22,24 +22,23 @@ function getWrapper(props) {
 }
 
 describe('pages/search/results/SearchResultsPaging', () => {
-  test('renders app-SearchResultsPaging if resultCount > 0', () => {
+  test('renders app-SearchResultsPaging if resultCount > 0 and props', () => {
     const wrapper = getWrapper();
-    expect(wrapper.is('div.app-SearchResultsPaging')).toBe(true);
+    expect(wrapper.is('section.app-SearchResultsPaging')).toBe(true);
+    expect(wrapper.prop('aria-label')).toBe('SearchResultsPaging.section.name');
   });
 
   test('renders null if resultCount is 0', () => {
     const wrapper = getWrapper({ resultCount: 0 });
-    expect(wrapper.is('div')).toBe(true);
-    expect(wrapper.is('div.app-SearchResultsPaging')).toBe(false);
+    expect(wrapper.is('section')).toBe(true);
+    expect(wrapper.is('section.app-SearchResultsPaging')).toBe(false);
   });
 
-  test(
-    'renders prev and next buttons and correct number of page buttons',
-    () => {
-      const buttons = getWrapper().find(Button);
-      expect(buttons).toHaveLength(4);
-    }
-  );
+  test('render prev button with correct props', () => {
+    const buttons = getWrapper().find(Button);
+    expect(buttons).toHaveLength(4);
+    expect(buttons.at(0).prop('aria-label')).toBe('SearchResultsPaging.previous');
+  });
 
   test('prev button is disabled when current page is 1', () => {
     const filters = { page: 1 };
@@ -47,6 +46,12 @@ describe('pages/search/results/SearchResultsPaging', () => {
     expect(buttons).toHaveLength(4);
     expect(buttons.at(0).prop('disabled')).toBe(true);
     expect(buttons.at(3).prop('disabled')).toBe(false);
+  });
+
+  test('render next button with correct props', () => {
+    const buttons = getWrapper().find(Button);
+    expect(buttons).toHaveLength(4);
+    expect(buttons.at(3).prop('aria-label')).toBe('SearchResultsPaging.next');
   });
 
   test('next button is disabled when on last page', () => {

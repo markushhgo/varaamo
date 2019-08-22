@@ -16,15 +16,16 @@ function getWrapper(props) {
 }
 
 describe('pages/search/controls/CheckboxControl', () => {
-  test('renders a div.app-CheckboxControl', () => {
+  test('renders a section.app-CheckboxControl', () => {
     const wrapper = getWrapper({});
-    expect(wrapper.is('div.app-CheckboxControl')).toBe(true);
+    expect(wrapper.is('section.app-CheckboxControl')).toBe(true);
+    expect(wrapper.prop('aria-label')).toBe(defaults.label);
   });
 
   test('renders a Toggle with correct props', () => {
     const toggle = getWrapper({}).find(Toggle);
     expect(toggle).toHaveLength(1);
-    expect(toggle.prop('defaultChecked')).toBe(defaults.value);
+    expect(toggle.prop('checked')).toBe(defaults.value);
     expect(typeof toggle.prop('onChange')).toBe('function');
   });
 

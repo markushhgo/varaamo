@@ -19,6 +19,9 @@
     margin: 0;
     width: 40px;
     height: 40px;
+    align-self: flex-end;
+
+    @include addFocus;
 
     &--prev {
       @include icon-angle-left($black);
@@ -31,13 +34,27 @@
 
   .app-ResourceCalendar__wrapper {
     display: block;
-    max-width: 400px;
+    max-width: 630px;
     flex-grow: 1;
     position: relative;
+    @media only screen and (min-width: 1080px) {
+      margin-left: 15px;
+      max-width: 900px;
+    }
+
+    #dateField {
+      font-size: 1em;
+    }
 
     .form-group {
       margin-bottom: 0;
     }
+
+    .form-group label {
+      margin-right: 10px;
+    }
+
+
     .form-control[disabled] {
       background-color: transparent;
       border-color: $black;
@@ -46,12 +63,19 @@
       transition: all 0s ease 0s;
     }
 
-    .input-group-addon {
-      background-color: transparent;
+    &__button {
+      border-left-width: 2px !important;
+      height: 40px !important;
+
+      @include addFocus($width: 4px);
     }
 
-    .glyphicon-triangle-bottom {
-      font-size: 10px;
+    #date-input-error {
+      margin: 0;
+      color: rgb(200, 0, 0);
+      font-weight: bold;
+      display: inline;
+      white-space: nowrap;
     }
 
     .form-control[disabled] {
@@ -65,7 +89,7 @@
       width: 100%;
 
       &:focus {
-        outline: none;
+        outline: initial;
       }
     }
 
@@ -116,8 +140,13 @@
       border-radius: 0;
       font-size: 1.6rem;
 
+      @media (max-width: $screen-xs-max) {
+        padding-left: 0px;
+        padding-right: 0px;
+      }
+
       &:focus {
-        outline: none;
+        outline: initial;
       }
 
       &--disabled {
@@ -127,7 +156,7 @@
         color: $dark-gray;
       }
       &--available:not(.DayPicker-Day--disabled) {
-        background-color: $copper;
+        background-color: $turku-yellow;
         &.DayPicker-Day--selected {
           background-color: $available-color;
         }
@@ -170,6 +199,7 @@
     }
     .DayPicker-Weekday {
       color: $black;
+      padding: 0px;
     }
 
     .DayPicker-WeekNumber {
@@ -239,12 +269,13 @@
 
       &__content {
         background-color: $white;
-        padding: 20px;
+        padding: 10px;
       }
     }
     @media (max-width: $screen-xs-max) {
       order: -1;
       width: 100%;
+      padding: 0px;
     }
   }
 }

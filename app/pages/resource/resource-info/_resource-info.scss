@@ -65,6 +65,15 @@ $horizontal-margin: 20px;
   &__web {
     span {
       display: block;
+      margin-left: -30px;
+      width: 320px;
+      margin-bottom: 10px;
+    }
+  }
+
+  &__address {
+    span:nth-child(2) {
+      margin-bottom: 0px;
     }
   }
 
@@ -111,4 +120,7 @@ $horizontal-margin: 20px;
       margin-right: 10px;
     }
   }
+ .app-ResourceInfo__www {
+   margin-top: 10px;
+ }
 }

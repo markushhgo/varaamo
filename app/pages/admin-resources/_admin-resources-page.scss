@@ -1,0 +1,95 @@
+.admin-resources-page {
+  min-height: 600px;
+
+  .loadedContent{
+
+    .availability-view .date-selector {
+      font-size: 1em;
+       .date-picker {
+         > input {
+           min-width: 140px;
+         }
+        .DayPicker-WeekDaysRow,
+        .DayPicker-Day {
+          font-size: 1em;
+        }
+
+        .date-picker-overlay {
+          padding: 15px;
+        }
+      }
+
+      .previous,
+      .next {
+        text-decoration: none;
+      }
+    }
+
+
+  }
+  .date-picker .DayPicker-WeekDaysRow {
+    font-size: 1em;
+  }
+
+  @include highContrast{
+    .loadedContent {
+
+      .resource-type-filter-container {
+        background-color: transparent;
+        border: 1px solid black;
+      }
+
+      .availability-view {
+        .top-left {
+          background-color: transparent;
+          color: black;
+          border: 1px solid black;
+        }
+        .sidebar > .group-info {
+          background-color: transparent;
+          border: 1px solid black;
+        }
+        .date-selector {
+          background-color: transparent;
+          color: black;
+          border: 1px solid black;
+          a {
+            color: black;
+          }
+          .date-picker input {
+            color: black;
+          }
+          .date-picker::after {
+            border-top-color: black;
+          }
+        }
+      }
+    }
+  }
+
+  @media(max-width: $screen-sm-max) {
+    .availability-view .date-selector .current-value .date-picker{
+      > div {
+      margin-left: -150%;
+    }
+      > input {
+        min-width: 120px;
+      }
+    }
+
+  }
+
+  @media(max-width: $screen-xs-max) {
+    .availability-view  .date-selector {
+      justify-content: center;
+
+      .previous,
+      .next {
+        display: none;
+      }
+
+
+
+    }
+  }
+}
