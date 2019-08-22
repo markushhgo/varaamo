@@ -15,13 +15,14 @@
   &.react-toggle--checked,
   &.react-toggle--checked:hover,
   &:focus,
-  &:focus-within{
-    @include focusElement;
-  }
   &:hover {
     &:not(.react-toggle--disabled) .react-toggle-track {
       background-color: $green !important;
     }
+  }
+
+  &.react-toggle:focus-within{
+    @include focusElement;
   }
 
   .react-toggle-thumb,
