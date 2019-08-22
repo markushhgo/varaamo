@@ -148,6 +148,7 @@ class TimeSlot extends PureComponent {
       onMouseLeave,
       selected,
       slot,
+      t,
     } = this.props;
 
     const { disabled, isPast } = this.state;
@@ -184,7 +185,12 @@ class TimeSlot extends PureComponent {
           <time dateTime={slot.asISOString}>{startTime}</time>
         </button>
         {showClear && (
-          <button className="app-TimeSlot__clear" onClick={onClear} type="button">
+          <button
+            aria-label={t('TimeSlot.label.removeSelection')}
+            className="app-TimeSlot__clear"
+            onClick={onClear}
+            type="button"
+          >
             <span className="app-TimeSlot__clear-icon" />
           </button>
         )}

@@ -3,6 +3,8 @@
 
 .app-UserReservationPage {
 
+  background-color: $hel-silver;
+
   &__overlay {
     z-index: 5;
   }
@@ -11,7 +13,17 @@
     position: relative;
   }
 
+  @include highContrast{
+    .reservation-list .reservation {
+      border: 1px solid black;
+
+      .image-container {
+        background-color: transparent;
+      }
+    }
+  };
+
   .app-PageWrapper {
-    background-color: $hel-silver;
+//    background-color: $hel-silver;
   }
 }

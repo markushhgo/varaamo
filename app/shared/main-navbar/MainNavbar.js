@@ -58,13 +58,21 @@ class MainNavbar extends React.Component {
                 {t('Navbar.search')}
               </NavItem>
             </LinkContainer>
-            {isLoggedIn && (
+            {(isLoggedIn && !isAdmin) && (
+              <LinkContainer to="/favourites">
+                <NavItem eventKey="favourites" onClick={() => this.collapseItem()}>
+                  {isAdmin ? t('Navbar.adminResources') : t('Navbar.userFavorites')}
+                </NavItem>
+              </LinkContainer>
+            )}
+            {(isLoggedIn && isAdmin) && (
               <LinkContainer to="/admin-resources">
                 <NavItem eventKey="admin-resources" onClick={() => this.collapseItem()}>
                   {isAdmin ? t('Navbar.adminResources') : t('Navbar.userFavorites')}
                 </NavItem>
               </LinkContainer>
             )}
+
             {isLoggedIn && (
               <LinkContainer to="/my-reservations">
                 <NavItem eventKey="my-reservations" onClick={() => this.collapseItem()}>

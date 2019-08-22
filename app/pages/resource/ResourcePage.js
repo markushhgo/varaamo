@@ -136,6 +136,7 @@ class UnconnectedResourcePage extends Component {
       t,
       unit,
       history,
+      contrast
     } = this.props;
     const { params } = match;
     const { isOpen, photoIndex } = this.state;
@@ -156,6 +157,7 @@ class UnconnectedResourcePage extends Component {
       <div className="app-ResourcePage">
         <Loader loaded={!isEmpty(resource)}>
           <ResourceHeader
+            contrast={contrast}
             isLoggedIn={isLoggedIn}
             onBackClick={this.handleBackButton}
             onMapClick={actions.toggleResourceMap}
@@ -198,7 +200,7 @@ class UnconnectedResourcePage extends Component {
                         {/* Show reservation max period text */}
                         {resource.maxPeriod && (
                           <div className="app-ResourcePage__content-max-period">
-                            {`${t('ReservationInfo.reservationMaxLength')} ${maxPeriodText}`}
+                            <p>{`${t('ReservationInfo.reservationMaxLength')} ${maxPeriodText}`}</p>
                           </div>
                         )}
 
@@ -272,6 +274,7 @@ UnconnectedResourcePage.propTypes = {
   t: PropTypes.func.isRequired,
   unit: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
+  contrast: PropTypes.string,
 };
 UnconnectedResourcePage = injectT(UnconnectedResourcePage); // eslint-disable-line
 

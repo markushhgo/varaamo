@@ -4,9 +4,11 @@ import { createSelector, createStructuredSelector } from 'reselect';
 
 import { isAdminSelector, isLoggedInSelector } from 'state/selectors/authSelectors';
 import { createResourceSelector, unitsSelector } from 'state/selectors/dataSelectors';
+import { contrastSelector } from 'state/selectors/accessibilitySelectors';
 import dateSelector from 'state/selectors/dateSelector';
 import requestIsActiveSelectorFactory from 'state/selectors/factories/requestIsActiveSelectorFactory';
 
+const contrastOptionsSelector = state => contrastSelector(state);
 const resourceIdSelector = (state, props) => props.match && props.match.params.id;
 const resourceSelector = createResourceSelector(resourceIdSelector);
 const showMapSelector = state => state.ui.resourceMap.showMap;
@@ -25,6 +27,7 @@ const resourcePageSelector = createStructuredSelector({
   resource: resourceSelector,
   showMap: showMapSelector,
   unit: unitSelector,
+  contrast: contrastOptionsSelector,
 });
 
 export default resourcePageSelector;
