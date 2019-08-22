@@ -39,6 +39,17 @@ describe('pages/resource/reservation-calendar/time-slots/TimeSlot', () => {
     expect(getClickableButton()).toHaveLength(1);
   });
 
+  test('renders app-TimeSlot__icon with correct props', () => {
+    const icon = getWrapper().find('.app-TimeSlot__icon');
+    expect(icon).toHaveLength(1);
+    expect(icon.prop('aria-hidden')).toBe('true');
+  });
+
+  test('renders app-TimeSlot__status', () => {
+    const icon = getWrapper().find('.app-TimeSlot__icon');
+    expect(icon).toHaveLength(1);
+  });
+
   test('does not render clear button when clearing disabled', () => {
     expect(getWrapper().find('button.app-TimeSlot__clear')).toHaveLength(0);
   });
@@ -268,6 +279,30 @@ describe('pages/resource/reservation-calendar/time-slots/TimeSlot', () => {
       expect(typeof button.prop('onClick')).toBe('function');
       button.prop('onClick')();
       expect(onClear.callCount).toBe(1);
+    });
+  });
+
+  describe('getSelectButtonStatusLabel', () => {
+    // Params in order: isDisabled, isPast, isOwnReservation, isReserved, isSelected
+    test('return correct string when timeslot is own reservation', () => {
+      expect(getWrapper().instance()
+        .getSelectButtonStatusLabel(false, false, true, false, false)).toBe('TimeSlot.ownReservation');
+    });
+    test('return correct string when timeslot is reserved', () => {
+      expect(getWrapper().instance()
+        .getSelectButtonStatusLabel(false, false, false, true, false)).toBe('TimeSlot.reserved');
+    });
+    test('return correct string when timeslot is selected', () => {
+      expect(getWrapper().instance()
+        .getSelectButtonStatusLabel(false, false, false, false, true)).toBe('TimeSlot.selected');
+    });
+    test('return correct string when timeslot is not selectable', () => {
+      expect(getWrapper().instance()
+        .getSelectButtonStatusLabel(true, true, false, false, false)).toBe('TimeSlot.notSelectable');
+    });
+    test('return correct string when timeslot is available', () => {
+      expect(getWrapper().instance()
+        .getSelectButtonStatusLabel(false, false, false, false, false)).toBe('TimeSlot.available');
     });
   });
 });
