@@ -2,6 +2,7 @@ import React from 'react';
 import Immutable from 'seamless-immutable';
 import simple from 'simple-mock';
 import Lightbox from 'lightbox-react';
+import Panel from 'react-bootstrap/lib/Panel';
 
 import NotFoundPage from 'pages/not-found/NotFoundPage';
 import PageWrapper from 'pages/PageWrapper';
@@ -69,6 +70,19 @@ describe('pages/resource/ResourcePage', () => {
       expect(pageWrapper.prop('title')).toBe(defaultProps.resource.name);
       expect(pageWrapper.prop('transparent')).toBe(true);
     });
+
+    test('renders panel with correct props', () => {
+      const panel = getWrapper().find(Panel);
+      expect(panel).toHaveLength(1);
+      expect(panel.prop('aria-labelledby')).toBe('ResourceCalendarHeader');
+    });
+
+    test('renders header text', () => {
+      const header = getWrapper().find('#ResourceCalendarHeader');
+      expect(header).toHaveLength(1);
+      expect(header.text()).toBe('ResourceCalendar.header');
+    });
+
 
     test('renders ResourceHeader with correct props', () => {
       const wrapper = getWrapper();

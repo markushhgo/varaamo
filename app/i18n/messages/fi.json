@@ -246,6 +246,7 @@
   "ResourceCalendar.form.label": "Valitse päivämäärä (esim. 30.07.2019)",
   "ResourceCalendar.nextWeek": "Seuraava viikko",
   "ResourceCalendar.previousWeek": "Viime viikko",
+  "ResourceCalendar.header": "Ajanvaraus",
   "ResourceCard.description.label": "Katkelma kuvauksesta",
   "ResourceCard.peopleCapacity": "{people} henkilöä",
   "ResourceCard.unknown": "Tuntematon",

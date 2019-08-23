@@ -248,6 +248,7 @@
   "ResourceCalendar.form.label": "Välj datumn (t.ex. 30.07.2019)",
   "ResourceCalendar.nextWeek": "Nästa vecka",
   "ResourceCalendar.previousWeek": "Förra veckan",
+  "ResourceCalendar.header": "Tidsreservering",
   "ResourceCard.description.label": "Information",
   "ResourceCard.peopleCapacity": "{people} personer",
   "ResourceCard.unknown": "Okänt",

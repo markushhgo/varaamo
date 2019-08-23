@@ -244,6 +244,7 @@
   "ResourceCalendar.form.label": "Select a date (e.g. 30/07/2019)",
   "ResourceCalendar.nextWeek": "Next week",
   "ResourceCalendar.previousWeek": "Previous week",
+  "ResourceCalendar.header": "Time reservation",
   "ResourceCard.description.label": "Description snippet",
   "ResourceCard.peopleCapacity": "{people} people",
   "ResourceCard.unknown": "Unknown",
