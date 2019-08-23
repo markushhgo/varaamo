@@ -153,6 +153,7 @@ export class UnconnectedReservationCalendarContainer extends Component {
     const selectedDateSlots = this.getSelectedDateSlots(timeSlots, selected);
     return (
       <div className="reservation-calendar">
+        <h3 className="visually-hidden reservation-calendar__header">{t('ReservationCalendar.header')}</h3>
         {showTimeSlots && (
           <TimeSlots
             addNotification={debounce(actions.addNotification, 100)}

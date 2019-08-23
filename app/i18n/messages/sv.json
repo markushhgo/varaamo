@@ -164,6 +164,7 @@
   "RecurringReservationControls.numberOfOccurrencesLabel": "Antal upprepningar",
   "ReservationAccessCode.defaultText": "PIN-kod",
   "ReservationAccessCode.pending": "PIN-koden visas här. Den kommer att genereras 24 timmar före bokningsstart och skickas till ditt mail.",
+  "ReservationCalendar.header": "Tidtabell",
   "ReservationCalendarPickerLegend.booked": "Reserverad",
   "ReservationCalendarPickerLegend.busy": "Delvis ledig",
   "ReservationCalendarPickerLegend.free": "Ledig",
