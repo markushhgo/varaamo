@@ -73,7 +73,7 @@
   @media (max-width: $screen-xs-max) {
        /* fix for map */
      .app-ResourceCompactList {
-        max-width: 90%;
+        max-width: calc(100% - 45px);
         font-size: 1.2em;
     }
   }

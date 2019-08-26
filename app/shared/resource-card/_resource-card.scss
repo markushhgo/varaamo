@@ -193,8 +193,8 @@ $cellHeight: 50%;
       max-width: 880px;
       margin: auto;
     }
-    @media (min-width: $screen-sm-min) and (max-width: $screen-md-min) {
-      max-width: 688px;
+    @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+      max-width: 660px;
       margin: auto;
     }
     border: 2px solid $hel-silver;
