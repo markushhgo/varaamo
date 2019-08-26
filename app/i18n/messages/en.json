@@ -318,7 +318,7 @@
   "TimeRangeControl.end.label": "End time",
   "TimeRangeControl.duration.label": "Duration",
   "TimeSlot.available": "Free",
-  "TimeSlot.label.removeSelection": "Remove selection",
+  "TimeSlot.label.removeSelection": "Remove selections",
   "TimeSlot.logInFirst": "Log in first",
   "TimeSlot.notSelectable": "Not selectable",
   "TimeSlot.editing": "Edited",
