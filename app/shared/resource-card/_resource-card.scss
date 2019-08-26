@@ -28,9 +28,13 @@ $cellHeight: 50%;
     }
 
   }
+  > a {
+    margin: 0;
+  }
 
   &__image-link{
     display: block;
+    margin: auto;
     @media (min-width: $screen-xs-min) {
       height: $app-ResourceCard-height;
       width: 100%;
@@ -177,6 +181,22 @@ $cellHeight: 50%;
   }
 
   &.app-ResourceCard__stacked {
+    @media (min-width: $screen-lg-min) {
+      max-width: 1230px;
+      margin: auto;
+    }
+    @media (min-width: 1200px) and (max-width: 1400px) {
+      max-width: 1080px;
+      margin: auto;
+    }
+    @media (min-width: $screen-md-min) and (max-width: $screen-lg-min) {
+      max-width: 880px;
+      margin: auto;
+    }
+    @media (min-width: $screen-sm-min) and (max-width: $screen-md-min) {
+      max-width: 688px;
+      margin: auto;
+    }
     border: 2px solid $hel-silver;
   }
 
