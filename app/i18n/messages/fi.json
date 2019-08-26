@@ -321,6 +321,7 @@
   "TestSiteMessage.text": "Tämä on Varaamon testiversio",
   "TimeSlot.available": "Vapaa",
   "TimeSlot.label.removeSelection": "Poista valinta",
+  "TimeSlot.logInFirst": "Kirjaudu sisään ensin",
   "TimeSlot.notSelectable": "Ei valittavissa",
   "TimeSlot.editing": "Muokataan",
   "TimeSlot.ownReservation": "Oma varaus",

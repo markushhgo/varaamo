@@ -283,26 +283,36 @@ describe('pages/resource/reservation-calendar/time-slots/TimeSlot', () => {
   });
 
   describe('getSelectButtonStatusLabel', () => {
-    // Params in order: isDisabled, isPast, isOwnReservation, isReserved, isSelected
+    // Params in order: isDisabled, isLoggedIn, isOwnReservation, isReserved, isSelected
     test('return correct string when timeslot is own reservation', () => {
       expect(getWrapper().instance()
-        .getSelectButtonStatusLabel(false, false, true, false, false)).toBe('TimeSlot.ownReservation');
+        .getSelectButtonStatusLabel(false, false, true, false, false))
+        .toBe('TimeSlot.notSelectable - TimeSlot.ownReservation');
     });
     test('return correct string when timeslot is reserved', () => {
       expect(getWrapper().instance()
-        .getSelectButtonStatusLabel(false, false, false, true, false)).toBe('TimeSlot.reserved');
+        .getSelectButtonStatusLabel(false, false, false, true, false))
+        .toBe('TimeSlot.notSelectable - TimeSlot.reserved');
     });
     test('return correct string when timeslot is selected', () => {
       expect(getWrapper().instance()
-        .getSelectButtonStatusLabel(false, false, false, false, true)).toBe('TimeSlot.selected');
+        .getSelectButtonStatusLabel(false, false, false, false, true))
+        .toBe('TimeSlot.selected');
     });
     test('return correct string when timeslot is not selectable', () => {
       expect(getWrapper().instance()
-        .getSelectButtonStatusLabel(true, true, false, false, false)).toBe('TimeSlot.notSelectable');
+        .getSelectButtonStatusLabel(true, true, false, false, false))
+        .toBe('TimeSlot.notSelectable');
+    });
+    test('return correct string when timeslot is not selectable and user is not logged in', () => {
+      expect(getWrapper().instance()
+        .getSelectButtonStatusLabel(true, false, false, false, false))
+        .toBe('TimeSlot.notSelectable - TimeSlot.logInFirst');
     });
     test('return correct string when timeslot is available', () => {
       expect(getWrapper().instance()
-        .getSelectButtonStatusLabel(false, false, false, false, false)).toBe('TimeSlot.available');
+        .getSelectButtonStatusLabel(false, true, false, false, false))
+        .toBe('TimeSlot.available');
     });
   });
 });
