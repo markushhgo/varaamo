@@ -53,7 +53,7 @@ describe('pages/user-reservations/reservation-list/ReservationListItem', () => {
     test('displays the name of the resource', () => {
       const expected = props.resource.name;
 
-      expect(component.find('h4').text()).toContain(expected);
+      expect(component.find('h2').text()).toContain(expected);
     });
 
     test('displays the name of the given unit in props', () => {
