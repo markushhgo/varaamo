@@ -4,6 +4,7 @@
 .app-UserReservationPage {
 
   background-color: $hel-silver;
+  height: 100%;
 
   &__overlay {
     z-index: 5;
@@ -19,6 +20,10 @@
 
       .image-container {
         background-color: transparent;
+
+        img {
+          height: 179px;
+        }
       }
     }
   };

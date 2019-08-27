@@ -38,7 +38,7 @@ class ReservationListItem extends Component {
         <div className="col-xs-8 col-md-6 col-lg-7 reservation-details">
           <ReservationStateLabel reservation={reservation} />
           <Link to={getResourcePageUrl(resource)}>
-            <h4>{resource.name}</h4>
+            <h2>{resource.name}</h2>
           </Link>
           <div>
             <img alt={resource.type.name} className="location" src={iconHome} />

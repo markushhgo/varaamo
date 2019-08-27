@@ -27,7 +27,7 @@ $reservation-list-label-height: 20px;
       }
 
       img {
-        margin-left: -13px;
+        margin-left: -15px;
 
         height: 180px;
         width: 180px;
@@ -35,13 +35,13 @@ $reservation-list-label-height: 20px;
     }
 
     .reservation-details {
-      margin-top: 10px;
+//      margin-top: 10px;
       min-height: 180px;
 
       .reservation-state-label-container {
         font-size: 18px;
         margin-bottom: 8px;
-        margin-top: -8px;
+//        margin-top: -8px;
         width: 100%;
 
         .label {
@@ -55,11 +55,15 @@ $reservation-list-label-height: 20px;
       .location, .timeslot {
         width: 28.8px;
         margin-right: 5px
+        ;@media (max-width: $screen-xs-max) {
+          width: 20.8px;
+        };
       }
 
       .reservation-access-code {
         font-weight: bold;
         margin-left: 33.8px;
+
       }
     }
 
@@ -89,6 +93,9 @@ $reservation-list-label-height: 20px;
 
     a {
       text-decoration: none;
+      > h2{
+        margin-top: 12px;
+      }
     }
   }
 }
