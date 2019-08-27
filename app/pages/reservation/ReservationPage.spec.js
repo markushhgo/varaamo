@@ -99,12 +99,12 @@ describe('pages/reservation/ReservationPage', () => {
     const defClass = 'app-ReservationPage__content ';
 
     test('does not get additional class when high-contrast: false', () => {
-      const element = getWrapper().find('div').at(2);
+      const element = getWrapper().find('div').at(1);
       expect(element.prop('className')).toBe(defClass);
     });
 
     test('gets additional class when high-contrast: true', () => {
-      const element = getWrapper({ contrast: 'high-contrast' }).find('div').at(2);
+      const element = getWrapper({ contrast: 'high-contrast' }).find('div').at(1);
       expect(element.prop('className')).toBe(`${defClass}high-contrast`);
     });
   });
