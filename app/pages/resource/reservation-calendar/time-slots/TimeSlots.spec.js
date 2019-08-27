@@ -1,6 +1,7 @@
 import React from 'react';
 import Immutable from 'seamless-immutable';
 import simple from 'simple-mock';
+import moment from 'moment';
 
 import Resource from 'utils/fixtures/Resource';
 import { shallowWithIntl } from 'utils/testUtils';
@@ -61,6 +62,22 @@ describe('pages/resource/reservation-calendar/time-slots/TimeSlots', () => {
   test('renders div.app-TimeSlots', () => {
     const div = getWrapper().find('div.app-TimeSlots');
     expect(div).toHaveLength(1);
+  });
+
+  test('renders timeslot weekday headers with correct texts', () => {
+    const headers = getWrapper().find('h4.app-TimeSlots--date--header');
+    // default test slots has two different days
+    expect(headers.length).toBe(2);
+
+    // first header text is correct
+    expect(headers.at(0).text())
+      .toBe(defaultSlots[0][0] && defaultSlots[0][0].start
+        ? moment(defaultSlots[0][0].start).format('dd D.M') : '');
+
+    // second header text is correct
+    expect(headers.at(1).text())
+      .toBe(defaultSlots[1][0] && defaultSlots[1][0].start
+        ? moment(defaultSlots[1][0].start).format('dd D.M') : '');
   });
 
   describe('rendering individual time slots', () => {
