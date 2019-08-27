@@ -79,23 +79,37 @@ class TimeSlot extends PureComponent {
     }
   }
 
-  getSelectButtonStatusLabel(isDisabled, isPast, isOwnReservation, isReserved, isSelected) {
+  getSelectButtonStatusLabel(
+    isDisabled, isLoggedIn, isOwnReservation, isReserved, isSelected
+  ) {
     const { t } = this.props;
 
     if (isOwnReservation) {
-      return t('TimeSlot.ownReservation');
+      return `${t('TimeSlot.notSelectable')} - ${t('TimeSlot.ownReservation')}`;
     }
+
     if (isReserved) {
-      return t('TimeSlot.reserved');
+      return `${t('TimeSlot.notSelectable')} - ${t('TimeSlot.reserved')}`;
     }
+
     if (isSelected) {
       return t('TimeSlot.selected');
     }
-    if (isDisabled || isPast) {
+
+    // if timeslot is otherwise disabled
+    if (isDisabled && !isOwnReservation && !isReserved && !isSelected) {
+      if (!isLoggedIn) {
+        return `${t('TimeSlot.notSelectable')} - ${t('TimeSlot.logInFirst')}`;
+      }
       return t('TimeSlot.notSelectable');
     }
 
-    return t('TimeSlot.available');
+    // if timeslot is none of the above, it is free
+    if (!isDisabled && isLoggedIn && !isOwnReservation && !isReserved && !isSelected) {
+      return t('TimeSlot.available');
+    }
+
+    return undefined;
   }
 
   getReservationInfoNotification(isLoggedIn, resource, slot, t) {
@@ -168,6 +182,7 @@ class TimeSlot extends PureComponent {
       selected,
       slot,
       t,
+      isLoggedIn
     } = this.props;
 
     const { disabled, isPast } = this.state;
@@ -204,7 +219,7 @@ class TimeSlot extends PureComponent {
           <time dateTime={slot.asISOString}>{startTime}</time>
           <span
             aria-label={this.getSelectButtonStatusLabel(
-              disabled, isPast, isOwnReservation, slot.reserved, selected
+              disabled, isLoggedIn, isOwnReservation, slot.reserved, selected
             )}
             className="app-TimeSlot__status"
           />

@@ -326,6 +326,7 @@
   "TimeRangeControl.duration.label": "Längd",
   "TimeSlot.available": "Ledigt",
   "TimeSlot.label.removeSelection": "Ta bort val",
+  "TimeSlot.logInFirst": "Logga in först",
   "TimeSlot.notSelectable": "Kan inte väljas",
   "TimeSlot.editing": "Redigeras",
   "TimeSlot.ownReservation": "Egen bokning",
