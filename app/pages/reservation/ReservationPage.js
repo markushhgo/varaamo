@@ -191,7 +191,7 @@ class UnconnectedReservationPage extends Component {
     return (
       <div className="app-ReservationPage">
         <PageWrapper title={title} transparent>
-          <div>
+          <React.Fragment>
             <div className={`app-ReservationPage__content ${contrast}`}>
               <h1>{title}</h1>
               <Loader loaded={!isEmpty(resource)}>
@@ -236,7 +236,7 @@ class UnconnectedReservationPage extends Component {
                 )}
               </Loader>
             </div>
-          </div>
+          </React.Fragment>
         </PageWrapper>
       </div>
     );
