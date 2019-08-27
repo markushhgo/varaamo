@@ -161,6 +161,7 @@
   "ReservationAccessCode.defaultText": "PIN code",
   "ReservationAccessCode.pending": "PIN code is shown here. It will be generated 24h before the start of the reservation and will be sent to your email.",
   "ReservationCalendar.header": "Timetable",
+  "ReservationCalendar.Confirmation.header": "Summary and confirmation",
   "ReservationCalendarPickerLegend.booked": "Booked",
   "ReservationCalendarPickerLegend.busy": "Partially booked",
   "ReservationCalendarPickerLegend.free": "Free",
