@@ -27,6 +27,9 @@ function getState(resources = [], units = [], user = defaultUser) {
       users: { [user.id]: user },
     }),
     ui: Immutable({
+      accessibility: {
+        isHighContrast: false,
+      },
       reservations: {
         selected: [
           {
@@ -55,6 +58,14 @@ function getProps(id = 'some-id') {
 }
 
 describe('pages/reservation/reservationPageSelector', () => {
+  test('returns contrast', () => {
+    const state = getState();
+    const props = getProps();
+    const selected = reservationPageSelector(state, props);
+
+    expect(selected.contrast).toBeDefined();
+  });
+
   test('returns date', () => {
     const state = getState();
     const props = getProps();

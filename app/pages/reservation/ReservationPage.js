@@ -149,6 +149,7 @@ class UnconnectedReservationPage extends Component {
   render() {
     const {
       actions,
+      contrast,
       isAdmin,
       isStaff,
       isFetchingResource,
@@ -191,7 +192,7 @@ class UnconnectedReservationPage extends Component {
       <div className="app-ReservationPage">
         <PageWrapper title={title} transparent>
           <div>
-            <div className="app-ReservationPage__content">
+            <div className={`app-ReservationPage__content ${contrast}`}>
               <h1>{title}</h1>
               <Loader loaded={!isEmpty(resource)}>
                 <ReservationPhases currentPhase={view} isEditing={isEditing || isEdited} />
@@ -244,6 +245,7 @@ class UnconnectedReservationPage extends Component {
 
 UnconnectedReservationPage.propTypes = {
   actions: PropTypes.object.isRequired,
+  contrast: PropTypes.string,
   date: PropTypes.string.isRequired,
   isAdmin: PropTypes.bool.isRequired,
   isStaff: PropTypes.bool.isRequired,

@@ -14,6 +14,7 @@ import {
 import { createResourceSelector, unitsSelector } from 'state/selectors/dataSelectors';
 import dateSelector from 'state/selectors/dateSelector';
 import requestIsActiveSelectorFactory from 'state/selectors/factories/requestIsActiveSelectorFactory';
+import { contrastSelector } from 'state/selectors/accessibilitySelectors';
 
 const selectedSelector = state => orderBy(state.ui.reservations.selected, 'begin');
 const createdSelector = (state) => {
@@ -37,6 +38,7 @@ const unitSelector = createSelector(
 );
 
 const reservationPageSelector = createStructuredSelector({
+  contrast: contrastSelector,
   date: dateSelector,
   isAdmin: isAdminSelector,
   isStaff: createIsStaffSelector(resourceSelector),

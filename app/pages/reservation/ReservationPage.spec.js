@@ -30,6 +30,7 @@ describe('pages/reservation/ReservationPage', () => {
       putReservation: simple.mock(),
       postReservation: simple.mock(),
     },
+    contrast: '',
     date: '2016-10-10',
     isAdmin: false,
     isStaff: false,
@@ -91,6 +92,20 @@ describe('pages/reservation/ReservationPage', () => {
 
       expect(pageWrapper).toHaveLength(1);
       expect(pageWrapper.prop('title')).toBe('ReservationPage.editReservationTitle');
+    });
+  });
+
+  describe('__content ', () => {
+    const defClass = 'app-ReservationPage__content ';
+
+    test('does not get additional class when high-contrast: false', () => {
+      const element = getWrapper().find('div').at(2);
+      expect(element.prop('className')).toBe(defClass);
+    });
+
+    test('gets additional class when high-contrast: true', () => {
+      const element = getWrapper({ contrast: 'high-contrast' }).find('div').at(2);
+      expect(element.prop('className')).toBe(`${defClass}high-contrast`);
     });
   });
 

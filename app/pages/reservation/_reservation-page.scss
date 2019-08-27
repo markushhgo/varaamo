@@ -8,4 +8,13 @@
     background-color: $yellow;
     color: $black;
   }
+
+  &__content {
+    @include highContrast {
+      .well {
+        border-color: black;
+        background-color: transparent;
+      }
+    };
+  }
 }
