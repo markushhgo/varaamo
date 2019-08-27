@@ -13,4 +13,10 @@
   h6 {
     color: $gray-darker;
   }
+
+  button {
+    @include addFocus($color: black){
+      outline-offset: 2px;
+    };
+  }
 }

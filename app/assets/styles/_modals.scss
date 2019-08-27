@@ -16,7 +16,10 @@
       border: none;
       &::before {
         content: '';
-        @include helsinki-logo($black);
+
+        background-image: url('../pictures/logo.png');
+        filter: brightness(0);
+
         position: absolute;
         background-repeat: no-repeat;
         background-size: contain;

@@ -167,7 +167,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: flex-end;
-    font-size: $font-size-small;
+
     padding: $padding-xs-vertical $padding-base-horizontal;
     line-height: 16px;
 
@@ -187,7 +187,7 @@
 
       a {
         color: $text-color;
-        font-size: $font-size-small;
+
         font-weight: $headings-font-weight;
       }
     }
@@ -317,6 +317,10 @@
   .reservation-slot {
     background-color: $gray-lighter;
     overflow: hidden;
+
+    @include addFocus{
+      outline-offset: -2px;
+    };
 
     &-selectable {
       background-color: $gray-light;
