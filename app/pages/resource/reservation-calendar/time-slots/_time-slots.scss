@@ -61,6 +61,9 @@
     &:hover:not(.app-TimeSlot--disabled) {
       background-color: $dark-gray;
       color: $white;
+      .app-TimeSlot__time {
+        color: white;
+      }
     }
 
     &--disabled {
@@ -86,6 +89,9 @@
     &--reserved {
       color: $white;
       background-color: $red;
+      .app-TimeSlot__time {
+        color: white;
+      }
     }
     &--reservation-ending + .app-TimeSlot--reservation-starting {
       border-top: solid $white 1px;
@@ -98,6 +104,9 @@
 
     &--own-reservation {
       background-color: $theme-info;
+      .app-TimeSlot__time {
+        color: white;
+      }
     }
     &--own-reservation:not(.app-TimeSlot--editing) {
       &:hover {
@@ -118,6 +127,9 @@
     &--selected {
       color: $white;
       background-color: $dark-gray;
+      .app-TimeSlot__time {
+        color: white;
+      }
       .app-TimeSlot__icon {
         @include icon-check($white);
       }
@@ -126,6 +138,9 @@
     &--highlight {
       color: $white;
       background-color: $dark-gray;
+      .app-TimeSlot__time {
+        color: white;
+      }
     }
 
     &__icon {
