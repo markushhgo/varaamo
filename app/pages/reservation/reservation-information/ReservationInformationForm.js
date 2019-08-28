@@ -130,7 +130,7 @@ class UnconnectedReservationInformationForm extends Component {
       <div>
         <Form className="reservation-form" horizontal>
           { includes(this.props.fields, 'reserverName') && (
-            <h3>{t('ReservationInformationForm.reserverInformationTitle')}</h3>
+            <h2>{t('ReservationInformationForm.reserverInformationTitle')}</h2>
           )}
           { includes(this.props.fields, 'staffEvent') && (
             <Well>
@@ -147,7 +147,6 @@ class UnconnectedReservationInformationForm extends Component {
             'reserverName',
             'text',
             t('common.reserverNameLabel'),
-            { placeholder: t('common.reserverNameLabel') }
           )}
           {this.renderField(
             'reserverId',
@@ -159,34 +158,29 @@ class UnconnectedReservationInformationForm extends Component {
             'reserverPhoneNumber',
             'text',
             t('common.reserverPhoneNumberLabel'),
-            { placeholder: t('common.reserverPhoneNumberLabel') }
           )}
           {this.renderField(
             'reserverEmailAddress',
             'email',
             t('common.reserverEmailAddressLabel'),
-            { placeholder: t('common.reserverEmailAddressLabel') }
           )}
           {includes(this.props.fields, 'reserverAddressStreet')
             && this.renderField(
               'reserverAddressStreet',
               'text',
               t('common.addressStreetLabel'),
-              { placeholder: t('common.addressStreetLabel') }
             )}
           {includes(this.props.fields, 'reserverAddressZip')
             && this.renderField(
               'reserverAddressZip',
               'text',
               t('common.addressZipLabel'),
-              { placeholder: t('common.addressZipLabel') }
             )}
           {includes(this.props.fields, 'reserverAddressCity')
             && this.renderField(
               'reserverAddressCity',
               'text',
               t('common.addressCityLabel'),
-              { placeholder: t('common.addressCityLabel') }
             )
           }
           {includes(this.props.fields, 'billingAddressStreet')
@@ -197,7 +191,6 @@ class UnconnectedReservationInformationForm extends Component {
               'billingAddressStreet',
               'text',
               t('common.addressStreetLabel'),
-              { placeholder: t('common.addressStreetLabel') }
             )
           }
           {includes(this.props.fields, 'billingAddressZip')
@@ -205,7 +198,6 @@ class UnconnectedReservationInformationForm extends Component {
               'billingAddressZip',
               'text',
               t('common.addressZipLabel'),
-              { placeholder: t('common.addressZipLabel') }
             )
           }
           {includes(this.props.fields, 'billingAddressCity')
@@ -213,7 +205,6 @@ class UnconnectedReservationInformationForm extends Component {
               'billingAddressCity',
               'text',
               t('common.addressCityLabel'),
-              { placeholder: t('common.addressCityLabel') }
             )
           }
           <h3>{t('ReservationInformationForm.eventInformationTitle')}</h3>
