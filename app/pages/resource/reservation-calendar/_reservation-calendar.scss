@@ -5,6 +5,7 @@
 
   &__reserve-button {
     font-size: 24px;
+   @include addFocus(4px,black);
   }
 }
 
