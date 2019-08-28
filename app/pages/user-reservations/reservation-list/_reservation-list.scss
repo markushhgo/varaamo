@@ -70,7 +70,7 @@ $reservation-list-label-height: 20px;
     .action-container {
       min-height: 180px;
 
-     @media (max-width: $screen-sm-min) {
+     @media (max-width: $screen-xs-min) {
        min-height: 230px;
      }
 
@@ -80,6 +80,7 @@ $reservation-list-label-height: 20px;
         margin-bottom: 25px;
         @media (max-width: $screen-xs-max) {
           top: 20%;
+          margin-left: 15px;
         }
 
         @media (min-width: $screen-md-min) and (max-width: $screen-md-max) {
