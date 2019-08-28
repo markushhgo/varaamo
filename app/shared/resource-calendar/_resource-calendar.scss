@@ -2,6 +2,7 @@
   $available-color: $light-gray;
   $busy-color: $yellow;
   $booked-color: $red;
+  $available-color-green: #00d7a7;
 
   display: flex;
   flex-wrap: wrap;
@@ -156,7 +157,7 @@
         color: $dark-gray;
       }
       &--available:not(.DayPicker-Day--disabled) {
-        background-color: $turku-yellow;
+        background-color: $available-color-green;
         &.DayPicker-Day--selected {
           background-color: $available-color;
         }

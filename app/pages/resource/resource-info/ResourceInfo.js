@@ -17,7 +17,8 @@ function ResourceInfo({
 
   return (
     <Row>
-      <section aria-label={t('ResourcePage.info')} className="app-ResourceInfo">
+      <section aria-labelledby="ResourcePageInfo" className="app-ResourceInfo">
+        <h2 className="visually-hidden" id="ResourcePageInfo">{t('ResourcePage.info')}</h2>
         <div className="app-ResourceInfo__description">
           {resource.description && <WrappedText openLinksInNewTab text={resource.description} />}
         </div>

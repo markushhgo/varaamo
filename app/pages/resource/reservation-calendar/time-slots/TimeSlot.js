@@ -79,6 +79,39 @@ class TimeSlot extends PureComponent {
     }
   }
 
+  getSelectButtonStatusLabel(
+    isDisabled, isLoggedIn, isOwnReservation, isReserved, isSelected
+  ) {
+    const { t } = this.props;
+
+    if (isOwnReservation) {
+      return `${t('TimeSlot.notSelectable')} - ${t('TimeSlot.ownReservation')}`;
+    }
+
+    if (isReserved) {
+      return `${t('TimeSlot.notSelectable')} - ${t('TimeSlot.reserved')}`;
+    }
+
+    if (isSelected) {
+      return t('TimeSlot.selected');
+    }
+
+    // if timeslot is otherwise disabled
+    if (isDisabled && !isOwnReservation && !isReserved && !isSelected) {
+      if (!isLoggedIn) {
+        return `${t('TimeSlot.notSelectable')} - ${t('TimeSlot.logInFirst')}`;
+      }
+      return t('TimeSlot.notSelectable');
+    }
+
+    // if timeslot is none of the above, it is free
+    if (!isDisabled && isLoggedIn && !isOwnReservation && !isReserved && !isSelected) {
+      return t('TimeSlot.available');
+    }
+
+    return undefined;
+  }
+
   getReservationInfoNotification(isLoggedIn, resource, slot, t) {
     if (new Date(slot.end) < new Date() || slot.reserved) {
       return null;
@@ -149,6 +182,7 @@ class TimeSlot extends PureComponent {
       selected,
       slot,
       t,
+      isLoggedIn
     } = this.props;
 
     const { disabled, isPast } = this.state;
@@ -181,8 +215,14 @@ class TimeSlot extends PureComponent {
           onMouseLeave={() => !disabled && onMouseLeave()}
           type="button"
         >
-          <span className="app-TimeSlot__icon" />
-          <time dateTime={slot.asISOString}>{startTime}</time>
+          <span aria-hidden="true" className="app-TimeSlot__icon" />
+          <time className="app-TimeSlot__time" dateTime={slot.asISOString}>{startTime}</time>
+          <span
+            aria-label={this.getSelectButtonStatusLabel(
+              disabled, isLoggedIn, isOwnReservation, slot.reserved, selected
+            )}
+            className="app-TimeSlot__status"
+          />
         </button>
         {showClear && (
           <button

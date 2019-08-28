@@ -31,6 +31,18 @@ describe('pages/resource/resource-info/ResourceInfo', () => {
     return shallowWithIntl(<ResourceInfo {...defaultProps} {...extraProps} />);
   }
 
+  test('renders section with correct props', () => {
+    const section = getWrapper().find('.app-ResourceInfo');
+    expect(section).toHaveLength(1);
+    expect(section.prop('aria-labelledby')).toBe('ResourcePageInfo');
+  });
+
+  test('renders header text', () => {
+    const header = getWrapper().find('#ResourcePageInfo');
+    expect(header).toHaveLength(1);
+    expect(header.text()).toBe('ResourcePage.info');
+  });
+
   test('renders resource description as WrappedText', () => {
     const wrappedText = getWrapper()
       .find('.app-ResourceInfo__description')
