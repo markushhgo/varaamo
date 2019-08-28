@@ -185,7 +185,8 @@ class UnconnectedResourcePage extends Component {
                     })}
                   <ResourceInfo isLoggedIn={isLoggedIn} resource={resource} unit={unit} />
 
-                  <Panel aria-label={t('ResourcePage.timeTable')} defaultExpanded header={t('ResourceInfo.reserveTitle')} role="region">
+                  <Panel aria-labelledby="ResourceCalendarHeader" defaultExpanded header={t('ResourceInfo.reserveTitle')} role="region">
+                    <h2 className="visually-hidden" id="ResourceCalendarHeader">{t('ResourceCalendar.header')}</h2>
                     {resource.externalReservationUrl && (
                       <form action={resource.externalReservationUrl}>
                         <input
