@@ -66,6 +66,7 @@ class UnconnectedAdminResourcesPage extends Component {
       t,
       resourceTypes,
       contrast,
+      minPeriod,
     } = this.props;
     return (
       <PageWrapper className={`admin-resources-page ${contrast}`} title={(t('AdminResourcesPage.adminTitle'))}>
@@ -82,7 +83,7 @@ class UnconnectedAdminResourcesPage extends Component {
               />
               <AvailabilityView
                 date={this.props.date}
-                groups={[{ name: '', resources }]}
+                groups={[{ name: '', resources, minPeriod }]}
                 isAdmin={isAdmin}
                 onDateChange={this.props.actions.changeAdminResourcesPageDate}
                 onSelect={this.handleSelect}
@@ -120,6 +121,7 @@ UnconnectedAdminResourcesPage.propTypes = {
   t: PropTypes.func.isRequired,
   resourceTypes: PropTypes.array.isRequired,
   contrast: PropTypes.string,
+  minPeriod: PropTypes.arrayOf(PropTypes.string),
 };
 
 UnconnectedAdminResourcesPage = injectT(UnconnectedAdminResourcesPage);  // eslint-disable-line

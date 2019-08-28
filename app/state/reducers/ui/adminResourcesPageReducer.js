@@ -10,6 +10,7 @@ const initialState = Immutable({
   date: undefined,
   selectedResourceTypes: [],
   resourceIds: [],
+  resourceMinPeriods: []
 });
 
 function adminResourcesPageReducer(state = initialState, action) {
@@ -36,7 +37,7 @@ function adminResourcesPageReducer(state = initialState, action) {
     case types.API.RESOURCES_GET_SUCCESS: {
       const meta = action.meta;
       if (meta && meta.source === 'adminResourcesPage') {
-        return state.merge({ resourceIds: map(action.payload.entities.resources, 'id') });
+        return state.merge({ resourceIds: map(action.payload.entities.resources, 'id'), resourceMinPeriods: map(action.payload.entities.resources, 'minPeriod') });
       }
       return state;
     }
