@@ -216,7 +216,7 @@ class TimeSlot extends PureComponent {
           type="button"
         >
           <span aria-hidden="true" className="app-TimeSlot__icon" />
-          <time dateTime={slot.asISOString}>{startTime}</time>
+          <time className="app-TimeSlot__time" dateTime={slot.asISOString}>{startTime}</time>
           <span
             aria-label={this.getSelectButtonStatusLabel(
               disabled, isLoggedIn, isOwnReservation, slot.reserved, selected
