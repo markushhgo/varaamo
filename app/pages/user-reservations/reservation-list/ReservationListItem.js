@@ -45,13 +45,13 @@ class ReservationListItem extends Component {
             <h2>{resource.name}</h2>
           </Link>
           <div>
-            <img alt={resource.type.name} className="location" src={iconHome} />
+            <img alt={t('common.addressStreetLabel')} className="location" src={iconHome} />
             <span className="unit-name">{unit.name}</span>
             {nameSeparator}
             <span>{unit.streetAddress}</span>
           </div>
           <div>
-            <img alt={resource.type.name} className="timeslot" src={iconCalendar} />
+            <img alt={t('common.reservationTimeLabel')} className="timeslot" src={iconCalendar} />
             <TimeRange begin={reservation.begin} end={reservation.end} />
           </div>
           <ReservationAccessCode

@@ -63,10 +63,24 @@ describe('pages/user-reservations/reservation-list/ReservationListItem', () => {
       expect(component.find('h2').text()).toContain(expected);
     });
 
+    test('displays unit icon with correct props', () => {
+      const unitIcon = component.find('.location');
+      expect(unitIcon.length).toBe(1);
+      expect(unitIcon.prop('alt')).toBe('common.addressStreetLabel');
+      expect(unitIcon.prop('src')).toBeDefined();
+    });
+
     test('displays the name of the given unit in props', () => {
       const expected = props.unit.name;
 
       expect(component.find('.unit-name').text()).toContain(expected);
+    });
+
+    test('displays timeslot icon with correct props', () => {
+      const timeslotIcon = component.find('.timeslot');
+      expect(timeslotIcon.length).toBe(1);
+      expect(timeslotIcon.prop('alt')).toBe('common.reservationTimeLabel');
+      expect(timeslotIcon.prop('src')).toBeDefined();
     });
 
     test('contains TimeRange component with correct props', () => {
