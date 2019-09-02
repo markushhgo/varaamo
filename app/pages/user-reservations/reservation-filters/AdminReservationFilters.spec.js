@@ -18,8 +18,14 @@ describe('pages/user-reservations/reservation-filters/AdminReservationFilters', 
   describe('state filter', () => {
     const select = getWrapper().find(SelectControl);
 
-    test('renders a Select component', () => {
+    test('renders a Select component with correct props', () => {
       expect(select.length).toBe(1);
+      expect(select.prop('id')).toBe('reservation');
+      expect(select.prop('isClearable')).toBe(false);
+      expect(select.prop('isSearchable')).toBe(false);
+      expect(select.prop('label')).toBe('UserReservationsPage.preliminaryReservationsHeader');
+      expect(select.prop('name')).toBe('reservation-state-select');
+      expect(select.prop('onChange')).toBeDefined();
     });
 
     test('passes correct value to the Select component', () => {
