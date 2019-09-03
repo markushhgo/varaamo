@@ -66,6 +66,14 @@ describe('pages/reservation/reservationPageSelector', () => {
     expect(selected.contrast).toBeDefined();
   });
 
+  test('returns currentLanguage', () => {
+    const state = getState();
+    const props = getProps();
+    const selected = reservationPageSelector(state, props);
+
+    expect(selected.currentLanguage).toBeDefined();
+  });
+
   test('returns date', () => {
     const state = getState();
     const props = getProps();

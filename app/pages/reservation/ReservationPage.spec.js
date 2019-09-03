@@ -31,6 +31,7 @@ describe('pages/reservation/ReservationPage', () => {
       postReservation: simple.mock(),
     },
     contrast: '',
+    currentLanguage: 'fi',
     date: '2016-10-10',
     isAdmin: false,
     isStaff: false,
@@ -185,9 +186,23 @@ describe('pages/reservation/ReservationPage', () => {
   });
 
   describe('ReservationConfirmation', () => {
-    test('does not render ReservationInformation by default', () => {
+    test('does not render ReservationConfirmation by default', () => {
       const reservationConfirmation = getWrapper().find(ReservationConfirmation);
       expect(reservationConfirmation).toHaveLength(0);
+    });
+
+    test('renders ReservationConfirmation with correct props when view is confirmation', () => {
+      const reservationEdited = {};
+      const wrapper = getWrapper({ reservationEdited });
+      wrapper.setState({ view: 'confirmation' });
+      const reservationConfirmation = wrapper.find(ReservationConfirmation);
+
+      expect(reservationConfirmation).toHaveLength(1);
+      expect(reservationConfirmation.prop('currentLanguage')).toBe(defaultProps.currentLanguage);
+      expect(reservationConfirmation.prop('history')).toBe(defaultProps.history);
+      expect(reservationConfirmation.prop('reservation')).toBe(reservationEdited);
+      expect(reservationConfirmation.prop('resource')).toBe(defaultProps.resource);
+      expect(reservationConfirmation.prop('user')).toBe(defaultProps.user);
     });
   });
 

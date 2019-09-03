@@ -1,3 +1,5 @@
+import constants from 'constants/AppConstants';
+
 import React from 'react';
 import { FormattedHTMLMessage } from 'react-intl';
 import Immutable from 'seamless-immutable';
@@ -18,6 +20,7 @@ describe('pages/reservation/reservation-confirmation/ReservationConfirmation', (
   };
 
   const defaultProps = {
+    currentLanguage: 'fi',
     history,
     isEdited: false,
     reservation: Immutable(Reservation.build({ user: User.build() })),
@@ -68,6 +71,26 @@ describe('pages/reservation/reservation-confirmation/ReservationConfirmation', (
       .filter({ id: 'ReservationConfirmation.confirmationText' });
     expect(email).toHaveLength(1);
     expect(email.prop('values')).toEqual({ email: reserverEmailAddress });
+  });
+
+  describe('renders feedback link with correct props', () => {
+    test('when currentLanguage is fi', () => {
+      const link = getWrapper({ currentLanguage: 'fi' })
+        .find(FormattedHTMLMessage)
+        .filter({ id: 'ReservationConfirmation.feedbackText' });
+
+      expect(link.length).toBe(1);
+      expect(link.prop('values')).toEqual({ href: constants.FEEDBACK_URL.FI });
+    });
+
+    test('when currentLanguage is sv', () => {
+      const link = getWrapper({ currentLanguage: 'sv' })
+        .find(FormattedHTMLMessage)
+        .filter({ id: 'ReservationConfirmation.feedbackText' });
+
+      expect(link.length).toBe(1);
+      expect(link.prop('values')).toEqual({ href: constants.FEEDBACK_URL.SV });
+    });
   });
 
   test('renders reservation.user.email', () => {

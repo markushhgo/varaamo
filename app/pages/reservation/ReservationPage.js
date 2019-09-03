@@ -150,6 +150,7 @@ class UnconnectedReservationPage extends Component {
     const {
       actions,
       contrast,
+      currentLanguage,
       isAdmin,
       isStaff,
       isFetchingResource,
@@ -227,6 +228,7 @@ class UnconnectedReservationPage extends Component {
                 )}
                 {view === 'confirmation' && (reservationCreated || reservationEdited) && (
                   <ReservationConfirmation
+                    currentLanguage={currentLanguage}
                     history={history}
                     isEdited={isEdited}
                     reservation={reservationCreated || reservationEdited}
@@ -246,6 +248,7 @@ class UnconnectedReservationPage extends Component {
 UnconnectedReservationPage.propTypes = {
   actions: PropTypes.object.isRequired,
   contrast: PropTypes.string,
+  currentLanguage: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
   isAdmin: PropTypes.bool.isRequired,
   isStaff: PropTypes.bool.isRequired,
