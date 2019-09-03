@@ -39,7 +39,7 @@ class FooterContent extends React.Component {
               <FormattedHTMLMessage id="Footer.turkuText" />
             </p>
             <p role="presentation">
-              <a className="feedback-link" href={currentLink}>
+              <a className="feedback-link" href={currentLink} rel="noopener noreferrer" target="_blank">
                 {t('Footer.feedbackLink')}
               </a>
             </p>

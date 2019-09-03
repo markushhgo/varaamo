@@ -28,7 +28,7 @@ class AboutPage extends React.Component {
         <p>
           {t('AboutPageContent.feedbackParagraph')}
           {' '}
-          <a className="feedback-link" href={currentLink}>
+          <a className="feedback-link" href={currentLink} rel="noopener noreferrer" target="_blank">
             {t('AboutPageContent.feedbackLink')}
           </a>
         </p>
