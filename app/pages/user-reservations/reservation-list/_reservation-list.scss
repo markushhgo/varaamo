@@ -68,19 +68,19 @@ $reservation-list-label-height: 20px;
     }
 
     .action-container {
-      min-height: 180px;
 
-     @media (max-width: $screen-xs-min) {
-       min-height: 230px;
-     }
+@media (min-width: $screen-xs-min) {
+  min-height: 180px;
+}
 
       .buttons {
         position: absolute;
         bottom: 0;
         margin-bottom: 25px;
+        @include addFocus;
         @media (max-width: $screen-xs-max) {
-          top: 20%;
-          margin-left: 15px;
+          top: -15px;
+          left: 20%;
         }
 
         @media (min-width: $screen-md-min) and (max-width: $screen-md-max) {
@@ -110,9 +110,6 @@ $reservation-list-label-height: 20px;
             margin-bottom: 10px;
           }
 
-          @media (max-width: $screen-xs-max) {
-            margin-left: -15px;
-          }
         }
       }
     }
@@ -122,6 +119,7 @@ $reservation-list-label-height: 20px;
       text-decoration: none;
       > h2{
         margin-top: 12px;
+        overflow-wrap: break-word;
       }
     }
   }
