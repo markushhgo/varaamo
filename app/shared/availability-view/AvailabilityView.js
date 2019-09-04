@@ -71,16 +71,8 @@ export default class AvailabilityView extends React.Component {
     const maxTime = moment(slot.maxPeriod, 'hh:mm:ss').format('HH:mm:ss');
     const maxTimeD = moment.duration(maxTime).asHours();
     const durationTime = moment.duration((endTime.diff(startTime))).asHours();
-    const durationT = moment.duration(durationTime).asHours();
+
     const isEnough = durationTime <= maxTimeD;
-    // eslint-disable-next-line no-console
-    //    console.log(durationTime);
-    // eslint-disable-next-line no-console
-    //    console.log(durationT);
-    // eslint-disable-next-line no-console
-    //    console.log(minTime);
-    // eslint-disable-next-line no-console
-    //    console.log(isEnough);
 
     return !!isEnough;
   }
@@ -91,16 +83,8 @@ export default class AvailabilityView extends React.Component {
     const minTime = moment(slot.minPeriod, 'hh:mm:ss').format('HH:mm:ss');
     const minTimeD = moment.duration(minTime).asHours();
     const durationTime = moment.duration((endTime.diff(startTime))).asHours();
-    const durationT = moment.duration(durationTime).asHours();
+
     const isEnough = durationTime >= minTimeD;
-    // eslint-disable-next-line no-console
-    //    console.log(durationTime);
-    // eslint-disable-next-line no-console
-    //    console.log(durationT);
-    // eslint-disable-next-line no-console
-    //    console.log(minTime);
-    // eslint-disable-next-line no-console
-    //    console.log(isEnough);
 
     return !!isEnough;
   }
@@ -131,26 +115,14 @@ export default class AvailabilityView extends React.Component {
         return;
       }
     }
-    /*    const isValid = (
-      this.state.selection.resourceId === slot.resourceId
-      && this.state.selection.begin <= slot.begin
-      && this.handleReservationMinPeriod(slot)
-      && this.handleReservationMaxPeriod(slot)
-    );
 
-    if (!isValid) {
-      return;
-    }
-*/
     const selection = { ...this.state.selection, end: slot.end };
     if (this.props.onSelect) this.props.onSelect(selection);
     this.setState({ selection: null });
   }
 
   startSelection(slot) {
-    if (true) {
-      this.setState({ selection: slot });
-    }
+    this.setState({ selection: slot });
   }
 
   render() {

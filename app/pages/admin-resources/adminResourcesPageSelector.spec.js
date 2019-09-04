@@ -33,6 +33,14 @@ describe('pages/admin-resources/adminResourcesPageSelector', () => {
     expect(getSelected().contrast).toBeDefined();
   });
 
+  test('returns minPeriod', () => {
+    expect(getSelected().minPeriod).toBeDefined();
+  });
+
+  test('returns maxPeriod', () => {
+    expect(getSelected().maxPeriod).toBeDefined();
+  });
+
   test('returns date', () => {
     const selected = getSelected({ 'ui.pages.adminResources': { date: '2017-02-01' } });
     expect(selected.date).toBe('2017-02-01');
@@ -96,6 +104,34 @@ describe('pages/admin-resources/adminResourcesPageSelector', () => {
       const selected = getSelected(extraState);
       expect(selected.selectedResourceTypes).toEqual(['school']);
       expect(selected.resources).toEqual([1]);
+    }
+  );
+
+  test(
+    'returns an object of minPeriod',
+    () => {
+      const minTime = { awd123: '01:00:00', asd: '02:00:00' };
+
+      const extraState = {
+        'ui.pages.adminResources.resourceMinPeriod': { awd123: '01:00:00', asd: '02:00:00' }
+      };
+
+      const selected = getSelected(extraState);
+      expect(selected.minPeriod).toStrictEqual(minTime);
+    }
+  );
+
+  test(
+    'returns an object of maxPeriod',
+    () => {
+      const maxTime = { awd123: '10:00:00', asd: '06:00:00' };
+
+      const extraState = {
+        'ui.pages.adminResources.resourceMaxPeriod': { awd123: '10:00:00', asd: '06:00:00' }
+      };
+
+      const selected = getSelected(extraState);
+      expect(selected.maxPeriod).toStrictEqual(maxTime);
     }
   );
 });

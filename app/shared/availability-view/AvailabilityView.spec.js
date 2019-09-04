@@ -44,10 +44,12 @@ describe('shared/availability-view/AvailabilityView', () => {
   test('renders TimelineGroups', () => {
     const date = '2016-11-12';
     const groups = [];
-    const element = getWrapper({ date, groups }).find(TimelineGroups);
+    const isAdmin = true;
+    const element = getWrapper({ date, groups, isAdmin }).find(TimelineGroups);
     expect(element).toHaveLength(1);
     expect(element.prop('date')).toBe(date);
     expect(element.prop('groups')).toBe(groups);
+    expect(element.prop('isAdmin')).toBe(isAdmin);
   });
 
   test('has correct initial state', () => {
@@ -255,6 +257,52 @@ describe('shared/availability-view/AvailabilityView', () => {
             end: '2016-01-01T11:30:00Z',
           }]);
         });
+
+        test('when not admin', () => {
+          const resourceId = 'resource-id';
+          const onSelect = simple.mock();
+          const wrapper = doSelect(
+            { isAdmin: false },
+            {
+              resourceId,
+              begin: '2016-01-01T10:30:00Z',
+              end: '2016-01-01T11:00:00Z',
+              minPeriod: '01:00:00',
+              maxPeriod: '10:00:00'
+            },
+            {
+              resourceId,
+              begin: '2016-01-01T11:00:00Z',
+              end: '2016-01-01T11:30:00Z',
+              minPeriod: '01:00:00',
+              maxPeriod: '10:00:00'
+            }
+          );
+          expect(wrapper.state()).toEqual({ selection: null, hoverSelection: null });
+        });
+
+        test('when admin', () => {
+          const resourceId = 'resource-id';
+          const onSelect = simple.mock();
+          const wrapper = doSelect(
+            {},
+            {
+              resourceId,
+              begin: '2016-01-01T10:30:00Z',
+              end: '2016-01-01T11:00:00Z',
+              minPeriod: '02:00:00',
+              maxPeriod: '10:00:00'
+            },
+            {
+              resourceId,
+              begin: '2016-01-01T11:00:00Z',
+              end: '2016-01-01T11:30:00Z',
+              minPeriod: '02:00:00',
+              maxPeriod: '10:00:00'
+            }
+          );
+          expect(wrapper.state()).toEqual({ selection: null, hoverSelection: null });
+        });
       });
 
       describe('end slot is invalid', () => {
@@ -264,6 +312,19 @@ describe('shared/availability-view/AvailabilityView', () => {
           expect(wrapper.state()).toEqual({ hoverSelection: null, selection: begin });
           expect(onSelect.called).toBe(false);
         }
+
+        test('same as start time', () => {
+          const wrapper = doSelect(
+            {},
+            {
+              resourceId: 'r1', begin: '2016-01-01T10:00:00Z'
+            },
+            {
+              resourceId: 'r1', begin: '2016-01-01T10:00:00Z'
+            }
+          );
+          expect(wrapper.state()).toEqual({ hoverSelection: null, selection: null });
+        });
 
         test('if after start time', () => {
           const resourceId = 'resource';

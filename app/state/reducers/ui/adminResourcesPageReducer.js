@@ -11,10 +11,8 @@ const initialState = Immutable({
   date: undefined,
   selectedResourceTypes: [],
   resourceIds: [],
-  resourceMinPeriods: [],
-  resourceMaxPeriods: [],
-  minTimesObj: {},
-  maxTimesObj: {},
+  resourceMinPeriod: {},
+  resourceMaxPeriod: {},
 });
 
 function adminResourcesPageReducer(state = initialState, action) {
@@ -43,11 +41,9 @@ function adminResourcesPageReducer(state = initialState, action) {
       if (meta && meta.source === 'adminResourcesPage') {
         return state.merge({
           resourceIds: map(action.payload.entities.resources, 'id'),
-          resourceMinPeriods: map(action.payload.entities.resources, 'minPeriod'),
-          resourceMaxPeriods: map(action.payload.entities.resources, 'maxPeriod'),
           // eslint-disable-next-line max-len
-          minTimesObj: mapValues(action.payload.entities.resources, 'minPeriod'),
-          maxTimesObj: mapValues(action.payload.entities.resources, 'maxPeriod')
+          resourceMinPeriod: mapValues(action.payload.entities.resources, 'minPeriod'),
+          resourceMaxPeriod: mapValues(action.payload.entities.resources, 'maxPeriod')
         });
       }
       return state;

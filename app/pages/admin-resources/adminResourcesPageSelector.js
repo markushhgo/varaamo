@@ -14,10 +14,8 @@ import requestIsActiveSelectorFactory from 'state/selectors/factories/requestIsA
 const dateSelector = state => state.ui.pages.adminResources.date || moment().format('YYYY-MM-DD');
 const resourceIdsSelector = state => state.ui.pages.adminResources.resourceIds;
 const selectedResourceTypesSelector = state => state.ui.pages.adminResources.selectedResourceTypes;
-const resourceMinPeriodSelector = state => state.ui.pages.adminResources.resourceMinPeriods;
-const resourceMaxPeriodSelector = state => state.ui.pages.adminResources.resourceMaxPeriods;
-const minPeriodSelector = state => state.ui.pages.adminResources.minTimesObj;
-const maxPeriodSelector = state => state.ui.pages.adminResources.maxTimesObj;
+const minPeriodSelector = state => state.ui.pages.adminResources.resourceMinPeriod;
+const maxPeriodSelector = state => state.ui.pages.adminResources.resourceMaxPeriod;
 
 const adminResourcesSelector = createSelector(
   resourceIdsSelector,
@@ -53,10 +51,8 @@ const adminResourcesPageSelector = createStructuredSelector({
   isFetchingResources: requestIsActiveSelectorFactory(ActionTypes.API.RESOURCES_GET_REQUEST),
   resources: filteredAdminResourcesIdsSelector,
   resourceTypes: adminResourceTypesSelector,
-  minPeriod: resourceMinPeriodSelector,
-  maxPeriod: resourceMaxPeriodSelector,
-  minTimes: minPeriodSelector,
-  maxTimes: maxPeriodSelector
+  minPeriod: minPeriodSelector,
+  maxPeriod: maxPeriodSelector
 });
 
 export default adminResourcesPageSelector;
