@@ -226,6 +226,8 @@
   "ReservationPhase.informationTitle": "Bokningens detaljer",
   "ReservationPhase.confirmationTitle": "Färdig",
   "ReservationPopover.selectionInfoHeader": "Välj evenemangets sluttid",
+  "ReservationPopover.minPeriod" : "Bokningens minimitid:",
+  "ReservationPopover.maxPeriod" : "Bokningens maximitid:",
   "ReservationSuccessModal.emailHelpText": "samt på bokningsbekräftelsen som skickats till e-postadressen: <strong> {email}</strong>",
   "ReservationSuccessModal.failedReservationsHeader": "Följande bokningar misslyckades:",
   "ReservationSuccessModal.ownReservationsPageHelpText": "I fortsättningen kan du kontrollera PIN-koden via sidan Mina bokningar",

@@ -224,6 +224,8 @@
   "ReservationPhase.informationTitle": "Varauksen lisätiedot",
   "ReservationPhase.confirmationTitle": "Valmis",
   "ReservationPopover.selectionInfoHeader": "Valitse varauksen päättymisajankohta",
+  "ReservationPopover.minPeriod" : "Varauksen kesto vähintään:",
+  "ReservationPopover.maxPeriod" : "Varauksen kesto korkeintaan:",
   "ReservationSuccessModal.emailHelpText": "sekä varausvahvistuksesta, joka on lähetetty sähköpostiosoitteeseen: <strong> {email}</strong>",
   "ReservationSuccessModal.failedReservationsHeader": "Seuraavien varausten tekeminen ei onnistunut:",
   "ReservationSuccessModal.ownReservationsPageHelpText": "PIN-koodin voit tarkistaa jatkossa \"Omat varaukset\" -sivulta",
