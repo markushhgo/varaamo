@@ -1,6 +1,7 @@
 import isEqual from 'lodash/isEqual';
 import PropTypes from 'prop-types';
 import React from 'react';
+import moment from 'moment';
 
 import ReservationInfoModal from 'shared/modals/reservation-info';
 import DateSelector from './DateSelector';
@@ -36,7 +37,11 @@ export default class AvailabilityView extends React.Component {
 
   handleReservationSlotClick(slot) {
     if (this.state.selection) {
-      this.endSelection(slot);
+      if (this.state.selection.begin === slot.begin) {
+        this.handleSelectionCancel();
+      } else {
+        this.endSelection(slot);
+      }
     } else {
       this.startSelection(slot);
     }
@@ -60,6 +65,46 @@ export default class AvailabilityView extends React.Component {
     }
   }
 
+  handleReservationMaxPeriod(slot) {
+    const startTime = moment(this.state.selection.begin);
+    const endTime = moment(slot.end);
+    const maxTime = moment(slot.maxPeriod, 'hh:mm:ss').format('HH:mm:ss');
+    const maxTimeD = moment.duration(maxTime).asHours();
+    const durationTime = moment.duration((endTime.diff(startTime))).asHours();
+    const durationT = moment.duration(durationTime).asHours();
+    const isEnough = durationTime <= maxTimeD;
+    // eslint-disable-next-line no-console
+    //    console.log(durationTime);
+    // eslint-disable-next-line no-console
+    //    console.log(durationT);
+    // eslint-disable-next-line no-console
+    //    console.log(minTime);
+    // eslint-disable-next-line no-console
+    //    console.log(isEnough);
+
+    return !!isEnough;
+  }
+
+  handleReservationMinPeriod(slot) {
+    const startTime = moment(this.state.selection.begin);
+    const endTime = moment(slot.end);
+    const minTime = moment(slot.minPeriod, 'hh:mm:ss').format('HH:mm:ss');
+    const minTimeD = moment.duration(minTime).asHours();
+    const durationTime = moment.duration((endTime.diff(startTime))).asHours();
+    const durationT = moment.duration(durationTime).asHours();
+    const isEnough = durationTime >= minTimeD;
+    // eslint-disable-next-line no-console
+    //    console.log(durationTime);
+    // eslint-disable-next-line no-console
+    //    console.log(durationT);
+    // eslint-disable-next-line no-console
+    //    console.log(minTime);
+    // eslint-disable-next-line no-console
+    //    console.log(isEnough);
+
+    return !!isEnough;
+  }
+
   handleSelectionCancel() {
     if (this.state.selection) {
       this.setState({ hoverSelection: null, selection: null });
@@ -67,20 +112,43 @@ export default class AvailabilityView extends React.Component {
   }
 
   endSelection(slot) {
-    const isValid = (
+    if (!this.props.isAdmin) {
+      const isValid = (
+        this.state.selection.resourceId === slot.resourceId
+        && this.state.selection.begin <= slot.begin
+        && this.handleReservationMinPeriod(slot)
+        && this.handleReservationMaxPeriod(slot)
+      );
+      if (!isValid) {
+        return;
+      }
+    } else {
+      const isValid = (
+        this.state.selection.resourceId === slot.resourceId
+        && this.state.selection.begin <= slot.begin
+      );
+      if (!isValid) {
+        return;
+      }
+    }
+    /*    const isValid = (
       this.state.selection.resourceId === slot.resourceId
       && this.state.selection.begin <= slot.begin
+      && this.handleReservationMinPeriod(slot)
+      && this.handleReservationMaxPeriod(slot)
     );
+
     if (!isValid) {
       return;
     }
+*/
     const selection = { ...this.state.selection, end: slot.end };
     if (this.props.onSelect) this.props.onSelect(selection);
     this.setState({ selection: null });
   }
 
   startSelection(slot) {
-    if (this.props.isAdmin) {
+    if (true) {
       this.setState({ selection: slot });
     }
   }
@@ -102,6 +170,7 @@ export default class AvailabilityView extends React.Component {
           <TimelineGroups
             date={this.props.date}
             groups={this.props.groups}
+            isAdmin={this.props.isAdmin}
             onReservationSlotClick={this.handleReservationSlotClick}
             onReservationSlotMouseEnter={this.handleReservationSlotMouseEnter}
             onReservationSlotMouseLeave={this.handleReservationSlotMouseLeave}

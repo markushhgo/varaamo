@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import { slotSize, slotWidth, slotMargin } from 'constants/SlotConstants';
 
 import some from 'lodash/some';
@@ -51,26 +52,35 @@ function isInsideOpeningHours(item, openingHours) {
   ));
 }
 
-function markItemSelectable(item, isSelectable, openingHours) {
+function isBeforeReservableAfter(item, reservableAfter, isAdmin) {
+  if (isAdmin) return true;
+  return (item.data.begin >= reservableAfter && item.data.end >= reservableAfter);
+}
+
+function markItemSelectable(item, isSelectable, openingHours, reservableAfter, isAdmin) {
   const selectable = (
     isSelectable
     && moment().isSameOrBefore(item.data.end)
     && (!openingHours || isInsideOpeningHours(item, openingHours))
+    && isBeforeReservableAfter(item, moment(reservableAfter).toISOString(true), isAdmin)
   );
   return { ...item, data: { ...item.data, isSelectable: selectable } };
 }
 
-function markItemsSelectable(items, isSelectable, openingHours) {
+function markItemsSelectable(items, isSelectable, openingHours, reservableAfter, isAdmin) {
   return items.map((item) => {
     if (item.type === 'reservation') return item;
-    return markItemSelectable(item, isSelectable, openingHours);
+    return markItemSelectable(item, isSelectable, openingHours, reservableAfter, isAdmin);
   });
 }
 
-function addSelectionData(selection, resource, items) {
-  if (!selection) {
-    return markItemsSelectable(items, true, resource.openingHours);
-  } if (selection.resourceId !== resource.id) {
+function addSelectionData(selection, resource, items, isAdmin) {
+  if (!selection && !isAdmin) {
+    return markItemsSelectable(items, true, resource.openingHours, resource.reservableAfter, isAdmin);
+  } if (!selection && isAdmin) {
+    return markItemsSelectable(items, true, resource.openingHours, resource.reservableAfter, isAdmin);
+  }
+  if (selection.resourceId !== resource.id) {
     // isSelectable is false by default, so nothing needs to be done.
     // This is a pretty important performance optimization when there are tons of
     // resources in the AvailabilityView and the selection is in a state where the
@@ -90,7 +100,7 @@ function addSelectionData(selection, resource, items) {
       lastSelectableFound = true;
       return item;
     }
-    return markItemSelectable(item, true, resource.openingHours);
+    return markItemSelectable(item, true, resource.openingHours, resource.reservableAfter, isAdmin);
   });
 }
 

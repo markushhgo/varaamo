@@ -1,6 +1,7 @@
 import types from 'constants/ActionTypes';
 
 import map from 'lodash/map';
+import mapValues from 'lodash/mapValues';
 import uniq from 'lodash/uniq';
 import filter from 'lodash/filter';
 import Immutable from 'seamless-immutable';
@@ -10,7 +11,10 @@ const initialState = Immutable({
   date: undefined,
   selectedResourceTypes: [],
   resourceIds: [],
-  resourceMinPeriods: []
+  resourceMinPeriods: [],
+  resourceMaxPeriods: [],
+  minTimesObj: {},
+  maxTimesObj: {},
 });
 
 function adminResourcesPageReducer(state = initialState, action) {
@@ -37,7 +41,14 @@ function adminResourcesPageReducer(state = initialState, action) {
     case types.API.RESOURCES_GET_SUCCESS: {
       const meta = action.meta;
       if (meta && meta.source === 'adminResourcesPage') {
-        return state.merge({ resourceIds: map(action.payload.entities.resources, 'id'), resourceMinPeriods: map(action.payload.entities.resources, 'minPeriod') });
+        return state.merge({
+          resourceIds: map(action.payload.entities.resources, 'id'),
+          resourceMinPeriods: map(action.payload.entities.resources, 'minPeriod'),
+          resourceMaxPeriods: map(action.payload.entities.resources, 'maxPeriod'),
+          // eslint-disable-next-line max-len
+          minTimesObj: mapValues(action.payload.entities.resources, 'minPeriod'),
+          maxTimesObj: mapValues(action.payload.entities.resources, 'maxPeriod')
+        });
       }
       return state;
     }

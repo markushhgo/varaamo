@@ -10,7 +10,7 @@ import { injectT } from 'i18n/index';
 class ReservationPopover extends PureComponent {
   render() {
     const {
-      begin, children, end, onCancel, t
+      begin, children, end, onCancel, t, minPeriod, maxPeriod
     } = this.props;
     const reservationLength = end ? moment.duration(moment(end).diff(moment(begin))) : null;
 
@@ -35,6 +35,19 @@ class ReservationPopover extends PureComponent {
               : `(${reservationLength.minutes()}min)`}
           </span>
         )}
+        {minPeriod && (
+          <span>
+              Vähintään:
+            {moment(minPeriod, 'hh:mm:ss').format('HH:mm')}
+          </span>
+        )}
+        {maxPeriod && (
+          <span>
+              Enintään:
+            {moment(maxPeriod, 'hh:mm:ss').format('HH:mm')}
+          </span>
+        )}
+
 
         <Glyphicon className="reservation-popover__cancel" glyph="trash" onClick={onCancel} />
       </Popover>
@@ -53,6 +66,13 @@ ReservationPopover.propTypes = {
   begin: PropTypes.string.isRequired,
   end: PropTypes.string.isRequired,
   t: PropTypes.func.isRequired,
+  minPeriod: PropTypes.string,
+  maxPeriod: PropTypes.string,
+};
+
+ReservationPopover.defaultProps = {
+  minPeriod: null,
+  maxPeriod: null
 };
 
 export default injectT(ReservationPopover);
