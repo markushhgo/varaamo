@@ -40,6 +40,7 @@ export default class TimelineGroups extends React.Component {
     onReservationSlotMouseLeave: PropTypes.func,
     onSelectionCancel: PropTypes.func,
     selection: PropTypes.object,
+    isAdmin: PropTypes.bool
   };
 
   constructor(props) {
@@ -79,6 +80,7 @@ export default class TimelineGroups extends React.Component {
         {this.props.groups.map(group => (
           <TimelineGroup
             date={this.props.date}
+            isAdmin={this.props.isAdmin}
             key={group.name}
             onReservationSlotClick={this.props.onReservationSlotClick}
             onReservationSlotMouseEnter={this.props.onReservationSlotMouseEnter}

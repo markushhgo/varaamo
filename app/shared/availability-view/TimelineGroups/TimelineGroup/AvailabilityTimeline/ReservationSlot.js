@@ -22,6 +22,8 @@ export class UninjectedReservationSlot extends React.Component {
       hover: PropTypes.bool,
       resourceId: PropTypes.string.isRequired,
     }),
+    minPeriod: PropTypes.string,
+    maxPeriod: PropTypes.string
   };
 
   constructor(props) {
@@ -56,6 +58,8 @@ export class UninjectedReservationSlot extends React.Component {
       begin: this.props.begin,
       end: this.props.end,
       resourceId: this.props.resourceId,
+      minPeriod: this.props.minPeriod,
+      maxPeriod: this.props.maxPeriod,
     };
   }
 
@@ -107,6 +111,8 @@ export class UninjectedReservationSlot extends React.Component {
         <ReservationPopover
           begin={this.props.selection.begin}
           end={this.props.selection.end}
+          maxPeriod={this.props.maxPeriod}
+          minPeriod={this.props.minPeriod}
           onCancel={this.props.onSelectionCancel}
         >
           {slot}

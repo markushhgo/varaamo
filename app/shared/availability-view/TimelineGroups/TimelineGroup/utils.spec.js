@@ -146,6 +146,81 @@ describe('shared/availability-view/utils', () => {
       const actual = utils.addSelectionData(null, resource, items);
       expect(actual).toEqual(expected);
     });
+
+    test('marks NOT selectable for non-admins if NOT isAfterReservableAfter ', () => {
+      const expected = getItems(false, false, false, false);
+      const isAdmin = false;
+      const resource = {
+        id: 'r1',
+        openingHours: [
+          { opens: '2016-01-01T11:30:00Z', closes: '2016-01-01T12:30:00Z' },
+          { opens: '2016-01-01T13:00:00Z', closes: '2016-01-01T13:30:00Z' },
+        ],
+        reservableAfter: '2016-01-03T00:00:00Z',
+      };
+      const actual = utils.addSelectionData(null, resource, items, isAdmin);
+      expect(actual).toEqual(expected);
+    });
+
+    test('marks selectable for non-admins if isAfterReservableAfter ', () => {
+      const expected = getItems(true, true, true, true);
+      const isAdmin = false;
+      const resource = {
+        id: 'r1',
+        openingHours: [
+          { opens: '2016-01-01T11:00:00Z', closes: '2016-01-01T13:00:00Z' },
+          { opens: '2016-01-01T13:00:00Z', closes: '2016-01-01T13:30:00Z' },
+        ],
+        reservableAfter: '2016-01-01T00:00:00Z',
+      };
+      const actual = utils.addSelectionData(null, resource, items, isAdmin);
+      expect(actual).toEqual(expected);
+    });
+
+    test('marks selectable for admins regardless of isAfterReservableAfter ', () => {
+      const expected = getItems(true, true, true, true);
+      const isAdmin = true;
+      const resource = {
+        id: 'r1',
+        openingHours: [
+          { opens: '2016-01-01T11:00:00Z', closes: '2016-01-01T13:00:00Z' },
+          { opens: '2016-01-01T13:00:00Z', closes: '2016-01-01T13:30:00Z' },
+        ],
+        reservableAfter: '2016-01-02T00:00:00Z',
+      };
+      const actual = utils.addSelectionData(null, resource, items, isAdmin);
+      expect(actual).toEqual(expected);
+    });
+
+    test('isAfterReservableAfter if given item is after', () => {
+      const item = {
+        data: {
+          begin: '2016-01-01T11:00:00Z',
+          end: '2016-01-01T11:30:00Z',
+          isSelectable: false,
+        },
+        type: 'reservation-slot',
+      };
+      const reservableAfter = '2016-01-01T00:00:00Z';
+
+      const isAfter = utils.isAfterReservableAfter(item, moment(reservableAfter).toISOString(true));
+      expect(isAfter).toBe(true);
+    });
+
+    test('isAfterReservableAfter if given item is NOT after', () => {
+      const item = {
+        data: {
+          begin: '2016-01-01T11:00:00Z',
+          end: '2016-01-01T11:30:00Z',
+          isSelectable: false,
+        },
+        type: 'reservation-slot',
+      };
+      const reservableAfter = '2016-01-05T00:00:00Z';
+
+      const isAfter = utils.isAfterReservableAfter(item, moment(reservableAfter).toISOString(true));
+      expect(isAfter).toBe(false);
+    });
   });
 
   describe('getTimelineItems', () => {
