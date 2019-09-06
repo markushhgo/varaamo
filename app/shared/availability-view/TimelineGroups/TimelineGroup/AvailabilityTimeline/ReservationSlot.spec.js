@@ -13,6 +13,8 @@ function getWrapper(props) {
     resourceId: '1',
     isSelectable: true,
     t: s => s,
+    maxPeriod: '10:00:00',
+    minPeriod: '01:00:00',
   };
   return shallow(<ReservationSlot {...defaults} {...props} />);
 }
@@ -101,6 +103,24 @@ describe('shared/availability-view/ReservationSlot', () => {
       });
       expect(popover).toHaveLength(1);
     });
+
+    test('gets maxPeriod and minPeriod props', () => {
+      const element = getPopover({
+        begin: '2016-01-01T10:00:00Z',
+        end: '2016-01-01T10:30:00Z',
+        maxPeriod: '12:00:00',
+        minPeriod: '02:00:00',
+        selection: {
+          begin: '2016-01-01T10:00:00Z',
+          end: '2016-01-01T12:00:00Z',
+          maxPeriod: '12:00:00',
+          minPeriod: '02:00:00',
+          resourceId: '1',
+        },
+      });
+      expect(element.prop('maxPeriod')).toBe('12:00:00');
+      expect(element.prop('minPeriod')).toBe('02:00:00');
+    });
   });
 
   describe('selection', () => {
@@ -176,11 +196,15 @@ describe('shared/availability-view/ReservationSlot', () => {
         const begin = '2017-01-02T14:00:00Z';
         const end = '2017-01-02T14:30:00Z';
         const resourceId = 'auuxn391';
+        const maxPeriod = '10:00:00';
+        const minPeriod = '01:00:00';
         callHandleClick({}, {
           begin, end, onClick, resourceId
         });
         expect(onClick.callCount).toBe(1);
-        expect(onClick.lastCall.args).toEqual([{ begin, end, resourceId }]);
+        expect(onClick.lastCall.args).toEqual([{
+          begin, end, resourceId, maxPeriod, minPeriod
+        }]);
       });
 
       test('does not call onSelectionCancel', () => {

@@ -10,6 +10,7 @@ import utils from '../utils';
 
 export function selector() {
   function dateSelector(state, props) { return props.date; }
+  function isAdminSelector(state, props) { return props.isAdmin; }
   function resourceIdSelector(state, props) { return props.id; }
   function resourcesSelector(state) { return state.data.resources; }
   function nonHoverSelectionSelector(state, props) {
@@ -46,7 +47,10 @@ export function selector() {
     itemsSelector,
     nonHoverSelectionSelector,
     resourceSelector,
-    (items, selection, resource) => utils.addSelectionData(selection, resource, items)
+    isAdminSelector,
+    (items, selection, resource, isAdmin) => utils.addSelectionData(
+      selection, resource, items, isAdmin
+    )
   );
 
   return createSelector(
@@ -63,6 +67,7 @@ const AvailabilityTimelineContainer = connect(selector, actions)(AvailabilityTim
 AvailabilityTimelineContainer.propTypes = {
   date: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
+
   onReservationSlotClick: PropTypes.func,
   onReservationSlotMouseEnter: PropTypes.func,
   onReservationSlotMouseLeave: PropTypes.func,

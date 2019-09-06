@@ -10,6 +10,8 @@ function getWrapper(props) {
   const defaults = {
     id: 'resource-id',
     items: [],
+    maxPeriod: '10:00:00',
+    minPeriod: '01:00:00',
   };
   return shallow(<AvailabilityTimeline {...defaults} {...props} />);
 }
@@ -22,6 +24,8 @@ describe('shared/availability-view/AvailabilityTimeline', () => {
 
   test('renders given reservation slot', () => {
     const id = 'resource-auuxnane';
+    const maxPeriod = '12:00:00';
+    const minPeriod = '02:00:00';
     const onReservationSlotClick = () => null;
     const onReservationSlotMouseEnter = () => null;
     const onReservationSlotMouseLeave = () => null;
@@ -32,6 +36,8 @@ describe('shared/availability-view/AvailabilityTimeline', () => {
         type: 'reservation-slot',
         data: { begin: moment().format(), end: moment().format(), resourceId: '' },
       }],
+      maxPeriod,
+      minPeriod,
       onReservationSlotClick,
       onReservationSlotMouseEnter,
       onReservationSlotMouseLeave,
@@ -42,6 +48,8 @@ describe('shared/availability-view/AvailabilityTimeline', () => {
     expect(slot.prop('onClick')).toBe(onReservationSlotClick);
     expect(slot.prop('onMouseEnter')).toBe(onReservationSlotMouseEnter);
     expect(slot.prop('onMouseLeave')).toBe(onReservationSlotMouseLeave);
+    expect(slot.prop('maxPeriod')).toBe(maxPeriod);
+    expect(slot.prop('minPeriod')).toBe(minPeriod);
   });
 
   test('renders given reservation', () => {

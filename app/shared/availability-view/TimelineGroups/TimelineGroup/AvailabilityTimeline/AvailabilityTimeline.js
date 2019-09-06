@@ -20,6 +20,8 @@ export default class AvailabilityTimeline extends React.Component {
     onReservationSlotMouseLeave: PropTypes.func,
     onSelectionCancel: PropTypes.func,
     selection: PropTypes.object,
+    maxPeriod: PropTypes.string,
+    minPeriod: PropTypes.string
   };
 
   shouldComponentUpdate(nextProps) {
@@ -45,6 +47,8 @@ export default class AvailabilityTimeline extends React.Component {
               <ReservationSlot
                 {...item.data}
                 key={item.key}
+                maxPeriod={this.props.maxPeriod}
+                minPeriod={this.props.minPeriod}
                 onClick={onReservationSlotClick}
                 onMouseEnter={onReservationSlotMouseEnter}
                 onMouseLeave={onReservationSlotMouseLeave}
