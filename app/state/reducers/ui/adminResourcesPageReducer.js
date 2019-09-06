@@ -41,7 +41,6 @@ function adminResourcesPageReducer(state = initialState, action) {
       if (meta && meta.source === 'adminResourcesPage') {
         return state.merge({
           resourceIds: map(action.payload.entities.resources, 'id'),
-          // eslint-disable-next-line max-len
           resourceMinPeriod: mapValues(action.payload.entities.resources, 'minPeriod'),
           resourceMaxPeriod: mapValues(action.payload.entities.resources, 'maxPeriod')
         });

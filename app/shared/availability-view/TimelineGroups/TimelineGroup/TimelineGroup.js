@@ -123,9 +123,7 @@ export default class TimelineGroup extends React.Component {
             id={resource}
             isAdmin={this.props.isAdmin}
             key={resource}
-
             maxPeriod={maxPeriod[resource]}
-
             minPeriod={minPeriod[resource]}
             onReservationSlotClick={onReservationSlotClick}
             onReservationSlotMouseEnter={onReservationSlotMouseEnter}

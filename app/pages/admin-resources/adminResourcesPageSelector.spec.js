@@ -110,10 +110,10 @@ describe('pages/admin-resources/adminResourcesPageSelector', () => {
   test(
     'returns an object of minPeriod',
     () => {
-      const minTime = { awd123: '01:00:00', asd: '02:00:00' };
+      const minTime = { resourceIdFirst: '01:00:00', resourceIdSecond: '02:00:00' };
 
       const extraState = {
-        'ui.pages.adminResources.resourceMinPeriod': { awd123: '01:00:00', asd: '02:00:00' }
+        'ui.pages.adminResources.resourceMinPeriod': { resourceIdFirst: '01:00:00', resourceIdSecond: '02:00:00' }
       };
 
       const selected = getSelected(extraState);
@@ -124,10 +124,10 @@ describe('pages/admin-resources/adminResourcesPageSelector', () => {
   test(
     'returns an object of maxPeriod',
     () => {
-      const maxTime = { awd123: '10:00:00', asd: '06:00:00' };
+      const maxTime = { resourceIdFirst: '10:00:00', resourceIdSecond: '06:00:00' };
 
       const extraState = {
-        'ui.pages.adminResources.resourceMaxPeriod': { awd123: '10:00:00', asd: '06:00:00' }
+        'ui.pages.adminResources.resourceMaxPeriod': { resourceIdFirst: '10:00:00', resourceIdSecond: '06:00:00' }
       };
 
       const selected = getSelected(extraState);

@@ -48,8 +48,9 @@ export function selector() {
     nonHoverSelectionSelector,
     resourceSelector,
     isAdminSelector,
-    // eslint-disable-next-line max-len
-    (items, selection, resource, isAdmin) => utils.addSelectionData(selection, resource, items, isAdmin)
+    (items, selection, resource, isAdmin) => utils.addSelectionData(
+      selection, resource, items, isAdmin
+    )
   );
 
   return createSelector(

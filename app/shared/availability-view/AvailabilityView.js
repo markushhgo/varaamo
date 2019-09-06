@@ -65,28 +65,28 @@ export default class AvailabilityView extends React.Component {
     }
   }
 
-  handleReservationMaxPeriod(slot) {
+  isUnderReservationMaxPeriod(slot) {
     const startTime = moment(this.state.selection.begin);
     const endTime = moment(slot.end);
     const maxTime = moment(slot.maxPeriod, 'hh:mm:ss').format('HH:mm:ss');
-    const maxTimeD = moment.duration(maxTime).asHours();
+    const maxTimeDuration = moment.duration(maxTime).asHours();
     const durationTime = moment.duration((endTime.diff(startTime))).asHours();
 
-    const isEnough = durationTime <= maxTimeD;
+    const isUnder = durationTime <= maxTimeDuration;
 
-    return !!isEnough;
+    return isUnder;
   }
 
-  handleReservationMinPeriod(slot) {
+  isOverReservationMinPeriod(slot) {
     const startTime = moment(this.state.selection.begin);
     const endTime = moment(slot.end);
     const minTime = moment(slot.minPeriod, 'hh:mm:ss').format('HH:mm:ss');
-    const minTimeD = moment.duration(minTime).asHours();
+    const minTimeDuration = moment.duration(minTime).asHours();
     const durationTime = moment.duration((endTime.diff(startTime))).asHours();
 
-    const isEnough = durationTime >= minTimeD;
+    const isOver = durationTime >= minTimeDuration;
 
-    return !!isEnough;
+    return isOver;
   }
 
   handleSelectionCancel() {
@@ -100,8 +100,8 @@ export default class AvailabilityView extends React.Component {
       const isValid = (
         this.state.selection.resourceId === slot.resourceId
         && this.state.selection.begin <= slot.begin
-        && this.handleReservationMinPeriod(slot)
-        && this.handleReservationMaxPeriod(slot)
+        && this.isOverReservationMinPeriod(slot)
+        && this.isUnderReservationMaxPeriod(slot)
       );
       if (!isValid) {
         return;

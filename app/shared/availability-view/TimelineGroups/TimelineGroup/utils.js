@@ -52,8 +52,8 @@ function isInsideOpeningHours(item, openingHours) {
   ));
 }
 
-function isBeforeReservableAfter(item, reservableAfter, isAdmin) {
-  if (isAdmin) return true;
+// checks if item(timeslot) is after given (reservableAfter) time
+function isAfterReservableAfter(item, reservableAfter) {
   return (item.data.begin >= reservableAfter && item.data.end >= reservableAfter);
 }
 
@@ -62,7 +62,7 @@ function markItemSelectable(item, isSelectable, openingHours, reservableAfter, i
     isSelectable
     && moment().isSameOrBefore(item.data.end)
     && (!openingHours || isInsideOpeningHours(item, openingHours))
-    && isBeforeReservableAfter(item, moment(reservableAfter).toISOString(true), isAdmin)
+    && (isAdmin ? true : isAfterReservableAfter(item, moment(reservableAfter).toISOString(true)))
   );
   return { ...item, data: { ...item.data, isSelectable: selectable } };
 }
@@ -75,9 +75,7 @@ function markItemsSelectable(items, isSelectable, openingHours, reservableAfter,
 }
 
 function addSelectionData(selection, resource, items, isAdmin) {
-  if (!selection && !isAdmin) {
-    return markItemsSelectable(items, true, resource.openingHours, resource.reservableAfter, isAdmin);
-  } if (!selection && isAdmin) {
+  if (!selection) {
     return markItemsSelectable(items, true, resource.openingHours, resource.reservableAfter, isAdmin);
   }
   if (selection.resourceId !== resource.id) {
@@ -108,4 +106,5 @@ export default {
   addSelectionData,
   getTimelineItems,
   getTimeSlotWidth,
+  isAfterReservableAfter,
 };

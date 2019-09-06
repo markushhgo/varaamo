@@ -260,7 +260,6 @@ describe('shared/availability-view/AvailabilityView', () => {
 
         test('when not admin', () => {
           const resourceId = 'resource-id';
-          const onSelect = simple.mock();
           const wrapper = doSelect(
             { isAdmin: false },
             {
@@ -283,7 +282,6 @@ describe('shared/availability-view/AvailabilityView', () => {
 
         test('when admin', () => {
           const resourceId = 'resource-id';
-          const onSelect = simple.mock();
           const wrapper = doSelect(
             {},
             {
@@ -302,6 +300,48 @@ describe('shared/availability-view/AvailabilityView', () => {
             }
           );
           expect(wrapper.state()).toEqual({ selection: null, hoverSelection: null });
+        });
+      });
+
+      describe('Reservation min/max', () => {
+        function checkReservation(props) {
+          const wrapper = getWrapper(props);
+          const instance = wrapper.instance();
+          return instance;
+        }
+
+        const selection = { begin: '2019-09-07T09:00:00+03:00' };
+
+        test('when selection is under maxPeriod', () => {
+          const instance = checkReservation();
+          instance.state = { selection };
+          const slot = { end: '2019-09-07T10:00:00+03:00', maxPeriod: '02:00:00' };
+          const isUnderMaxPeriod = instance.isUnderReservationMaxPeriod(slot);
+          expect(isUnderMaxPeriod).toBe(true);
+        });
+
+        test('when selection is over maxPeriod', () => {
+          const instance = checkReservation();
+          instance.state = { selection };
+          const slot = { end: '2019-09-07T11:00:00+03:00', maxPeriod: '01:00:00' };
+          const isOverMaxPeriod = instance.isUnderReservationMaxPeriod(slot);
+          expect(isOverMaxPeriod).toBe(false);
+        });
+
+        test('when time is under minPeriod', () => {
+          const instance = checkReservation();
+          instance.state = { selection };
+          const slot = { end: '2019-09-07T10:00:00+03:00', minPeriod: '02:00:00' };
+          const isUnderMinPeriod = instance.isOverReservationMinPeriod(slot);
+          expect(isUnderMinPeriod).toBe(false);
+        });
+
+        test('when time is over minPeriod', () => {
+          const instance = checkReservation();
+          instance.state = { selection };
+          const slot = { end: '2019-09-07T11:00:00+03:00', minPeriod: '01:00:00' };
+          const isOverMinPeriod = instance.isOverReservationMinPeriod(slot);
+          expect(isOverMinPeriod).toBe(true);
         });
       });
 
