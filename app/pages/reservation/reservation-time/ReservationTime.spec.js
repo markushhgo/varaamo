@@ -1,6 +1,7 @@
 import React from 'react';
 import simple from 'simple-mock';
 import moment from 'moment';
+import Button from 'react-bootstrap/lib/Button';
 
 import ReservationCalendar from 'pages/resource/reservation-calendar';
 import ResourceCalendar from 'shared/resource-calendar';
@@ -23,6 +24,7 @@ describe('pages/reservation/reservation-time/ReservationTime', () => {
     match: { params: {} },
     resource: Resource.build(),
     selectedReservation: Reservation.build(),
+    selectedTime: { begin: 'beginTimeString', end: 'endTimeString' },
     unit: Unit.build(),
   };
 
@@ -56,6 +58,46 @@ describe('pages/reservation/reservation-time/ReservationTime', () => {
     expect(details).toHaveLength(1);
     expect(details.props().children).toEqual(expect.arrayContaining([defaultProps.resource.name]));
     expect(details.props().children).toEqual(expect.arrayContaining([defaultProps.unit.name]));
+  });
+
+  describe('reservation time controls', () => {
+    const wrapper = getWrapper();
+
+    test('is rendered', () => {
+      const controls = wrapper.find('.app-ReservationTime__controls');
+      expect(controls.length).toBe(1);
+    });
+
+    test('renders cancel button with correct props', () => {
+      const buttons = wrapper.find('.app-ReservationTime__controls').find(Button);
+      expect(buttons.length).toBe(2);
+      expect(buttons.at(0).prop('bsStyle')).toBe('warning');
+      expect(buttons.at(0).prop('onClick')).toBe(defaultProps.onCancel);
+      expect(buttons.at(0).prop('children')).toBe('ReservationInformationForm.cancelEdit');
+    });
+
+    describe('continue button', () => {
+      test('renders with correct props', () => {
+        const buttons = wrapper.find('.app-ReservationTime__controls').find(Button);
+        expect(buttons.length).toBe(2);
+        expect(buttons.at(1).prop('bsStyle')).toBe('primary');
+        expect(buttons.at(1).prop('onClick')).toBe(defaultProps.onConfirm);
+        expect(buttons.at(1).prop('children')).toBe('common.continue');
+      });
+
+      test('prop disabled is false when selected time is not empty', () => {
+        // default props sets selected time to be not empty
+        const buttons = wrapper.find('.app-ReservationTime__controls').find(Button);
+        expect(buttons.length).toBe(2);
+        expect(buttons.at(1).prop('disabled')).toBe(false);
+      });
+
+      test('prop disabled is true when selected time is empty', () => {
+        const buttons = getWrapper({ selectedTime: {} }).find('.app-ReservationTime__controls').find(Button);
+        expect(buttons.length).toBe(2);
+        expect(buttons.at(1).prop('disabled')).toBe(true);
+      });
+    });
   });
 
   describe('handleDateChange', () => {

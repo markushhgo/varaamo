@@ -207,6 +207,7 @@ class UnconnectedReservationPage extends Component {
                     params={params}
                     resource={resource}
                     selectedReservation={reservationToEdit}
+                    selectedTime={selectedTime}
                     unit={unit}
                   />
                 )}

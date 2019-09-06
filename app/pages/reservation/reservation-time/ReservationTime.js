@@ -20,6 +20,7 @@ class ReservationTime extends Component {
     history: PropTypes.object.isRequired,
     resource: PropTypes.object.isRequired,
     selectedReservation: PropTypes.object.isRequired,
+    selectedTime: PropTypes.object,
     t: PropTypes.func.isRequired,
     unit: PropTypes.object.isRequired,
   };
@@ -39,6 +40,7 @@ class ReservationTime extends Component {
       match,
       resource,
       selectedReservation,
+      selectedTime,
       t,
       unit,
     } = this.props;
@@ -80,7 +82,7 @@ class ReservationTime extends Component {
           <Button bsStyle="warning" onClick={onCancel}>
             {t('ReservationInformationForm.cancelEdit')}
           </Button>
-          <Button bsStyle="primary" disabled={isEmpty(selectedReservation)} onClick={onConfirm}>
+          <Button bsStyle="primary" disabled={isEmpty(selectedReservation) || isEmpty(selectedTime)} onClick={onConfirm}>
             {t('common.continue')}
           </Button>
         </div>
