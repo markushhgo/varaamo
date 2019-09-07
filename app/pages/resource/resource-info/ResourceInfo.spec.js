@@ -31,6 +31,18 @@ describe('pages/resource/resource-info/ResourceInfo', () => {
     return shallowWithIntl(<ResourceInfo {...defaultProps} {...extraProps} />);
   }
 
+  test('renders section with correct props', () => {
+    const section = getWrapper().find('.app-ResourceInfo');
+    expect(section).toHaveLength(1);
+    expect(section.prop('aria-labelledby')).toBe('ResourcePageInfo');
+  });
+
+  test('renders header text', () => {
+    const header = getWrapper().find('#ResourcePageInfo');
+    expect(header).toHaveLength(1);
+    expect(header.text()).toBe('ResourcePage.info');
+  });
+
   test('renders resource description as WrappedText', () => {
     const wrappedText = getWrapper()
       .find('.app-ResourceInfo__description')
@@ -90,6 +102,7 @@ describe('pages/resource/resource-info/ResourceInfo', () => {
     expect(link).toHaveLength(1);
     expect(link.prop('href')).toBe(unit.wwwUrl);
     expect(link.prop('target')).toBe('_blank');
+    expect(link.text()).toBe('ResourceInfo.webSiteLink');
   });
 
   test('renders service map link', () => {
@@ -109,6 +122,7 @@ describe('pages/resource/resource-info/ResourceInfo', () => {
     expect(link).toHaveLength(1);
     expect(link.prop('href')).toBe(expected);
     expect(link.prop('target')).toBe('_blank');
+    expect(link.text()).toBe('ResourceInfo.serviceMapLink');
   });
 
   test('does not render service map link if unit empty', () => {

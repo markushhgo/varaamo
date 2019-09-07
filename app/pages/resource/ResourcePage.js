@@ -178,14 +178,15 @@ class UnconnectedResourcePage extends Component {
           {!showMap && (
             <PageWrapper title={resource.name || ''} transparent>
               <div>
-                <Col className="app-ResourcePage__content" lg={8} md={8} xs={12}>
+                <Col className="app-ResourcePage__content" lg={9} md={9} xs={12}>
                   {mainImage
                     && this.renderImage(mainImage, mainImageIndex, {
                       mainImageMobileVisibility: true,
                     })}
                   <ResourceInfo isLoggedIn={isLoggedIn} resource={resource} unit={unit} />
 
-                  <Panel defaultExpanded header={t('ResourceInfo.reserveTitle')}>
+                  <Panel aria-labelledby="ResourceCalendarHeader" defaultExpanded header={t('ResourceInfo.reserveTitle')} role="region">
+                    <h2 className="visually-hidden" id="ResourceCalendarHeader">{t('ResourceCalendar.header')}</h2>
                     {resource.externalReservationUrl && (
                       <form action={resource.externalReservationUrl}>
                         <input
@@ -229,7 +230,9 @@ class UnconnectedResourcePage extends Component {
                   </Panel>
                 </Col>
                 <Col className="app-ResourceInfo__images" lg={3} md={3} xs={12}>
-                  {images.map(this.renderImage)}
+                  <section>
+                    {images.map(this.renderImage)}
+                  </section>
                 </Col>
               </div>
             </PageWrapper>

@@ -1,3 +1,5 @@
+import constants from 'constants/AppConstants';
+
 import React from 'react';
 import { FormattedHTMLMessage } from 'react-intl';
 
@@ -21,9 +23,22 @@ describe('shared/footer/FooterContent', () => {
       expect(image.length).toBe(1);
     });
 
-    test('contains feedback link', () => {
-      const feedbackLink = content.find('.feedback-link');
-      expect(feedbackLink.length).toBe(1);
+    describe('contains feedback link with correct props', () => {
+      test('when current language is fi', () => {
+        const feedbackLink = getWrapper({ currentLang: 'fi' }).find('.feedback-link');
+        expect(feedbackLink.length).toBe(1);
+        expect(feedbackLink.prop('href')).toBe(constants.FEEDBACK_URL.FI);
+        expect(feedbackLink.prop('rel')).toBe('noopener noreferrer');
+        expect(feedbackLink.prop('target')).toBe('_blank');
+      });
+
+      test('when current language is sv', () => {
+        const feedbackLink = getWrapper({ currentLang: 'se' }).find('.feedback-link');
+        expect(feedbackLink.length).toBe(1);
+        expect(feedbackLink.prop('href')).toBe(constants.FEEDBACK_URL.SV);
+        expect(feedbackLink.prop('rel')).toBe('noopener noreferrer');
+        expect(feedbackLink.prop('target')).toBe('_blank');
+      });
     });
 
     test('renders FormattedHTMLMessage for Turku', () => {

@@ -2,6 +2,7 @@ import MockDate from 'mockdate';
 import React from 'react';
 import moment from 'moment';
 import simple from 'simple-mock';
+import Row from 'react-bootstrap/lib/Row';
 
 import ReservationCancelModal from 'shared/modals/reservation-cancel';
 import ReservationInfoModal from 'shared/modals/reservation-info';
@@ -82,6 +83,12 @@ describe('pages/resource/reservation-calendar/ReservationCalendarContainer', () 
       wrapper = getWrapper(props);
     });
 
+    test('renders header text', () => {
+      const header = getWrapper().find('.reservation-calendar__header');
+      expect(header).toHaveLength(1);
+      expect(header.text()).toBe('ReservationCalendar.header');
+    });
+
     test(`${renderTimeSlots ? 'renders' : 'does not render'} TimeSlots`, () => {
       expect(wrapper.find(TimeSlots).length === 1).toBe(renderTimeSlots);
     });
@@ -96,6 +103,43 @@ describe('pages/resource/reservation-calendar/ReservationCalendarContainer', () 
         expect(wrapper.find(ReservingRestrictedText).length === 1).toBe(renderRestrictedText);
       }
     );
+
+    describe(renderTimeSlots ? 'renders' : 'does not render', () => {
+      test('Comfirmation header', () => {
+        if (renderTimeSlots && props.selected > 0) {
+          const headerconf = getWrapper().find('.reservation-calendar-reserve-info').find('h3');
+          expect(headerconf).toHaveLength(1);
+          expect(headerconf.text()).toBe('ReservationCalendar.Confirmation.header');
+        } else {
+          const headerconf = getWrapper().find('.reservation-calendar-reserve-info').find('h3');
+          expect(headerconf).toHaveLength(0);
+        }
+      });
+
+      test('Comfirmation text', () => {
+        if (renderTimeSlots && props.selected > 0) {
+          const selectedTime = getWrapper().find('strong');
+          expect(selectedTime).toHaveLength(1);
+          expect(selectedTime.text()).toBe('TimeSlots.selectedDate ');
+        } else {
+          const selectedTime = getWrapper().find('strong');
+          expect(selectedTime).toHaveLength(0);
+        }
+      });
+
+      test('reservering button with correct props', () => {
+        if (renderTimeSlots) {
+          const button = wrapper.find('.reservation-calendar__reserve-button');
+          expect(button).toHaveLength(1);
+          expect(button.prop('bsStyle')).toBe('primary');
+          expect(button.prop('onClick')).toBe(wrapper.instance().handleReserveClick);
+          expect(button.prop('children')).toBe('TimeSlots.reserveButton');
+        } else {
+          const button = wrapper.find('.reservation-calendar__reserve-button');
+          expect(button).toHaveLength(0);
+        }
+      });
+    });
 
     test('renders ReservationCancelModal', () => {
       expect(wrapper.find(ReservationCancelModal).length).toBe(1);
