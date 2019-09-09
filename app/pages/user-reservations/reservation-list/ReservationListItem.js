@@ -39,7 +39,7 @@ class ReservationListItem extends Component {
             {this.renderImage(getMainImage(resource.images))}
           </Link>
         </div>
-        <div className="col-xs-12 col-md-6 col-lg-7 reservation-details">
+        <div className="col-xs-12 col-sm-8 col-md-5 col-lg-7 reservation-details">
           <ReservationStateLabel reservation={reservation} />
           <Link to={getResourcePageUrl(resource)}>
             <h2>{resource.name}</h2>
@@ -60,7 +60,7 @@ class ReservationListItem extends Component {
             text={t('ReservationListItem.accessCodeText')}
           />
         </div>
-        <div className="col-xs-12 col-md-3 col-lg-3 action-container">
+        <div className="col-xs-12 col-sm-4 col-md-4 col-lg-3 action-container">
           <ReservationControls
             isAdmin={isAdmin}
             isStaff={isStaff}

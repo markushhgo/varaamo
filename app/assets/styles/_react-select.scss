@@ -19,12 +19,11 @@ $selectDropdownPaddingRight: 4px;
     border-radius: $selectBorderRadius;
     box-sizing: border-box;
     background: transparent;
-    outline: none;
     box-shadow: none;
     flex: 1;
 
-    &:hover {
-      border: $selectBorderWidth solid $input-border;
+    &:hover, :focus-within {
+      border: 1px  solid $input-border;
     }
 
     &--is-focused {

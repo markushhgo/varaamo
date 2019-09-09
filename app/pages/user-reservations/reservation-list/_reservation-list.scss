@@ -14,30 +14,37 @@ $reservation-list-label-height: 20px;
     @media (max-width: $screen-xs-max) {
       min-height: 300px;
     }
-
+    @media (min-width: $screen-md-min) and (max-width: $screen-md-max) {
+      min-height: 240px;
+    }
     .image-container {
       background-color: #ebedf1;
       min-height: 180px;
       max-width: 180px;
+
       @include addFocus($width: 2px, $color: currentColor) {
       }
-
       @media (max-width: $screen-md-min) {
         display: none;
       }
 
       img {
         margin-left: -15px;
-
         height: 180px;
         width: 180px;
+        @media (min-width: $screen-md-min) and (max-width: $screen-md-max) {
+          height: 240px;
+          width: 240px;
+        }
       }
     }
 
     .reservation-details {
 //      margin-top: 10px;
       min-height: 180px;
-
+      @media (min-width: $screen-md-min) and (max-width: $screen-md-max) {
+        margin-left: 55px;
+      }
       .reservation-state-label-container {
         font-size: 1em;
         margin-bottom: 8px;
@@ -72,19 +79,20 @@ $reservation-list-label-height: 20px;
 @media (min-width: $screen-xs-min) {
   min-height: 180px;
 }
+@media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
 
+}
       .buttons {
         position: absolute;
         bottom: 0;
         margin-bottom: 25px;
         @include addFocus;
         @media (max-width: $screen-xs-max) {
-          top: -15px;
-          left: 20%;
+          top: 20px;
+          left: 0px;
         }
 
         @media (min-width: $screen-md-min) and (max-width: $screen-md-max) {
-
           width: 350px;
           left: -8px;
           }
@@ -101,15 +109,25 @@ $reservation-list-label-height: 20px;
           width: 100px;
           font-size: 1em;
           margin-bottom: 10px;
+          @include addFocus($width: 3px, $color: currentColor) {}
 
-          @media (min-width: $screen-md-min){
-            width: 130px;
+          @media (max-width: $screen-xs-max) {
+            width: 80px;
           }
 
-          @media (max-width: $screen-md-max) {
-            margin-bottom: 10px;
+          @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+            width: 100px;
+            display: block;
           }
 
+          @media (min-width: $screen-md-min) and (max-width: $screen-md-max) {
+            width: 120px;
+            display: block;
+          }
+
+          @media (min-width: $screen-lg-min) {
+            width: 150px;
+          }
         }
       }
     }
@@ -120,6 +138,10 @@ $reservation-list-label-height: 20px;
       > h2{
         margin-top: 12px;
         overflow-wrap: break-word;
+        @media (min-width: $screen-md-min) and (max-width: $screen-md-max) {
+          margin-top: 5px;
+          margin-bottom: 0;
+        }
       }
     }
   }
