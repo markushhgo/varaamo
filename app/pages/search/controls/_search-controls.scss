@@ -22,8 +22,7 @@
     min-width: 120px;
     font-size: 1em;
     text-transform: uppercase;
-    @include addFocus($width: 2px, $color: currentColor) {
-    }
+    @include addFocus(2px, currentColor) {}
   }
   &__reset-button {
     img {
@@ -175,8 +174,7 @@
   &__button {
     height: 40px !important;
     border-left-width: 2px !important;
-    @include addFocus($color: currentColor) {
-    }
+    @include addFocus(3px, currentColor) {}
   }
   &__title {
     border-right-width: 0;
@@ -312,6 +310,12 @@
 }
 .app-TimeRangeControl {
   display: block;
+  // addFocus didn't work; different solution
+  &__range-start:focus-within,
+  &__range-end:focus-within,
+  &__range-duration:focus-within {
+    outline: 1px solid $black !important;
+  }
   @media (min-width: 768px) {
     &__range {
       align-items: baseline;
