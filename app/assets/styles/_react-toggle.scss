@@ -21,6 +21,10 @@
     }
   }
 
+  &.react-toggle:focus-within{
+    @include focusElement;
+  }
+
   .react-toggle-thumb,
   &.react-toggle--checked .react-toggle-thumb {
     box-shadow: none;

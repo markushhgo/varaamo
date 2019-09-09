@@ -118,7 +118,7 @@ class ResourceCard extends Component {
             onClick={this.handleLinkClick}
             to={linkTo}
           >
-            <h2>{resource.name}</h2>
+            <h3>{resource.name}</h3>
             <div className="app-ResourceCard__unit-name">
               <span>{unit.name}</span>
             </div>
