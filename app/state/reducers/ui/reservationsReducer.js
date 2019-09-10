@@ -82,7 +82,7 @@ function reservationsReducer(state = initialState, action) {
         selected: [],
         toEdit: [],
         toShow: [],
-        toShowEdited: [...state.toShowEdited, action.payload],
+        toShowEdited: [action.payload],
       });
     }
 

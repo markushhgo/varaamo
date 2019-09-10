@@ -13,7 +13,7 @@ import Lightbox from 'lightbox-react';
 import 'lightbox-react/style.css';
 
 import { fetchResource } from 'actions/resourceActions';
-import { clearReservations, toggleResourceMap } from 'actions/uiActions';
+import { clearReservations, toggleResourceMap, closeReservationSuccessModal } from 'actions/uiActions';
 import PageWrapper from 'pages/PageWrapper';
 import NotFoundPage from 'pages/not-found/NotFoundPage';
 import ResourceCalendar from 'shared/resource-calendar';
@@ -41,6 +41,7 @@ class UnconnectedResourcePage extends Component {
 
   componentDidMount() {
     this.props.actions.clearReservations();
+    this.props.actions.closeReservationSuccessModal();
     this.fetchResource();
   }
 
@@ -283,6 +284,7 @@ UnconnectedResourcePage = injectT(UnconnectedResourcePage); // eslint-disable-li
 
 function mapDispatchToProps(dispatch) {
   const actionCreators = {
+    closeReservationSuccessModal,
     clearReservations,
     fetchResource,
     toggleResourceMap,

@@ -29,8 +29,10 @@ class UnconnectedReservationPage extends Component {
     super(props);
     this.fetchResource = this.fetchResource.bind(this);
     const { reservationToEdit } = this.props;
+    const { reservationCreated } = this.props;
+    const { reservationEdited } = this.props;
     this.state = {
-      view: !isEmpty(reservationToEdit) ? 'time' : 'information',
+      view: this.setViewState(reservationToEdit, reservationCreated, reservationEdited),
     };
   }
 
@@ -60,27 +62,20 @@ class UnconnectedReservationPage extends Component {
       this.fetchResource();
       window.scrollTo(0, 0);
     }
-  }
-
-  componentWillUpdate(nextProps) {
-    const { reservationCreated: nextCreated, reservationEdited: nextEdited } = nextProps;
-    const { reservationCreated, reservationEdited } = this.props;
-    if (
-      (!isEmpty(nextCreated) || !isEmpty(nextEdited))
-      && (nextCreated !== reservationCreated || nextEdited !== reservationEdited)
-    ) {
-      // TODO: fix this lint
-      // eslint-disable-next-line react/no-will-update-set-state
-      this.setState({
-        view: 'confirmation',
-      });
-      window.scrollTo(0, 0);
+    if (!isEmpty(reservationCreated) && this.state.view !== 'confirmation') {
+      this.props.actions.closeReservationSuccessModal();
     }
   }
 
-  componentWillUnmount() {
-    this.props.actions.clearReservations();
-    this.props.actions.closeReservationSuccessModal();
+  setViewState(reservationToEdit, reservationCreated, reservationEdited) {
+    if (!isEmpty(reservationToEdit)) {
+      return 'time';
+    }
+    if (!isEmpty(reservationCreated) || !isEmpty(reservationEdited)) {
+      return 'confirmation';
+    }
+
+    return 'information';
   }
 
   handleBack = () => {
@@ -120,12 +115,18 @@ class UnconnectedReservationPage extends Component {
           begin,
           end,
         });
+        this.setState({
+          view: 'confirmation',
+        });
       } else {
         actions.postReservation({
           ...values,
           begin,
           end,
           resource: resource.id,
+        });
+        this.setState({
+          view: 'confirmation',
         });
       }
     }
@@ -226,6 +227,7 @@ class UnconnectedReservationPage extends Component {
                 )}
                 {view === 'confirmation' && (reservationCreated || reservationEdited) && (
                   <ReservationConfirmation
+                    actions={actions}
                     history={history}
                     isEdited={isEdited}
                     reservation={reservationCreated || reservationEdited}

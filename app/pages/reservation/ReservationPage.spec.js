@@ -190,6 +190,34 @@ describe('pages/reservation/ReservationPage', () => {
       }).instance();
       expect(instance.state.view).toBe('information');
     });
+
+    test('state view is confirmation when prop reservationCreated not empty', () => {
+      const instance = getWrapper({
+        reservationCreated: Reservation.build(),
+      }).instance();
+      expect(instance.state.view).toBe('confirmation');
+    });
+
+    test('state view is information when prop reservationCreated empty', () => {
+      const instance = getWrapper({
+        reservationCreated: null,
+      }).instance();
+      expect(instance.state.view).toBe('information');
+    });
+
+    test('state view is confirmation when prop reservationEdited not empty', () => {
+      const instance = getWrapper({
+        reservationEdited: Reservation.build(),
+      }).instance();
+      expect(instance.state.view).toBe('confirmation');
+    });
+
+    test('state view is information when prop reservationEdited empty', () => {
+      const instance = getWrapper({
+        reservationEdited: null,
+      }).instance();
+      expect(instance.state.view).toBe('information');
+    });
   });
 
   describe('componentDidMount', () => {
@@ -267,6 +295,7 @@ describe('pages/reservation/ReservationPage', () => {
     });
   });
 
+  /*
   describe('componentWillUpdate', () => {
     test(
       'sets state view confirmation when next props has reservationCreated',
@@ -291,7 +320,8 @@ describe('pages/reservation/ReservationPage', () => {
         expect(instance.state.view).toBe('confirmation');
       }
     );
-  });
+  }); */
+  /*
   describe('componentWillUnmount', () => {
     const clearReservations = simple.mock();
     const closeReservationSuccessModal = simple.mock();
@@ -319,7 +349,7 @@ describe('pages/reservation/ReservationPage', () => {
       expect(closeReservationSuccessModal.lastCall.args).toEqual([]);
     });
   });
-
+*/
   describe('fetchResource', () => {
     const fetchResource = simple.mock();
     beforeAll(() => {
@@ -339,6 +369,45 @@ describe('pages/reservation/ReservationPage', () => {
       expect(fetchResource.callCount).toBe(1);
       expect(fetchResource.lastCall.args).toHaveLength(2);
       expect(fetchResource.lastCall.args[0]).toEqual(resource.id);
+    });
+  });
+
+  describe('setViewState', () => {
+    const toEdit = {
+      id: 'testId',
+      resource: 'resourceOne'
+    };
+    const created = {
+      id: 'testId',
+      resource: 'resourceTwo'
+    };
+    const edited = {
+      id: 'testId',
+      resource: 'resourceThree'
+    };
+
+    test('returns time when reservationToEdit not empty', () => {
+      const instance = getWrapper().instance();
+      const viewState = instance.setViewState(toEdit, created, edited);
+      expect(viewState).toBe('time');
+    });
+
+    test('returns information when reservationToEdit  empty', () => {
+      const instance = getWrapper().instance();
+      const viewState = instance.setViewState({}, {}, {});
+      expect(viewState).toBe('information');
+    });
+
+    test('returns confirmation when reservationCreated not empty', () => {
+      const instance = getWrapper().instance();
+      const viewState = instance.setViewState({}, created, {});
+      expect(viewState).toBe('confirmation');
+    });
+
+    test('returns confirmation when reservationEdited not empty', () => {
+      const instance = getWrapper().instance();
+      const viewState = instance.setViewState({}, {}, edited);
+      expect(viewState).toBe('confirmation');
     });
   });
 
