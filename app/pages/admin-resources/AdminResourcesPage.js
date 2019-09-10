@@ -11,8 +11,6 @@ import {
   selectAdminResourceType,
   openConfirmReservationModal,
   unselectAdminResourceType,
-  clearReservations,
-  closeReservationSuccessModal,
 } from 'actions/uiActions';
 import { injectT } from 'i18n';
 import PageWrapper from 'pages/PageWrapper';
@@ -33,8 +31,6 @@ class UnconnectedAdminResourcesPage extends Component {
 
   componentDidMount() {
     const interval = 10 * 60 * 1000;
-    this.props.actions.clearReservations();
-    this.props.actions.closeReservationSuccessModal();
     this.fetchResources();
     this.updateResourcesTimer = window.setInterval(this.fetchResources, interval);
   }
@@ -136,8 +132,6 @@ UnconnectedAdminResourcesPage = injectT(UnconnectedAdminResourcesPage);  // esli
 
 function mapDispatchToProps(dispatch) {
   const actionCreators = {
-    clearReservations,
-    closeReservationSuccessModal,
     changeAdminResourcesPageDate,
     changeRecurringBaseTime: recurringReservations.changeBaseTime,
     fetchFavoritedResources,

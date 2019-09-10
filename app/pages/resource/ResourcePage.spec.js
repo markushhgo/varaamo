@@ -46,7 +46,6 @@ describe('pages/resource/ResourcePage', () => {
       clearReservations: () => null,
       fetchResource: () => null,
       toggleResourceMap: () => null,
-      closeReservationSuccessModal: () => null,
     },
     date: '2015-10-10',
     id: resource.id,
@@ -192,26 +191,17 @@ describe('pages/resource/ResourcePage', () => {
   });
 
   describe('componentDidMount', () => {
-    test('calls clearReservations, fetchResource and closeReservationSuccessModal', () => {
+    test('calls clearReservations and fetchResource', () => {
       const clearReservations = simple.mock();
       const fetchResource = simple.mock();
-      const closeReservationSuccessModal = simple.mock();
-      const instance = getWrapper({
-        actions: {
-          clearReservations,
-          closeReservationSuccessModal
-        }
-      }).instance();
+      const instance = getWrapper({ actions: { clearReservations } }).instance();
       instance.fetchResource = fetchResource;
-
       instance.componentDidMount();
 
       expect(clearReservations.callCount).toBe(1);
       expect(clearReservations.lastCall.args).toEqual([]);
       expect(fetchResource.callCount).toBe(1);
       expect(fetchResource.lastCall.args).toEqual([]);
-      expect(closeReservationSuccessModal.callCount).toBe(1);
-      expect(closeReservationSuccessModal.lastCall.args).toEqual([]);
     });
   });
 

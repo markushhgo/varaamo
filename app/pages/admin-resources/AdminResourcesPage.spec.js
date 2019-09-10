@@ -14,8 +14,6 @@ describe('pages/admin-resources/AdminResourcesPage', () => {
   const selectAdminResourceType = simple.stub();
   const openConfirmReservationModal = simple.stub();
   const unselectAdminResourceType = simple.stub();
-  const clearReservations = simple.stub();
-  const closeReservationSuccessModal = simple.stub();
 
   const defaultProps = {
     actions: {
@@ -25,9 +23,6 @@ describe('pages/admin-resources/AdminResourcesPage', () => {
       selectAdminResourceType,
       openConfirmReservationModal,
       unselectAdminResourceType,
-      clearReservations,
-      closeReservationSuccessModal,
-
     },
     date: '2017-01-10',
     selectedResourceTypes: [],
@@ -147,14 +142,6 @@ describe('pages/admin-resources/AdminResourcesPage', () => {
 
       afterAll(() => {
         simple.restore();
-      });
-
-      test('runs clearReservations', () => {
-        expect(clearReservations.callCount).toBe(1);
-      });
-
-      test('runs closeREservationSuccessModal', () => {
-        expect(closeReservationSuccessModal.callCount).toBe(1);
       });
 
       test('fetches favorited resources', () => {
