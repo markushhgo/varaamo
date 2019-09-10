@@ -99,13 +99,14 @@
       width: 100%;
       justify-content: space-between;
     }
-
+// Added focus to "previous" and "next" arrow buttons in the calendar
     .DayPicker-NavButton--prev {
       @include icon-angle-left($black);
       width: $line-height-computed;
       height: $line-height-computed;
       position: static;
-      margin-right: 0;
+      margin-left: 5px;
+      @include addFocus(2px, $black) {}
     }
 
     .DayPicker-NavButton--next {
@@ -113,6 +114,8 @@
       width: $line-height-computed;
       height: $line-height-computed;
       position: static;
+      margin-right: 5px;
+      @include addFocus(2px, $black) {}
     }
 
     .DayPicker-Caption {
