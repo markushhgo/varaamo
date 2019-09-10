@@ -1,8 +1,13 @@
 $map-height: 600px;
+$map-height-mobile: 225px;
+
 .app-ResourceMap {
   z-index: -1;
   &__map {
     height: $map-height;
+    @media (max-width: $screen-xs-max){
+      height: $map-height-mobile;
+    }
     width: 100%;
     pointer-events: none;
     position: relative;
