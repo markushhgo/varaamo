@@ -39,6 +39,17 @@ describe('pages/resource/ResourcePage', () => {
       },
     ],
     unit: Unit.id,
+    equipment: [
+      {
+        name: 'equipment 1'
+      },
+      {
+        name: 'equipment 2'
+      },
+      {
+        name: 'equipment 3'
+      },
+    ]
   });
   const defaultProps = {
     history,
@@ -56,7 +67,7 @@ describe('pages/resource/ResourcePage', () => {
     resource: Immutable(resource),
     showMap: false,
     unit: Immutable(unit),
-    contrast: ''
+    contrast: '',
   };
 
   function getWrapper(props) {
@@ -99,9 +110,11 @@ describe('pages/resource/ResourcePage', () => {
 
     test('renders ResourceInfo with correct props', () => {
       const resourceInfo = getWrapper().find(ResourceInfo);
+      const equipmentList = ['equipment 1', 'equipment 2', 'equipment 3'];
       expect(resourceInfo).toHaveLength(1);
       expect(resourceInfo.prop('resource')).toEqual(defaultProps.resource);
       expect(resourceInfo.prop('unit')).toEqual(defaultProps.unit);
+      expect(resourceInfo.prop('equipment')).toEqual(equipmentList);
     });
 
     test('renders ResourceCalendar with correct props', () => {
