@@ -3,9 +3,10 @@ import React from 'react';
 
 import Checkbox from './Checkbox';
 import FormControl from './FormControl';
+import FormControlCheckbox from './FormControlCheckbox';
 
 function ReduxFormField({
-  controlProps = {}, help, info, input, label, meta, type
+  controlProps = {}, help, info, input, label, meta, type, altCheckbox
 }) {
   const showError = meta.error && meta.touched;
   const props = {
@@ -19,6 +20,10 @@ function ReduxFormField({
   };
 
   if (type === 'checkbox') {
+    if (altCheckbox) {
+      return <FormControlCheckbox {...props} />;
+    }
+
     return <Checkbox {...props} />;
   }
 
@@ -26,6 +31,7 @@ function ReduxFormField({
 }
 
 ReduxFormField.propTypes = {
+  altCheckbox: PropTypes.bool,
   controlProps: PropTypes.object,
   help: PropTypes.string,
   info: PropTypes.string,

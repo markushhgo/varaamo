@@ -72,7 +72,7 @@ export function validate(values, { fields, requiredFields, t }) {
 }
 
 class UnconnectedReservationInformationForm extends Component {
-  renderField(name, type, label, controlProps = {}, help = null, info = null) {
+  renderField(name, type, label, controlProps = {}, help = null, info = null, altCheckbox = false) {
     if (!includes(this.props.fields, name)) {
       return null;
     }
@@ -80,6 +80,7 @@ class UnconnectedReservationInformationForm extends Component {
 
     return (
       <Field
+        altCheckbox={altCheckbox}
         component={ReduxFormField}
         controlProps={controlProps}
         help={help}
@@ -227,6 +228,15 @@ class UnconnectedReservationInformationForm extends Component {
             'number',
             t('common.numberOfParticipantsLabel'),
             { min: '0' }
+          )}
+          {this.renderField(
+            'requireAssistance',
+            'checkbox',
+            t('common.requireAssistanceLabel'),
+            {},
+            null,
+            null,
+            true
           )}
           {this.renderField(
             'comments',
