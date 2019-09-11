@@ -11,7 +11,7 @@ import { getServiceMapUrl } from 'utils/unitUtils';
 import ReservationInfo from '../reservation-info';
 
 function ResourceInfo({
-  isLoggedIn, resource, unit, t, equipment
+  isLoggedIn, resource, unit, t, equipment, equipmentIsOpen
 }) {
   const serviceMapUrl = getServiceMapUrl(unit);
   const equipmentList = equipment.map((thing, index) => <li key={index}>{thing}</li>);
@@ -23,41 +23,66 @@ function ResourceInfo({
         <div className="app-ResourceInfo__description">
           {resource.description && <WrappedText openLinksInNewTab text={resource.description} />}
         </div>
-        <Panel defaultExpanded header={t('ResourceInfo.reservationTitle')}>
-          <ReservationInfo isLoggedIn={isLoggedIn} resource={resource} />
+        <Panel header={t('ResourceInfo.reservationTitle')}>
+          <Panel.Heading>
+            <Panel.Toggle componentClass="h4">Tietoa varaamisesta</Panel.Toggle>
+          </Panel.Heading>
+          <Panel.Collapse>
+            <Panel.Body>
+              <ReservationInfo isLoggedIn={isLoggedIn} resource={resource} />
+            </Panel.Body>
+          </Panel.Collapse>
         </Panel>
-        <Panel defaultExpanded header={t('ResourceInfo.additionalInfoTitle')}>
-          <Row>
-            <Col className="app-ResourceInfo__address" lg={6} md={6} sm={6} xs={12}>
-              {unit && unit.name && <span>{unit.name}</span>}
-              {unit && unit.streetAddress && <span>{unit.streetAddress}</span>}
-              {unit && <span>{`${unit.addressZip} ${upperFirst(unit.municipality)}`.trim()}</span>}
-            </Col>
-            <Col className="app-ResourceInfo__web" lg={6} md={6} sm={6} xs={12}>
-              {serviceMapUrl && (
-                <span className="app-ResourceInfo__servicemap">
-                  <a href={serviceMapUrl} rel="noopener noreferrer" target="_blank">
-                    {t('ResourceInfo.serviceMapLink')}
-                  </a>
-                </span>
-              )}
-              {unit && unit.wwwUrl && (
-                <span className="app-ResourceInfo__www">
-                  <a href={unit.wwwUrl} rel="noopener noreferrer" target="_blank">
-                    {t('ResourceInfo.webSiteLink')}
-                  </a>
-                </span>
-              )}
-            </Col>
-          </Row>
+        <Panel header={t('ResourceInfo.additionalInfoTitle')}>
+          <Panel.Heading>
+            <Panel.Title toggle>
+              Lisätietoa
+            </Panel.Title>
+          </Panel.Heading>
+          <Panel.Collapse>
+            <Panel.Body>
+              <Row>
+                <Col className="app-ResourceInfo__address" lg={6} md={6} sm={6} xs={12}>
+                  {unit && unit.name && <span>{unit.name}</span>}
+                  {unit && unit.streetAddress && <span>{unit.streetAddress}</span>}
+                  {unit && <span>{`${unit.addressZip} ${upperFirst(unit.municipality)}`.trim()}</span>}
+                </Col>
+                <Col className="app-ResourceInfo__web" lg={6} md={6} sm={6} xs={12}>
+                  {serviceMapUrl && (
+                  <span className="app-ResourceInfo__servicemap">
+                    <a href={serviceMapUrl} rel="noopener noreferrer" target="_blank">
+                      {t('ResourceInfo.serviceMapLink')}
+                    </a>
+                  </span>
+                  )}
+                  {unit && unit.wwwUrl && (
+                  <span className="app-ResourceInfo__www">
+                    <a href={unit.wwwUrl} rel="noopener noreferrer" target="_blank">
+                      {t('ResourceInfo.webSiteLink')}
+                    </a>
+                  </span>
+                  )}
+                </Col>
+              </Row>
+            </Panel.Body>
+          </Panel.Collapse>
         </Panel>
         {equipmentList.length > 0 && (
-          <Panel defaultExpanded header={t('ResourceInfo.equipmentHeader')}>
-            <Row>
-              <Col className="app-ResourceInfo__equipment" lg={6} md={6} sm={6} xs={12}>
-                {equipmentList}
-              </Col>
-            </Row>
+          <Panel header={t('ResourceInfo.equipmentHeader')} id="equipment-panel">
+            <Panel.Heading>
+              <Panel.Toggle componentClass="h4">
+                Varustus
+              </Panel.Toggle>
+            </Panel.Heading>
+            <Panel.Collapse>
+              <Panel.Body>
+                <Row>
+                  <Col className="app-ResourceInfo__equipment" lg={6} md={6} sm={6} xs={12}>
+                    {equipmentList}
+                  </Col>
+                </Row>
+              </Panel.Body>
+            </Panel.Collapse>
           </Panel>
         )}
 
@@ -68,6 +93,7 @@ function ResourceInfo({
 
 ResourceInfo.propTypes = {
   equipment: PropTypes.array,
+  equipmentIsOpen: PropTypes.bool,
   isLoggedIn: PropTypes.bool.isRequired,
   resource: PropTypes.object.isRequired,
   t: PropTypes.func.isRequired,

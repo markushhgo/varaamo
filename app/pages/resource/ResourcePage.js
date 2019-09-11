@@ -35,6 +35,7 @@ class UnconnectedResourcePage extends Component {
     this.state = {
       photoIndex: 0,
       isOpen: false,
+      equipmentIsOpen: true,
     };
 
     this.fetchResource = this.fetchResource.bind(this);
@@ -141,7 +142,7 @@ class UnconnectedResourcePage extends Component {
       contrast
     } = this.props;
     const { params } = match;
-    const { isOpen, photoIndex } = this.state;
+    const { isOpen, photoIndex, equipmentIsOpen } = this.state;
 
     if (isEmpty(resource) && !isFetchingResource) {
       return <NotFoundPage />;
@@ -188,6 +189,7 @@ class UnconnectedResourcePage extends Component {
                     })}
                   <ResourceInfo
                     equipment={equipment}
+                    equipmentIsOpen={equipmentIsOpen}
                     isLoggedIn={isLoggedIn}
                     resource={resource}
                     unit={unit}
