@@ -247,6 +247,20 @@ class UnconnectedReservationInformationForm extends Component {
               rows: 5,
             }
           )}
+          {includes(this.props.fields, 'reservationExtraQuestions')
+            && <h3 id="additional-info-heading">{t('common.additionalInfo.heading')}</h3>
+          }
+          {includes(this.props.fields, 'reservationExtraQuestions')
+            && <p id="additional-info-paragraph">{resource.reservationAdditionalInformation}</p>
+          }
+          {this.renderField(
+            'reservationExtraQuestions',
+            'textarea',
+            t('common.additionalInfo.label'),
+            {
+              rows: 5,
+            }
+          )}
           {termsAndConditions
             && this.renderTermsField('termsAndConditions')
           }

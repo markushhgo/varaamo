@@ -34,6 +34,8 @@
   "CommentForm.placeholder": "Any additional information about the reservation",
   "CommentModal.title": "Comments concerning the reservation",
   "common.accessCodeLabel": "PIN code",
+  "common.additionalInfo.heading": "Additional information about the reservation",
+  "common.additionalInfo.label": "Additional information",
   "common.addressCityLabel": "City",
   "common.addressStreetLabel": "Street address",
   "common.addressZipLabel": "Postal code",
