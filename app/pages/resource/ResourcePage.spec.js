@@ -39,6 +39,17 @@ describe('pages/resource/ResourcePage', () => {
       },
     ],
     unit: Unit.id,
+    equipment: [
+      {
+        name: 'equipment 1'
+      },
+      {
+        name: 'equipment 2'
+      },
+      {
+        name: 'equipment 3'
+      },
+    ]
   });
   const defaultProps = {
     history,
@@ -56,7 +67,7 @@ describe('pages/resource/ResourcePage', () => {
     resource: Immutable(resource),
     showMap: false,
     unit: Immutable(unit),
-    contrast: ''
+    contrast: '',
   };
 
   function getWrapper(props) {
@@ -74,13 +85,15 @@ describe('pages/resource/ResourcePage', () => {
     test('renders panel with correct props', () => {
       const panel = getWrapper().find(Panel);
       expect(panel).toHaveLength(1);
-      expect(panel.prop('aria-labelledby')).toBe('ResourceCalendarHeader');
+      expect(panel.prop('header')).toBe('ResourceInfo.reserveTitle');
     });
 
-    test('renders header text', () => {
-      const header = getWrapper().find('#ResourceCalendarHeader');
+    test('renders panel.heading.title with correct props', () => {
+      const header = getWrapper().find(Panel).find(Panel.Heading).find(Panel.Title);
       expect(header).toHaveLength(1);
-      expect(header.text()).toBe('ResourceCalendar.header');
+      expect(header.prop('children')).toBe('ResourceCalendar.header');
+      expect(header.prop('componentClass')).toBe('h2');
+      expect(header.prop('toggle')).toBeTruthy();
     });
 
 
@@ -99,9 +112,11 @@ describe('pages/resource/ResourcePage', () => {
 
     test('renders ResourceInfo with correct props', () => {
       const resourceInfo = getWrapper().find(ResourceInfo);
+      const equipmentList = ['equipment 1', 'equipment 2', 'equipment 3'];
       expect(resourceInfo).toHaveLength(1);
       expect(resourceInfo.prop('resource')).toEqual(defaultProps.resource);
       expect(resourceInfo.prop('unit')).toEqual(defaultProps.unit);
+      expect(resourceInfo.prop('equipment')).toEqual(equipmentList);
     });
 
     test('renders ResourceCalendar with correct props', () => {

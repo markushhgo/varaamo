@@ -18,7 +18,8 @@ import {
   getTermsAndConditions,
   reservingIsRestricted,
   getResourcePageUrlComponents,
-  getMinPeriodText
+  getMinPeriodText,
+  getEquipment
 } from 'utils/resourceUtils';
 
 describe('Utils: resourceUtils', () => {
@@ -584,6 +585,34 @@ describe('Utils: resourceUtils', () => {
           expect(availabilityData).toEqual(expected);
         });
       });
+    });
+  });
+
+  describe('getEquipment', () => {
+    const equipment = [
+      {
+        name: 'equipment 1',
+      },
+      {
+        name: 'equipment 2',
+      },
+      {
+        name: 'equipment 3',
+      },
+    ];
+    const resource = {
+      equipment
+    };
+
+    const expectedResult = ['equipment 1', 'equipment 2', 'equipment 3'];
+    test('returns an array of equipment names', () => {
+      const resourceEquipment = getEquipment(resource);
+      expect(resourceEquipment).toEqual(expectedResult);
+    });
+
+    test('returns an array of correct length', () => {
+      const resourceEquipment = getEquipment(resource);
+      expect(resourceEquipment).toHaveLength(3);
     });
   });
 

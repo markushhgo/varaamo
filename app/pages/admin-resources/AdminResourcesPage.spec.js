@@ -33,6 +33,8 @@ describe('pages/admin-resources/AdminResourcesPage', () => {
     resources: [],
     resourceTypes: ['a', 'b', 'c'],
     contrast: '',
+    minPeriod: {},
+    maxPeriod: {},
   };
 
   function getWrapper(extraProps = {}) {
@@ -47,7 +49,7 @@ describe('pages/admin-resources/AdminResourcesPage', () => {
       expect(pageWrapper.prop('title')).toBe('AdminResourcesPage.adminTitle');
     });
 
-    test('renders PageWrapper with correct props, wit high-contrast', () => {
+    test('renders PageWrapper with correct props, with high-contrast', () => {
       const pageWrapper = getWrapper({ contrast: 'high-contrast' }).find(PageWrapper);
       expect(pageWrapper).toHaveLength(1);
       expect(pageWrapper.prop('className')).toBe('admin-resources-page high-contrast');
@@ -104,7 +106,9 @@ describe('pages/admin-resources/AdminResourcesPage', () => {
         const view = wrapper.find(AvailabilityView);
         expect(view).toHaveLength(1);
         expect(view.prop('groups')).toEqual([
-          { name: '', resources },
+          {
+            name: '', resources, minPeriod: {}, maxPeriod: {}
+          },
         ]);
         expect(view.prop('date')).toEqual('2017-01-10');
         expect(view.prop('onDateChange')).toBe(changeAdminResourcesPageDate);

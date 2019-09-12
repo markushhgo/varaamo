@@ -352,10 +352,10 @@ describe('pages/resource/reservation-calendar/time-slots/TimeSlots', () => {
     });
 
     describe('is not Admin', () => {
-      test('enables all TimeSlots if maxPeriod in not defined', () => {
+      test('does NOT enable all TimeSlots if maxPeriod in not defined', () => {
         const renderedTimeSlots = getWrapper().find(TimeSlotComponent);
-        expect(renderedTimeSlots.first().prop('isDisabled')).toBe(false);
-        expect(renderedTimeSlots.at(1).prop('isDisabled')).toBe(false);
+        expect(renderedTimeSlots.first().prop('isDisabled')).toBe(true);
+        expect(renderedTimeSlots.at(1).prop('isDisabled')).toBe(true);
       });
 
       test(

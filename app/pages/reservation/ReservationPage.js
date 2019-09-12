@@ -28,12 +28,18 @@ class UnconnectedReservationPage extends Component {
   constructor(props) {
     super(props);
     this.fetchResource = this.fetchResource.bind(this);
+    this.handleRedirect = this.handleRedirect.bind(this);
     const { reservationToEdit } = this.props;
     this.state = {
       view: !isEmpty(reservationToEdit) ? 'time' : 'information',
     };
   }
 
+  /**
+ * The last if statement is there to redirect to the resource page if
+ * language changes on the final confirmation page, previously it just
+ * displayed an empty page.
+ */
   componentDidMount() {
     const {
       location,
@@ -56,6 +62,12 @@ class UnconnectedReservationPage extends Component {
       } else {
         history.replace('/my-reservations');
       }
+    }
+    if (
+      this.state.view === 'information'
+      && (!isEmpty(reservationCreated) || !isEmpty(reservationEdited))
+    ) {
+      this.handleRedirect();
     } else {
       this.fetchResource();
       window.scrollTo(0, 0);
@@ -79,7 +91,9 @@ class UnconnectedReservationPage extends Component {
   }
 
   componentWillUnmount() {
-    this.props.actions.clearReservations();
+    if (this.state.view === 'confirmation') {
+      this.props.actions.clearReservations();
+    }
     this.props.actions.closeReservationSuccessModal();
   }
 
@@ -87,15 +101,6 @@ class UnconnectedReservationPage extends Component {
     if (!isEmpty(this.props.reservationToEdit)) {
       this.setState({ view: 'time' });
       window.scrollTo(0, 0);
-    }
-  };
-
-  handleCancel = () => {
-    const { reservationToEdit, resource, history } = this.props;
-    if (!isEmpty(reservationToEdit)) {
-      history.replace('/my-reservations');
-    } else {
-      history.replace(`/resources/${resource.id}`);
     }
   };
 
@@ -130,6 +135,23 @@ class UnconnectedReservationPage extends Component {
       }
     }
   };
+
+  handleCancel = () => {
+    const { reservationToEdit, resource, history } = this.props;
+    if (!isEmpty(reservationToEdit)) {
+      history.replace('/my-reservations');
+    } else {
+      history.replace(`/resources/${resource.id}`);
+    }
+  }
+
+  /**
+ * Redirects the user to the resourcepage
+ */
+  handleRedirect() {
+    const query = queryString.parse(this.props.location.search);
+    this.props.history.push(`/resources/${query.resource}/reservation`);
+  }
 
   fetchResource() {
     const { actions, date, resource } = this.props;
