@@ -68,6 +68,23 @@ describe('pages/resource/resource-info/ResourceInfo', () => {
     expect(panels.at(2).prop('header')).toBe('ResourceInfo.equipmentHeader');
   });
 
+  test('renders panel.titles with correct props', () => {
+    const panels = getWrapper().find(Panel).find(Panel.Heading).find(Panel.Title);
+
+    expect(panels).toHaveLength(3);
+    expect(panels.at(0).prop('componentClass')).toBe('h3');
+    expect(panels.at(1).prop('componentClass')).toBe('h3');
+    expect(panels.at(2).prop('componentClass')).toBe('h3');
+
+    expect(panels.at(0).prop('toggle')).toBeTruthy();
+    expect(panels.at(1).prop('toggle')).toBeTruthy();
+    expect(panels.at(2).prop('toggle')).toBeTruthy();
+
+    expect(panels.at(0).prop('children')).toBe('ResourceInfo.reservationTitle');
+    expect(panels.at(1).prop('children')).toBe('ResourceInfo.additionalInfoTitle');
+    expect(panels.at(2).prop('children')).toBe('ResourceInfo.equipmentHeader');
+  });
+
   test('renders ReservationInfo with correct props', () => {
     const reservationInfo = getWrapper().find(ReservationInfo);
     expect(reservationInfo).toHaveLength(1);
