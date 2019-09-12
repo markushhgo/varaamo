@@ -85,13 +85,15 @@ describe('pages/resource/ResourcePage', () => {
     test('renders panel with correct props', () => {
       const panel = getWrapper().find(Panel);
       expect(panel).toHaveLength(1);
-      expect(panel.prop('aria-labelledby')).toBe('ResourceCalendarHeader');
+      expect(panel.prop('header')).toBe('ResourceInfo.reserveTitle');
     });
 
-    test('renders header text', () => {
-      const header = getWrapper().find('#ResourceCalendarHeader');
+    test('renders panel.heading.title with correct props', () => {
+      const header = getWrapper().find(Panel).find(Panel.Heading).find(Panel.Title);
       expect(header).toHaveLength(1);
-      expect(header.text()).toBe('ResourceCalendar.header');
+      expect(header.prop('children')).toBe('ResourceCalendar.header');
+      expect(header.prop('componentClass')).toBe('h2');
+      expect(header.prop('toggle')).toBeTruthy();
     });
 
 

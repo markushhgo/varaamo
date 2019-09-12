@@ -139,6 +139,9 @@ $content-padding: 10px;
             width: $line-height-computed;
           }
         }
+        a[aria-expanded="true"]::before {
+          background-image: url('../search/controls/images//angle-down.svg');
+        }
         a[aria-selected="true"]::before {
           background-image: url('../search/controls/images//angle-down.svg');
         }

@@ -11,7 +11,7 @@ import { getServiceMapUrl } from 'utils/unitUtils';
 import ReservationInfo from '../reservation-info';
 
 function ResourceInfo({
-  isLoggedIn, resource, unit, t, equipment, equipmentIsOpen
+  isLoggedIn, resource, unit, t, equipment
 }) {
   const serviceMapUrl = getServiceMapUrl(unit);
   const equipmentList = equipment.map((thing, index) => <li key={index}>{thing}</li>);
@@ -23,9 +23,11 @@ function ResourceInfo({
         <div className="app-ResourceInfo__description">
           {resource.description && <WrappedText openLinksInNewTab text={resource.description} />}
         </div>
-        <Panel header={t('ResourceInfo.reservationTitle')}>
+        <Panel defaultExpanded header={t('ResourceInfo.reservationTitle')} id="reservation-panel">
           <Panel.Heading>
-            <Panel.Toggle componentClass="h4">Tietoa varaamisesta</Panel.Toggle>
+            <Panel.Title componentClass="h3" toggle>
+              {t('ResourceInfo.reservationTitle')}
+            </Panel.Title>
           </Panel.Heading>
           <Panel.Collapse>
             <Panel.Body>
@@ -33,10 +35,10 @@ function ResourceInfo({
             </Panel.Body>
           </Panel.Collapse>
         </Panel>
-        <Panel header={t('ResourceInfo.additionalInfoTitle')}>
+        <Panel defaultExpanded header={t('ResourceInfo.additionalInfoTitle')} id="additionalInfo-panel">
           <Panel.Heading>
-            <Panel.Title toggle>
-              Lisätietoa
+            <Panel.Title componentClass="h3" toggle>
+              {t('ResourceInfo.additionalInfoTitle')}
             </Panel.Title>
           </Panel.Heading>
           <Panel.Collapse>
@@ -68,11 +70,11 @@ function ResourceInfo({
           </Panel.Collapse>
         </Panel>
         {equipmentList.length > 0 && (
-          <Panel header={t('ResourceInfo.equipmentHeader')} id="equipment-panel">
+          <Panel defaultExpanded header={t('ResourceInfo.equipmentHeader')} id="equipment-panel">
             <Panel.Heading>
-              <Panel.Toggle componentClass="h4">
-                Varustus
-              </Panel.Toggle>
+              <Panel.Title componentClass="h3" toggle>
+                {t('ResourceInfo.equipmentHeader')}
+              </Panel.Title>
             </Panel.Heading>
             <Panel.Collapse>
               <Panel.Body>
@@ -93,7 +95,6 @@ function ResourceInfo({
 
 ResourceInfo.propTypes = {
   equipment: PropTypes.array,
-  equipmentIsOpen: PropTypes.bool,
   isLoggedIn: PropTypes.bool.isRequired,
   resource: PropTypes.object.isRequired,
   t: PropTypes.func.isRequired,
