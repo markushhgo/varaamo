@@ -19,7 +19,9 @@ import NotFoundPage from 'pages/not-found/NotFoundPage';
 import ResourceCalendar from 'shared/resource-calendar';
 import ResourceMap from 'shared/resource-map';
 import { injectT } from 'i18n';
-import { getMaxPeriodText, getResourcePageUrl, getMinPeriodText } from 'utils/resourceUtils';
+import {
+  getMaxPeriodText, getResourcePageUrl, getMinPeriodText, getEquipment
+} from 'utils/resourceUtils';
 import ReservationCalendar from './reservation-calendar';
 import ResourceHeader from './resource-header';
 import ResourceInfo from './resource-info';
@@ -148,6 +150,7 @@ class UnconnectedResourcePage extends Component {
     const maxPeriodText = getMaxPeriodText(t, resource);
     const minPeriodText = getMinPeriodText(t, resource);
     const images = this.orderImages(resource.images || []);
+    const equipment = getEquipment(resource);
 
     const mainImageIndex = findIndex(images, image => image.type === 'main');
     const mainImage = mainImageIndex != null ? images[mainImageIndex] : null;
@@ -183,7 +186,12 @@ class UnconnectedResourcePage extends Component {
                     && this.renderImage(mainImage, mainImageIndex, {
                       mainImageMobileVisibility: true,
                     })}
-                  <ResourceInfo isLoggedIn={isLoggedIn} resource={resource} unit={unit} />
+                  <ResourceInfo
+                    equipment={equipment}
+                    isLoggedIn={isLoggedIn}
+                    resource={resource}
+                    unit={unit}
+                  />
 
                   <Panel aria-labelledby="ResourceCalendarHeader" defaultExpanded header={t('ResourceInfo.reserveTitle')} role="region">
                     <h2 className="visually-hidden" id="ResourceCalendarHeader">{t('ResourceCalendar.header')}</h2>

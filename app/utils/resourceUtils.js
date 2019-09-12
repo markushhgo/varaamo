@@ -105,6 +105,15 @@ function getAvailabilityDataForWholeDay(resource = {}, date = null) {
   };
 }
 
+function getEquipment(resource) {
+  const resourceEquipment = [];
+  const equipment = resource.equipment;
+  forEach(equipment, (thing) => {
+    resourceEquipment.push(thing.name);
+  });
+  return resourceEquipment;
+}
+
 function getHourlyPrice(t, { minPricePerHour, maxPricePerHour }) {
   if (!(minPricePerHour || maxPricePerHour)) {
     return t('ResourceIcons.free');
@@ -216,6 +225,7 @@ export {
   isOpenNow,
   getAvailabilityDataForNow,
   getAvailabilityDataForWholeDay,
+  getEquipment,
   getHourlyPrice,
   getHumanizedPeriod,
   getMaxPeriodText,

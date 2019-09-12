@@ -25,6 +25,11 @@ describe('pages/resource/resource-info/ResourceInfo', () => {
       })
     ),
     unit: Immutable(Unit.build()),
+    equipment: [
+      'equipment 1',
+      'equipment 2',
+      'equipment 3',
+    ]
   };
 
   function getWrapper(extraProps) {
@@ -57,9 +62,10 @@ describe('pages/resource/resource-info/ResourceInfo', () => {
   test('renders panels with correct header text', () => {
     const panels = getWrapper().find(Panel);
 
-    expect(panels).toHaveLength(2);
+    expect(panels).toHaveLength(3);
     expect(panels.at(0).prop('header')).toBe('ResourceInfo.reservationTitle');
     expect(panels.at(1).prop('header')).toBe('ResourceInfo.additionalInfoTitle');
+    expect(panels.at(2).prop('header')).toBe('ResourceInfo.equipmentHeader');
   });
 
   test('renders ReservationInfo with correct props', () => {
@@ -131,5 +137,18 @@ describe('pages/resource/resource-info/ResourceInfo', () => {
       .find('a');
 
     expect(link).toHaveLength(0);
+  });
+
+  test('render equipment list', () => {
+    const element = getWrapper().find('li');
+    expect(element).toHaveLength(3);
+    expect(element.first().text()).toBe('equipment 1');
+    expect(element.at(1).text()).toBe('equipment 2');
+    expect(element.last().text()).toBe('equipment 3');
+  });
+
+  test('does not render equipment list when list is empty', () => {
+    const element = getWrapper({ equipment: [] }, { equipmentList: [] }).find('li');
+    expect(element).toHaveLength(0);
   });
 });
