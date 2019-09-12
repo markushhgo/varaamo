@@ -62,6 +62,7 @@
   "common.reserverNameLabel": "The person making the reservation / lessee",
   "common.reserverPhoneNumberLabel": "Phone",
   "common.resourceLabel": "Premises",
+  "common.requireAssistanceLabel": "I require guidance",
   "common.save": "Save",
   "common.saving": "Saving...",
   "common.select": "Select",

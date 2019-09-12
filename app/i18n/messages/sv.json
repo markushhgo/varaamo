@@ -64,6 +64,7 @@
   "common.reserverNameLabel": "Bokare / hyrestagare",
   "common.reserverPhoneNumberLabel": "Telefon",
   "common.resourceLabel": "Utrymme",
+  "common.requireAssistanceLabel": "Jag behöver handledning",
   "common.save": "Spara",
   "common.saving": "Sparas...",
   "common.select": "Välj",

@@ -4,9 +4,11 @@ import React from 'react';
 import Checkbox from './Checkbox';
 import FormControl from './FormControl';
 import ReduxFormField from './ReduxFormField';
+import FormControlCheckbox from './FormControlCheckbox';
 
 describe('shared/form-fields/ReduxFormField', () => {
   const defaultProps = {
+    altCheckbox: false,
     controlProps: { someProp: 'some', otherProp: 'other' },
     input: { name: 'email' },
     label: 'Enter your email',
@@ -20,7 +22,12 @@ describe('shared/form-fields/ReduxFormField', () => {
   }
 
   describe('if type is "checkbox"', () => {
-    test('renders a Checkbox component', () => {
+    test('if altCheckbox is true, renders a FormControlCheckbox component', () => {
+      const wrapper = getWrapper({ type: 'checkbox', altCheckbox: true });
+      const formControlCheckbox = wrapper.find(FormControlCheckbox);
+      expect(formControlCheckbox.length).toBe(1);
+    });
+    test('if altCheckbox is false, renders a Checkbox component', () => {
       const wrapper = getWrapper({ type: 'checkbox' });
       const checkbox = wrapper.find(Checkbox);
       expect(checkbox.length).toBe(1);
