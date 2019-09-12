@@ -184,6 +184,7 @@
       &--outside {
         color: $dark-gray;
       }
+      @include addFocus(2px, $black) {}
     }
 
     .DayPicker-WeekdaysRow {
