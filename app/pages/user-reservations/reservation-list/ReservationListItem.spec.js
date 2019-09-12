@@ -34,6 +34,7 @@ describe('pages/user-reservations/reservation-list/ReservationListItem', () => {
   describe('rendering', () => {
     test('renders a li element', () => {
       expect(component.is('li')).toBe(true);
+      expect(component.prop('className')).toBe('reservation container');
     });
 
     test('displays an image with correct props', () => {

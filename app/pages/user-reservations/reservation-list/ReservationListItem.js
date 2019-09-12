@@ -29,7 +29,7 @@ class ReservationListItem extends Component {
     const nameSeparator = isEmpty(resource) || isEmpty(unit) ? '' : ', ';
 
     return (
-      <li className="reservation">
+      <li className="reservation container">
         <div className="col-md-3 col-lg-2 image-container">
           <Link
             aria-hidden="true"
