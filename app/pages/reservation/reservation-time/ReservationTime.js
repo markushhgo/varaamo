@@ -50,7 +50,7 @@ class ReservationTime extends Component {
     return (
       <div className="app-ReservationTime">
         <Row>
-          <Col md={7} sm={12}>
+          <Col lg={8} sm={12}>
             <ResourceCalendar
               onDateChange={this.handleDateChange}
               resourceId={resource.id}
@@ -62,7 +62,7 @@ class ReservationTime extends Component {
               params={{ ...params, id: resource.id }}
             />
           </Col>
-          <Col md={5} sm={12}>
+          <Col lg={4} sm={12}>
             <Well className="app-ReservationDetails">
               <h3>{t('ReservationPage.detailsTitle')}</h3>
               <Row>
