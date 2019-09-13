@@ -103,6 +103,13 @@ $horizontal-margin: 20px;
   }
 
   &__equipment {
+    padding: 0px;
+
+    ul{
+      padding: 0px;
+      margin: 0px;
+    }
+
     &-header {
       color: $gold;
       font-weight: 600;
