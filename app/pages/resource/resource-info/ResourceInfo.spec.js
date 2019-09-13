@@ -59,13 +59,17 @@ describe('pages/resource/resource-info/ResourceInfo', () => {
     expect(wrappedText.prop('openLinksInNewTab')).toBe(true);
   });
 
-  test('renders panels with correct header text', () => {
+  test('renders panels with correct props', () => {
     const panels = getWrapper().find(Panel);
 
     expect(panels).toHaveLength(3);
     expect(panels.at(0).prop('header')).toBe('ResourceInfo.reservationTitle');
     expect(panels.at(1).prop('header')).toBe('ResourceInfo.additionalInfoTitle');
     expect(panels.at(2).prop('header')).toBe('ResourceInfo.equipmentHeader');
+
+    expect(panels.at(0).prop('role')).toBe('tablist');
+    expect(panels.at(1).prop('role')).toBe('tablist');
+    expect(panels.at(2).prop('role')).toBe('tablist');
   });
 
   test('renders panel.titles with correct props', () => {
@@ -154,6 +158,11 @@ describe('pages/resource/resource-info/ResourceInfo', () => {
       .find('a');
 
     expect(link).toHaveLength(0);
+  });
+
+  test('renders the <ul> element', () => {
+    const element = getWrapper().find('ul');
+    expect(element).toHaveLength(1);
   });
 
   test('render equipment list', () => {

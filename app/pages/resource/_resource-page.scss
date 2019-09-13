@@ -125,7 +125,6 @@ $content-padding: 10px;
           color: $black;
           padding-left: 24px;
           position: relative;
-          text-decoration: underline;
           &::before {
             background-image: url('../search/controls/images/angle-right.svg');
             background-repeat: no-repeat;
@@ -150,11 +149,6 @@ $content-padding: 10px;
     .panel-body {
       padding: 0;
     }
-  }
-
-  @media (max-width: $resource-page-width) {
-    margin-left: -15px;
-    margin-right: -15px;
   }
 
   /* Full width page */

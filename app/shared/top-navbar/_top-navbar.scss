@@ -407,9 +407,6 @@
       color: $black;
       background-color: transparent;
     }
-    a:focus{
-
-    }
 
     .dropdown-menu {
       min-width: 10px;
@@ -438,10 +435,6 @@
     }
     &:hover,
     &:active,
-    &:focus {
-
-    }
-
     .mobile_accessibility {
       cursor: pointer;
     }
