@@ -85,7 +85,7 @@ function fetchReservations(params = {}) {
 }
 
 function parseReservationData(reservation) {
-  const parsed = pickBy(reservation, value => value || value === 0);
+  const parsed = pickBy(reservation, value => value || value === 0 || typeof (value) === 'boolean');
   return JSON.stringify(decamelizeKeys(parsed));
 }
 

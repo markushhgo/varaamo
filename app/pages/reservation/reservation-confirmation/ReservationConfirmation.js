@@ -14,6 +14,7 @@ import ReservationDate from 'shared/reservation-date';
 
 class ReservationConfirmation extends Component {
   static propTypes = {
+    currentLanguage: PropTypes.string,
     isEdited: PropTypes.bool,
     reservation: PropTypes.object.isRequired,
     resource: PropTypes.object.isRequired,
@@ -44,10 +45,10 @@ class ReservationConfirmation extends Component {
 
   render() {
     const {
-      isEdited, reservation, resource, t, user
+      currentLanguage, isEdited, reservation, resource, t, user
     } = this.props;
-    const refUrl = window.location.href;
-    const href = `${constants.FEEDBACK_URL}?ref=${refUrl}`;
+
+    const href = (currentLanguage === 'sv') ? constants.FEEDBACK_URL.SV : constants.FEEDBACK_URL.FI;
     let email = '';
     if (reservation.reserverEmailAddress) {
       email = reservation.reserverEmailAddress;
@@ -71,7 +72,7 @@ class ReservationConfirmation extends Component {
                 className="app-ReservationConfirmation__icon"
                 src={iconHome}
               />
-              <b>{resource.name}</b>
+              {resource.name}
             </p>
             {!isEdited && (
               <p>

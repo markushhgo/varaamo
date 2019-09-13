@@ -120,7 +120,8 @@ class ReservationInformation extends Component {
 
     return (
       <div className="app-ReservationInformation">
-        <Col md={7} sm={12}>
+        <h2 className="visually-hidden reservationInformation__Header">{t('ReservationPhase.informationTitle')}</h2>
+        <Col lg={8} sm={12}>
           {this.renderInfoTexts()}
           <ReservationInformationForm
             fields={this.getFormFields(termsAndConditions)}
@@ -136,9 +137,9 @@ class ReservationInformation extends Component {
             termsAndConditions={termsAndConditions}
           />
         </Col>
-        <Col md={5} sm={12}>
+        <Col lg={4} sm={12}>
           <Well className="app-ReservationDetails">
-            <h3>{t('ReservationPage.detailsTitle')}</h3>
+            <h2>{t('ReservationPage.detailsTitle')}</h2>
             <Row>
               <Col className="app-ReservationDetails__label" md={4}>
                 {t('common.resourceLabel')}

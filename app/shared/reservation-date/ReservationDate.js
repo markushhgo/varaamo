@@ -20,14 +20,14 @@ function ReservationDate({ beginDate, endDate }) {
   return (
     <div className="reservation-date">
       <div className="reservation-date__content">
-        <h5 className="reservation-date__month">{month}</h5>
-        <h1>{day}</h1>
-        <h5 className="reservation-date__day-of-week">{dayOfWeek}</h5>
+        <span className="reservation-date__month">{month}</span>
+        <span className="reservation-date__day-number">{day}</span>
+        <span className="reservation-date__day-of-week">{dayOfWeek}</span>
       </div>
-      <h3>
+      <p className="reservation-date__time">
         <img alt="" className="reservation-date__icon" src={iconClock} />
         {` ${beginTime} \u2013 ${endTime} (${hours}h)`}
-      </h3>
+      </p>
     </div>
   );
 }

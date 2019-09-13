@@ -31,6 +31,8 @@ describe('pages/reservation/ReservationPage', () => {
       putReservation: simple.mock(),
       postReservation: simple.mock(),
     },
+    contrast: '',
+    currentLanguage: 'fi',
     date: '2016-10-10',
     isAdmin: false,
     isStaff: false,
@@ -92,6 +94,20 @@ describe('pages/reservation/ReservationPage', () => {
 
       expect(pageWrapper).toHaveLength(1);
       expect(pageWrapper.prop('title')).toBe('ReservationPage.editReservationTitle');
+    });
+  });
+
+  describe('__content ', () => {
+    const defClass = 'app-ReservationPage__content ';
+
+    test('does not get additional class when high-contrast: false', () => {
+      const element = getWrapper().find('div').at(1);
+      expect(element.prop('className')).toBe(defClass);
+    });
+
+    test('gets additional class when high-contrast: true', () => {
+      const element = getWrapper({ contrast: 'high-contrast' }).find('div').at(1);
+      expect(element.prop('className')).toBe(`${defClass}high-contrast`);
     });
   });
 
@@ -171,9 +187,23 @@ describe('pages/reservation/ReservationPage', () => {
   });
 
   describe('ReservationConfirmation', () => {
-    test('does not render ReservationInformation by default', () => {
+    test('does not render ReservationConfirmation by default', () => {
       const reservationConfirmation = getWrapper().find(ReservationConfirmation);
       expect(reservationConfirmation).toHaveLength(0);
+    });
+
+    test('renders ReservationConfirmation with correct props when view is confirmation', () => {
+      const reservationEdited = {};
+      const wrapper = getWrapper({ reservationEdited });
+      wrapper.setState({ view: 'confirmation' });
+      const reservationConfirmation = wrapper.find(ReservationConfirmation);
+
+      expect(reservationConfirmation).toHaveLength(1);
+      expect(reservationConfirmation.prop('currentLanguage')).toBe(defaultProps.currentLanguage);
+      expect(reservationConfirmation.prop('history')).toBe(defaultProps.history);
+      expect(reservationConfirmation.prop('reservation')).toBe(reservationEdited);
+      expect(reservationConfirmation.prop('resource')).toBe(defaultProps.resource);
+      expect(reservationConfirmation.prop('user')).toBe(defaultProps.user);
     });
   });
 
