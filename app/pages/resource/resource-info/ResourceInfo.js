@@ -23,7 +23,7 @@ function ResourceInfo({
         <div className="app-ResourceInfo__description">
           {resource.description && <WrappedText openLinksInNewTab text={resource.description} />}
         </div>
-        <Panel defaultExpanded header={t('ResourceInfo.reservationTitle')} id="reservation-panel">
+        <Panel defaultExpanded header={t('ResourceInfo.reservationTitle')} id="reservation-panel" role="tablist">
           <Panel.Heading>
             <Panel.Title componentClass="h3" toggle>
               {t('ResourceInfo.reservationTitle')}
@@ -35,7 +35,7 @@ function ResourceInfo({
             </Panel.Body>
           </Panel.Collapse>
         </Panel>
-        <Panel defaultExpanded header={t('ResourceInfo.additionalInfoTitle')} id="additionalInfo-panel">
+        <Panel defaultExpanded header={t('ResourceInfo.additionalInfoTitle')} id="additionalInfo-panel" role="tablist">
           <Panel.Heading>
             <Panel.Title componentClass="h3" toggle>
               {t('ResourceInfo.additionalInfoTitle')}
@@ -70,7 +70,7 @@ function ResourceInfo({
           </Panel.Collapse>
         </Panel>
         {equipmentList.length > 0 && (
-          <Panel defaultExpanded header={t('ResourceInfo.equipmentHeader')} id="equipment-panel">
+          <Panel defaultExpanded header={t('ResourceInfo.equipmentHeader')} id="equipment-panel" role="tablist">
             <Panel.Heading>
               <Panel.Title componentClass="h3" toggle>
                 {t('ResourceInfo.equipmentHeader')}
@@ -80,7 +80,9 @@ function ResourceInfo({
               <Panel.Body>
                 <Row>
                   <Col className="app-ResourceInfo__equipment" lg={6} md={6} sm={6} xs={12}>
-                    {equipmentList}
+                    <ul>
+                      {equipmentList}
+                    </ul>
                   </Col>
                 </Row>
               </Panel.Body>
