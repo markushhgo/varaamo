@@ -139,6 +139,13 @@ describe('pages/reservation/reservation-information/ReservationInformationForm',
     describe('form fields', () => {
       const fieldName = 'reserverName';
 
+      test('renders header title', () => {
+        const fields = [fieldName];
+        const header = getWrapper({ fields }).find('.reservationers-Info');
+        expect(header).toHaveLength(1);
+        expect(header.text()).toBe('ReservationInformationForm.reserverInformationTitle');
+      });
+
       test('renders a field if it is included in props.fields', () => {
         const fields = [fieldName];
         const input = getWrapper({ fields }).find(Field);

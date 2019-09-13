@@ -72,7 +72,7 @@ class ReservationConfirmation extends Component {
                 className="app-ReservationConfirmation__icon"
                 src={iconHome}
               />
-              <b>{resource.name}</b>
+              {resource.name}
             </p>
             {!isEdited && (
               <p>

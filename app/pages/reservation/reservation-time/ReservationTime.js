@@ -49,6 +49,7 @@ class ReservationTime extends Component {
 
     return (
       <div className="app-ReservationTime">
+        <h2 className="visually-hidden reservationTime__Header">{t('ReservationPhase.timeTitle')}</h2>
         <Row>
           <Col lg={8} sm={12}>
             <ResourceCalendar
@@ -61,10 +62,23 @@ class ReservationTime extends Component {
               location={location}
               params={{ ...params, id: resource.id }}
             />
+            <div className="app-ReservationTime__controls">
+              <Button bsStyle="warning" className="cancel_Button" onClick={onCancel}>
+                {t('ReservationInformationForm.cancelEdit')}
+              </Button>
+              <Button
+                bsStyle="primary"
+                className="next_Button"
+                disabled={isEmpty(selectedReservation) || isEmpty(selectedTime)}
+                onClick={onConfirm}
+              >
+                {t('common.continue')}
+              </Button>
+            </div>
           </Col>
           <Col lg={4} sm={12}>
             <Well className="app-ReservationDetails">
-              <h3>{t('ReservationPage.detailsTitle')}</h3>
+              <h2>{t('ReservationPage.detailsTitle')}</h2>
               <Row>
                 <Col className="app-ReservationDetails__label" md={4}>
                   {t('common.resourceLabel')}
@@ -78,14 +92,6 @@ class ReservationTime extends Component {
             </Well>
           </Col>
         </Row>
-        <div className="app-ReservationTime__controls">
-          <Button bsStyle="warning" onClick={onCancel}>
-            {t('ReservationInformationForm.cancelEdit')}
-          </Button>
-          <Button bsStyle="primary" disabled={isEmpty(selectedReservation) || isEmpty(selectedTime)} onClick={onConfirm}>
-            {t('common.continue')}
-          </Button>
-        </div>
       </div>
     );
   }

@@ -32,6 +32,12 @@ describe('pages/reservation/reservation-time/ReservationTime', () => {
     return shallowWithIntl(<ReservationTime {...defaultProps} {...extraProps} />);
   }
 
+  test('renders header text', () => {
+    const header = getWrapper().find('.reservationTime__Header');
+    expect(header).toHaveLength(1);
+    expect(header.text()).toBe('ReservationPhase.timeTitle');
+  });
+
   test('renders ResourceCalendar', () => {
     const wrapper = getWrapper();
     const instance = wrapper.instance();
@@ -50,6 +56,26 @@ describe('pages/reservation/reservation-time/ReservationTime', () => {
     expect(reservationCalendar).toHaveLength(1);
     expect(reservationCalendar.prop('location')).toEqual(location);
     expect(reservationCalendar.prop('params')).toEqual({ id: defaultProps.resource.id });
+  });
+
+  test('renders cancel button', () => {
+    const onCancel = () => undefined;
+    const wrapper = getWrapper({ onCancel });
+    const button = wrapper.find('.cancel_Button');
+    expect(button).toHaveLength(1);
+    expect(button.prop('bsStyle')).toBe('warning');
+    expect(button.prop('onClick')).toBe(onCancel);
+    expect(button.prop('children')).toBe('ReservationInformationForm.cancelEdit');
+  });
+
+  test('renders next button', () => {
+    const onConfirm = () => undefined;
+    const wrapper = getWrapper({ onConfirm });
+    const button = wrapper.find('.next_Button');
+    expect(button).toHaveLength(1);
+    expect(button.prop('bsStyle')).toBe('primary');
+    expect(button.prop('onClick')).toBe(onConfirm);
+    expect(button.prop('children')).toBe('common.continue');
   });
 
   test('renders resource and unit names', () => {

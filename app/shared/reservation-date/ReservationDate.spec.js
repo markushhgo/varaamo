@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 
 import { shallowWithIntl } from 'utils/testUtils';
 import ReservationDate from './ReservationDate';
@@ -10,10 +11,13 @@ describe('shared/reservation-date/ReservationDate', () => {
 
   let wrapper;
 
+  const beginDate = '2018-01-31T13:00:00+02:00';
+  const endDate = '2018-01-31T13:30:00+02:00';
+
   beforeAll(() => {
     wrapper = getWrapper({
-      beginDate: '2018-01-31T13:00:00+02:00',
-      endDate: '2018-01-31T13:30:00+02:00',
+      beginDate,
+      endDate
     });
   });
 
@@ -29,21 +33,27 @@ describe('shared/reservation-date/ReservationDate', () => {
 
   test('renders a month heading', () => {
     const container = wrapper.find('.reservation-date__month');
+    const reservationBegin = moment(beginDate);
     expect(container.length).toBe(1);
+    expect(container.text()).toBe(reservationBegin.format('MMMM'));
   });
 
-  test('renders a day heading', () => {
-    const container = wrapper.find('h1');
+  test('renders a date day', () => {
+    const container = wrapper.find('.reservation-date__day-number');
+    const reservationBegin = moment(beginDate);
     expect(container.length).toBe(1);
+    expect(container.text()).toBe(reservationBegin.format('D'));
   });
 
   test('renders a day of week heading', () => {
     const container = wrapper.find('.reservation-date__day-of-week');
+    const reservationBegin = moment(beginDate);
     expect(container.length).toBe(1);
+    expect(container.text()).toBe(reservationBegin.format('dddd'));
   });
 
-  test('renders a time heading', () => {
-    const container = wrapper.find('h3');
+  test('renders a reservation time', () => {
+    const container = wrapper.find('.reservation-date__time');
     expect(container.length).toBe(1);
   });
 

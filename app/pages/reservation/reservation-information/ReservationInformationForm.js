@@ -131,7 +131,7 @@ class UnconnectedReservationInformationForm extends Component {
       <div>
         <Form className="reservation-form" horizontal>
           { includes(this.props.fields, 'reserverName') && (
-            <h2>{t('ReservationInformationForm.reserverInformationTitle')}</h2>
+            <h3 className="reservationers-Info">{t('ReservationInformationForm.reserverInformationTitle')}</h3>
           )}
           { includes(this.props.fields, 'staffEvent') && (
             <Well>
