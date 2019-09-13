@@ -2,7 +2,6 @@ import { shallow } from 'enzyme';
 import React from 'react';
 import Col from 'react-bootstrap/lib/Col';
 import ControlLabel from 'react-bootstrap/lib/ControlLabel';
-import RBCheckbox from 'react-bootstrap/lib/Checkbox';
 import FormGroup from 'react-bootstrap/lib/FormGroup';
 import HelpBlock from 'react-bootstrap/lib/HelpBlock';
 
@@ -48,7 +47,7 @@ describe('shared/form-fields/FormControlCheckbox', () => {
 
       test('gets correct props', () => {
         expect(getColWrapper().props().componentClass).toBe(ControlLabel);
-        expect(getColWrapper().props().sm).toBe(3);
+        expect(getColWrapper().props().xs).toBe(3);
       });
 
       test('contains the label text given in props', () => {
@@ -78,24 +77,24 @@ describe('shared/form-fields/FormControlCheckbox', () => {
       });
 
       test('gets correct props', () => {
-        expect(col.props().sm).toBe(9);
+        expect(col.props().xs).toBe(9);
       });
 
-      test('contains React Bootstrap Checkbox', () => {
-        const rbCheckbox = col.find(RBCheckbox);
-        expect(rbCheckbox.length).toBe(1);
+      test('contains input', () => {
+        const input = col.find('input');
+        expect(input.length).toBe(1);
       });
     });
   });
 
-  describe('React Bootstrap Checkbox component', () => {
+  describe('checkbox input', () => {
     test('is rendered', () => {
-      const rbCheckbox = getWrapper().find(RBCheckbox);
-      expect(rbCheckbox.length).toBe(1);
+      const checkbox = getWrapper().find('input');
+      expect(checkbox.length).toBe(1);
     });
 
     test('gets correct props', () => {
-      const actualProps = getWrapper().find(RBCheckbox).props();
+      const actualProps = getWrapper().find('input').props();
       Object.keys(defaultProps.controlProps).forEach((key) => {
         expect(actualProps[key]).toBe(defaultProps.controlProps[key]);
       });
