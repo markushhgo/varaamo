@@ -26,6 +26,7 @@ describe('pages/reservation/ReservationPage', () => {
       clearReservations: simple.mock(),
       closeReservationSuccessModal: simple.mock(),
       fetchResource: simple.mock(),
+      handleRedirect: simple.mock(),
       openResourceTermsModal: simple.mock(),
       putReservation: simple.mock(),
       postReservation: simple.mock(),
@@ -223,6 +224,38 @@ describe('pages/reservation/ReservationPage', () => {
   });
 
   describe('componentDidMount', () => {
+    describe('when state.view is', () => {
+      const expectedPath = `/resources/${resource.id}/reservation`;
+      function getInstance(created, edited) {
+        const instance = getWrapper({
+          reservationCreated: created,
+          reservationEdited: edited,
+          reservationToEdit: null,
+          selected: [],
+          location: {
+            search: `?resource=${resource.id}`,
+          },
+        }).instance();
+        return instance;
+      }
+
+      test('information and reservationCreated already exists', () => {
+        const historyMock = simple.mock(history, 'push');
+        const localInstance = getInstance(Reservation.build(), null);
+        localInstance.componentDidMount();
+        expect(historyMock.callCount).toBe(1);
+        expect(historyMock.lastCall.args).toEqual([expectedPath]);
+      });
+
+      test('information and reservationEdited already exists', () => {
+        const historyMock = simple.mock(history, 'push');
+        const localInstance = getInstance(null, Reservation.build());
+        localInstance.componentDidMount();
+        expect(historyMock.callCount).toBe(1);
+        expect(historyMock.lastCall.args).toEqual([expectedPath]);
+      });
+    });
+
     describe('when reservations and selected empty', () => {
       let historyMock;
 
@@ -322,7 +355,36 @@ describe('pages/reservation/ReservationPage', () => {
       }
     );
   });
-  describe('componentWillUnmount', () => {
+  describe('componentWillUnmount when state.view is confirmation', () => {
+    const clearReservations = simple.mock();
+    const closeReservationSuccessModal = simple.mock();
+    beforeAll(() => {
+      const instance = getWrapper({
+        actions: {
+          clearReservations,
+          closeReservationSuccessModal,
+        },
+      }).instance();
+      instance.state.view = 'confirmation';
+      instance.componentWillUnmount();
+    });
+
+    afterAll(() => {
+      simple.restore();
+    });
+
+    test('calls clearReservations', () => {
+      expect(clearReservations.callCount).toBe(1);
+      expect(clearReservations.lastCall.args).toEqual([]);
+    });
+
+    test('calls closeReservationSuccessModal', () => {
+      expect(closeReservationSuccessModal.callCount).toBe(1);
+      expect(closeReservationSuccessModal.lastCall.args).toEqual([]);
+    });
+  });
+
+  describe('componentWillUnmount when state.view is not confirmation', () => {
     const clearReservations = simple.mock();
     const closeReservationSuccessModal = simple.mock();
     beforeAll(() => {
@@ -339,8 +401,8 @@ describe('pages/reservation/ReservationPage', () => {
       simple.restore();
     });
 
-    test('calls clearReservations', () => {
-      expect(clearReservations.callCount).toBe(1);
+    test('does not call clearReservations', () => {
+      expect(clearReservations.callCount).toBe(0);
       expect(clearReservations.lastCall.args).toEqual([]);
     });
 

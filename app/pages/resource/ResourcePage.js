@@ -19,7 +19,9 @@ import NotFoundPage from 'pages/not-found/NotFoundPage';
 import ResourceCalendar from 'shared/resource-calendar';
 import ResourceMap from 'shared/resource-map';
 import { injectT } from 'i18n';
-import { getMaxPeriodText, getResourcePageUrl, getMinPeriodText } from 'utils/resourceUtils';
+import {
+  getMaxPeriodText, getResourcePageUrl, getMinPeriodText, getEquipment
+} from 'utils/resourceUtils';
 import ReservationCalendar from './reservation-calendar';
 import ResourceHeader from './resource-header';
 import ResourceInfo from './resource-info';
@@ -148,6 +150,7 @@ class UnconnectedResourcePage extends Component {
     const maxPeriodText = getMaxPeriodText(t, resource);
     const minPeriodText = getMinPeriodText(t, resource);
     const images = this.orderImages(resource.images || []);
+    const equipment = getEquipment(resource);
 
     const mainImageIndex = findIndex(images, image => image.type === 'main');
     const mainImage = mainImageIndex != null ? images[mainImageIndex] : null;
@@ -183,30 +186,41 @@ class UnconnectedResourcePage extends Component {
                     && this.renderImage(mainImage, mainImageIndex, {
                       mainImageMobileVisibility: true,
                     })}
-                  <ResourceInfo isLoggedIn={isLoggedIn} resource={resource} unit={unit} />
+                  <ResourceInfo
+                    equipment={equipment}
+                    isLoggedIn={isLoggedIn}
+                    resource={resource}
+                    unit={unit}
+                  />
 
-                  <Panel aria-labelledby="ResourceCalendarHeader" defaultExpanded header={t('ResourceInfo.reserveTitle')} role="region">
-                    <h2 className="visually-hidden" id="ResourceCalendarHeader">{t('ResourceCalendar.header')}</h2>
-                    {resource.externalReservationUrl && (
-                      <form action={resource.externalReservationUrl}>
-                        <input
-                          className="btn btn-primary"
-                          type="submit"
-                          value="Siirry ulkoiseen ajanvarauskalenteriin"
-                        />
-                      </form>
-                    )}
-                    {!resource.externalReservationUrl && (
-                      <div>
-                        {/* Show reservation max period text */}
-                        {resource.maxPeriod && (
+                  <Panel defaultExpanded header={t('ResourceInfo.reserveTitle')} role="region">
+                    <Panel.Heading>
+                      <Panel.Title componentClass="h2" toggle>
+                        {t('ResourceCalendar.header')}
+                      </Panel.Title>
+                    </Panel.Heading>
+                    <Panel.Collapse>
+                      <Panel.Body>
+                        {resource.externalReservationUrl && (
+                        <form action={resource.externalReservationUrl}>
+                          <input
+                            className="btn btn-primary"
+                            type="submit"
+                            value="Siirry ulkoiseen ajanvarauskalenteriin"
+                          />
+                        </form>
+                        )}
+                        {!resource.externalReservationUrl && (
+                        <div>
+                          {/* Show reservation max period text */}
+                          {resource.maxPeriod && (
                           <div className="app-ResourcePage__content-max-period">
                             <p>{`${t('ReservationInfo.reservationMaxLength')} ${maxPeriodText}`}</p>
                           </div>
-                        )}
+                          )}
 
-                        {/* Show reservation max period text */}
-                        {resource.minPeriod
+                          {/* Show reservation max period text */}
+                          {resource.minPeriod
                         && (
                           <div className="app-ResourcePage__content-min-period">
                             <p>{`${t('ReservationInfo.reservationMinLength')} ${minPeriodText}`}</p>
@@ -214,19 +228,22 @@ class UnconnectedResourcePage extends Component {
                         )
                         }
 
-                        <ResourceCalendar
-                          disableDays={this.disableDays}
-                          onDateChange={this.handleDateChange}
-                          resourceId={resource.id}
-                          selectedDate={date}
-                        />
-                        <ReservationCalendar
-                          history={history}
-                          location={location}
-                          params={params}
-                        />
-                      </div>
-                    )}
+                          <ResourceCalendar
+                            disableDays={this.disableDays}
+                            onDateChange={this.handleDateChange}
+                            resourceId={resource.id}
+                            selectedDate={date}
+                          />
+                          <ReservationCalendar
+                            history={history}
+                            location={location}
+                            params={params}
+                          />
+                        </div>
+                        )}
+                      </Panel.Body>
+                    </Panel.Collapse>
+
                   </Panel>
                 </Col>
                 <Col className="app-ResourceInfo__images" lg={3} md={3} xs={12}>

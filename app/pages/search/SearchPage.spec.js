@@ -100,6 +100,12 @@ describe('pages/search/SearchPage', () => {
       expect(resourceMap.prop('selectedUnitId')).toBe(props.selectedUnitId);
     });
 
+    test('renders search results header', () => {
+      const header = getWrapper().find('.app-SearchPage__header');
+      expect(header).toHaveLength(1);
+      expect(header.text()).toBe('SearchResults.label');
+    });
+
     test('renders an Row element', () => {
       expect(getWrapper().find(Row)).toHaveLength(1);
     });

@@ -39,5 +39,7 @@ describe('pages/about/AboutPage', () => {
     };
     const elements = getWrapper({ lan }).find('a');
     expect(elements.prop('href')).toBe(constants.FEEDBACK_URL.FI);
+    expect(elements.prop('rel')).toBe('noopener noreferrer');
+    expect(elements.prop('target')).toBe('_blank');
   });
 });

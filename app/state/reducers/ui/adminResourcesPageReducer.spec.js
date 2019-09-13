@@ -22,6 +22,14 @@ describe('state/reducers/ui/adminResourcesPageReducer', () => {
     test('date is undefined', () => {
       expect(initialState.date).toBeUndefined();
     });
+
+    test('resourceMinPeriod is an empty obj', () => {
+      expect(initialState.resourceMinPeriod).toEqual({});
+    });
+
+    test('resourceMaxPeriod is an empty obj', () => {
+      expect(initialState.resourceMaxPeriod).toEqual({});
+    });
   });
 
   describe('handling actions', () => {
@@ -84,10 +92,24 @@ describe('state/reducers/ui/adminResourcesPageReducer', () => {
         Resource.build(),
         Resource.build(),
       ];
+
       const resources = {
-        [resourcesList[0].id]: resourcesList[0],
-        [resourcesList[1].id]: resourcesList[1],
-        [resourcesList[2].id]: resourcesList[2],
+        [resourcesList[0].id]: {
+          id: resourcesList[0].id,
+          maxPeriod: '10:00:00',
+          minPeriod: '01:00:00',
+        },
+        [resourcesList[1].id]: {
+          id: resourcesList[1].id,
+          maxPeriod: '06:00:00',
+          minPeriod: '02:00:00',
+        },
+        [resourcesList[2].id]: {
+          id: resourcesList[2].id,
+          maxPeriod: '12:00:00',
+          minPeriod: '03:00:00',
+        },
+
       };
 
       describe('with correct meta source', () => {
@@ -102,9 +124,34 @@ describe('state/reducers/ui/adminResourcesPageReducer', () => {
           );
         });
 
+        test('adds maxPeriod from action', () => {
+          const initialState = Immutable({
+            resourceMaxPeriod: {}
+          });
+          const nextState = adminResourcesPageReducer(initialState, action);
+          expect(nextState.resourceMaxPeriod).toEqual({
+            [resourcesList[0].id]: '10:00:00',
+            [resourcesList[1].id]: '06:00:00',
+            [resourcesList[2].id]: '12:00:00',
+          });
+        });
+
+        test('adds minPeriod from action', () => {
+          const initialState = Immutable({
+            resourceMinPeriod: {}
+          });
+          const nextState = adminResourcesPageReducer(initialState, action);
+          expect(nextState.resourceMinPeriod).toEqual({
+            [resourcesList[0].id]: '01:00:00',
+            [resourcesList[1].id]: '02:00:00',
+            [resourcesList[2].id]: '03:00:00',
+          });
+        });
+
         test('adds resources ids from action', () => {
           const initialState = Immutable({
             resourceIds: [],
+            resourceMaxPeriod: {}
           });
           const nextState = adminResourcesPageReducer(initialState, action);
           expect(nextState.resourceIds).toEqual([
