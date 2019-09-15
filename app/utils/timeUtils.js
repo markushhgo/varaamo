@@ -94,7 +94,8 @@ function getTimeSlots(
   start, end,
   period = DEFAULT_SLOT_SIZE,
   reservations = [],
-  reservationsToEdit = []
+  reservationsToEdit = [],
+  cooldown = 0
 ) {
   if (!start || !end) {
     return [];
@@ -108,6 +109,15 @@ function getTimeSlots(
       moment(reservation.begin), moment(reservation.end)
     )
   );
+
+  /*
+    reservation cooldown range is calculated in the following way:
+    cooldown range = from (begin time - cooldown) to (end time + cooldown)
+  */
+  const cooldownRanges = map(reservations, reservation => moment.range(
+    moment(reservation.begin).subtract(moment.duration(cooldown)),
+    moment(reservation.end).add(moment.duration(cooldown))
+  ));
 
   const editRanges = map(
     reservationsToEdit, reservation => moment.range(
@@ -147,6 +157,17 @@ function getTimeSlots(
         }
       });
 
+      /*
+        slot is on cooldown if it's within cooldown range
+        slot is not on cooldown if it's set as reserved
+      */
+      let onCooldown = false;
+      forEach(cooldownRanges, (cooldownRange) => {
+        if (!reserved && cooldownRange.overlaps(slotRange)) {
+          onCooldown = true;
+        }
+      });
+
       return {
         asISOString,
         asString,
@@ -157,6 +178,7 @@ function getTimeSlots(
         reserved,
         start: startMoment.toISOString(),
         end: endMoment.toISOString(),
+        onCooldown,
       };
     }
   );

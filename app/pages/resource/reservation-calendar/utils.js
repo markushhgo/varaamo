@@ -66,6 +66,9 @@ function isSlotSelectable(slot, selected, resource, lastSelectableFound, isAdmin
   if ((!slot.editing && slot.reserved) || lastSelectableFound) {
     return false;
   }
+  if (slot.onCooldown && !isAdmin) {
+    return false;
+  }
   const firstSelected = getBeginOfSelection(selected);
   if (!isAdmin && resource.maxPeriod) {
     const durationParts = resource.maxPeriod.split(':');

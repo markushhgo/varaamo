@@ -36,7 +36,7 @@ class TimeSlot extends PureComponent {
 
   static getDerivedStateFromProps(prop) {
     const {
-      slot, resource, isDisabled, isSelectable, selected, isLoggedIn
+      slot, resource, isAdmin, isDisabled, isSelectable, selected, isLoggedIn
     } = prop;
     const isPast = new Date(slot.end) < new Date();
     const isReservable = (resource.reservableAfter
@@ -46,7 +46,8 @@ class TimeSlot extends PureComponent {
       || (!isSelectable && !selected)
       || !resource.userPermissions.canMakeReservations
       || isReservable
-      || (!slot.editing && (slot.reserved || isPast));
+      || (!slot.editing && (slot.reserved || isPast))
+      || (slot.onCooldown && !isAdmin);
 
     return {
       disabled,
