@@ -6,6 +6,7 @@ import React from 'react';
 import Button from 'react-bootstrap/lib/Button';
 import Immutable from 'seamless-immutable';
 import simple from 'simple-mock';
+import Panel from 'react-bootstrap/lib/Panel';
 
 import { shallowWithIntl } from 'utils/testUtils';
 import CheckboxControl from './CheckboxControl';
@@ -102,6 +103,14 @@ describe('pages/search/controls/SearchControlsContainer', () => {
       expect(datePickerControl.prop('currentLanguage')).toBe(defaultProps.currentLanguage);
       expect(datePickerControl.prop('date')).toBe(moment(filters.date).format('L'));
       expect(datePickerControl.prop('onConfirm')).toBe(wrapper.instance().handleDateChange);
+    });
+
+    test('renders title button with correct props', () => {
+      const panel = getWrapper().find(Panel).find(Panel.Heading).find(Panel.Title);
+      expect(panel).toHaveLength(1);
+      expect(panel.prop('componentClass')).toBe('p');
+      expect(panel.prop('toggle')).toBeTruthy();
+      expect(panel.prop('children')).toBe('SearchControlsContainer.advancedSearch');
     });
 
     test('renders SelectControl for purpose with correct props', () => {
