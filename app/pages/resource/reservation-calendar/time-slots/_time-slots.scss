@@ -39,9 +39,9 @@
   }
 
   &--date--header {
+    // Reduced font size and changed padding to fix some date headers from displaying on two lines when toggled to large font size on iPad Pro
     margin: 0 0 4px 0;
-    padding: 10px;
-    // Reduced font size to fix some date headers from displaying on two lines when toggled to large font size on iPad Pro
+    padding: 10px 0 10px 0;
     @media (min-width: $screen-md-min) and (max-width: $screen-md-max) {
       font-size: 0.95em;
     }
