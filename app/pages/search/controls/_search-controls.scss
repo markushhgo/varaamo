@@ -46,7 +46,6 @@
           padding-left: 24px;
           cursor: pointer;
           position: relative;
-          text-decoration: underline;
           &::before {
             background-image: url('./images/angle-right.svg');
             background-repeat: no-repeat;
@@ -59,6 +58,9 @@
             height: $line-height-computed;
             width: $line-height-computed;
           }
+        }
+        a[aria-expanded="true"]::before {
+          background-image: url('./images/angle-down.svg');
         }
         a[aria-selected='true']::before {
           background-image: url('./images/angle-down.svg');
