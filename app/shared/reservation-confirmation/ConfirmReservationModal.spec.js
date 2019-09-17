@@ -155,6 +155,12 @@ describe('shared/reservation-confirmation/ConfirmReservationModal', () => {
       return getWrapper(props).find(ReservationForm).props().fields;
     }
 
+    test('contains resource', () => {
+      const form = getWrapper().find(ReservationForm);
+      expect(form.length).toBe(1);
+      expect(form.prop('resource')).toBe(defaultProps.resource);
+    });
+
     test('contain resource.supportedReservationExtraFields', () => {
       const supportedReservationExtraFields = ['firstField', 'secondField'];
       const resource = Resource.build({ supportedReservationExtraFields });

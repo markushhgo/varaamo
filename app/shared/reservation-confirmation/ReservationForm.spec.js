@@ -9,6 +9,7 @@ import simple from 'simple-mock';
 import WrappedText from 'shared/wrapped-text';
 import { shallowWithIntl } from 'utils/testUtils';
 import { UnconnectedReservationForm as ReservationForm, validate } from './ReservationForm';
+import Resource from 'utils/fixtures/Resource';
 
 describe('shared/reservation-confirmation/ReservationForm', () => {
   describe('validation', () => {
@@ -117,6 +118,7 @@ describe('shared/reservation-confirmation/ReservationForm', () => {
       onCancel: simple.mock(),
       onConfirm: simple.mock(),
       requiredFields: [],
+      resource: Resource.build(),
       termsAndConditions: '',
     };
 
@@ -191,6 +193,38 @@ describe('shared/reservation-confirmation/ReservationForm', () => {
               expect(input.props().label).not.toContain('*');
             }
           );
+        });
+      });
+    });
+
+    describe('Additional info', () => {
+      describe('if extra questions is included in props', () => {
+        const resource = { reservationAdditionalInformation: 'info string' };
+        const fields = ['reservationExtraQuestions'];
+        const props = { resource, fields };
+        const wrapper = getWrapper(props);
+
+        test('renders additional info heading', () => {
+          const heading = wrapper.find('#additional-info-heading');
+          expect(heading.length).toBe(1);
+          expect(heading.text()).toBe('common.additionalInfo.heading');
+        });
+
+        test('renders additional info paragraph', () => {
+          const paragraph = wrapper.find('#additional-info-paragraph');
+          expect(paragraph.length).toBe(1);
+          expect(paragraph.text()).toBe(resource.reservationAdditionalInformation);
+        });
+      });
+
+      describe('if extra questions is not included in props', () => {
+        test('does not render additional info heading', () => {
+          const heading = getWrapper().find('#additional-info-heading');
+          expect(heading.length).toBe(0);
+        });
+        test('does not render additional info paragraph', () => {
+          const paragraph = getWrapper().find('#additional-info-paragraph');
+          expect(paragraph.length).toBe(0);
         });
       });
     });

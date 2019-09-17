@@ -75,7 +75,7 @@ export function validate(values, { fields, requiredFields, t }) {
 }
 
 class UnconnectedReservationForm extends Component {
-  renderField(name, type, label, controlProps = {}, help = null, info = null) {
+  renderField(name, type, label, controlProps = {}, help = null, info = null, altCheckbox = false) {
     if (!includes(this.props.fields, name)) {
       return null;
     }
@@ -83,6 +83,7 @@ class UnconnectedReservationForm extends Component {
 
     return (
       <Field
+        altCheckbox={altCheckbox}
         component={ReduxFormField}
         controlProps={controlProps}
         help={help}
@@ -127,6 +128,7 @@ class UnconnectedReservationForm extends Component {
       onCancel,
       onConfirm,
       requiredFields,
+      resource,
       staffEventSelected,
       t,
       termsAndConditions,
@@ -190,6 +192,27 @@ class UnconnectedReservationForm extends Component {
             'number',
             t('common.numberOfParticipantsLabel'),
             { min: '0' }
+          )}
+          {this.renderField(
+            'requireAssistance',
+            'checkbox',
+            t('common.requireAssistanceLabel'),
+            {},
+            null,
+            null,
+            true
+          )}
+          {includes(this.props.fields, 'reservationExtraQuestions') && (
+            <Well>
+              <p id="additional-info-heading">{t('common.additionalInfo.heading')}</p>
+              <p id="additional-info-paragraph">{resource.reservationAdditionalInformation}</p>
+              {this.renderField(
+                'reservationExtraQuestions',
+                'textarea',
+                t('common.additionalInfo.label'),
+                { rows: 5 }
+              )}
+            </Well>
           )}
           {includes(this.props.fields, 'reserverAddressStreet') && (
             <Well>
@@ -286,6 +309,7 @@ UnconnectedReservationForm.propTypes = {
   onCancel: PropTypes.func.isRequired,
   onConfirm: PropTypes.func.isRequired,
   requiredFields: PropTypes.array.isRequired,
+  resource: PropTypes.object.isRequired,
   staffEventSelected: PropTypes.bool,
   t: PropTypes.func.isRequired,
   termsAndConditions: PropTypes.string.isRequired,
