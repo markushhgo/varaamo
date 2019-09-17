@@ -159,6 +159,9 @@ class UnconnectedReservationEditForm extends Component {
         {this.renderAddressRow('reserverAddress')}
         {this.renderAddressRow('billingAddress')}
         {this.renderStaticInfoRow('accessCode')}
+        {!(reservation.requireAssistance === undefined)
+           && this.renderInfoRow(t('common.requireAssistanceLabel'), reservation.requireAssistance ? t('common.yes') : t('common.no'))}
+        {this.renderInfoRow(t('common.additionalInfo.label'), reservation.reservationExtraQuestions)}
         {isAdmin && !reservationIsEditable && this.renderStaticInfoRow('comments')}
         {isAdmin && reservationIsEditable && (
           <div className="form-controls">
