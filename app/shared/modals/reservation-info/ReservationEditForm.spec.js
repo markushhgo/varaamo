@@ -28,6 +28,8 @@ describe('shared/modals/reservation-info/ReservationEditForm', () => {
     reserverName: 'Luke Skywalker',
     reserverPhoneNumber: '1234567',
     resource: resource.id,
+    requireAssistance: undefined,
+    reservationExtraQuestions: undefined,
   });
   const defaultProps = {
     handleSubmit: () => null,
@@ -162,6 +164,35 @@ describe('shared/modals/reservation-info/ReservationEditForm', () => {
           }
         );
       });
+
+      describe('requires assistance', () => {
+        test('is rendered if reservation supports it', () => {
+          const userReservation = Reservation.build({
+            requireAssistance: false
+          });
+          expect(getData({ reservation: userReservation })).toContain('common.requireAssistanceLabel');
+        });
+
+        test('is not rendered if reservation doesnt support it', () => {
+          const userReservation = Reservation.build({
+            requireAssistance: undefined
+          });
+          expect(getData({ reservation: userReservation })).not.toContain('common.requireAssistanceLabel');
+        });
+      });
+
+      describe('reservation extra questions', () => {
+        test('is rendered if reservation supports it', () => {
+          const userReservation = Reservation.build({
+            reservationExtraQuestions: 'extra question string'
+          });
+          expect(getData({ reservation: userReservation }))
+            .toContain('common.additionalInfo.label');
+        });
+        test('is not rendered if reservation doesnt support it', () => {
+          expect(getData()).not.toContain('common.additionalInfo.label');
+        });
+      });
     });
 
     describe('form fields', () => {
@@ -180,6 +211,7 @@ describe('shared/modals/reservation-info/ReservationEditForm', () => {
           const field = getFormField('eventDescription');
           expect(field).toHaveLength(1);
           expect(field.prop('type')).toBe('textarea');
+          expect(field.prop('controlProps')).toEqual({ maxLength: '256' });
         });
 
         test('renders a number field for numberOfParticipants', () => {

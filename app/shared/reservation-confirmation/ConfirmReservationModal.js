@@ -222,6 +222,7 @@ class ConfirmReservationModal extends Component {
             onCancel={this.handleCancel}
             onConfirm={this.onConfirm}
             requiredFields={this.getRequiredFormFields(resource, termsAndConditions)}
+            resource={resource}
             staffEventSelected={staffEventSelected}
             termsAndConditions={termsAndConditions}
             timeSlots={timeSlots}

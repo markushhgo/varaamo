@@ -64,7 +64,7 @@ class UnconnectedReservationEditForm extends Component {
     );
   }
 
-  renderEditableInfoRow(propertyName, type) {
+  renderEditableInfoRow(propertyName, type, controlProps = {}) {
     const { isEditing, reservation, t } = this.props;
     if (!isEditing) return this.renderStaticInfoRow(propertyName);
     const property = reservation[propertyName];
@@ -72,7 +72,7 @@ class UnconnectedReservationEditForm extends Component {
     return (
       <Field
         component={ReduxFormField}
-        controlProps={{}}
+        controlProps={controlProps}
         label={t(`common.${propertyName}Label`)}
         name={propertyName}
         type={type}
@@ -148,7 +148,7 @@ class UnconnectedReservationEditForm extends Component {
         </Well>
         {this.renderEditableInfoRow('eventSubject', 'text')}
         {this.renderStaticInfoRow('reserverName')}
-        {this.renderEditableInfoRow('eventDescription', 'textarea')}
+        {this.renderEditableInfoRow('eventDescription', 'textarea', { maxLength: '256' })}
         {this.renderEditableInfoRow('numberOfParticipants', 'number')}
         {this.renderReservationTime()}
         {this.renderInfoRow(t('common.resourceLabel'), resource.name)}
@@ -159,6 +159,9 @@ class UnconnectedReservationEditForm extends Component {
         {this.renderAddressRow('reserverAddress')}
         {this.renderAddressRow('billingAddress')}
         {this.renderStaticInfoRow('accessCode')}
+        {!(reservation.requireAssistance === undefined)
+           && this.renderInfoRow(t('common.requireAssistanceLabel'), reservation.requireAssistance ? t('common.yes') : t('common.no'))}
+        {this.renderInfoRow(t('common.additionalInfo.label'), reservation.reservationExtraQuestions)}
         {isAdmin && !reservationIsEditable && this.renderStaticInfoRow('comments')}
         {isAdmin && reservationIsEditable && (
           <div className="form-controls">
