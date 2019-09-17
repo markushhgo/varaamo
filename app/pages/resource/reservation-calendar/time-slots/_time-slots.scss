@@ -70,8 +70,22 @@
       }
     }
 
-    &--cooldown.app-TimeSlot--is-admin {
-      background-color: lightpink;
+    // only in use when logged in as admin and resource has cooldown.
+    &--cooldown.app-TimeSlot--is-admin:not(.app-TimeSlot--past) {
+      background: repeating-linear-gradient(
+        45deg,
+        $silver,
+        $silver 10px,
+        $gray-light 10px,
+        $gray-light 15px
+      );
+      &:hover:not(.app-TimeSlot--disabled) {
+        background: $dark-gray;
+        color: $white;
+        .app-TimeSlot__time {
+          color: white;
+        }
+      }
     }
 
     &--disabled {

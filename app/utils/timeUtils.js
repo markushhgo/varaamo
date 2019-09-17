@@ -174,10 +174,10 @@ function getTimeSlots(
           reservation.push(reservations[index]);
 
           if (isEditing) {
-            if (reservation.some(res => !res.isOwn) && isEditing) {
-              if (reservationRanges.some(resRange => resRange.overlaps(slotRange))) {
+            if (reservation.some(res => !res.isOwn)) {
+              /*        if (reservationRanges.some(resRange => resRange.overlaps(slotRange))) {
                 onCooldown = true;
-              }
+              } */
               onCooldown = true;
             } else {
               onCooldown = false;
