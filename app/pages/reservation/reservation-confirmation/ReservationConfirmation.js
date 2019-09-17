@@ -158,7 +158,7 @@ class ReservationConfirmation extends Component {
                 reservation.reserverAddressCity
               )}
             {reservation.billingAddressStreet && (
-              <Col xs={12}>{t('common.billingAddressLabel')}</Col>
+              <Col xs={12}><h3 id="billingInformationHeader">{t('common.billingAddressLabel')}</h3></Col>
             )}
             {reservation.billingAddressStreet
               && this.renderField(
@@ -178,6 +178,15 @@ class ReservationConfirmation extends Component {
                 t('common.addressCityLabel'),
                 reservation.billingAddressCity
               )}
+            {reservation.reservationExtraQuestions && (
+            <Col xs={12}><h3 id="reservationExtraQuestionsHeader">{t('common.additionalInfo.heading')}</h3></Col>
+            )}
+            {reservation.reservationExtraQuestions
+            && this.renderField(
+              'reservationExtraQuestions',
+              t('common.additionalInfo.label'),
+              reservation.reservationExtraQuestions
+            )}
           </Well>
         </Col>
       </Row>
