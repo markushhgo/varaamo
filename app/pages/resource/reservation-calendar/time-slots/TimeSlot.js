@@ -189,7 +189,8 @@ class TimeSlot extends PureComponent {
     const { disabled, isPast } = this.state;
 
     const reservation = slot.reservation;
-    const isOwnReservation = reservation && reservation.isOwn;
+    const isOwnReservation = reservation && reservation.isOwn && slot.reserved;
+    const isCooldown = slot.onCooldown;
     const start = new Date(slot.start);
     const startTime = `${padLeft(start.getHours())}:${padLeft(start.getMinutes())}`;
 
@@ -206,6 +207,7 @@ class TimeSlot extends PureComponent {
           'app-TimeSlot--reserved': slot.reserved,
           'app-TimeSlot--selected': selected,
           'app-TimeSlot--highlight': isHighlighted,
+          'app-TimeSlot--cooldown': isCooldown,
         })}
         ref={this.timeSlotRef}
       >

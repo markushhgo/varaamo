@@ -121,7 +121,9 @@ function getTimeSlots(
 
   const editRanges = map(
     reservationsToEdit, reservation => moment.range(
-      moment(reservation.begin), moment(reservation.end)
+      moment(reservation.begin), moment(reservation.end),
+      //      moment(reservation.begin).subtract(moment.duration(cooldown))
+
     )
   );
 
@@ -141,9 +143,10 @@ function getTimeSlots(
 
       const slotRange = moment.range(startMoment, endMoment);
       const editing = editRanges.some(editRange => editRange.overlaps(slotRange));
+      // const editingCooldown = editRanges.some(editRange => editRange.overlaps(cooldownRanges));
 
       let reserved = false;
-      let reservation = null;
+      let reservation = [];
       let reservationStarting = false;
       let reservationEnding = false;
       forEach(reservationRanges, (reservationRange, index) => {
@@ -161,12 +164,30 @@ function getTimeSlots(
         slot is on cooldown if it's within cooldown range
         slot is not on cooldown if it's set as reserved
       */
+      const isEditing = Boolean(reservationsToEdit.length);
       let onCooldown = false;
-      forEach(cooldownRanges, (cooldownRange) => {
+      forEach(cooldownRanges, (cooldownRange, index) => {
         if (!reserved && cooldownRange.overlaps(slotRange)) {
-          onCooldown = true;
+          //         reservation = reservations[index];
+          //         reservation = reservations[index];
+
+          reservation.push(reservations[index]);
+
+          if (isEditing) {
+            if (reservation.some(res => !res.isOwn) && isEditing) {
+              if (reservationRanges.some(resRange => resRange.overlaps(slotRange))) {
+                onCooldown = true;
+              }
+              onCooldown = true;
+            } else {
+              onCooldown = false;
+            }
+          } else {
+            onCooldown = true;
+          }
         }
       });
+
 
       return {
         asISOString,

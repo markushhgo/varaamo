@@ -70,6 +70,10 @@
       }
     }
 
+    &--cooldown.app-TimeSlot--is-admin {
+      background-color: lightpink;
+    }
+
     &--disabled {
       &:hover {
         cursor: not-allowed;
