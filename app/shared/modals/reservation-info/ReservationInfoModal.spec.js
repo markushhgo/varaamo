@@ -131,6 +131,7 @@ describe('shared/modals/reservation-info/ReservationInfoModal', () => {
             expect(formControl).toHaveLength(1);
             expect(formControl.prop('componentClass')).toBe('textarea');
             expect(formControl.prop('defaultValue')).toBe(reservation.comments);
+            expect(formControl.prop('maxLength')).toBe('256');
             expect(typeof formControl.prop('inputRef')).toBe('function');
             expect(wrapper.instance().commentsInput).toEqual(mockRef);
           });

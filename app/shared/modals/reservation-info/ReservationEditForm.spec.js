@@ -211,6 +211,7 @@ describe('shared/modals/reservation-info/ReservationEditForm', () => {
           const field = getFormField('eventDescription');
           expect(field).toHaveLength(1);
           expect(field.prop('type')).toBe('textarea');
+          expect(field.prop('controlProps')).toEqual({ maxLength: '256' });
         });
 
         test('renders a number field for numberOfParticipants', () => {

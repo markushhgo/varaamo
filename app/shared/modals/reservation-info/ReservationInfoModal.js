@@ -100,6 +100,7 @@ class ReservationInfoModal extends Component {
                     disabled={disabled}
                     // eslint-disable-next-line no-return-assign
                     inputRef={ref => this.commentsInput = ref}
+                    maxLength="256"
                     placeholder={t('common.commentsPlaceholder')}
                     rows={5}
                   />

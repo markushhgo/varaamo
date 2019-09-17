@@ -64,7 +64,7 @@ class UnconnectedReservationEditForm extends Component {
     );
   }
 
-  renderEditableInfoRow(propertyName, type) {
+  renderEditableInfoRow(propertyName, type, controlProps = {}) {
     const { isEditing, reservation, t } = this.props;
     if (!isEditing) return this.renderStaticInfoRow(propertyName);
     const property = reservation[propertyName];
@@ -72,7 +72,7 @@ class UnconnectedReservationEditForm extends Component {
     return (
       <Field
         component={ReduxFormField}
-        controlProps={{}}
+        controlProps={controlProps}
         label={t(`common.${propertyName}Label`)}
         name={propertyName}
         type={type}
@@ -148,7 +148,7 @@ class UnconnectedReservationEditForm extends Component {
         </Well>
         {this.renderEditableInfoRow('eventSubject', 'text')}
         {this.renderStaticInfoRow('reserverName')}
-        {this.renderEditableInfoRow('eventDescription', 'textarea')}
+        {this.renderEditableInfoRow('eventDescription', 'textarea', { maxLength: '256' })}
         {this.renderEditableInfoRow('numberOfParticipants', 'number')}
         {this.renderReservationTime()}
         {this.renderInfoRow(t('common.resourceLabel'), resource.name)}
