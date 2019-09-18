@@ -122,8 +122,6 @@ function getTimeSlots(
   const editRanges = map(
     reservationsToEdit, reservation => moment.range(
       moment(reservation.begin), moment(reservation.end),
-      //      moment(reservation.begin).subtract(moment.duration(cooldown))
-
     )
   );
 
@@ -143,7 +141,6 @@ function getTimeSlots(
 
       const slotRange = moment.range(startMoment, endMoment);
       const editing = editRanges.some(editRange => editRange.overlaps(slotRange));
-      // const editingCooldown = editRanges.some(editRange => editRange.overlaps(cooldownRanges));
 
       let reserved = false;
       let reservation = [];
@@ -161,23 +158,25 @@ function getTimeSlots(
       });
 
       /*
-        slot is on cooldown if it's within cooldown range
-        slot is not on cooldown if it's set as reserved
+        slot is on cooldown if it's within cooldown range of a reservation,
+        slot is not on cooldown if it's set as reserved.
+        When a slot is within cooldown range of a reservation it gets added to the slot,
+        if slot is within cooldown range of two reservations both are added.
+        The cooldown slots get a reservation but are NOT set as reserved.
+
+        When editing a reservation,
+        the cooldown slots that ONLY have the users reservation are false.
+        If a cooldown slots reservation is NOT
+        the users or its shared with another reservation it remains true.
       */
       const isEditing = Boolean(reservationsToEdit.length);
       let onCooldown = false;
       forEach(cooldownRanges, (cooldownRange, index) => {
         if (!reserved && cooldownRange.overlaps(slotRange)) {
-          //         reservation = reservations[index];
-          //         reservation = reservations[index];
-
           reservation.push(reservations[index]);
 
           if (isEditing) {
             if (reservation.some(res => !res.isOwn)) {
-              /*        if (reservationRanges.some(resRange => resRange.overlaps(slotRange))) {
-                onCooldown = true;
-              } */
               onCooldown = true;
             } else {
               onCooldown = false;

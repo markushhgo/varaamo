@@ -193,6 +193,12 @@ class TimeSlot extends PureComponent {
     const isCooldown = slot.onCooldown;
     const start = new Date(slot.start);
     const startTime = `${padLeft(start.getHours())}:${padLeft(start.getMinutes())}`;
+    const showCooldown = isAdmin
+      && isCooldown
+      && !isPast
+      && !selected
+      && !isHighlighted
+      && !disabled;
 
     return (
       <div
@@ -218,7 +224,7 @@ class TimeSlot extends PureComponent {
           onMouseLeave={() => !disabled && onMouseLeave()}
           type="button"
         >
-          <span aria-hidden="true" className="app-TimeSlot__icon" />
+          <span aria-hidden="true" className={`app-TimeSlot__icon${showCooldown ? ' cooldown' : ''}`} />
           <time className="app-TimeSlot__time" dateTime={slot.asISOString}>{startTime}</time>
           <span
             aria-label={this.getSelectButtonStatusLabel(
