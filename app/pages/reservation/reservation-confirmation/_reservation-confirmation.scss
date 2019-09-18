@@ -20,20 +20,19 @@
     height: 20px;
     margin-right: 6px;
   }
+
   &__resource-name {
-    font-weight: bold;
+    text-align: center;
+  }
+
+  p {
+  text-align: center;
   }
 
   .reservation-date {
-    .reservation-date__content {
-      margin: 0;
-      @media (max-width: $screen-xs-max){
-        margin-bottom: 8px;
-       }
-    }
     h3 {
       font-size: 1.6rem;
-      text-align: left;
+      text-align: center;
     }
   }
 }
