@@ -20,6 +20,7 @@ export class UnconnectedReservationConfirmationContainer extends Component {
   static propTypes = {
     actions: PropTypes.object.isRequired,
     confirmReservationModalIsOpen: PropTypes.bool.isRequired,
+    currentLanguage: PropTypes.string.isRequired,
     isMakingReservations: PropTypes.bool.isRequired,
     isStaff: PropTypes.bool.isRequired,
     params: PropTypes.shape({ // eslint-disable-line react/no-unused-prop-types
@@ -44,17 +45,19 @@ export class UnconnectedReservationConfirmationContainer extends Component {
 
   handleReservation = (values = {}) => {
     const {
-      actions, recurringReservations, resource, selectedReservations
+      actions, currentLanguage, recurringReservations, resource, selectedReservations
     } = this.props;
     const orderedReservations = orderBy(selectedReservations, 'begin');
     const selectedReservation = Object.assign({}, first(orderedReservations));
     selectedReservation.end = last(orderedReservations).end;
     const mergedReservations = [selectedReservation];
+    const preferredLanguage = currentLanguage;
 
     [...mergedReservations, ...recurringReservations].forEach((reservation) => {
       actions.postReservation({
         ...reservation,
         ...values,
+        preferredLanguage,
         resource: resource.id,
       });
     });

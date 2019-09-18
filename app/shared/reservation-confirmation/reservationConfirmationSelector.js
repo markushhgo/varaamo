@@ -12,6 +12,7 @@ import { createResourceSelector } from 'state/selectors/dataSelectors';
 import selectedReservationsFromStateSelector from 'state/selectors/selectedReservationsSelector';
 import modalIsOpenSelectorFactory from 'state/selectors/factories/modalIsOpenSelectorFactory';
 import requestIsActiveSelectorFactory from 'state/selectors/factories/requestIsActiveSelectorFactory';
+import { currentLanguageSelector } from 'state/selectors/translationSelectors';
 
 const resourceIdSelector = (state, props) => props.params.id;
 const resourceSelector = createResourceSelector(resourceIdSelector);
@@ -27,6 +28,7 @@ const selectedReservationsSelector = createSelector(
 
 const reservationConfirmationSelector = createStructuredSelector({
   confirmReservationModalIsOpen: modalIsOpenSelectorFactory(ModalTypes.RESERVATION_CONFIRM),
+  currentLanguage: currentLanguageSelector,
   isMakingReservations: requestIsActiveSelectorFactory(ActionTypes.API.RESERVATION_POST_REQUEST),
   isStaff: createIsStaffSelector(resourceSelector),
   recurringReservations: recurringReservations.selectReservations,
