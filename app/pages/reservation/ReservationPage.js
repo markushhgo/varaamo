@@ -111,23 +111,26 @@ class UnconnectedReservationPage extends Component {
 
   handleReservation = (values = {}) => {
     const {
-      actions, reservationToEdit, resource, selected
+      actions, currentLanguage, reservationToEdit, resource, selected
     } = this.props;
     if (!isEmpty(selected)) {
       const { begin } = first(selected);
       const { end } = last(selected);
+      const preferredLanguage = currentLanguage;
 
       if (!isEmpty(reservationToEdit)) {
         const reservation = Object.assign({}, reservationToEdit);
         actions.putReservation({
           ...reservation,
           ...values,
+          preferredLanguage,
           begin,
           end,
         });
       } else {
         actions.postReservation({
           ...values,
+          preferredLanguage,
           begin,
           end,
           resource: resource.id,

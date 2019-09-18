@@ -514,6 +514,7 @@ describe('pages/reservation/ReservationPage', () => {
       instance.handleReservation(values);
       expect(postReservation.callCount).toBe(0);
       expect(putReservation.callCount).toBe(1);
+      expect(putReservation.lastCall.args[0].preferredLanguage).toEqual('fi');
     });
 
     test('calls postReservation action when reservationToEdit empty', () => {
@@ -527,6 +528,7 @@ describe('pages/reservation/ReservationPage', () => {
       }).instance();
       instance.handleReservation(values);
       expect(postReservation.callCount).toBe(1);
+      expect(postReservation.lastCall.args[0].preferredLanguage).toEqual('fi');
       expect(putReservation.callCount).toBe(0);
     });
   });
