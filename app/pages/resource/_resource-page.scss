@@ -25,9 +25,6 @@ $content-padding: 10px;
     background-color: $white;
     box-sizing: content-box;
     margin-bottom: 30px;
-    @media only screen and (min-width: 767px) {
-    margin-left: -25px;
-    }
   }
 
   p {
@@ -157,10 +154,6 @@ $content-padding: 10px;
       /* Padding for turquise area */
       .app-ResourceHeader__content {
         padding: 15px 15px 15px 15px;
-        @media only screen and (min-width: 767px) {
-         padding: 15px 0 15px 0;
-         margin-left: -15px;
-        }
       }
       /*smaller header*/
       .h1, h1 {
