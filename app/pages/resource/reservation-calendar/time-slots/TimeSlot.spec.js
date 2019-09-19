@@ -45,6 +45,34 @@ describe('pages/resource/reservation-calendar/time-slots/TimeSlot', () => {
     expect(icon.prop('aria-hidden')).toBe('true');
   });
 
+  test('renders app-TimeSlot__icon cooldown when isAdmin', () => {
+    const slotWithCooldown = TimeSlotFixture.build({ onCooldown: true });
+    const wrapper = getWrapper({
+      isAdmin: true,
+      slot: slotWithCooldown,
+      isPast: false,
+      selected: false,
+      isHighlighted: false,
+      disabled: false,
+    });
+    const icon = wrapper.find('button.app-TimeSlot__action').find('span').first();
+    expect(icon.prop('className')).toBe('app-TimeSlot__icon cooldown');
+  });
+
+  test('does not render app-TimeSlot__icon cooldown when not isAdmin', () => {
+    const slotWithCooldown = TimeSlotFixture.build({ onCooldown: true });
+    const wrapper = getWrapper({
+      isAdmin: false,
+      slot: slotWithCooldown,
+      isPast: false,
+      selected: false,
+      isHighlighted: false,
+      disabled: false,
+    });
+    const icon = wrapper.find('button.app-TimeSlot__action').find('span').first();
+    expect(icon.prop('className')).toBe('app-TimeSlot__icon');
+  });
+
   test('renders app-TimeSlot__status', () => {
     const icon = getWrapper().find('.app-TimeSlot__icon');
     expect(icon).toHaveLength(1);

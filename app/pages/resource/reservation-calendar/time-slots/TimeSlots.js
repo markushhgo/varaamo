@@ -218,7 +218,7 @@ class TimeSlots extends Component {
 
     const isFirstSelected = utils.isFirstSelected(slot, selected);
     const shouldShowReservationPopover = hoveredTimeSlot
-    && isFirstSelected && !isHoveredSlotSelected;
+      && isFirstSelected && !isHoveredSlotSelected;
 
     const isHighlighted = utils.isHighlighted(slot, selected, hoveredTimeSlot);
     const resBegin = this.getReservationBegin();
@@ -264,9 +264,7 @@ class TimeSlots extends Component {
       >
         {timeSlot}
       </ReservationPopover>
-    ) : (
-      timeSlot
-    );
+    ) : (timeSlot);
   };
 
   render() {

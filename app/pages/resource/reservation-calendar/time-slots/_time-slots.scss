@@ -70,6 +70,22 @@
       }
     }
 
+    // only in use when logged in as admin and resource has cooldown.
+    &--cooldown.app-TimeSlot--is-admin:not(.app-TimeSlot--past) {
+      .app-TimeSlot__action > .app-TimeSlot__icon {
+        font-family: 'Segoe UI Symbol';
+        vertical-align: inherit;
+        &.cooldown::before {
+          content: '\231B';
+        }
+      }
+      &:hover{
+        .app-TimeSlot__action > .app-TimeSlot__icon {
+          color: $white;
+        }
+      }
+    }
+
     &--disabled {
       &:hover {
         cursor: not-allowed;

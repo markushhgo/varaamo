@@ -36,7 +36,7 @@ class TimeSlot extends PureComponent {
 
   static getDerivedStateFromProps(prop) {
     const {
-      slot, resource, isDisabled, isSelectable, selected, isLoggedIn
+      slot, resource, isAdmin, isDisabled, isSelectable, selected, isLoggedIn
     } = prop;
     const isPast = new Date(slot.end) < new Date();
     const isReservable = (resource.reservableAfter
@@ -46,7 +46,8 @@ class TimeSlot extends PureComponent {
       || (!isSelectable && !selected)
       || !resource.userPermissions.canMakeReservations
       || isReservable
-      || (!slot.editing && (slot.reserved || isPast));
+      || (!slot.editing && (slot.reserved || isPast))
+      || (slot.onCooldown && !isAdmin);
 
     return {
       disabled,
@@ -188,9 +189,16 @@ class TimeSlot extends PureComponent {
     const { disabled, isPast } = this.state;
 
     const reservation = slot.reservation;
-    const isOwnReservation = reservation && reservation.isOwn;
+    const isOwnReservation = reservation && reservation.isOwn && slot.reserved;
+    const isCooldown = slot.onCooldown;
     const start = new Date(slot.start);
     const startTime = `${padLeft(start.getHours())}:${padLeft(start.getMinutes())}`;
+    const showCooldown = isAdmin
+      && isCooldown
+      && !isPast
+      && !selected
+      && !isHighlighted
+      && !disabled;
 
     return (
       <div
@@ -205,6 +213,7 @@ class TimeSlot extends PureComponent {
           'app-TimeSlot--reserved': slot.reserved,
           'app-TimeSlot--selected': selected,
           'app-TimeSlot--highlight': isHighlighted,
+          'app-TimeSlot--cooldown': isCooldown,
         })}
         ref={this.timeSlotRef}
       >
@@ -215,7 +224,7 @@ class TimeSlot extends PureComponent {
           onMouseLeave={() => !disabled && onMouseLeave()}
           type="button"
         >
-          <span aria-hidden="true" className="app-TimeSlot__icon" />
+          <span aria-hidden="true" className={`app-TimeSlot__icon${showCooldown ? ' cooldown' : ''}`} />
           <time className="app-TimeSlot__time" dateTime={slot.asISOString}>{startTime}</time>
           <span
             aria-label={this.getSelectButtonStatusLabel(

@@ -94,7 +94,8 @@ function getTimeSlots(
   start, end,
   period = DEFAULT_SLOT_SIZE,
   reservations = [],
-  reservationsToEdit = []
+  reservationsToEdit = [],
+  cooldown = 0
 ) {
   if (!start || !end) {
     return [];
@@ -109,9 +110,18 @@ function getTimeSlots(
     )
   );
 
+  /*
+    reservation cooldown range is calculated in the following way:
+    cooldown range = from (begin time - cooldown) to (end time + cooldown)
+  */
+  const cooldownRanges = map(reservations, reservation => moment.range(
+    moment(reservation.begin).subtract(moment.duration(cooldown)),
+    moment(reservation.end).add(moment.duration(cooldown))
+  ));
+
   const editRanges = map(
     reservationsToEdit, reservation => moment.range(
-      moment(reservation.begin), moment(reservation.end)
+      moment(reservation.begin), moment(reservation.end),
     )
   );
 
@@ -133,7 +143,7 @@ function getTimeSlots(
       const editing = editRanges.some(editRange => editRange.overlaps(slotRange));
 
       let reserved = false;
-      let reservation = null;
+      let reservation = [];
       let reservationStarting = false;
       let reservationEnding = false;
       forEach(reservationRanges, (reservationRange, index) => {
@@ -147,6 +157,37 @@ function getTimeSlots(
         }
       });
 
+      /*
+        slot is on cooldown if it's within cooldown range of a reservation,
+        slot is not on cooldown if it's set as reserved.
+        When a slot is within cooldown range of a reservation it gets added to the slot,
+        if slot is within cooldown range of two reservations both are added.
+        The cooldown slots get a reservation but are NOT set as reserved.
+
+        When editing a reservation,
+        the cooldown slots that ONLY have the users reservation are false.
+        If a cooldown slots reservation is NOT
+        the users or its shared with another reservation it remains true.
+      */
+      const isEditing = Boolean(reservationsToEdit.length);
+      let onCooldown = false;
+      forEach(cooldownRanges, (cooldownRange, index) => {
+        if (!reserved && cooldownRange.overlaps(slotRange)) {
+          reservation.push(reservations[index]);
+
+          if (isEditing) {
+            if (reservation.some(res => !res.isOwn)) {
+              onCooldown = true;
+            } else {
+              onCooldown = false;
+            }
+          } else {
+            onCooldown = true;
+          }
+        }
+      });
+
+
       return {
         asISOString,
         asString,
@@ -157,6 +198,7 @@ function getTimeSlots(
         reserved,
         start: startMoment.toISOString(),
         end: endMoment.toISOString(),
+        onCooldown,
       };
     }
   );
