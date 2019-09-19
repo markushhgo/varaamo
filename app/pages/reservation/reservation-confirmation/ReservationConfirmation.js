@@ -98,7 +98,7 @@ class ReservationConfirmation extends Component {
         </Col>
         <Col md={6} xs={12}>
           <Well>
-            <h2>{t('ReservationConfirmation.reservationDetailsTitle')}</h2>
+            <h2 id="reservationDetails">{t('ReservationConfirmation.reservationDetailsTitle')}</h2>
             {reservation.reserverName
               && this.renderField(
                 'reserverName',
@@ -136,6 +136,13 @@ class ReservationConfirmation extends Component {
                 'numberOfParticipants',
                 t('common.numberOfParticipantsLabel'),
                 reservation.numberOfParticipants
+              )}
+            {reservation.requireAssistance
+              && this.renderField(
+                'requireAssistance',
+                t('common.requireAssistanceLabel'),
+                t('common.yes'),
+                reservation.requireAssistance
               )}
             {reservation.comments
               && this.renderField('comments', t('common.commentsLabel'), reservation.comments)}

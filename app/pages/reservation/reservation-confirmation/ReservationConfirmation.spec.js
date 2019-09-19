@@ -152,7 +152,7 @@ describe('pages/reservation/reservation-confirmation/ReservationConfirmation', (
     expect(typeof button.prop('onClick')).toBe('function');
   });
 
-  test('renders reserverName', () => {
+  test('renders reserver details fields', () => {
     const reservation = Reservation.build({
       reserverName: 'reserver name',
       reserverId: 'reserver id',
@@ -161,6 +161,7 @@ describe('pages/reservation/reservation-confirmation/ReservationConfirmation', (
       eventSubject: 'event subject',
       eventDescription: 'event description',
       numberOfParticipants: 12,
+      requireAssistance: true,
       comments: 'comments',
       reserverAddressStreet: 'reserver address street',
       reserverAddressZip: 'reserver address zip',
@@ -172,7 +173,7 @@ describe('pages/reservation/reservation-confirmation/ReservationConfirmation', (
       user: User.build(),
     });
     const fields = getWrapper({ reservation }).find('.app-ReservationConfirmation__field');
-    expect(fields).toHaveLength(15);
+    expect(fields).toHaveLength(16);
   });
 
   describe('Button onClick', () => {
