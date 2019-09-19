@@ -7,7 +7,7 @@
   position: relative;
   z-index: 3;
 
-  @include highContrast;
+  @include high-contrast;
 
   &__content {
     padding: 30px 0;
@@ -22,7 +22,7 @@
     min-width: 120px;
     font-size: 1em;
     text-transform: uppercase;
-    @include addFocus(2px, currentColor) {}
+    @include add-focus(2px, currentColor) {}
   }
   &__reset-button {
     img {
@@ -98,7 +98,7 @@
   }
   .btn.btn-link {
     color: $black;
-    @include addFocus($width: 2px, $color: currentColor) {
+    @include add-focus($width: 2px, $color: currentColor) {
     }
 
   }
@@ -176,7 +176,7 @@
   &__button {
     height: 40px !important;
     border-left-width: 2px !important;
-    @include addFocus(3px, currentColor) {}
+    @include add-focus(3px, currentColor) {}
   }
   &__title {
     border-right-width: 0;
@@ -312,7 +312,7 @@
 }
 .app-TimeRangeControl {
   display: block;
-  // addFocus didn't work; different solution
+  // add-focus didn't work; different solution
   &__range-start:focus-within,
   &__range-end:focus-within,
   &__range-duration:focus-within {

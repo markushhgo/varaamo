@@ -1,0 +1,25 @@
+// Mixins
+
+@mixin focusElement($width: 2px, $color: currentColor) {
+  outline: auto $width $color;
+}
+
+@mixin add-focus($width: 2px, $color: currentColor) {
+  &:focus {
+    outline: solid $width $color;
+    @content;
+  }
+}
+
+@mixin high-contrast {
+  &.high-contrast {
+    background-color: $white;
+    color: $black;
+    @content;
+  }
+}
+
+@mixin box-shadow($x: 0px, $y: 0px, $blur: 3px, $spread: 0px, $color: black) {
+  box-shadow: $x $y $blur $spread $color;
+  @content;
+}
