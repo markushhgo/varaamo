@@ -1,5 +1,6 @@
 .availability-view {
-  $slot-height: 50px;
+  // Increased slot height
+  $slot-height: 60px;
   $slot-border-size: 1px;
   $slot-border: $slot-border-size solid white;
   $slot-comment-bubble-size: 18px;
@@ -16,11 +17,18 @@
       overflow-x: auto;
     }
   }
+  // Changed "left" and "right" div widths on smaller pads
   .left {
     width: 19%;
+    @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+      width: 29%;
+    }
   }
   .right {
     width: 80%;
+    @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+      width: 70%;
+    }
   }
   // max-width calculated based on width: 19% and width: 120px
   @media (max-width: 630px) {
@@ -162,15 +170,19 @@
       }
     }
   }
+  // Fixes to alignment, sizing, borders and text overflow
   .resource-info {
     display: flex;
+    align-items: flex-start;
     flex-direction: column;
     justify-content: center;
-    align-items: flex-end;
-
-    padding: $padding-xs-vertical $padding-base-horizontal;
-    line-height: 16px;
-
+    font-size: 1em;
+    padding-left: 5px;
+    line-height: 1em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    border: 1px solid $white;
     &-selected {
       background-color: $gray-light;
     }
@@ -180,10 +192,11 @@
       font-size: 12px;
     }
     .name {
-      text-align: right;
+      text-align: left;
       overflow: hidden;
       text-overflow: ellipsis;
       max-width: 100%;
+      padding-bottom: 3px;
 
       a {
         color: $text-color;
@@ -318,10 +331,6 @@
     background-color: $gray-lighter;
     overflow: hidden;
 
-    @include addFocus{
-      outline-offset: -2px;
-    };
-
     &-selectable {
       background-color: $gray-light;
       cursor: pointer;
@@ -342,5 +351,13 @@
   hr {
     margin-top: 5px;
     margin-bottom: 5px;
+  }
+}
+.label {
+  @media (min-width: $screen-md-min) {
+    padding: 0 5px;
+  }
+  @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+    padding: 2px 5px;
   }
 }

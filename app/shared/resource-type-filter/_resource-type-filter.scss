@@ -1,5 +1,7 @@
 .resource-type-button {
+  // Made buttons scalable
   text-transform: capitalize;
+  font-size: 1em;
   & + & {
     margin-left: 10px;
   }
@@ -15,6 +17,10 @@
   }
 
   button {
+    // Fixed button alignment
+    padding: 5px;
+    margin: 5px !important;
+
     @include addFocus($color: black){
       outline-offset: 2px;
     };
