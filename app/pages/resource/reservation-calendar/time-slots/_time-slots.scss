@@ -183,7 +183,7 @@
       padding: 0;
       background-color: transparent;
       color: black;
-      @include addFocus{
+      @include add-focus{
         outline-offset: -2px;
       };
     }

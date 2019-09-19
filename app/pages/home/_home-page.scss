@@ -46,6 +46,7 @@ $purposeCellHeight: 350px;
       padding: 6px;
       max-width: 500px;
 
+
       @media (max-width: $screen-md-min) {
         max-width: 300px;
       }
@@ -54,7 +55,8 @@ $purposeCellHeight: 350px;
       display: inline-block;
       margin-left: 12px;
       text-transform: uppercase;
-      @include addFocus($color: white){}
+
+      @include add-focus($color: white){}
     }
   }
 
@@ -83,6 +85,7 @@ $purposeCellHeight: 350px;
       display: flex;
       height: $purposeCellHeight;
 
+
       &-icon {
         height: 30%;
         display: flex;
@@ -99,13 +102,14 @@ $purposeCellHeight: 350px;
         height: 100%;
         position: relative;
         text-decoration: none;
-        border: 1px solid black;
+//        border: 1px solid black;
+        @include box-shadow;
 
         &:hover, &:active, &:focus {
           color: $black;
           background-color: $turku-yellow;
         }
-        @include addFocus(4px);
+        @include add-focus(4px);
         img {
           height: 100%;
           width: 100%;
@@ -138,7 +142,7 @@ $purposeCellHeight: 350px;
       button {
         text-transform: uppercase;
         font-size: 1em;
-        @include addFocus;
+        @include add-focus;
       }
     }
   }

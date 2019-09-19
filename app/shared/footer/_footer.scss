@@ -33,14 +33,14 @@ footer {
   a {
     color: $white;
 
-    @include addFocus;
+    @include add-focus;
   }
 
   a:hover,a:focus {
     color: $white;
   }
 
-  @include highContrast {
+  @include high-contrast {
     border-top: 1px solid $black;
     .brand-link > img {
       filter: brightness(0);

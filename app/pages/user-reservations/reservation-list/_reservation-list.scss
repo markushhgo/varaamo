@@ -10,6 +10,7 @@ $reservation-list-label-height: 20px;
     position: relative;
     margin-bottom: 50px;
     min-height: 180px;
+    @include box-shadow;
 
     @media (max-width: $screen-xs-max) {
       min-height: 200px;
@@ -19,7 +20,7 @@ $reservation-list-label-height: 20px;
       background-color: #ebedf1;
       min-height: 180px;
       max-width: 180px;
-      @include addFocus($width: 2px, $color: currentColor) {
+      @include add-focus($width: 2px, $color: currentColor) {
       }
 
       @media (max-width: $screen-md-min) {
