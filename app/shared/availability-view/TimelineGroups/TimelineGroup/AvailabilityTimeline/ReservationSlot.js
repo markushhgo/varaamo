@@ -93,6 +93,7 @@ export class UninjectedReservationSlot extends React.Component {
 
   render() {
     const isSelected = this.getIsSelected();
+
     const slot = (
       <button
         className={classNames('reservation-slot', {

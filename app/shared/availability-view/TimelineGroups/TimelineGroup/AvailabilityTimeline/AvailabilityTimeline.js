@@ -46,7 +46,7 @@ export default class AvailabilityTimeline extends React.Component {
           const previous = (this.props.items[index - 1]) ? this.props.items[index - 1] : item;
           const next = (this.props.items[index + 1]) ? this.props.items[index + 1] : item;
 
-          const hasCd = item.coolDownSize > 0;
+          const hasCooldown = !this.props.isAdmin ? item.data.cooldownSize > 0 : false;
 
           if (item.type === 'reservation-slot' && previous.type !== 'reservation' && next.type !== 'reservation') {
             return (
@@ -69,8 +69,8 @@ export default class AvailabilityTimeline extends React.Component {
             return (
               <ReservationSlot
                 {...item.data}
-                isCooldown={!this.props.isAdmin || hasCd > 0}
-                isSelectable={hasCd}
+                isCooldown={hasCooldown}
+                isSelectable={item.data.isSelectable ? !hasCooldown : false}
                 key={item.key}
                 maxPeriod={this.props.maxPeriod}
                 minPeriod={this.props.minPeriod}
