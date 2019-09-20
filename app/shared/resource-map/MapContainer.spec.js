@@ -1,6 +1,6 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-import { Map } from 'react-leaflet';
+import { Map, TileLayer } from 'react-leaflet';
 import simple from 'simple-mock';
 
 import { UnconnectedResourceMapContainer as MapContainer } from './MapContainer';
@@ -17,6 +17,7 @@ describe('shared/resource-map/MapContainer', () => {
         maxLongitude: 0,
         minLongitude: 0,
       },
+      useHighContrast: false,
       searchMapClick: () => {},
       selectedUnitId: null,
       selectUnit: () => {},
@@ -54,6 +55,22 @@ describe('shared/resource-map/MapContainer', () => {
     const searchMapClick = () => {};
     const map = getWrapper({ searchMapClick }).find(Map);
     expect(map.prop('onClick')).toBe(searchMapClick);
+  });
+
+  describe('TileLayer', () => {
+    test('is rendered with correct props when high contrast is in use', () => {
+      const tileLayer = getWrapper({ useHighContrast: true }).find(TileLayer);
+      expect(tileLayer.length).toBe(1);
+      expect(tileLayer.prop('attribution')).toEqual('© <a href="http://osm.org/copyright">OpenStreetMap</a> contributors');
+      expect(tileLayer.prop('url')).toEqual('https://maptiles.turku.fi/styles/hel-osm-high-contrast/{z}/{x}/{y}.png');
+    });
+
+    test('is rendered with correct props when high contrast is not in use', () => {
+      const tileLayer = getWrapper({ useHighContrast: false }).find(TileLayer);
+      expect(tileLayer.length).toBe(1);
+      expect(tileLayer.prop('attribution')).toEqual('© <a href="http://osm.org/copyright">OpenStreetMap</a> contributors');
+      expect(tileLayer.prop('url')).toEqual('https://maptiles.turku.fi/styles/hel-osm-bright/{z}/{x}/{y}.png');
+    });
   });
 
   test('does not render Marker if no markers', () => {

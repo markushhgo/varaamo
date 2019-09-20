@@ -139,6 +139,13 @@ describe('pages/reservation/reservation-information/ReservationInformationForm',
     describe('form fields', () => {
       const fieldName = 'reserverName';
 
+      test('renders header title', () => {
+        const fields = [fieldName];
+        const header = getWrapper({ fields }).find('.reservationers-Info');
+        expect(header).toHaveLength(1);
+        expect(header.text()).toBe('ReservationInformationForm.reserverInformationTitle');
+      });
+
       test('renders a field if it is included in props.fields', () => {
         const fields = [fieldName];
         const input = getWrapper({ fields }).find(Field);
@@ -198,6 +205,38 @@ describe('pages/reservation/reservation-information/ReservationInformationForm',
               expect(input.props().label).not.toContain('*');
             }
           );
+        });
+      });
+    });
+
+    describe('Additional info', () => {
+      describe('if extra questions is included in props', () => {
+        const resource = { reservationAdditionalInformation: 'info string' };
+        const fields = ['reservationExtraQuestions'];
+        const props = { resource, fields };
+        const wrapper = getWrapper(props);
+
+        test('renders additional info heading', () => {
+          const heading = wrapper.find('#additional-info-heading');
+          expect(heading.length).toBe(1);
+          expect(heading.text()).toBe('common.additionalInfo.heading');
+        });
+
+        test('renders additional info paragraph', () => {
+          const paragraph = wrapper.find('#additional-info-paragraph');
+          expect(paragraph.length).toBe(1);
+          expect(paragraph.text()).toBe(resource.reservationAdditionalInformation);
+        });
+      });
+
+      describe('if extra questions is not included in props', () => {
+        test('does not render additional info heading', () => {
+          const heading = getWrapper().find('#additional-info-heading');
+          expect(heading.length).toBe(0);
+        });
+        test('does not render additional info paragraph', () => {
+          const paragraph = getWrapper().find('#additional-info-paragraph');
+          expect(paragraph.length).toBe(0);
         });
       });
     });

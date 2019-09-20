@@ -28,12 +28,18 @@ class UnconnectedReservationPage extends Component {
   constructor(props) {
     super(props);
     this.fetchResource = this.fetchResource.bind(this);
+    this.handleRedirect = this.handleRedirect.bind(this);
     const { reservationToEdit } = this.props;
     this.state = {
       view: !isEmpty(reservationToEdit) ? 'time' : 'information',
     };
   }
 
+  /**
+ * The last if statement is there to redirect to the resource page if
+ * language changes on the final confirmation page, previously it just
+ * displayed an empty page.
+ */
   componentDidMount() {
     const {
       location,
@@ -56,6 +62,12 @@ class UnconnectedReservationPage extends Component {
       } else {
         history.replace('/my-reservations');
       }
+    }
+    if (
+      this.state.view === 'information'
+      && (!isEmpty(reservationCreated) || !isEmpty(reservationEdited))
+    ) {
+      this.handleRedirect();
     } else {
       this.fetchResource();
       window.scrollTo(0, 0);
@@ -79,7 +91,9 @@ class UnconnectedReservationPage extends Component {
   }
 
   componentWillUnmount() {
-    this.props.actions.clearReservations();
+    if (this.state.view === 'confirmation') {
+      this.props.actions.clearReservations();
+    }
     this.props.actions.closeReservationSuccessModal();
   }
 
@@ -90,15 +104,6 @@ class UnconnectedReservationPage extends Component {
     }
   };
 
-  handleCancel = () => {
-    const { reservationToEdit, resource, history } = this.props;
-    if (!isEmpty(reservationToEdit)) {
-      history.replace('/my-reservations');
-    } else {
-      history.replace(`/resources/${resource.id}`);
-    }
-  };
-
   handleConfirmTime = () => {
     this.setState({ view: 'information' });
     window.scrollTo(0, 0);
@@ -106,23 +111,26 @@ class UnconnectedReservationPage extends Component {
 
   handleReservation = (values = {}) => {
     const {
-      actions, reservationToEdit, resource, selected
+      actions, currentLanguage, reservationToEdit, resource, selected
     } = this.props;
     if (!isEmpty(selected)) {
       const { begin } = first(selected);
       const { end } = last(selected);
+      const preferredLanguage = currentLanguage;
 
       if (!isEmpty(reservationToEdit)) {
         const reservation = Object.assign({}, reservationToEdit);
         actions.putReservation({
           ...reservation,
           ...values,
+          preferredLanguage,
           begin,
           end,
         });
       } else {
         actions.postReservation({
           ...values,
+          preferredLanguage,
           begin,
           end,
           resource: resource.id,
@@ -130,6 +138,23 @@ class UnconnectedReservationPage extends Component {
       }
     }
   };
+
+  handleCancel = () => {
+    const { reservationToEdit, resource, history } = this.props;
+    if (!isEmpty(reservationToEdit)) {
+      history.replace('/my-reservations');
+    } else {
+      history.replace(`/resources/${resource.id}`);
+    }
+  }
+
+  /**
+ * Redirects the user to the resourcepage
+ */
+  handleRedirect() {
+    const query = queryString.parse(this.props.location.search);
+    this.props.history.push(`/resources/${query.resource}/reservation`);
+  }
 
   fetchResource() {
     const { actions, date, resource } = this.props;
@@ -149,6 +174,8 @@ class UnconnectedReservationPage extends Component {
   render() {
     const {
       actions,
+      contrast,
+      currentLanguage,
       isAdmin,
       isStaff,
       isFetchingResource,
@@ -190,8 +217,8 @@ class UnconnectedReservationPage extends Component {
     return (
       <div className="app-ReservationPage">
         <PageWrapper title={title} transparent>
-          <div>
-            <div className="app-ReservationPage__content">
+          <React.Fragment>
+            <div className={`app-ReservationPage__content ${contrast}`}>
               <h1>{title}</h1>
               <Loader loaded={!isEmpty(resource)}>
                 <ReservationPhases currentPhase={view} isEditing={isEditing || isEdited} />
@@ -205,6 +232,7 @@ class UnconnectedReservationPage extends Component {
                     params={params}
                     resource={resource}
                     selectedReservation={reservationToEdit}
+                    selectedTime={selectedTime}
                     unit={unit}
                   />
                 )}
@@ -226,6 +254,7 @@ class UnconnectedReservationPage extends Component {
                 )}
                 {view === 'confirmation' && (reservationCreated || reservationEdited) && (
                   <ReservationConfirmation
+                    currentLanguage={currentLanguage}
                     history={history}
                     isEdited={isEdited}
                     reservation={reservationCreated || reservationEdited}
@@ -235,7 +264,7 @@ class UnconnectedReservationPage extends Component {
                 )}
               </Loader>
             </div>
-          </div>
+          </React.Fragment>
         </PageWrapper>
       </div>
     );
@@ -244,6 +273,8 @@ class UnconnectedReservationPage extends Component {
 
 UnconnectedReservationPage.propTypes = {
   actions: PropTypes.object.isRequired,
+  contrast: PropTypes.string,
+  currentLanguage: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
   isAdmin: PropTypes.bool.isRequired,
   isStaff: PropTypes.bool.isRequired,

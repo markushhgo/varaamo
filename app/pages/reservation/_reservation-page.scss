@@ -4,6 +4,11 @@
 @import './reservation-time/reservation-time';
 
 .app-ReservationPage {
+
+  &__header{
+    text-align: center;
+  }
+
   .btn.btn-warning {
     background-color: $yellow;
     color: $black;

@@ -7,7 +7,7 @@
   position: relative;
   z-index: 3;
 
-  @include highContrast;
+  @include high-contrast;
 
   &__content {
     padding: 30px 0;
@@ -22,8 +22,7 @@
     min-width: 120px;
     font-size: 1em;
     text-transform: uppercase;
-    @include addFocus($width: 2px, $color: currentColor) {
-    }
+    @include add-focus(2px, currentColor) {}
   }
   &__reset-button {
     img {
@@ -47,7 +46,6 @@
           padding-left: 24px;
           cursor: pointer;
           position: relative;
-          text-decoration: underline;
           &::before {
             background-image: url('./images/angle-right.svg');
             background-repeat: no-repeat;
@@ -60,6 +58,9 @@
             height: $line-height-computed;
             width: $line-height-computed;
           }
+        }
+        a[aria-expanded="true"]::before {
+          background-image: url('./images/angle-down.svg');
         }
         a[aria-selected='true']::before {
           background-image: url('./images/angle-down.svg');
@@ -97,7 +98,7 @@
   }
   .btn.btn-link {
     color: $black;
-    @include addFocus($width: 2px, $color: currentColor) {
+    @include add-focus($width: 2px, $color: currentColor) {
     }
 
   }
@@ -175,8 +176,7 @@
   &__button {
     height: 40px !important;
     border-left-width: 2px !important;
-    @include addFocus($color: currentColor) {
-    }
+    @include add-focus(3px, currentColor) {}
   }
   &__title {
     border-right-width: 0;
@@ -312,6 +312,12 @@
 }
 .app-TimeRangeControl {
   display: block;
+  // add-focus didn't work; different solution
+  &__range-start:focus-within,
+  &__range-end:focus-within,
+  &__range-duration:focus-within {
+    outline: 1px solid $black !important;
+  }
   @media (min-width: 768px) {
     &__range {
       align-items: baseline;

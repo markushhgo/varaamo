@@ -3,11 +3,17 @@
 
   &__controls {
     text-align: right;
+    @media (max-width: $screen-xs-max){
+      padding-bottom: 8px;
+    }
     .btn {
       margin-left: 15px;
     }
   }
   .reservation-calendar-reserve-info {
+    @media (max-width: $screen-xs-max){
+      margin-bottom: 8px;
+     }
     .btn {
       display: none;
     }

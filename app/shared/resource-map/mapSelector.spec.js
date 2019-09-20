@@ -9,7 +9,10 @@ function getState({
 } = {}) {
   return {
     data: { units, resources },
-    ui: { search: { filters, position: null } },
+    ui: {
+      accessibility: { isHighContrast: false },
+      search: { filters, position: null }
+    },
   };
 }
 
@@ -150,6 +153,16 @@ describe('shared/resource-map/mapSelector', () => {
       minLatitude: 0 - padding,
       maxLongitude: 10 + padding,
       minLongitude: 3 - padding,
+    });
+  });
+
+  describe('isHighContrast', () => {
+    test('is defined', () => {
+      const state = getState();
+      const props = getProps({ resourceIds: ['123'] });
+      const selected = selector(state, props);
+
+      expect(selected.useHighContrast).toBeDefined();
     });
   });
 

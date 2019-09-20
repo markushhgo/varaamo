@@ -25,9 +25,6 @@ $content-padding: 10px;
     background-color: $white;
     box-sizing: content-box;
     margin-bottom: 30px;
-    @media only screen and (min-width: 767px) {
-    margin-left: -25px;
-    }
   }
 
   p {
@@ -125,7 +122,6 @@ $content-padding: 10px;
           color: $black;
           padding-left: 24px;
           position: relative;
-          text-decoration: underline;
           &::before {
             background-image: url('../search/controls/images/angle-right.svg');
             background-repeat: no-repeat;
@@ -139,6 +135,9 @@ $content-padding: 10px;
             width: $line-height-computed;
           }
         }
+        a[aria-expanded="true"]::before {
+          background-image: url('../search/controls/images//angle-down.svg');
+        }
         a[aria-selected="true"]::before {
           background-image: url('../search/controls/images//angle-down.svg');
         }
@@ -149,21 +148,12 @@ $content-padding: 10px;
     }
   }
 
-  @media (max-width: $resource-page-width) {
-    margin-left: -15px;
-    margin-right: -15px;
-  }
-
   /* Full width page */
   @media (min-width: $screen-xs-max) {
     /* Fix for resource page */
       /* Padding for turquise area */
       .app-ResourceHeader__content {
         padding: 15px 15px 15px 15px;
-        @media only screen and (min-width: 767px) {
-         padding: 15px 0 15px 0;
-         margin-left: -15px;
-        }
       }
       /*smaller header*/
       .h1, h1 {

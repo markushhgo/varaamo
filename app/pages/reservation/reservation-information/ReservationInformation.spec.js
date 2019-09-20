@@ -60,6 +60,12 @@ describe('pages/reservation/reservation-information/ReservationInformation', () 
     expect(form.prop('resource')).toBe(defaultProps.resource);
   });
 
+  test('renders text header', () => {
+    const header = getWrapper().find('.reservationInformation__Header');
+    expect(header).toHaveLength(1);
+    expect(header.text()).toBe('ReservationPhase.informationTitle');
+  });
+
   test('renders correct reservation details and time', () => {
     const details = getWrapper().find('.app-ReservationDetails__value');
     expect(details).toHaveLength(2);

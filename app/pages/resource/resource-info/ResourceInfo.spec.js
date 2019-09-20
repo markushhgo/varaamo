@@ -25,11 +25,28 @@ describe('pages/resource/resource-info/ResourceInfo', () => {
       })
     ),
     unit: Immutable(Unit.build()),
+    equipment: [
+      'equipment 1',
+      'equipment 2',
+      'equipment 3',
+    ]
   };
 
   function getWrapper(extraProps) {
     return shallowWithIntl(<ResourceInfo {...defaultProps} {...extraProps} />);
   }
+
+  test('renders section with correct props', () => {
+    const section = getWrapper().find('.app-ResourceInfo');
+    expect(section).toHaveLength(1);
+    expect(section.prop('aria-labelledby')).toBe('ResourcePageInfo');
+  });
+
+  test('renders header text', () => {
+    const header = getWrapper().find('#ResourcePageInfo');
+    expect(header).toHaveLength(1);
+    expect(header.text()).toBe('ResourcePage.info');
+  });
 
   test('renders resource description as WrappedText', () => {
     const wrappedText = getWrapper()
@@ -42,12 +59,34 @@ describe('pages/resource/resource-info/ResourceInfo', () => {
     expect(wrappedText.prop('openLinksInNewTab')).toBe(true);
   });
 
-  test('renders panels with correct header text', () => {
+  test('renders panels with correct props', () => {
     const panels = getWrapper().find(Panel);
 
-    expect(panels).toHaveLength(2);
+    expect(panels).toHaveLength(3);
     expect(panels.at(0).prop('header')).toBe('ResourceInfo.reservationTitle');
     expect(panels.at(1).prop('header')).toBe('ResourceInfo.additionalInfoTitle');
+    expect(panels.at(2).prop('header')).toBe('ResourceInfo.equipmentHeader');
+
+    expect(panels.at(0).prop('role')).toBe('tablist');
+    expect(panels.at(1).prop('role')).toBe('tablist');
+    expect(panels.at(2).prop('role')).toBe('tablist');
+  });
+
+  test('renders panel.titles with correct props', () => {
+    const panels = getWrapper().find(Panel).find(Panel.Heading).find(Panel.Title);
+
+    expect(panels).toHaveLength(3);
+    expect(panels.at(0).prop('componentClass')).toBe('h3');
+    expect(panels.at(1).prop('componentClass')).toBe('h3');
+    expect(panels.at(2).prop('componentClass')).toBe('h3');
+
+    expect(panels.at(0).prop('toggle')).toBeTruthy();
+    expect(panels.at(1).prop('toggle')).toBeTruthy();
+    expect(panels.at(2).prop('toggle')).toBeTruthy();
+
+    expect(panels.at(0).prop('children')).toBe('ResourceInfo.reservationTitle');
+    expect(panels.at(1).prop('children')).toBe('ResourceInfo.additionalInfoTitle');
+    expect(panels.at(2).prop('children')).toBe('ResourceInfo.equipmentHeader');
   });
 
   test('renders ReservationInfo with correct props', () => {
@@ -95,14 +134,15 @@ describe('pages/resource/resource-info/ResourceInfo', () => {
 
   test('renders service map link', () => {
     const unit = Unit.build({
-      id: 'abc:123',
+      id: 'abc',
+      mapServiceId: '123',
       addressZip: '99999',
       municipality: 'helsinki',
       name: 'Unit name',
       streetAddress: 'Test street 12',
       wwwUrl: 'some-url',
     });
-    const expected = 'https://palvelukartta.hel.fi/unit/123#!route-details';
+    const expected = 'https://palvelukartta.turku.fi/unit/123#!route-details';
     const link = getWrapper({ unit })
       .find('.app-ResourceInfo__servicemap')
       .find('a');
@@ -110,14 +150,33 @@ describe('pages/resource/resource-info/ResourceInfo', () => {
     expect(link).toHaveLength(1);
     expect(link.prop('href')).toBe(expected);
     expect(link.prop('target')).toBe('_blank');
+    expect(link.prop('rel')).toBe('noopener noreferrer');
     expect(link.text()).toBe('ResourceInfo.serviceMapLink');
   });
 
-  test('does not render service map link if unit empty', () => {
+  test('does not render service map link if unit or unit.mapServiceId empty', () => {
     const link = getWrapper({ unit: {} })
       .find('.app-ResourceInfo__servicemap')
       .find('a');
 
     expect(link).toHaveLength(0);
+  });
+
+  test('renders the <ul> element', () => {
+    const element = getWrapper().find('ul');
+    expect(element).toHaveLength(1);
+  });
+
+  test('render equipment list', () => {
+    const element = getWrapper().find('li');
+    expect(element).toHaveLength(3);
+    expect(element.first().text()).toBe('equipment 1');
+    expect(element.at(1).text()).toBe('equipment 2');
+    expect(element.last().text()).toBe('equipment 3');
+  });
+
+  test('does not render equipment list when list is empty', () => {
+    const element = getWrapper({ equipment: [] }, { equipmentList: [] }).find('li');
+    expect(element).toHaveLength(0);
   });
 });

@@ -161,9 +161,9 @@ class TimeSlots extends Component {
 
       return (
         <div className={className} key={`dateslot-${index}`}>
-          <h2 className="app-TimeSlots--date--header">
+          <h4 className="app-TimeSlots--date--header">
             {slot && slot.start ? moment(slot.start).format('dd D.M') : ''}
-          </h2>
+          </h4>
 
           {!!placeholderSize && (
             <TimeSlotPlaceholder mobileOffset={mobilePlaceholderOffset} size={placeholderSize} />
@@ -218,7 +218,7 @@ class TimeSlots extends Component {
 
     const isFirstSelected = utils.isFirstSelected(slot, selected);
     const shouldShowReservationPopover = hoveredTimeSlot
-    && isFirstSelected && !isHoveredSlotSelected;
+      && isFirstSelected && !isHoveredSlotSelected;
 
     const isHighlighted = utils.isHighlighted(slot, selected, hoveredTimeSlot);
     const resBegin = this.getReservationBegin();
@@ -264,9 +264,7 @@ class TimeSlots extends Component {
       >
         {timeSlot}
       </ReservationPopover>
-    ) : (
-      timeSlot
-    );
+    ) : (timeSlot);
   };
 
   render() {

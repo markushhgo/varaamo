@@ -39,6 +39,45 @@ describe('pages/resource/reservation-calendar/time-slots/TimeSlot', () => {
     expect(getClickableButton()).toHaveLength(1);
   });
 
+  test('renders app-TimeSlot__icon with correct props', () => {
+    const icon = getWrapper().find('.app-TimeSlot__icon');
+    expect(icon).toHaveLength(1);
+    expect(icon.prop('aria-hidden')).toBe('true');
+  });
+
+  test('renders app-TimeSlot__icon cooldown when isAdmin', () => {
+    const slotWithCooldown = TimeSlotFixture.build({ onCooldown: true });
+    const wrapper = getWrapper({
+      isAdmin: true,
+      slot: slotWithCooldown,
+      isPast: false,
+      selected: false,
+      isHighlighted: false,
+      disabled: false,
+    });
+    const icon = wrapper.find('button.app-TimeSlot__action').find('span').first();
+    expect(icon.prop('className')).toBe('app-TimeSlot__icon cooldown');
+  });
+
+  test('does not render app-TimeSlot__icon cooldown when not isAdmin', () => {
+    const slotWithCooldown = TimeSlotFixture.build({ onCooldown: true });
+    const wrapper = getWrapper({
+      isAdmin: false,
+      slot: slotWithCooldown,
+      isPast: false,
+      selected: false,
+      isHighlighted: false,
+      disabled: false,
+    });
+    const icon = wrapper.find('button.app-TimeSlot__action').find('span').first();
+    expect(icon.prop('className')).toBe('app-TimeSlot__icon');
+  });
+
+  test('renders app-TimeSlot__status', () => {
+    const icon = getWrapper().find('.app-TimeSlot__icon');
+    expect(icon).toHaveLength(1);
+  });
+
   test('does not render clear button when clearing disabled', () => {
     expect(getWrapper().find('button.app-TimeSlot__clear')).toHaveLength(0);
   });
@@ -268,6 +307,40 @@ describe('pages/resource/reservation-calendar/time-slots/TimeSlot', () => {
       expect(typeof button.prop('onClick')).toBe('function');
       button.prop('onClick')();
       expect(onClear.callCount).toBe(1);
+    });
+  });
+
+  describe('getSelectButtonStatusLabel', () => {
+    // Params in order: isDisabled, isLoggedIn, isOwnReservation, isReserved, isSelected
+    test('return correct string when timeslot is own reservation', () => {
+      expect(getWrapper().instance()
+        .getSelectButtonStatusLabel(false, false, true, false, false))
+        .toBe('TimeSlot.notSelectable - TimeSlot.ownReservation');
+    });
+    test('return correct string when timeslot is reserved', () => {
+      expect(getWrapper().instance()
+        .getSelectButtonStatusLabel(false, false, false, true, false))
+        .toBe('TimeSlot.notSelectable - TimeSlot.reserved');
+    });
+    test('return correct string when timeslot is selected', () => {
+      expect(getWrapper().instance()
+        .getSelectButtonStatusLabel(false, false, false, false, true))
+        .toBe('TimeSlot.selected');
+    });
+    test('return correct string when timeslot is not selectable', () => {
+      expect(getWrapper().instance()
+        .getSelectButtonStatusLabel(true, true, false, false, false))
+        .toBe('TimeSlot.notSelectable');
+    });
+    test('return correct string when timeslot is not selectable and user is not logged in', () => {
+      expect(getWrapper().instance()
+        .getSelectButtonStatusLabel(true, false, false, false, false))
+        .toBe('TimeSlot.notSelectable - TimeSlot.logInFirst');
+    });
+    test('return correct string when timeslot is available', () => {
+      expect(getWrapper().instance()
+        .getSelectButtonStatusLabel(false, true, false, false, false))
+        .toBe('TimeSlot.available');
     });
   });
 });

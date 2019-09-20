@@ -18,7 +18,7 @@
     .navbar-brand {
       min-height: 90px;
 
-      @include addFocus;
+      @include add-focus;
     }
 
     .turku-logo {
@@ -103,7 +103,7 @@
           margin-left: 5px;
           cursor: pointer;
 
-          @include addFocus;
+          @include add-focus;
 
 
           &:hover {
@@ -148,7 +148,7 @@
           cursor: pointer;
           filter: invert(0%);
 
-          @include addFocus;
+          @include add-focus;
 
 
         }
@@ -181,7 +181,7 @@
           padding-right:5px;
           margin: 0 10px 0 15px;
 
-          @include addFocus;
+          @include add-focus;
         }
       }
 
@@ -238,7 +238,7 @@
             color: $black;
           }
 
-          @include addFocus(){
+          @include add-focus(){
             color: $black;
           }
 
@@ -268,7 +268,7 @@
         }
 
         li > a {
-          @include addFocus(){
+          @include add-focus(){
             background-color: transparent;
           }
         }
@@ -335,7 +335,7 @@
 
     // High-contrast
 
-    @include highContrast {
+    @include high-contrast {
       border-bottom: 1px solid $black;
       .navbar-brand {
 
@@ -407,9 +407,6 @@
       color: $black;
       background-color: transparent;
     }
-    a:focus{
-
-    }
 
     .dropdown-menu {
       min-width: 10px;
@@ -438,10 +435,6 @@
     }
     &:hover,
     &:active,
-    &:focus {
-
-    }
-
     .mobile_accessibility {
       cursor: pointer;
     }

@@ -20,6 +20,7 @@ class ReservationTime extends Component {
     history: PropTypes.object.isRequired,
     resource: PropTypes.object.isRequired,
     selectedReservation: PropTypes.object.isRequired,
+    selectedTime: PropTypes.object,
     t: PropTypes.func.isRequired,
     unit: PropTypes.object.isRequired,
   };
@@ -39,6 +40,7 @@ class ReservationTime extends Component {
       match,
       resource,
       selectedReservation,
+      selectedTime,
       t,
       unit,
     } = this.props;
@@ -47,8 +49,9 @@ class ReservationTime extends Component {
 
     return (
       <div className="app-ReservationTime">
+        <h2 className="visually-hidden reservationTime__Header">{t('ReservationPhase.timeTitle')}</h2>
         <Row>
-          <Col md={7} sm={12}>
+          <Col lg={8} sm={12}>
             <ResourceCalendar
               onDateChange={this.handleDateChange}
               resourceId={resource.id}
@@ -59,10 +62,23 @@ class ReservationTime extends Component {
               location={location}
               params={{ ...params, id: resource.id }}
             />
+            <div className="app-ReservationTime__controls">
+              <Button bsStyle="warning" className="cancel_Button" onClick={onCancel}>
+                {t('ReservationInformationForm.cancelEdit')}
+              </Button>
+              <Button
+                bsStyle="primary"
+                className="next_Button"
+                disabled={isEmpty(selectedReservation) || isEmpty(selectedTime)}
+                onClick={onConfirm}
+              >
+                {t('common.continue')}
+              </Button>
+            </div>
           </Col>
-          <Col md={5} sm={12}>
+          <Col lg={4} sm={12}>
             <Well className="app-ReservationDetails">
-              <h3>{t('ReservationPage.detailsTitle')}</h3>
+              <h2>{t('ReservationPage.detailsTitle')}</h2>
               <Row>
                 <Col className="app-ReservationDetails__label" md={4}>
                   {t('common.resourceLabel')}
@@ -76,14 +92,6 @@ class ReservationTime extends Component {
             </Well>
           </Col>
         </Row>
-        <div className="app-ReservationTime__controls">
-          <Button bsStyle="warning" onClick={onCancel}>
-            {t('ReservationInformationForm.cancelEdit')}
-          </Button>
-          <Button bsStyle="primary" disabled={isEmpty(selectedReservation)} onClick={onConfirm}>
-            {t('common.continue')}
-          </Button>
-        </div>
       </div>
     );
   }

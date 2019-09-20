@@ -539,6 +539,113 @@ describe('Utils: timeUtils', () => {
         });
       });
     });
+    describe('slot onCooldown property', () => {
+      const start = '2015-10-09T08:00:00+03:00';
+      const end = '2015-10-09T13:00:00+03:00';
+      const period = '01:00:00';
+      const reservations = [
+        {
+          begin: '2015-10-09T10:00:00+03:00',
+          end: '2015-10-09T11:00:00+03:00',
+        },
+      ];
+      let twoReservations = [
+        {
+          begin: '2015-10-09T09:00:00+03:00',
+          end: '2015-10-09T10:00:00+03:00',
+          isOwn: false,
+        },
+        {
+          begin: '2015-10-09T11:00:00+03:00',
+          end: '2015-10-09T12:00:00+03:00',
+          isOwn: true,
+        }
+      ];
+      const reservationsToEdit = [
+        {
+          begin: '2015-10-09T08:30:00+03:00',
+          end: '2015-10-09T09:30:00+03:00',
+        },
+      ];
+      test('is always false when cooldown is not set or it is 0', () => {
+        const slots = getTimeSlots(start, end, period, reservations);
+        slots.forEach((slot) => {
+          expect(slot.onCooldown).toBe(false);
+        });
+      });
+      test('is true for slots before and after reservations when cooldown is set', () => {
+        const cooldown = '1:00:00';
+        const slots = getTimeSlots(start, end, period, reservations, [], cooldown);
+        expect(slots[0].onCooldown).toBe(false);
+        expect(slots[1].onCooldown).toBe(true);
+        expect(slots[2].onCooldown).toBe(false);
+        expect(slots[3].onCooldown).toBe(true);
+        expect(slots[4].onCooldown).toBe(false);
+      });
+
+      test('is true when slot is shared by two reservations', () => {
+        const cooldown = '1:00:00';
+        const slots = getTimeSlots(
+          start,
+          end,
+          period,
+          twoReservations,
+          [],
+          cooldown
+        );
+        expect(slots[0].onCooldown).toBe(true);
+        expect(slots[1].onCooldown).toBe(false);
+        expect(slots[2].onCooldown).toBe(true);
+        expect(slots[3].onCooldown).toBe(false);
+        expect(slots[4].onCooldown).toBe(true);
+      });
+
+      test('is true when slot is shared by two reservations when editing', () => {
+        const cooldown = '1:00:00';
+        const slots = getTimeSlots(
+          start,
+          end,
+          period,
+          twoReservations,
+          reservationsToEdit,
+          cooldown
+        );
+        expect(slots[0].onCooldown).toBe(true);
+        expect(slots[1].onCooldown).toBe(false);
+        expect(slots[2].onCooldown).toBe(true);
+        expect(slots[3].onCooldown).toBe(false);
+        expect(slots[4].onCooldown).toBe(false);
+      });
+
+      test('is true when editing with two reservations, !isOwn reservations cooldown remains', () => {
+        const cooldown = '1:00:00';
+        twoReservations = [
+          {
+            begin: '2015-10-09T08:00:00+03:00',
+            end: '2015-10-09T09:00:00+03:00',
+            isOwn: false,
+          },
+          {
+            begin: '2015-10-09T12:00:00+03:00',
+            end: '2015-10-09T13:00:00+03:00',
+            isOwn: true,
+          }
+        ];
+        const slots = getTimeSlots(
+          start,
+          end,
+          period,
+          twoReservations,
+          reservationsToEdit,
+          cooldown
+        );
+        expect(slots[0].onCooldown).toBe(false);
+        expect(slots[1].onCooldown).toBe(true);
+        expect(slots[2].onCooldown).toBe(false);
+        expect(slots[3].onCooldown).toBe(false);
+        expect(slots[4].onCooldown).toBe(false);
+      });
+    });
   });
 
   describe('isPastDate', () => {

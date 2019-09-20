@@ -26,10 +26,13 @@ describe('pages/reservation/ReservationPage', () => {
       clearReservations: simple.mock(),
       closeReservationSuccessModal: simple.mock(),
       fetchResource: simple.mock(),
+      handleRedirect: simple.mock(),
       openResourceTermsModal: simple.mock(),
       putReservation: simple.mock(),
       postReservation: simple.mock(),
     },
+    contrast: '',
+    currentLanguage: 'fi',
     date: '2016-10-10',
     isAdmin: false,
     isStaff: false,
@@ -91,6 +94,20 @@ describe('pages/reservation/ReservationPage', () => {
 
       expect(pageWrapper).toHaveLength(1);
       expect(pageWrapper.prop('title')).toBe('ReservationPage.editReservationTitle');
+    });
+  });
+
+  describe('__content ', () => {
+    const defClass = 'app-ReservationPage__content ';
+
+    test('does not get additional class when high-contrast: false', () => {
+      const element = getWrapper().find('div').at(1);
+      expect(element.prop('className')).toBe(defClass);
+    });
+
+    test('gets additional class when high-contrast: true', () => {
+      const element = getWrapper({ contrast: 'high-contrast' }).find('div').at(1);
+      expect(element.prop('className')).toBe(`${defClass}high-contrast`);
     });
   });
 
@@ -170,9 +187,23 @@ describe('pages/reservation/ReservationPage', () => {
   });
 
   describe('ReservationConfirmation', () => {
-    test('does not render ReservationInformation by default', () => {
+    test('does not render ReservationConfirmation by default', () => {
       const reservationConfirmation = getWrapper().find(ReservationConfirmation);
       expect(reservationConfirmation).toHaveLength(0);
+    });
+
+    test('renders ReservationConfirmation with correct props when view is confirmation', () => {
+      const reservationEdited = {};
+      const wrapper = getWrapper({ reservationEdited });
+      wrapper.setState({ view: 'confirmation' });
+      const reservationConfirmation = wrapper.find(ReservationConfirmation);
+
+      expect(reservationConfirmation).toHaveLength(1);
+      expect(reservationConfirmation.prop('currentLanguage')).toBe(defaultProps.currentLanguage);
+      expect(reservationConfirmation.prop('history')).toBe(defaultProps.history);
+      expect(reservationConfirmation.prop('reservation')).toBe(reservationEdited);
+      expect(reservationConfirmation.prop('resource')).toBe(defaultProps.resource);
+      expect(reservationConfirmation.prop('user')).toBe(defaultProps.user);
     });
   });
 
@@ -193,6 +224,38 @@ describe('pages/reservation/ReservationPage', () => {
   });
 
   describe('componentDidMount', () => {
+    describe('when state.view is', () => {
+      const expectedPath = `/resources/${resource.id}/reservation`;
+      function getInstance(created, edited) {
+        const instance = getWrapper({
+          reservationCreated: created,
+          reservationEdited: edited,
+          reservationToEdit: null,
+          selected: [],
+          location: {
+            search: `?resource=${resource.id}`,
+          },
+        }).instance();
+        return instance;
+      }
+
+      test('information and reservationCreated already exists', () => {
+        const historyMock = simple.mock(history, 'push');
+        const localInstance = getInstance(Reservation.build(), null);
+        localInstance.componentDidMount();
+        expect(historyMock.callCount).toBe(1);
+        expect(historyMock.lastCall.args).toEqual([expectedPath]);
+      });
+
+      test('information and reservationEdited already exists', () => {
+        const historyMock = simple.mock(history, 'push');
+        const localInstance = getInstance(null, Reservation.build());
+        localInstance.componentDidMount();
+        expect(historyMock.callCount).toBe(1);
+        expect(historyMock.lastCall.args).toEqual([expectedPath]);
+      });
+    });
+
     describe('when reservations and selected empty', () => {
       let historyMock;
 
@@ -292,7 +355,36 @@ describe('pages/reservation/ReservationPage', () => {
       }
     );
   });
-  describe('componentWillUnmount', () => {
+  describe('componentWillUnmount when state.view is confirmation', () => {
+    const clearReservations = simple.mock();
+    const closeReservationSuccessModal = simple.mock();
+    beforeAll(() => {
+      const instance = getWrapper({
+        actions: {
+          clearReservations,
+          closeReservationSuccessModal,
+        },
+      }).instance();
+      instance.state.view = 'confirmation';
+      instance.componentWillUnmount();
+    });
+
+    afterAll(() => {
+      simple.restore();
+    });
+
+    test('calls clearReservations', () => {
+      expect(clearReservations.callCount).toBe(1);
+      expect(clearReservations.lastCall.args).toEqual([]);
+    });
+
+    test('calls closeReservationSuccessModal', () => {
+      expect(closeReservationSuccessModal.callCount).toBe(1);
+      expect(closeReservationSuccessModal.lastCall.args).toEqual([]);
+    });
+  });
+
+  describe('componentWillUnmount when state.view is not confirmation', () => {
     const clearReservations = simple.mock();
     const closeReservationSuccessModal = simple.mock();
     beforeAll(() => {
@@ -309,8 +401,8 @@ describe('pages/reservation/ReservationPage', () => {
       simple.restore();
     });
 
-    test('calls clearReservations', () => {
-      expect(clearReservations.callCount).toBe(1);
+    test('does not call clearReservations', () => {
+      expect(clearReservations.callCount).toBe(0);
       expect(clearReservations.lastCall.args).toEqual([]);
     });
 
@@ -422,6 +514,7 @@ describe('pages/reservation/ReservationPage', () => {
       instance.handleReservation(values);
       expect(postReservation.callCount).toBe(0);
       expect(putReservation.callCount).toBe(1);
+      expect(putReservation.lastCall.args[0].preferredLanguage).toEqual('fi');
     });
 
     test('calls postReservation action when reservationToEdit empty', () => {
@@ -435,6 +528,7 @@ describe('pages/reservation/ReservationPage', () => {
       }).instance();
       instance.handleReservation(values);
       expect(postReservation.callCount).toBe(1);
+      expect(postReservation.lastCall.args[0].preferredLanguage).toEqual('fi');
       expect(putReservation.callCount).toBe(0);
     });
   });

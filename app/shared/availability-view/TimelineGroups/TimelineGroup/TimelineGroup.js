@@ -35,6 +35,9 @@ export default class TimelineGroup extends React.Component {
     onSelectionCancel: PropTypes.func,
     resources: PropTypes.arrayOf(PropTypes.string).isRequired,
     selection: PropTypes.object,
+    minPeriod: PropTypes.object,
+    maxPeriod: PropTypes.object,
+    isAdmin: PropTypes.bool
   };
 
   constructor(props) {
@@ -84,6 +87,8 @@ export default class TimelineGroup extends React.Component {
       onReservationSlotMouseLeave,
       onSelectionCancel,
       selection,
+      minPeriod,
+      maxPeriod,
     } = this.props;
     return (
       <div
@@ -116,7 +121,10 @@ export default class TimelineGroup extends React.Component {
           <AvailabilityTimelineContainer
             date={this.props.date}
             id={resource}
+            isAdmin={this.props.isAdmin}
             key={resource}
+            maxPeriod={maxPeriod[resource]}
+            minPeriod={minPeriod[resource]}
             onReservationSlotClick={onReservationSlotClick}
             onReservationSlotMouseEnter={onReservationSlotMouseEnter}
             onReservationSlotMouseLeave={onReservationSlotMouseLeave}

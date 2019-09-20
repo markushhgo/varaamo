@@ -26,6 +26,10 @@ describe('shared/reservation-confirmation/reservationConfirmationSelector', () =
     expect(getSelected().confirmReservationModalIsOpen).toBeDefined();
   });
 
+  test('returns currentLanguage', () => {
+    expect(getSelected().currentLanguage).toBeDefined();
+  });
+
   test('returns isMakingReservations', () => {
     expect(getSelected().isMakingReservations).toBeDefined();
   });

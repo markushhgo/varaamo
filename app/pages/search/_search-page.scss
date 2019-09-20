@@ -26,7 +26,7 @@
     &__results-count {
       padding-top: 8px;
     }
-    @include highContrast{
+    @include high-contrast{
       button {
         background-color: inherit;
         border-color: transparent;
@@ -43,7 +43,7 @@
       border-color: $turku-yellow;
       color: $black;
       font-size: 1em;
-      @include addFocus($width: 2px, $color: currentColor) {
+      @include add-focus($width: 2px, $color: currentColor) {
       }
     }
     button:hover,
@@ -66,10 +66,14 @@
       border-color: $hel-silver;
     }
   }
+  .react-toggle-screenreader-only{
+    width: 0;
+    height: 0;
+  }
   @media (max-width: $screen-xs-max) {
        /* fix for map */
      .app-ResourceCompactList {
-        max-width: 90%;
+        max-width: calc(100% - 45px);
         font-size: 1.2em;
     }
   }

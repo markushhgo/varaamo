@@ -1,10 +1,8 @@
 function getServiceMapUrl(unit) {
-  if (!unit || !unit.id) {
+  if (!unit || !unit.mapServiceId) {
     return '';
   }
-  const unitIdSplit = unit ? unit.id.split(':') : [];
-  const unitId = unitIdSplit.length === 2 ? unitIdSplit[1] : '';
-  return `https://palvelukartta.hel.fi/unit/${unitId}#!route-details`;
+  return `https://palvelukartta.turku.fi/unit/${unit.mapServiceId}#!route-details`;
 }
 
 export {

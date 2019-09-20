@@ -1,10 +1,11 @@
 .reservation-calendar {
   @media (min-width: $screen-md-min) {
-    margin-bottom: 240px;
+    margin-bottom: 10px;
   }
 
   &__reserve-button {
     font-size: 24px;
+   @include add-focus(4px,black);
   }
 }
 

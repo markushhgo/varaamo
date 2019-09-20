@@ -79,7 +79,9 @@ const timeSlotsSelector = createSelector(
     const { closes, opens } = getOpeningHours(resource);
     const period = resource.slotSize || DEFAULT_SLOT_SIZE;
     const reservations = getOpenReservations(resource);
-    const timeSlots = getTimeSlots(opens, closes, period, reservations, reservationsToEdit);
+    const timeSlots = getTimeSlots(
+      opens, closes, period, reservations, reservationsToEdit, resource.cooldown
+    );
     if (timeSlots.length) {
       return timeSlots;
     }

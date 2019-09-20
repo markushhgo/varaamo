@@ -1,3 +1,5 @@
+import constants from 'constants/AppConstants';
+
 import React from 'react';
 import { FormattedHTMLMessage } from 'react-intl';
 import Immutable from 'seamless-immutable';
@@ -18,6 +20,7 @@ describe('pages/reservation/reservation-confirmation/ReservationConfirmation', (
   };
 
   const defaultProps = {
+    currentLanguage: 'fi',
     history,
     isEdited: false,
     reservation: Immutable(Reservation.build({ user: User.build() })),
@@ -39,10 +42,38 @@ describe('pages/reservation/reservation-confirmation/ReservationConfirmation', (
     expect(header.text()).toBe('ReservationConfirmation.reservationCreatedTitle');
   });
 
-  test('renders correct header when prop isEdited is false', () => {
+  test('renders correct header when prop isEdited is true', () => {
     const header = getWrapper({ isEdited: true }).find('.app-ReservationPage__header');
     expect(header).toHaveLength(1);
     expect(header.text()).toBe('ReservationConfirmation.reservationEditedTitle');
+  });
+
+  describe('billing information header', () => {
+    test('renders correct header when billingAddressStreet prop is given', () => {
+      const reservation = Reservation.build({ billingAddressStreet: 'Katukatu 123' });
+      const header = getWrapper({ reservation }).find('#billingInformationHeader');
+      expect(header).toHaveLength(1);
+      expect(header.text()).toBe('common.billingAddressLabel');
+    });
+
+    test('renders correct header when billingAddressStreet prop is not given', () => {
+      const header = getWrapper().find('#billingInformationHeader');
+      expect(header).toHaveLength(0);
+    });
+  });
+
+  describe('extra information header', () => {
+    test('renders correct header when reservationExtraQuestions prop is given', () => {
+      const reservation = Reservation.build({ reservationExtraQuestions: 'Testing text' });
+      const header = getWrapper({ reservation }).find('#reservationExtraQuestionsHeader');
+      expect(header).toHaveLength(1);
+      expect(header.text()).toBe('common.additionalInfo.heading');
+    });
+
+    test('renders correct header when reservationExtraQuestions prop is not given', () => {
+      const header = getWrapper().find('#reservationExtraQuestionsHeader');
+      expect(header).toHaveLength(0);
+    });
   });
 
   test('renders ReservationDate with correct props', () => {
@@ -68,6 +99,26 @@ describe('pages/reservation/reservation-confirmation/ReservationConfirmation', (
       .filter({ id: 'ReservationConfirmation.confirmationText' });
     expect(email).toHaveLength(1);
     expect(email.prop('values')).toEqual({ email: reserverEmailAddress });
+  });
+
+  describe('renders feedback link with correct props', () => {
+    test('when currentLanguage is fi', () => {
+      const link = getWrapper({ currentLanguage: 'fi' })
+        .find(FormattedHTMLMessage)
+        .filter({ id: 'ReservationConfirmation.feedbackText' });
+
+      expect(link.length).toBe(1);
+      expect(link.prop('values')).toEqual({ href: constants.FEEDBACK_URL.FI });
+    });
+
+    test('when currentLanguage is sv', () => {
+      const link = getWrapper({ currentLanguage: 'sv' })
+        .find(FormattedHTMLMessage)
+        .filter({ id: 'ReservationConfirmation.feedbackText' });
+
+      expect(link.length).toBe(1);
+      expect(link.prop('values')).toEqual({ href: constants.FEEDBACK_URL.SV });
+    });
   });
 
   test('renders reservation.user.email', () => {
@@ -101,7 +152,7 @@ describe('pages/reservation/reservation-confirmation/ReservationConfirmation', (
     expect(typeof button.prop('onClick')).toBe('function');
   });
 
-  test('renders reserverName', () => {
+  test('renders reserver details fields', () => {
     const reservation = Reservation.build({
       reserverName: 'reserver name',
       reserverId: 'reserver id',
@@ -110,6 +161,7 @@ describe('pages/reservation/reservation-confirmation/ReservationConfirmation', (
       eventSubject: 'event subject',
       eventDescription: 'event description',
       numberOfParticipants: 12,
+      requireAssistance: true,
       comments: 'comments',
       reserverAddressStreet: 'reserver address street',
       reserverAddressZip: 'reserver address zip',
@@ -117,10 +169,11 @@ describe('pages/reservation/reservation-confirmation/ReservationConfirmation', (
       billingAddressStreet: 'billing address street',
       billingAddressZip: 'billing address zip',
       billingAddressCity: 'billing address city',
+      reservationExtraQuestions: 'Extra information',
       user: User.build(),
     });
     const fields = getWrapper({ reservation }).find('.app-ReservationConfirmation__field');
-    expect(fields).toHaveLength(14);
+    expect(fields).toHaveLength(16);
   });
 
   describe('Button onClick', () => {

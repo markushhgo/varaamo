@@ -29,6 +29,7 @@ const TimeSlot = new Factory()
     .set('hour', (index + 3) % 24)
     .toISOString())
   .attr('reserved', false)
-  .attr('resource', 'some-resource-id');
+  .attr('resource', 'some-resource-id')
+  .attr('onCooldown', false);
 
 export default TimeSlot;

@@ -39,8 +39,12 @@
   }
 
   &--date--header {
+    // Reduced font size and changed padding to fix some date headers from displaying on two lines when toggled to large font size on iPad Pro
     margin: 0 0 4px 0;
-    padding: 10px;
+    padding: 10px 0 10px 0;
+    @media (min-width: $screen-md-min) and (max-width: $screen-md-max) {
+      font-size: 0.95em;
+    }
   }
 
   &--date--selected > &--date--header {
@@ -61,6 +65,25 @@
     &:hover:not(.app-TimeSlot--disabled) {
       background-color: $dark-gray;
       color: $white;
+      .app-TimeSlot__time {
+        color: white;
+      }
+    }
+
+    // only in use when logged in as admin and resource has cooldown.
+    &--cooldown.app-TimeSlot--is-admin:not(.app-TimeSlot--past) {
+      .app-TimeSlot__action > .app-TimeSlot__icon {
+        font-family: 'Segoe UI Symbol';
+        vertical-align: inherit;
+        &.cooldown::before {
+          content: '\231B';
+        }
+      }
+      &:hover{
+        .app-TimeSlot__action > .app-TimeSlot__icon {
+          color: $white;
+        }
+      }
     }
 
     &--disabled {
@@ -72,7 +95,6 @@
     &--past {
       &:hover {
         cursor: not-allowed;
-        background-color: $gray-light;
       }
     }
     &--disabled,
@@ -86,6 +108,9 @@
     &--reserved {
       color: $white;
       background-color: $red;
+      .app-TimeSlot__time {
+        color: white;
+      }
     }
     &--reservation-ending + .app-TimeSlot--reservation-starting {
       border-top: solid $white 1px;
@@ -98,6 +123,9 @@
 
     &--own-reservation {
       background-color: $theme-info;
+      .app-TimeSlot__time {
+        color: white;
+      }
     }
     &--own-reservation:not(.app-TimeSlot--editing) {
       &:hover {
@@ -118,6 +146,9 @@
     &--selected {
       color: $white;
       background-color: $dark-gray;
+      .app-TimeSlot__time {
+        color: white;
+      }
       .app-TimeSlot__icon {
         @include icon-check($white);
       }
@@ -126,6 +157,9 @@
     &--highlight {
       color: $white;
       background-color: $dark-gray;
+      .app-TimeSlot__time {
+        color: white;
+      }
     }
 
     &__icon {
@@ -149,7 +183,7 @@
       padding: 0;
       background-color: transparent;
       color: black;
-      @include addFocus{
+      @include add-focus{
         outline-offset: -2px;
       };
     }

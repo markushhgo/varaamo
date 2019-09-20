@@ -8,7 +8,8 @@ $cellHeight: 50%;
   margin: 20px 0;
   background-color: $white;
   display: flow-root;
-  @include addFocus($width: 2px, $color: currentColor) {
+  @include box-shadow;
+  @include add-focus($width: 2px, $color: currentColor) {
   }
 
   &__normal-font-size {
@@ -23,14 +24,18 @@ $cellHeight: 50%;
     text-decoration: none;
     display:inline-block;
     margin: 2px 2px 0 0;
-    @include addFocus($width: 2px, $color: currentColor) {
+    @include add-focus($width: 2px, $color: currentColor) {
       outline-offset: 1px;
     }
 
   }
+  > a {
+    margin: 0;
+  }
 
   &__image-link{
     display: block;
+    margin: auto;
     @media (min-width: $screen-xs-min) {
       height: $app-ResourceCard-height;
       width: 100%;
@@ -62,7 +67,7 @@ $cellHeight: 50%;
     background-position: 50% 50%;
     background-size: cover;
     outline-width: 7px;
-    @include addFocus($width: 2px, $color: currentColor) {
+    @include add-focus($width: 2px, $color: currentColor) {
     }
   }
 
@@ -71,17 +76,17 @@ $cellHeight: 50%;
     @media (min-width: $screen-md-min) {
       flex: 1 2 40%;
       overflow: hidden;
-      @include addFocus($width: 2px, $color: currentColor) {
+      @include add-focus($width: 2px, $color: currentColor) {
       }
     }
   }
 
-  h2 {
+  h3 {
     font-size: 1.2em;
     overflow-wrap: break-word;
     margin-top: 8px;
     margin-bottom: 0;
-    @include addFocus($width: 2px, $color: currentColor) {
+    @include add-focus($width: 2px, $color: currentColor) {
     }
   }
 
@@ -94,7 +99,7 @@ $cellHeight: 50%;
     }
 
     align-items: center;
-    @include addFocus($width: 2px, $color: currentColor) {
+    @include add-focus($width: 2px, $color: currentColor) {
     }
   }
 
@@ -133,7 +138,7 @@ $cellHeight: 50%;
       flex-direction: column;
       width: 100%;
       align-items: center;
-      @include addFocus($width: 2px, $color: currentColor) {
+      @include add-focus($width: 2px, $color: currentColor) {
       }
 
       &:hover,
@@ -177,6 +182,22 @@ $cellHeight: 50%;
   }
 
   &.app-ResourceCard__stacked {
+    @media (min-width: $screen-lg-min) {
+      max-width: 1230px;
+      margin: auto;
+    }
+    @media (min-width: 1200px) and (max-width: 1400px) {
+      max-width: 1080px;
+      margin: auto;
+    }
+    @media (min-width: $screen-md-min) and (max-width: $screen-lg-min) {
+      max-width: 880px;
+      margin: auto;
+    }
+    @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+      max-width: 660px;
+      margin: auto;
+    }
     border: 2px solid $hel-silver;
   }
 

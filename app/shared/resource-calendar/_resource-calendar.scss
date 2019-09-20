@@ -2,6 +2,7 @@
   $available-color: $light-gray;
   $busy-color: $yellow;
   $booked-color: $red;
+  $available-color-green: #00d7a7;
 
   display: flex;
   flex-wrap: wrap;
@@ -20,8 +21,12 @@
     width: 40px;
     height: 40px;
     align-self: flex-end;
+    // Arrow buttons are no longer visible with mobile time slot layout
+    @media (max-width: $screen-sm-max) {
+      display: none;
+    }
 
-    @include addFocus;
+    @include add-focus;
 
     &--prev {
       @include icon-angle-left($black);
@@ -38,10 +43,13 @@
     flex-grow: 1;
     position: relative;
     @media only screen and (min-width: 1080px) {
-      margin-left: 15px;
       max-width: 900px;
     }
-
+    // Changed calendar wrapper width to match maobile timeslot layout width on pads
+    @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+      min-width: 703px;
+      margin-left: 13px;
+    }
     #dateField {
       font-size: 1em;
     }
@@ -67,7 +75,7 @@
       border-left-width: 2px !important;
       height: 40px !important;
 
-      @include addFocus($width: 4px);
+      @include add-focus(3px);
     }
 
     #date-input-error {
@@ -99,13 +107,14 @@
       width: 100%;
       justify-content: space-between;
     }
-
+// Added focus to "previous" and "next" arrow buttons in the calendar
     .DayPicker-NavButton--prev {
       @include icon-angle-left($black);
       width: $line-height-computed;
       height: $line-height-computed;
       position: static;
-      margin-right: 0;
+      margin-left: 5px;
+      @include add-focus(2px, $black) {}
     }
 
     .DayPicker-NavButton--next {
@@ -113,6 +122,8 @@
       width: $line-height-computed;
       height: $line-height-computed;
       position: static;
+      margin-right: 5px;
+      @include add-focus(2px, $black) {}
     }
 
     .DayPicker-Caption {
@@ -156,7 +167,7 @@
         color: $dark-gray;
       }
       &--available:not(.DayPicker-Day--disabled) {
-        background-color: $turku-yellow;
+        background-color: $available-color-green;
         &.DayPicker-Day--selected {
           background-color: $available-color;
         }
@@ -181,6 +192,7 @@
       &--outside {
         color: $dark-gray;
       }
+      @include add-focus(2px, $black) {}
     }
 
     .DayPicker-WeekdaysRow {

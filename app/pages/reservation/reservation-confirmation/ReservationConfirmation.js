@@ -14,6 +14,7 @@ import ReservationDate from 'shared/reservation-date';
 
 class ReservationConfirmation extends Component {
   static propTypes = {
+    currentLanguage: PropTypes.string,
     isEdited: PropTypes.bool,
     reservation: PropTypes.object.isRequired,
     resource: PropTypes.object.isRequired,
@@ -44,10 +45,10 @@ class ReservationConfirmation extends Component {
 
   render() {
     const {
-      isEdited, reservation, resource, t, user
+      currentLanguage, isEdited, reservation, resource, t, user
     } = this.props;
-    const refUrl = window.location.href;
-    const href = `${constants.FEEDBACK_URL}?ref=${refUrl}`;
+
+    const href = (currentLanguage === 'sv') ? constants.FEEDBACK_URL.SV : constants.FEEDBACK_URL.FI;
     let email = '';
     if (reservation.reserverEmailAddress) {
       email = reservation.reserverEmailAddress;
@@ -71,7 +72,7 @@ class ReservationConfirmation extends Component {
                 className="app-ReservationConfirmation__icon"
                 src={iconHome}
               />
-              <b>{resource.name}</b>
+              {resource.name}
             </p>
             {!isEdited && (
               <p>
@@ -97,7 +98,7 @@ class ReservationConfirmation extends Component {
         </Col>
         <Col md={6} xs={12}>
           <Well>
-            <h2>{t('ReservationConfirmation.reservationDetailsTitle')}</h2>
+            <h2 id="reservationDetails">{t('ReservationConfirmation.reservationDetailsTitle')}</h2>
             {reservation.reserverName
               && this.renderField(
                 'reserverName',
@@ -136,6 +137,13 @@ class ReservationConfirmation extends Component {
                 t('common.numberOfParticipantsLabel'),
                 reservation.numberOfParticipants
               )}
+            {reservation.requireAssistance
+              && this.renderField(
+                'requireAssistance',
+                t('common.requireAssistanceLabel'),
+                t('common.yes'),
+                reservation.requireAssistance
+              )}
             {reservation.comments
               && this.renderField('comments', t('common.commentsLabel'), reservation.comments)}
             {reservation.reserverAddressStreet
@@ -157,7 +165,7 @@ class ReservationConfirmation extends Component {
                 reservation.reserverAddressCity
               )}
             {reservation.billingAddressStreet && (
-              <Col xs={12}>{t('common.billingAddressLabel')}</Col>
+              <Col xs={12}><h3 id="billingInformationHeader">{t('common.billingAddressLabel')}</h3></Col>
             )}
             {reservation.billingAddressStreet
               && this.renderField(
@@ -177,6 +185,15 @@ class ReservationConfirmation extends Component {
                 t('common.addressCityLabel'),
                 reservation.billingAddressCity
               )}
+            {reservation.reservationExtraQuestions && (
+            <Col xs={12}><h3 id="reservationExtraQuestionsHeader">{t('common.additionalInfo.heading')}</h3></Col>
+            )}
+            {reservation.reservationExtraQuestions
+            && this.renderField(
+              'reservationExtraQuestions',
+              t('common.additionalInfo.label'),
+              reservation.reservationExtraQuestions
+            )}
           </Well>
         </Col>
       </Row>

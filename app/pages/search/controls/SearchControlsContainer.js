@@ -183,76 +183,87 @@ class UnconnectedSearchControlsContainer extends Component {
                 />
               </Col>
             </Row>
-            <Panel
-              defaultExpanded={hasFilters}
-              header={t('SearchControlsContainer.advancedSearch')}
-            >
-              <Row>
-                <Col className="app-SearchControlsContainer__control" md={4} sm={12}>
-                  <SelectControl
-                    id="purpose"
-                    isLoading={isFetchingPurposes}
-                    label={t('SearchControlsContainer.purposeLabel')}
-                    name="app-SearchControls-purpose-select"
-                    onChange={purpose => this.handleFiltersChange({ purpose: purpose.value })}
-                    options={purposeOptions}
-                    value={filters.purpose}
-                  />
-                </Col>
-                <Col className="app-SearchControlsContainer__control" md={4} sm={12}>
-                  <SelectControl
-                    id="unit"
-                    isLoading={isFetchingUnits}
-                    label={t('SearchControlsContainer.unitLabel')}
-                    name="app-SearchControls-unit-select"
-                    onChange={unit => this.handleFiltersChange({ unit: unit.value })}
-                    options={unitOptions}
-                    value={filters.unit}
-                  />
-                </Col>
-                <Col className="app-SearchControlsContainer__control" md={4} sm={12}>
-                  <SelectControl
-                    id="people"
-                    isLoading={isFetchingUnits}
-                    label={t('SearchControlsContainer.peopleCapacityLabel')}
-                    name="app-SearchControls-people-select"
-                    onChange={people => this.handleFiltersChange({ people: people.value })}
-                    options={peopleCapacityOptions}
-                    value={filters.people ? String(parseInt(filters.people, 10)) : ''}
-                  />
-                </Col>
-              </Row>
-              <Row>
-                <Col className="app-SearchControlsContainer__control" md={12} sm={12}>
-                  <TimeRangeControl
-                    duration={parseInt(filters.duration, 10)}
-                    end={filters.end}
-                    onConfirm={this.handleTimeRangeChange}
-                    onTimeRangeSwitch={this.handleTimeRangeSwitch}
-                    start={filters.start}
-                    useTimeRange={filters.useTimeRange}
-                  />
-                </Col>
-                <Col className="app-SearchControlsContainer__control" md={6} sm={12}>
-                  <PositionControl
-                    geolocated={Boolean(this.props.position)}
-                    onConfirm={distance => this.handleFiltersChange({ distance })}
-                    onPositionSwitch={this.handlePositionSwitch}
-                    value={parseInt(filters.distance, 10)}
-                  />
-                </Col>
-                <Col className="app-SearchControlsContainer__control" md={6} sm={12}>
-                  <CheckboxControl
-                    id="charge"
-                    label={t('SearchControlsContainer.chargeLabel')}
-                    labelClassName="app-SearchControlsCheckbox__label"
-                    onConfirm={value => this.handleFiltersChange({ freeOfCharge: value })}
-                    toggleClassName="app-SearchControlsCheckbox__toggle"
-                    value={!!filters.freeOfCharge}
-                  />
-                </Col>
-              </Row>
-            </Panel>
+            <section>
+              <Panel
+                header={t('SearchControlsContainer.advancedSearch')}
+              >
+                <Panel.Heading>
+                  <Panel.Title componentClass="p" toggle>
+                    {t('SearchControlsContainer.advancedSearch')}
+                  </Panel.Title>
+                </Panel.Heading>
+                <Panel.Collapse>
+                  <Panel.Body>
+                    <Row>
+                      <Col className="app-SearchControlsContainer__control" md={4} sm={12}>
+                        <SelectControl
+                          id="purpose"
+                          isLoading={isFetchingPurposes}
+                          label={t('SearchControlsContainer.purposeLabel')}
+                          name="app-SearchControls-purpose-select"
+                          onChange={purpose => this.handleFiltersChange({ purpose: purpose.value })}
+                          options={purposeOptions}
+                          value={filters.purpose}
+                        />
+                      </Col>
+                      <Col className="app-SearchControlsContainer__control" md={4} sm={12}>
+                        <SelectControl
+                          id="unit"
+                          isLoading={isFetchingUnits}
+                          label={t('SearchControlsContainer.unitLabel')}
+                          name="app-SearchControls-unit-select"
+                          onChange={unit => this.handleFiltersChange({ unit: unit.value })}
+                          options={unitOptions}
+                          value={filters.unit}
+                        />
+                      </Col>
+                      <Col className="app-SearchControlsContainer__control" md={4} sm={12}>
+                        <SelectControl
+                          id="people"
+                          isLoading={isFetchingUnits}
+                          label={t('SearchControlsContainer.peopleCapacityLabel')}
+                          name="app-SearchControls-people-select"
+                          onChange={people => this.handleFiltersChange({ people: people.value })}
+                          options={peopleCapacityOptions}
+                          value={filters.people ? String(parseInt(filters.people, 10)) : ''}
+                        />
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col className="app-SearchControlsContainer__control" md={12} sm={12}>
+                        <TimeRangeControl
+                          duration={parseInt(filters.duration, 10)}
+                          end={filters.end}
+                          onConfirm={this.handleTimeRangeChange}
+                          onTimeRangeSwitch={this.handleTimeRangeSwitch}
+                          start={filters.start}
+                          useTimeRange={filters.useTimeRange}
+                        />
+                      </Col>
+                      <Col className="app-SearchControlsContainer__control" md={6} sm={12}>
+                        <PositionControl
+                          geolocated={Boolean(this.props.position)}
+                          onConfirm={distance => this.handleFiltersChange({ distance })}
+                          onPositionSwitch={this.handlePositionSwitch}
+                          value={parseInt(filters.distance, 10)}
+                        />
+                      </Col>
+                      <Col className="app-SearchControlsContainer__control" md={6} sm={12}>
+                        <CheckboxControl
+                          id="charge"
+                          label={t('SearchControlsContainer.chargeLabel')}
+                          labelClassName="app-SearchControlsCheckbox__label"
+                          onConfirm={value => this.handleFiltersChange({ freeOfCharge: value })}
+                          toggleClassName="app-SearchControlsCheckbox__toggle"
+                          value={!!filters.freeOfCharge}
+                        />
+                      </Col>
+                    </Row>
+                  </Panel.Body>
+                </Panel.Collapse>
+
+              </Panel>
+            </section>
             <Row className="app-SearchControlsContainer__buttons">
               <Col sm={12}>
                 <Button

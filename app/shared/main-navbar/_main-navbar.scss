@@ -37,7 +37,7 @@ $externalIconMarginLeft: 5px;
   .navbar-brand {
     font-size: inherit;
 
-    @include addFocus(){
+    @include add-focus(){
       color: $white;
     };
 
@@ -53,7 +53,7 @@ $externalIconMarginLeft: 5px;
         align-items: center;
         font-size: inherit;
 
-        @include addFocus;
+        @include add-focus;
       }
     }
   }
@@ -67,7 +67,7 @@ $externalIconMarginLeft: 5px;
 
 .app-MainNavbar {
 
-  @include highContrast{
+  @include high-contrast{
     border-bottom: 1px solid $black;
 
     .navbar-nav li,

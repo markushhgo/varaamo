@@ -1,7 +1,7 @@
 .app-ResourceHeader {
   background-color: $turku-yellow;
 
-  @include highContrast{
+  @include high-contrast{
     border-bottom: 1px solid black;
   };
 
@@ -12,6 +12,9 @@
     color: $black;
     padding-left: 0;
     padding-right: 0;
+    font-size: 0.9em;
+    @include add-focus($width: 2px, $color: currentColor) {}
+    // Added focus to "Back to search results"-button and made it scalable
   }
   &__back-button::before {
     @include icon-angle-left($black);
@@ -52,5 +55,36 @@
       margin-right: 8px;
       vertical-align: bottom;
     }
+  }
+}
+// Added focus to "Show on map" and "Add to favorites" buttons and made them scalable, fixed their sizes and alignment on mobile devices
+.app-ResourceHeader__map-button {
+  @include add-focus(3px, currentColor) {}
+  font-size: 1em;
+  text-align: left;
+  @media (max-width: $screen-xs-max) {
+    width: 230px;
+  }
+  @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+    width: 240px;
+  }
+  @media (min-width: $screen-md-min) and (max-width: $screen-md-max) {
+    width: 270px;
+  }
+}
+.favorite-button {
+  @include add-focus(3px, currentColor) {}
+  font-size: 1em;
+  text-align: left;
+  @media (max-width: $screen-xs-max) {
+    margin-top: 10px;
+    margin-left: 0 !important;
+    width: 230px;
+  }
+  @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+    width: 240px;
+  }
+  @media (min-width: $screen-md-min) and (max-width: $screen-md-max) {
+    width: 275px;
   }
 }
