@@ -248,12 +248,14 @@ describe('shared/availability-view/utils', () => {
     });
 
     test('returns reservations and slots', () => {
+      const slotSizes = '00:30:00';
+      const cooldown = '00:00:00';
       const reservations = [
         { id: 11, begin: '2016-01-01T02:00:00', end: '2016-01-01T10:00:00' },
         { id: 12, begin: '2016-01-01T12:30:00', end: '2016-01-01T20:00:00' },
         { id: 13, begin: '2016-01-01T20:00:00', end: '2016-01-01T20:30:00' },
       ];
-      const actual = utils.getTimelineItems(moment('2016-01-01T00:00:00'), reservations, '1');
+      const actual = utils.getTimelineItems(moment('2016-01-01T00:00:00'), reservations, '1', slotSizes, cooldown);
       const expected = [
         {
           key: '0',
@@ -263,6 +265,9 @@ describe('shared/availability-view/utils', () => {
             end: moment('2016-01-01T00:30:00').format(),
             resourceId: '1',
             isSelectable: false,
+            width: 30,
+            cooldownSize: 0,
+            isCooldown: false
           },
         },
         {
@@ -273,6 +278,9 @@ describe('shared/availability-view/utils', () => {
             end: moment('2016-01-01T01:00:00').format(),
             resourceId: '1',
             isSelectable: false,
+            width: 30,
+            cooldownSize: 0,
+            isCooldown: false
           },
         },
         {
@@ -283,6 +291,9 @@ describe('shared/availability-view/utils', () => {
             end: moment('2016-01-01T01:30:00').format(),
             resourceId: '1',
             isSelectable: false,
+            width: 30,
+            cooldownSize: 0,
+            isCooldown: false
           },
         },
         {
@@ -293,6 +304,9 @@ describe('shared/availability-view/utils', () => {
             end: moment('2016-01-01T02:00:00').format(),
             resourceId: '1',
             isSelectable: false,
+            width: 30,
+            cooldownSize: 0,
+            isCooldown: false
           },
         },
         { key: '4', type: 'reservation', data: reservations[0] },
@@ -304,6 +318,9 @@ describe('shared/availability-view/utils', () => {
             end: moment('2016-01-01T10:30:00').format(),
             resourceId: '1',
             isSelectable: false,
+            width: 30,
+            cooldownSize: 0,
+            isCooldown: false
           },
         },
         {
@@ -314,6 +331,9 @@ describe('shared/availability-view/utils', () => {
             end: moment('2016-01-01T11:00:00').format(),
             resourceId: '1',
             isSelectable: false,
+            width: 30,
+            cooldownSize: 0,
+            isCooldown: false
           },
         },
         {
@@ -324,6 +344,9 @@ describe('shared/availability-view/utils', () => {
             end: moment('2016-01-01T11:30:00').format(),
             resourceId: '1',
             isSelectable: false,
+            width: 30,
+            cooldownSize: 0,
+            isCooldown: false
           },
         },
         {
@@ -334,6 +357,9 @@ describe('shared/availability-view/utils', () => {
             end: moment('2016-01-01T12:00:00').format(),
             resourceId: '1',
             isSelectable: false,
+            width: 30,
+            cooldownSize: 0,
+            isCooldown: false
           },
         },
         {
@@ -344,6 +370,9 @@ describe('shared/availability-view/utils', () => {
             end: moment('2016-01-01T12:30:00').format(),
             resourceId: '1',
             isSelectable: false,
+            width: 30,
+            cooldownSize: 0,
+            isCooldown: false
           },
         },
         { key: '10', type: 'reservation', data: reservations[1] },
@@ -356,6 +385,9 @@ describe('shared/availability-view/utils', () => {
             end: moment('2016-01-01T21:00:00').format(),
             resourceId: '1',
             isSelectable: false,
+            width: 30,
+            cooldownSize: 0,
+            isCooldown: false
           },
         },
         {
@@ -366,6 +398,9 @@ describe('shared/availability-view/utils', () => {
             end: moment('2016-01-01T21:30:00').format(),
             resourceId: '1',
             isSelectable: false,
+            width: 30,
+            cooldownSize: 0,
+            isCooldown: false
           },
         },
         {
@@ -376,6 +411,9 @@ describe('shared/availability-view/utils', () => {
             end: moment('2016-01-01T22:00:00').format(),
             resourceId: '1',
             isSelectable: false,
+            width: 30,
+            cooldownSize: 0,
+            isCooldown: false
           },
         },
         {
@@ -386,6 +424,9 @@ describe('shared/availability-view/utils', () => {
             end: moment('2016-01-01T22:30:00').format(),
             resourceId: '1',
             isSelectable: false,
+            width: 30,
+            cooldownSize: 0,
+            isCooldown: false
           },
         },
         {
@@ -396,6 +437,9 @@ describe('shared/availability-view/utils', () => {
             end: moment('2016-01-01T23:00:00').format(),
             resourceId: '1',
             isSelectable: false,
+            width: 30,
+            cooldownSize: 0,
+            isCooldown: false
           },
         },
         {
@@ -406,6 +450,9 @@ describe('shared/availability-view/utils', () => {
             end: moment('2016-01-01T23:30:00').format(),
             resourceId: '1',
             isSelectable: false,
+            width: 30,
+            cooldownSize: 0,
+            isCooldown: false
           },
         },
         {
@@ -416,10 +463,71 @@ describe('shared/availability-view/utils', () => {
             end: moment('2016-01-02T00:00:00').format(),
             resourceId: '1',
             isSelectable: false,
+            width: 30,
+            cooldownSize: 0,
+            isCooldown: false
           },
         },
       ];
       expect(actual).toEqual(expected);
+    });
+  });
+
+  describe('getCooldown', () => {
+    test('returns 0 if no parameters given', () => {
+      const cooldown = utils.getCooldown();
+      expect(cooldown).toBe(0);
+    });
+
+    test('returns correct cooldown with hours', () => {
+      let cooldown = utils.getCooldown('01:00:00');
+      expect(cooldown).toBe(60);
+      cooldown = utils.getCooldown('02:00:00');
+      expect(cooldown).toBe(120);
+      cooldown = utils.getCooldown('03:00:00');
+      expect(cooldown).toBe(180);
+      cooldown = utils.getCooldown('04:00:00');
+      expect(cooldown).toBe(240);
+    });
+
+    test('returns correct cooldown with minutes', () => {
+      let cooldown = utils.getCooldown('00:10:00');
+      expect(cooldown).toBe(10);
+      cooldown = utils.getCooldown('00:20:00');
+      expect(cooldown).toBe(20);
+      cooldown = utils.getCooldown('00:30:00');
+      expect(cooldown).toBe(30);
+      cooldown = utils.getCooldown('00:40:00');
+      expect(cooldown).toBe(40);
+    });
+  });
+
+  describe('getSlotSize', () => {
+    test('returns slotSize(30) if no parameters', () => {
+      const cooldown = utils.getSlotSize();
+      expect(cooldown).toBe(30);
+    });
+
+    test('returns correct slotSize with hours', () => {
+      let cooldown = utils.getSlotSize('01:00:00');
+      expect(cooldown).toBe(60);
+      cooldown = utils.getSlotSize('02:00:00');
+      expect(cooldown).toBe(120);
+      cooldown = utils.getSlotSize('03:00:00');
+      expect(cooldown).toBe(180);
+      cooldown = utils.getSlotSize('04:00:00');
+      expect(cooldown).toBe(240);
+    });
+
+    test('returns correct slotSize minutes', () => {
+      let cooldown = utils.getSlotSize('00:10:00');
+      expect(cooldown).toBe(10);
+      cooldown = utils.getSlotSize('00:20:00');
+      expect(cooldown).toBe(20);
+      cooldown = utils.getSlotSize('00:30:00');
+      expect(cooldown).toBe(30);
+      cooldown = utils.getSlotSize('00:40:00');
+      expect(cooldown).toBe(40);
     });
   });
 });

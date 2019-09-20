@@ -10,7 +10,15 @@ function getTimeSlotWidth({ startTime, endTime } = {}) {
 
   return (slotWidth * slots) - slotMargin;
 }
-
+/**
+ * Returns a number, for example
+ *
+ * '01:00:00' returns 60 -> 1 hour,
+ *
+ * '00:30:00' returns 30 -> 30min
+ * @param {string} size - string to parse
+ *
+ */
 function getSlotSize(size = slotSize) {
   if (size === 30) { return size; }
   const hour = Number(size.substring(0, 2));
@@ -25,13 +33,22 @@ function getSlotSize(size = slotSize) {
   return slotSize;
 }
 
+/**
+ *  Returns a number, for example
+ *
+ * '01:00:00' for 1 hour,
+ *
+ * '00:30:00' for 30min
+ * @param {string} cooldown - string to parse
+ *
+ */
 function getCooldown(cooldown = 0) {
   if (cooldown === 0) { return cooldown; }
   const hour = Number(cooldown.substring(0, 2));
   const min = Number(cooldown.substring(3, 5));
 
   if (hour !== 0) {
-    return hour * 60;
+    return hour * (2 * slotSize);
   }
   if (min !== 0) {
     return min;
@@ -43,7 +60,6 @@ function getTimelineItems(date, reservations, resourceId, slotSizes, cooldown) {
   const items = [];
   let reservationPointer = 0;
   let timePointer = date.clone().startOf('day');
-  //  const size = (slotSizes.substring(0, 2) === '01') ? 60 : slotSize;
   const size = getSlotSize(slotSizes);
   const cooldownSize = getCooldown(cooldown);
   const end = date.clone().endOf('day');
@@ -86,7 +102,13 @@ function isInsideOpeningHours(item, openingHours) {
   ));
 }
 
-// checks if item(timeslot) is after given (reservableAfter) time
+//
+/**
+ * Checks if item(timeslot) is after given (reservableAfter) time
+ * @param {timeslot} item - timeslot
+ * @param {string} reservableAfter - value of moment(reservableAfter).toISOString(true))
+ *
+ */
 function isAfterReservableAfter(item, reservableAfter) {
   return (item.data.begin >= reservableAfter && item.data.end >= reservableAfter);
 }
@@ -138,6 +160,8 @@ function addSelectionData(selection, resource, items, isAdmin) {
 
 export default {
   addSelectionData,
+  getCooldown,
+  getSlotSize,
   getTimelineItems,
   getTimeSlotWidth,
   isAfterReservableAfter,

@@ -4,7 +4,6 @@ import classNames from 'classnames';
 
 import { injectT } from 'i18n';
 import ReservationPopover from 'shared/reservation-popover';
-import utils from '../utils';
 
 export class UninjectedReservationSlot extends React.Component {
   static propTypes = {
