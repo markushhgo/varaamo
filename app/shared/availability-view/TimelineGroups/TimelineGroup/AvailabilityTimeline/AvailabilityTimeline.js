@@ -21,7 +21,8 @@ export default class AvailabilityTimeline extends React.Component {
     onSelectionCancel: PropTypes.func,
     selection: PropTypes.object,
     maxPeriod: PropTypes.string,
-    minPeriod: PropTypes.string
+    minPeriod: PropTypes.string,
+    isAdmin: PropTypes.bool,
   };
 
   shouldComponentUpdate(nextProps) {
@@ -41,11 +42,35 @@ export default class AvailabilityTimeline extends React.Component {
     } = this.props;
     return (
       <div className="availability-timeline">
-        {this.props.items.map((item) => {
-          if (item.type === 'reservation-slot') {
+        {this.props.items.map((item, index) => {
+          const previous = (this.props.items[index - 1]) ? this.props.items[index - 1] : item;
+          const next = (this.props.items[index + 1]) ? this.props.items[index + 1] : item;
+
+          const hasCd = item.coolDownSize > 0;
+
+          if (item.type === 'reservation-slot' && previous.type !== 'reservation' && next.type !== 'reservation') {
             return (
               <ReservationSlot
                 {...item.data}
+                isCooldown={false}
+                key={item.key}
+                maxPeriod={this.props.maxPeriod}
+                minPeriod={this.props.minPeriod}
+                onClick={onReservationSlotClick}
+                onMouseEnter={onReservationSlotMouseEnter}
+                onMouseLeave={onReservationSlotMouseLeave}
+                onSelectionCancel={onSelectionCancel}
+                resourceId={this.props.id}
+                selection={selection}
+              />
+            );
+          }
+          if (item.type === 'reservation-slot' && (previous.type === 'reservation' || next.type === 'reservation')) {
+            return (
+              <ReservationSlot
+                {...item.data}
+                isCooldown={!this.props.isAdmin || hasCd > 0}
+                isSelectable={hasCd}
                 key={item.key}
                 maxPeriod={this.props.maxPeriod}
                 minPeriod={this.props.minPeriod}

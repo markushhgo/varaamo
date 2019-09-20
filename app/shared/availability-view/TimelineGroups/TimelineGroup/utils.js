@@ -11,10 +11,41 @@ function getTimeSlotWidth({ startTime, endTime } = {}) {
   return (slotWidth * slots) - slotMargin;
 }
 
-function getTimelineItems(date, reservations, resourceId) {
+function getSlotSize(size = slotSize) {
+  if (size === 30) { return size; }
+  const hour = Number(size.substring(0, 2));
+  const min = Number(size.substring(3, 5));
+
+  if (hour !== 0) {
+    return hour * 60;
+  }
+  if (min !== 0) {
+    return min;
+  }
+  return slotSize;
+}
+
+function getCooldown(cooldown = 0) {
+  if (cooldown === 0) { return cooldown; }
+  const hour = Number(cooldown.substring(0, 2));
+  const min = Number(cooldown.substring(3, 5));
+
+  if (hour !== 0) {
+    return hour * 60;
+  }
+  if (min !== 0) {
+    return min;
+  }
+  return 0;
+}
+
+function getTimelineItems(date, reservations, resourceId, slotSizes, cooldown) {
   const items = [];
   let reservationPointer = 0;
   let timePointer = date.clone().startOf('day');
+  //  const size = (slotSizes.substring(0, 2) === '01') ? 60 : slotSize;
+  const size = getSlotSize(slotSizes);
+  const cooldownSize = getCooldown(cooldown);
   const end = date.clone().endOf('day');
   while (timePointer.isBefore(end)) {
     const reservation = reservations && reservations[reservationPointer];
@@ -33,14 +64,17 @@ function getTimelineItems(date, reservations, resourceId) {
         type: 'reservation-slot',
         data: {
           begin: timePointer.format(),
-          end: timePointer.clone().add(slotSize, 'minutes').format(),
+          end: timePointer.clone().add(size, 'minutes').format(),
           resourceId,
           // isSelectable: false by default to improve selector performance by allowing
           // addSelectionData to make some assumptions.
           isSelectable: false,
+          width: size,
+          isCooldown: false,
+          cooldownSize,
         },
       });
-      timePointer.add(slotSize, 'minutes');
+      timePointer.add(size, 'minutes');
     }
   }
   return items;
