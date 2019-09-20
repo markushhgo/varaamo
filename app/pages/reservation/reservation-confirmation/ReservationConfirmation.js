@@ -36,7 +36,7 @@ class ReservationConfirmation extends Component {
         <Col xs={12}>
           <b>{label}</b>
         </Col>
-        <Col className="app-ReservationConfirmation__field-value" xs={6}>
+        <Col className="app-ReservationConfirmation__field-value" xs={12}>
           {value}
         </Col>
       </Row>

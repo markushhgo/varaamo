@@ -13,6 +13,7 @@
   &__field {
     padding-top: 12px;
     display: grid;
+    word-break: break-all;
   }
   a {
     color: $blue;
