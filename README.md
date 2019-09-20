@@ -210,4 +210,4 @@ License
 
 [The MIT License](http://opensource.org/licenses/MIT)
 
-Copyright (c) 2015 City of Helsinki <[http://www.hel.fi/](http://www.hel.fi/)>
+Copyright (c) 2019 City of Turku <[http://www.turku.fi/](http://www.turku.fi/)>
