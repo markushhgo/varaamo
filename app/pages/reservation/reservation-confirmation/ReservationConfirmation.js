@@ -14,7 +14,6 @@ import ReservationDate from 'shared/reservation-date';
 
 class ReservationConfirmation extends Component {
   static propTypes = {
-    currentLanguage: PropTypes.string,
     isEdited: PropTypes.bool,
     reservation: PropTypes.object.isRequired,
     resource: PropTypes.object.isRequired,
@@ -33,7 +32,7 @@ class ReservationConfirmation extends Component {
         className="app-ReservationConfirmation__field"
         key={`reservation-confirmation-field-${field}`}
       >
-        <Col xs={12}>
+        <Col xs={6}>
           <b>{label}</b>
         </Col>
         <Col className="app-ReservationConfirmation__field-value" xs={6}>
@@ -45,10 +44,10 @@ class ReservationConfirmation extends Component {
 
   render() {
     const {
-      currentLanguage, isEdited, reservation, resource, t, user
+      isEdited, reservation, resource, t, user
     } = this.props;
-
-    const href = (currentLanguage === 'sv') ? constants.FEEDBACK_URL.SV : constants.FEEDBACK_URL.FI;
+    const refUrl = window.location.href;
+    const href = `${constants.FEEDBACK_URL}?ref=${refUrl}`;
     let email = '';
     if (reservation.reserverEmailAddress) {
       email = reservation.reserverEmailAddress;
@@ -72,7 +71,7 @@ class ReservationConfirmation extends Component {
                 className="app-ReservationConfirmation__icon"
                 src={iconHome}
               />
-              {resource.name}
+              <b>{resource.name}</b>
             </p>
             {!isEdited && (
               <p>

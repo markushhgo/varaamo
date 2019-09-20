@@ -12,7 +12,6 @@
 
   &__field {
     padding-top: 12px;
-    display: grid;
   }
   a {
     color: $blue;
@@ -21,14 +20,10 @@
     height: 20px;
     margin-right: 6px;
   }
-  &__resource-name {
-    font-weight: bold;
-  }
 
   .reservation-date {
     .reservation-date__content {
       margin: 0;
-      margin-bottom: 8px;
     }
     h3 {
       font-size: 1.6rem;
