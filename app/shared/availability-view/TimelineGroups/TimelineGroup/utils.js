@@ -21,8 +21,8 @@ function getTimeSlotWidth({ startTime, endTime } = {}) {
  */
 function getSlotSize(size = slotSize) {
   if (size === 30) { return size; }
-  const hour = Number(size.substring(0, 2));
-  const min = Number(size.substring(3, 5));
+  const hour = moment(size, 'HH:mm:ss').hours();
+  const min = moment(size, 'HH:mm:ss').minutes();
 
   if (hour !== 0) {
     return hour * 60;
@@ -44,8 +44,8 @@ function getSlotSize(size = slotSize) {
  */
 function getCooldown(cooldown = 0) {
   if (cooldown === 0) { return cooldown; }
-  const hour = Number(cooldown.substring(0, 2));
-  const min = Number(cooldown.substring(3, 5));
+  const hour = moment(cooldown, 'HH:mm:ss').hours();
+  const min = moment(cooldown, 'HH:mm:ss').minutes();
 
   if (hour !== 0) {
     return hour * (2 * slotSize);
