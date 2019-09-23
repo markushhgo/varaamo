@@ -37,7 +37,7 @@ export default class AvailabilityView extends React.Component {
 
   handleReservationSlotClick(slot) {
     if (this.state.selection) {
-      if (this.state.selection.begin === slot.begin) {
+      if (this.state.selection.begin === slot.end) {
         this.handleSelectionCancel();
       } else {
         this.endSelection(slot);
@@ -51,7 +51,7 @@ export default class AvailabilityView extends React.Component {
     const isSlotSelectable = (
       !this.state.selection || (
         this.state.selection.resourceId === slot.resourceId
-        && this.state.selection.begin < slot.begin
+        && this.state.selection.begin < slot.end
       )
     );
     if (isSlotSelectable) {

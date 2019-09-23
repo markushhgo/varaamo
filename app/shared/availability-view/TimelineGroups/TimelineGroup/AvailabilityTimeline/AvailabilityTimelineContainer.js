@@ -34,12 +34,25 @@ export function selector() {
       'begin'
     )
   );
+
+  const slotSizeSelector = createSelector(
+    resourceSelector,
+    resource => resource.slotSize
+  );
+
+  const cooldownSelector = createSelector(
+    resourceSelector,
+    resource => resource.cooldown
+  );
+
   const itemsSelector = createSelector(
     reservationsSelector,
     dateSelector,
     resourceIdSelector,
-    (reservations, date, resourceId) => utils.getTimelineItems(
-      moment(date), reservations, resourceId
+    slotSizeSelector,
+    cooldownSelector,
+    (reservations, date, resourceId, slotSize, cooldown) => utils.getTimelineItems(
+      moment(date), reservations, resourceId, slotSize, cooldown
     )
   );
 
