@@ -5,6 +5,16 @@ $reservation-list-label-height: 20px;
   margin: 0;
   padding: 0;
 
+  .label-success {
+    background-color: #008540;
+  }
+  .label-danger {
+    background-color: #bd2719;
+  }
+  .label-primary {
+    background-color: #37475e;
+  }
+
   .reservation {
     background-color: $white;
     position: relative;
@@ -85,8 +95,8 @@ $reservation-list-label-height: 20px;
       @media (min-width: $screen-xs-min) {
         min-height: 180px;
       }
-      @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
-
+      @media (min-width: $screen-md-min) and (max-width: $screen-md-max) {
+        max-width: 310px;
       }
       .buttons {
         bottom: 0;
