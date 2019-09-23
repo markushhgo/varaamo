@@ -5,6 +5,10 @@
 .app-ReservationPage__phase {
   display: inline-block;
   z-index: 2;
+  @media (max-width: $screen-xs) {
+    display: block;
+    padding-bottom: 10px;
+  }
 
   &-index {
     background-color: $light-gray;
@@ -28,6 +32,9 @@
     left: 0;
     right: 50%;
     z-index: -1;
+    @media (max-width: $screen-xs) {
+      display: none;
+    }
   }
 
   &:not(:last-child):after {
@@ -40,6 +47,9 @@
     left: 50%;
     right: 0;
     z-index: -1;
+    @media (max-width: $screen-xs) {
+      display: none;
+    }
   }
 
   &-active,
