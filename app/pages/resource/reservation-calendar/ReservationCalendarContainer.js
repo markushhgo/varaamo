@@ -175,14 +175,14 @@ export class UnconnectedReservationCalendarContainer extends Component {
         {showTimeSlots && selected.length > 0 && (
           <Row className="reservation-calendar-reserve-info">
             <h3 className="visually-hidden">{t('ReservationCalendar.Confirmation.header')}</h3>
-            <Col md={8} xs={12}>
+            <Col xs={12}>
               <strong>
                 {t('TimeSlots.selectedDate')}
                 {' '}
               </strong>
               {this.getSelectedTimeText(selected)}
             </Col>
-            <Col md={4} xs={12}>
+            <Col xs={12}>
               <Button
                 bsStyle="primary"
                 className="reservation-calendar__reserve-button"

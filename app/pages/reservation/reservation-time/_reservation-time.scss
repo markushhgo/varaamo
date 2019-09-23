@@ -3,7 +3,7 @@
 
   &__controls {
     text-align: right;
-    @media (max-width: $screen-xs-max){
+    @media (max-width: $screen-md-max){
       padding-bottom: 8px;
     }
     .btn {

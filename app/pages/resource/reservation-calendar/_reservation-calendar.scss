@@ -8,7 +8,7 @@
     margin-top: 8px;
     text-align: center;
     display: block;
-    margin-right: auto;
+    float: right;
    @include add-focus(4px,black);
   }
 }
@@ -19,7 +19,7 @@
     padding-top: 16px;
   }
   > div:not(:first-child) {
-    padding-right: 0;
-    text-align: left;
+    padding-right: 5;
+    text-align: right;
   }
 }
