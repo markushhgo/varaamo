@@ -41,12 +41,12 @@ class AdminReservationFilters extends Component {
 
     return (
       <div className="reservation-filters">
-        <h4>{t('UserReservationsPage.preliminaryReservationsHeader')}</h4>
         <SelectControl
           className="reservation-state-select"
           id="reservation"
           isClearable={false}
           isSearchable={false}
+          label={t('UserReservationsPage.preliminaryReservationsHeader')}
           name="reservation-state-select"
           onChange={this.handleChange}
           options={stateOptions}

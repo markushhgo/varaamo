@@ -1,5 +1,6 @@
 import React from 'react';
 import Immutable from 'seamless-immutable';
+import { Link } from 'react-router-dom';
 
 import ReservationStateLabel from 'shared/reservation-state-label';
 import TimeRange from 'shared/time-range';
@@ -33,6 +34,7 @@ describe('pages/user-reservations/reservation-list/ReservationListItem', () => {
   describe('rendering', () => {
     test('renders a li element', () => {
       expect(component.is('li')).toBe(true);
+      expect(component.prop('className')).toBe('reservation container');
     });
 
     test('displays an image with correct props', () => {
@@ -43,23 +45,43 @@ describe('pages/user-reservations/reservation-list/ReservationListItem', () => {
       expect(image.props().src).toBe(props.resource.images[0].url);
     });
 
-    test('contains a link to resources page', () => {
+    test('contains two links to resource page with correct props', () => {
       const expectedUrl = getResourcePageUrl(props.resource);
-      const resourceLink = component.find({ to: expectedUrl });
+      const links = component.find(Link);
 
-      expect(resourceLink.length > 0).toBe(true);
+      expect(links.length).toBe(2);
+      // image link
+      expect(links.at(0).prop('aria-hidden')).toBe('true');
+      expect(links.at(0).prop('tabIndex')).toBe('-1');
+      expect(links.at(0).prop('to')).toBe(expectedUrl);
+      // header/name link
+      expect(links.at(1).prop('to')).toBe(expectedUrl);
     });
 
     test('displays the name of the resource', () => {
       const expected = props.resource.name;
 
-      expect(component.find('h4').text()).toContain(expected);
+      expect(component.find('h2').text()).toContain(expected);
+    });
+
+    test('displays unit icon with correct props', () => {
+      const unitIcon = component.find('.location');
+      expect(unitIcon.length).toBe(1);
+      expect(unitIcon.prop('alt')).toBe('common.addressStreetLabel');
+      expect(unitIcon.prop('src')).toBeDefined();
     });
 
     test('displays the name of the given unit in props', () => {
       const expected = props.unit.name;
 
       expect(component.find('.unit-name').text()).toContain(expected);
+    });
+
+    test('displays timeslot icon with correct props', () => {
+      const timeslotIcon = component.find('.timeslot');
+      expect(timeslotIcon.length).toBe(1);
+      expect(timeslotIcon.prop('alt')).toBe('common.reservationTimeLabel');
+      expect(timeslotIcon.prop('src')).toBeDefined();
     });
 
     test('contains TimeRange component with correct props', () => {

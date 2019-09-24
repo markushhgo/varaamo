@@ -5,6 +5,33 @@ $reservation-list-label-height: 20px;
   margin: 0;
   padding: 0;
 
+  // Fixed label colors to meet contrast standards
+  .label-success {
+    background-color: #008540;
+  }
+  .label-danger {
+    background-color: #ab1204;
+  }
+  .label-primary {
+    background-color: #c15801;
+  }
+  .label-default {
+    background-color: #37475e;
+  }
+
+  // Fixed also button colors to meet contrast standards
+
+  .btn-success {
+    color: #008540;
+    border-color: #008540;
+  }
+
+  .btn-danger {
+    color: #ab1204;
+    border-color: #ab1204;
+  }
+
+
   .reservation {
     background-color: $white;
     position: relative;
@@ -12,37 +39,48 @@ $reservation-list-label-height: 20px;
     min-height: 180px;
     @include box-shadow;
 
+    &.container {
+      padding: 0;
+      max-width: 100%;
+    }
+
     @media (max-width: $screen-xs-max) {
       min-height: 200px;
     }
-
+    @media (min-width: $screen-md-min) and (max-width: $screen-md-max) {
+      min-height: 240px;
+    }
     .image-container {
       background-color: #ebedf1;
       min-height: 180px;
       max-width: 180px;
       @include add-focus($width: 2px, $color: currentColor) {
       }
-
       @media (max-width: $screen-md-min) {
         display: none;
       }
 
       img {
-        margin-left: -13px;
-
+        margin-left: -15px;
         height: 180px;
         width: 180px;
+
+        @media (min-width: $screen-md-min) and (max-width: $screen-md-max) {
+          height: 240px;
+          width: 240px;
+        }
       }
     }
 
     .reservation-details {
-      margin-top: 10px;
       min-height: 180px;
 
+      @media (min-width: $screen-md-min) and (max-width: $screen-md-max) {
+        margin-left: 55px;
+      }
       .reservation-state-label-container {
-        font-size: 18px;
+        font-size: 1em;
         margin-bottom: 8px;
-        margin-top: -8px;
         width: 100%;
 
         .label {
@@ -56,32 +94,75 @@ $reservation-list-label-height: 20px;
       .location, .timeslot {
         width: 28.8px;
         margin-right: 5px
+        ;@media (max-width: $screen-xs-max) {
+          width: 20.8px;
+        };
       }
 
       .reservation-access-code {
         font-weight: bold;
         margin-left: 33.8px;
+
       }
     }
 
     .action-container {
-      min-height: 180px;
+      display: flex;
 
+      @media (min-width: $screen-xs-min) {
+        min-height: 180px;
+      }
+      @media (min-width: $screen-md-min) and (max-width: $screen-md-max) {
+        max-width: 310px;
+      }
       .buttons {
-        position: absolute;
         bottom: 0;
-        margin-bottom: 25px;
+        margin: auto 0;
+        @include add-focus;
+
+        @media (max-width: $screen-xs-max) {
+          top: 20px;
+          left: 0px;
+        }
+
+        @media (min-width: $screen-md-min) and (max-width: $screen-md-max) {
+          width: 350px;
+          left: -8px;
+          }
+
+        @media (min-width: $screen-sm-min) and (max-width:$screen-sm-max) {
+          width: 300px;
+          left: -5%;
+          top: 20%;
+        }
+
+        button:nth-last-child(4):first-child,
+        button:nth-last-child(4):first-child ~ * {
+
+          @media (max-width: $screen-md-min) {
+            margin-bottom: 5px;
+          }
+        }
 
         button {
           margin-left: 14px;
           width: 100px;
-
-          @media (max-width: $screen-md-max) {
-            margin-bottom: 10px;
-          }
+          font-size: 1em;
+          margin-bottom: 10px;
+          @include add-focus($width: 3px, $color: currentColor) {}
 
           @media (max-width: $screen-xs-max) {
-            margin-left: -15px;
+            width: 140px;
+          }
+          @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+            margin-left: 10px;
+            width: 190px;
+          }
+
+
+
+          @media (min-width: $screen-md-min) {
+            width: 120px;
           }
         }
       }
@@ -90,6 +171,15 @@ $reservation-list-label-height: 20px;
 
     a {
       text-decoration: none;
+      > h2{
+        margin-top: 12px;
+        overflow: hidden;
+
+        @media (min-width: $screen-md-min) and (max-width: $screen-md-max) {
+          margin-top: 5px;
+          margin-bottom: 0;
+        }
+      }
     }
   }
 }

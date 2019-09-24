@@ -29,25 +29,29 @@ class ReservationListItem extends Component {
     const nameSeparator = isEmpty(resource) || isEmpty(unit) ? '' : ', ';
 
     return (
-      <li className="reservation">
+      <li className="reservation container">
         <div className="col-md-3 col-lg-2 image-container">
-          <Link to={getResourcePageUrl(resource)}>
+          <Link
+            aria-hidden="true"
+            tabIndex="-1"
+            to={getResourcePageUrl(resource)}
+          >
             {this.renderImage(getMainImage(resource.images))}
           </Link>
         </div>
-        <div className="col-xs-8 col-md-6 col-lg-7 reservation-details">
+        <div className="col-xs-12 col-sm-8 col-md-5 col-lg-7 reservation-details">
           <ReservationStateLabel reservation={reservation} />
           <Link to={getResourcePageUrl(resource)}>
-            <h4>{resource.name}</h4>
+            <h2>{resource.name}</h2>
           </Link>
           <div>
-            <img alt={resource.type.name} className="location" src={iconHome} />
+            <img alt={t('common.addressStreetLabel')} className="location" src={iconHome} />
             <span className="unit-name">{unit.name}</span>
             {nameSeparator}
             <span>{unit.streetAddress}</span>
           </div>
           <div>
-            <img alt={resource.type.name} className="timeslot" src={iconCalendar} />
+            <img alt={t('common.reservationTimeLabel')} className="timeslot" src={iconCalendar} />
             <TimeRange begin={reservation.begin} end={reservation.end} />
           </div>
           <ReservationAccessCode
@@ -56,7 +60,7 @@ class ReservationListItem extends Component {
             text={t('ReservationListItem.accessCodeText')}
           />
         </div>
-        <div className="col-xs-4 col-md-3 col-lg-3 action-container">
+        <div className="col-xs-12 col-sm-4 col-md-4 col-lg-3 action-container">
           <ReservationControls
             isAdmin={isAdmin}
             isStaff={isStaff}
