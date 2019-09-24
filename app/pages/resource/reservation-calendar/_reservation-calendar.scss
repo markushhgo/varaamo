@@ -5,6 +5,10 @@
 
   &__reserve-button {
     font-size: 24px;
+    margin-top: 8px;
+    text-align: center;
+    display: block;
+    float: right;
    @include add-focus(4px,black);
   }
 }
@@ -15,7 +19,7 @@
     padding-top: 16px;
   }
   > div:not(:first-child) {
-    padding-right: 0;
+    padding-right: 5;
     text-align: right;
   }
 }
