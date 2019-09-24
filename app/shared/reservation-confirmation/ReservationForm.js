@@ -208,7 +208,7 @@ class UnconnectedReservationForm extends Component {
           {includes(this.props.fields, 'reservationExtraQuestions') && (
             <Well>
               <p id="additional-info-heading">{t('common.additionalInfo.heading')}</p>
-              <p id="additional-info-paragraph">{resource.reservationAdditionalInformation}</p>
+              <WrappedText id="additional-info-paragraph" openLinksInNewTab text={resource.reservationAdditionalInformation} />
               {this.renderField(
                 'reservationExtraQuestions',
                 'textarea',
