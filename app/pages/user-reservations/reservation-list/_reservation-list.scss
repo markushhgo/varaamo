@@ -5,16 +5,19 @@ $reservation-list-label-height: 20px;
   margin: 0;
   padding: 0;
 
+  // Fixed label colors to meet contrast standards
   .label-success {
     background-color: #008540;
   }
   .label-danger {
-    background-color: #bd2719;
+    background-color: #ab1204;
   }
   .label-primary {
+    background-color: #c15801;
+  }
+  .label-default {
     background-color: #37475e;
   }
-
   .reservation {
     background-color: $white;
     position: relative;
