@@ -18,6 +18,20 @@ $reservation-list-label-height: 20px;
   .label-default {
     background-color: #37475e;
   }
+
+  // Fixed also button colors to meet contrast standards
+
+  .btn-success {
+    color: #008540;
+    border-color: #008540;
+  }
+
+  .btn-danger {
+    color: #ab1204;
+    border-color: #ab1204;
+  }
+
+
   .reservation {
     background-color: $white;
     position: relative;
