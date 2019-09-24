@@ -33,10 +33,10 @@ class ReservationConfirmation extends Component {
         className="app-ReservationConfirmation__field"
         key={`reservation-confirmation-field-${field}`}
       >
-        <Col xs={6}>
+        <Col xs={12}>
           <b>{label}</b>
         </Col>
-        <Col className="app-ReservationConfirmation__field-value" xs={6}>
+        <Col className="app-ReservationConfirmation__field-value" xs={12}>
           {value}
         </Col>
       </Row>
@@ -98,7 +98,7 @@ class ReservationConfirmation extends Component {
         </Col>
         <Col md={6} xs={12}>
           <Well>
-            <h2>{t('ReservationConfirmation.reservationDetailsTitle')}</h2>
+            <h2 id="reservationDetails">{t('ReservationConfirmation.reservationDetailsTitle')}</h2>
             {reservation.reserverName
               && this.renderField(
                 'reserverName',
@@ -137,6 +137,13 @@ class ReservationConfirmation extends Component {
                 t('common.numberOfParticipantsLabel'),
                 reservation.numberOfParticipants
               )}
+            {reservation.requireAssistance
+              && this.renderField(
+                'requireAssistance',
+                t('common.requireAssistanceLabel'),
+                t('common.yes'),
+                reservation.requireAssistance
+              )}
             {reservation.comments
               && this.renderField('comments', t('common.commentsLabel'), reservation.comments)}
             {reservation.reserverAddressStreet
@@ -158,7 +165,7 @@ class ReservationConfirmation extends Component {
                 reservation.reserverAddressCity
               )}
             {reservation.billingAddressStreet && (
-              <Col xs={12}>{t('common.billingAddressLabel')}</Col>
+              <Col xs={12}><h3 id="billingInformationHeader">{t('common.billingAddressLabel')}</h3></Col>
             )}
             {reservation.billingAddressStreet
               && this.renderField(
@@ -178,6 +185,15 @@ class ReservationConfirmation extends Component {
                 t('common.addressCityLabel'),
                 reservation.billingAddressCity
               )}
+            {reservation.reservationExtraQuestions && (
+            <Col xs={12}><h3 id="reservationExtraQuestionsHeader">{t('common.additionalInfo.heading')}</h3></Col>
+            )}
+            {reservation.reservationExtraQuestions
+            && this.renderField(
+              'reservationExtraQuestions',
+              t('common.additionalInfo.label'),
+              reservation.reservationExtraQuestions
+            )}
           </Well>
         </Col>
       </Row>

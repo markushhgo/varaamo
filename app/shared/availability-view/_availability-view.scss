@@ -237,12 +237,15 @@
             $gray-lighter 50%
           );
         }
-        &-end-selected {
+/*        &-end-selected {
           background: linear-gradient(
             to left,
             $gray-light 49.9%,
             $gray-lighter 50%
           );
+        } */
+        &-end-selected {
+          background: $gray-light;
         }
       }
     }
@@ -284,6 +287,7 @@
     border: $slot-border;
     border-radius: 2px;
     flex-shrink: 0;
+    @include add-focus;
   }
   .reservation {
     height: $slot-height;
@@ -325,6 +329,7 @@
     &-selected {
       background-color: $brand-primary;
     }
+
     .a11y-text {
       position: relative;
       left: 100px;

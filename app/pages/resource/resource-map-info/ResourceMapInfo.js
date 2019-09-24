@@ -14,6 +14,7 @@ function formatAddress({ addressZip, municipality, streetAddress }) {
 }
 
 function ResourceMapInfo({ unit, t }) {
+  const serviceMapUrl = getServiceMapUrl(unit);
   return (
     <div className="app-ResourceMapInfo">
       <Grid>
@@ -25,9 +26,13 @@ function ResourceMapInfo({ unit, t }) {
               src={iconMapMarker}
             />
             <span>{formatAddress(unit)}</span>
-            <Button bsStyle="link" href={getServiceMapUrl(unit)}>
+
+            {serviceMapUrl && (
+            <Button bsStyle="link" href={serviceMapUrl} rel="noopener noreferrer" target="_blank">
               {t('ResourceInfo.serviceMapLink')}
             </Button>
+            )}
+
           </div>
         )}
       </Grid>

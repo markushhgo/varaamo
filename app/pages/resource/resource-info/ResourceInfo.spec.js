@@ -134,14 +134,15 @@ describe('pages/resource/resource-info/ResourceInfo', () => {
 
   test('renders service map link', () => {
     const unit = Unit.build({
-      id: 'abc:123',
+      id: 'abc',
+      mapServiceId: '123',
       addressZip: '99999',
       municipality: 'helsinki',
       name: 'Unit name',
       streetAddress: 'Test street 12',
       wwwUrl: 'some-url',
     });
-    const expected = 'https://palvelukartta.hel.fi/unit/123#!route-details';
+    const expected = 'https://palvelukartta.turku.fi/unit/123#!route-details';
     const link = getWrapper({ unit })
       .find('.app-ResourceInfo__servicemap')
       .find('a');
@@ -149,10 +150,11 @@ describe('pages/resource/resource-info/ResourceInfo', () => {
     expect(link).toHaveLength(1);
     expect(link.prop('href')).toBe(expected);
     expect(link.prop('target')).toBe('_blank');
+    expect(link.prop('rel')).toBe('noopener noreferrer');
     expect(link.text()).toBe('ResourceInfo.serviceMapLink');
   });
 
-  test('does not render service map link if unit empty', () => {
+  test('does not render service map link if unit or unit.mapServiceId empty', () => {
     const link = getWrapper({ unit: {} })
       .find('.app-ResourceInfo__servicemap')
       .find('a');

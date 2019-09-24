@@ -13,7 +13,8 @@ describe('pages/resource/resource-map-info/ResourceMapInfo', () => {
     unit: Immutable(
       Unit.build({
         addressZip: '12345',
-        id: 'aaa:123',
+        id: 'aaa',
+        mapServiceId: '123',
         municipality: 'some city',
         streetAddress: 'Street address 123',
       })
@@ -26,10 +27,17 @@ describe('pages/resource/resource-map-info/ResourceMapInfo', () => {
 
   test('renders Service map link as a Button with correct url', () => {
     const button = getWrapper().find(Button);
-    const expected = 'https://palvelukartta.hel.fi/unit/123#!route-details';
+    const expected = 'https://palvelukartta.turku.fi/unit/123#!route-details';
 
     expect(button).toHaveLength(1);
     expect(button.prop('href')).toBe(expected);
+    expect(button.prop('target')).toBe('_blank');
+    expect(button.prop('rel')).toBe('noopener noreferrer');
+  });
+
+  test('doesnt render service map link if unit or unit.mapServiceId is missing', () => {
+    const button = getWrapper({ unit: {} }).find(Button);
+    expect(button).toHaveLength(0);
   });
 
   test('renders address text', () => {

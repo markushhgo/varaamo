@@ -17,6 +17,9 @@ const defaultPosition = {
 };
 const defaultZoom = 12;
 
+const defaultTilesUrl = 'https://maptiles.turku.fi/styles/hel-osm-bright/{z}/{x}/{y}.png';
+const highContrastTilesUrl = 'https://maptiles.turku.fi/styles/hel-osm-high-contrast/{z}/{x}/{y}.png';
+
 export class UnconnectedResourceMapContainer extends React.Component {
   static propTypes = {
     boundaries: PropTypes.shape({
@@ -26,6 +29,7 @@ export class UnconnectedResourceMapContainer extends React.Component {
       minLongitude: PropTypes.number,
     }),
     markers: PropTypes.array,
+    useHighContrast: PropTypes.bool.isRequired,
     position: PropTypes.object,
     searchMapClick: PropTypes.func.isRequired,
     selectedUnitId: PropTypes.string,
@@ -84,6 +88,8 @@ export class UnconnectedResourceMapContainer extends React.Component {
   }
 
   render() {
+    const { useHighContrast } = this.props;
+
     return (
       <div className={classNames('app-ResourceMap', { 'app-ResourceMap__showMap': this.props.showMap })}>
         <Map
@@ -96,7 +102,7 @@ export class UnconnectedResourceMapContainer extends React.Component {
         >
           <TileLayer
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-            url="https://api.mapbox.com/styles/v1/mapbox/light-v9/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoidmFyYWFtbyIsImEiOiJjamU2cWhmdTUwM2ZmMzFud2dvZzFqb2dnIn0.Mj6YrtV9RbJXiU82dqqwhw"
+            url={useHighContrast ? highContrastTilesUrl : defaultTilesUrl}
           />
           <ZoomControl position="bottomright" />
           {this.props.markers && this.props.markers.map(

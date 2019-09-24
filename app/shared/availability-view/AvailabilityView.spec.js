@@ -345,7 +345,7 @@ describe('shared/availability-view/AvailabilityView', () => {
         });
       });
 
-      describe('end slot is invalid', () => {
+      describe('end slot is', () => {
         function checkInvalid(begin, end) {
           const onSelect = simple.mock();
           const wrapper = doSelect({ onSelect }, begin, end);
@@ -353,25 +353,30 @@ describe('shared/availability-view/AvailabilityView', () => {
           expect(onSelect.called).toBe(false);
         }
 
-        test('same as start time', () => {
+        test('invalid same start time', () => {
           const wrapper = doSelect(
             {},
             {
-              resourceId: 'r1', begin: '2016-01-01T10:00:00Z'
+              resourceId: 'r1',
+              begin: '2016-01-01T10:00:00Z',
+              end: '2016-01-01T10:30:00Z'
             },
             {
-              resourceId: 'r1', begin: '2016-01-01T10:00:00Z'
+              resourceId: 'r1',
+              begin: '2016-01-01T10:00:00Z',
+              end: '2016-01-01T10:30:00Z'
             }
           );
           expect(wrapper.state()).toEqual({ hoverSelection: null, selection: null });
         });
 
-        test('if after start time', () => {
+        test('valid if after start time', () => {
           const resourceId = 'resource';
-          checkInvalid(
-            { resourceId, begin: '2016-01-01T10:00:00Z' },
-            { resourceId, begin: '2016-01-01T09:30:00Z', end: '2016-01-01T10:00:00Z' }
-          );
+          const start = { resourceId, begin: '2016-01-01T10:00:00Z', end: '2016-01-01T10:30:00Z' };
+          const end = { resourceId, begin: '2016-01-01T10:30:00Z', end: '2016-01-01T11:00:00Z' };
+          const onSelect = simple.mock();
+          const wrapper = doSelect({ onSelect }, start, end);
+          expect(wrapper.state()).toEqual({ hoverSelection: null, selection: null });
         });
 
         test('if different resource', () => {
