@@ -15,6 +15,7 @@ import ReduxFormField from 'shared/form-fields/ReduxFormField';
 import TermsField from 'shared/form-fields/TermsField';
 import { injectT } from 'i18n';
 import ReservationTermsModal from 'shared/modals/reservation-terms';
+import WrappedText from 'shared/wrapped-text/WrappedText';
 
 const validators = {
   reserverEmailAddress: (t, { reserverEmailAddress }) => {
@@ -254,7 +255,7 @@ class UnconnectedReservationInformationForm extends Component {
             && <h3 id="additional-info-heading">{t('common.additionalInfo.heading')}</h3>
           }
           {includes(this.props.fields, 'reservationExtraQuestions')
-            && <p id="additional-info-paragraph">{resource.reservationAdditionalInformation}</p>
+            && <WrappedText id="additional-info-paragraph" openLinksInNewTab text={resource.reservationAdditionalInformation} />
           }
           {this.renderField(
             'reservationExtraQuestions',
