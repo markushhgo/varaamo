@@ -13,4 +13,14 @@
     background-color: $yellow;
     color: $black;
   }
+  // High-contrast
+  &__content{
+    @include high-contrast{
+
+     .well{
+       background-color: white;
+       border: 1px solid $black;
+     }
+   }
+ }
 }
