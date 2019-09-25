@@ -152,8 +152,7 @@
       font-size: 1.6rem;
 
       @media (max-width: $screen-xs-max) {
-        padding-left: 0px;
-        padding-right: 0px;
+       padding: 19.2px 0px;
       }
 
       &:focus {
