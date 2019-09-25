@@ -210,10 +210,11 @@ describe('shared/reservation-confirmation/ReservationForm', () => {
           expect(heading.text()).toBe('common.additionalInfo.heading');
         });
 
-        test('renders additional info paragraph', () => {
-          const paragraph = wrapper.find('#additional-info-paragraph');
-          expect(paragraph.length).toBe(1);
-          expect(paragraph.text()).toBe(resource.reservationAdditionalInformation);
+        test('renders additional info WrappedText with correct props', () => {
+          const wrappedText = wrapper.find('#additional-info-paragraph');
+          expect(wrappedText.length).toBe(1);
+          expect(wrappedText.prop('text')).toBe(resource.reservationAdditionalInformation);
+          expect(wrappedText.prop('openLinksInNewTab')).toBeDefined();
         });
       });
 
@@ -222,9 +223,9 @@ describe('shared/reservation-confirmation/ReservationForm', () => {
           const heading = getWrapper().find('#additional-info-heading');
           expect(heading.length).toBe(0);
         });
-        test('does not render additional info paragraph', () => {
-          const paragraph = getWrapper().find('#additional-info-paragraph');
-          expect(paragraph.length).toBe(0);
+        test('does not render additional info WrappedText', () => {
+          const wrappedText = getWrapper().find('#additional-info-paragraph');
+          expect(wrappedText.length).toBe(0);
         });
       });
     });

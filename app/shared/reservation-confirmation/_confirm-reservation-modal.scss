@@ -37,6 +37,10 @@
       }
     }
 
+    .wrapped-text a {
+      color: $blue;
+    }
+
     .terms-and-conditions {
       .wrapped-text {
         max-height: 300px;
