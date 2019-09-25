@@ -54,6 +54,7 @@ describe('shared/reservation-confirmation/ConfirmReservationModal', () => {
 
       test('contains a close button', () => {
         expect(getModalHeaderWrapper().props().closeButton).toBe(true);
+        expect(getModalHeaderWrapper().props().closeLabel).toBe('ConfirmReservationModal.closeLabel');
       });
 
       describe('title', () => {

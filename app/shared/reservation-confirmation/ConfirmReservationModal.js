@@ -202,7 +202,7 @@ class ConfirmReservationModal extends Component {
         onHide={onClose}
         show={show}
       >
-        <Modal.Header closeButton>
+        <Modal.Header closeButton closeLabel={t('ConfirmReservationModal.closeLabel')}>
           <Modal.Title>
             {this.getModalTitle(isEditing, isPreliminaryReservation, t)}
           </Modal.Title>

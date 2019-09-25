@@ -76,6 +76,7 @@
   "common.yes": "Kyllä",
   "SelectControl.noOptions": "Ei valintoja",
   "ConfirmReservationModal.beforeText": "Alkuperäinen varausaika:",
+  "ConfirmReservationModal.closeLabel": "Sulje",
   "ConfirmReservationModal.editTitle": "Varauksen muuttaminen",
   "ConfirmReservationModal.formInfo": "Täytä vielä seuraavat tiedot alustavaa varausta varten. Tähdellä (*) merkityt tiedot ovat pakollisia.",
   "ConfirmReservationModal.preliminaryReservationText": "Olet tekemässä alustavaa varausta {reservationsCount, plural, one {ajalle} other {ajoille}}:",
