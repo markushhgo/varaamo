@@ -38,13 +38,13 @@ class ReservationPopover extends PureComponent {
         {minPeriod && (
           <span>
               {t('ReservationPopover.minPeriod')}
-            {moment(minPeriod, 'hh:mm:ss').format('HH:mm')}
+            {` ${moment(minPeriod, 'hh:mm:ss').format('H')}h`}
           </span>
         )}
         {maxPeriod && (
           <span>
               {t('ReservationPopover.maxPeriod')}
-            {moment(maxPeriod, 'hh:mm:ss').format('HH:mm')}
+            {` ${moment(maxPeriod, 'hh:mm:ss').format('H')}h`}
           </span>
         )}
 
