@@ -109,6 +109,12 @@ class UnconnectedReservationPage extends Component {
     window.scrollTo(0, 0);
   };
 
+  /**
+   * Calls redux post reservation action if making a new reservation or
+   * put reservation action if editing a previously made reservation.
+   *
+   * @param {Object} values each form field's values
+   */
   handleReservation = (values = {}) => {
     const {
       actions, currentLanguage, reservationToEdit, resource, selected
@@ -119,10 +125,22 @@ class UnconnectedReservationPage extends Component {
       const preferredLanguage = currentLanguage;
 
       if (!isEmpty(reservationToEdit)) {
-        const reservation = Object.assign({}, reservationToEdit);
+        // old reservation values before editing
+        const oldValues = Object.assign({}, reservationToEdit);
+        // new reservation values from each field
+        const newValues = Object.assign({}, values);
+        // if value (string) was not previously empty and now is empty -> insert "-"
+        for (let i = 0; i < Object.keys(newValues).length; i += 1) {
+          const key = Object.keys(newValues)[i];
+          if (typeof (oldValues[key]) === 'string' && oldValues[key].length > 0
+          && typeof (values[key]) === 'string' && values[key].trim().length === 0) {
+            newValues[key] = '-';
+          }
+        }
+
         actions.putReservation({
-          ...reservation,
-          ...values,
+          ...oldValues,
+          ...newValues,
           preferredLanguage,
           begin,
           end,

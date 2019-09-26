@@ -63,7 +63,8 @@ export function validate(values, { fields, requiredFields, t }) {
       }
     }
     if (includes(currentRequiredFields, field)) {
-      if (!values[field]) {
+      // required fields cant be empty or have only white space in them
+      if (!values[field] || (typeof (values[field]) === 'string' && values[field].trim().length === 0)) {
         errors[field] = (
           field === 'termsAndConditions'
             ? t('ReservationForm.termsAndConditionsError')

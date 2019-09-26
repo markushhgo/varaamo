@@ -1,6 +1,7 @@
 import types from 'constants/ActionTypes';
 
 import pickBy from 'lodash/pickBy';
+import mapValues from 'lodash/mapValues';
 import { decamelizeKeys } from 'humps';
 import { RSAA } from 'redux-api-middleware';
 
@@ -84,8 +85,20 @@ function fetchReservations(params = {}) {
   };
 }
 
+/**
+ * Trims, parses and returns given reservation values in JSON form.
+ * @param {Object} reservation reservation values
+ * @returns reservation values in JSON form
+ */
 function parseReservationData(reservation) {
-  const parsed = pickBy(reservation, value => value || value === 0 || typeof (value) === 'boolean');
+  const trimmedValues = mapValues(reservation, (value) => {
+    if (typeof (value) === 'string') {
+      return value.trim();
+    }
+    return value;
+  });
+
+  const parsed = pickBy(trimmedValues, value => value || value === 0 || typeof (value) === 'boolean');
   return JSON.stringify(decamelizeKeys(parsed));
 }
 

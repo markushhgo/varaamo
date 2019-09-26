@@ -367,22 +367,24 @@ describe('shared/modals/reservation-info/ReservationInfoModal', () => {
 
   describe('handleSaveCommentsClick', () => {
     const onSaveCommentsClick = simple.mock();
-    const comments = 'Updated comments';
+    const instance = getWrapper({ onSaveCommentsClick }).instance();
 
-    beforeAll(() => {
-      const instance = getWrapper({ onSaveCommentsClick }).instance();
-      // override ref value to mock
-      instance.commentsInput = { value: comments };
-      instance.handleSaveCommentsClick();
-    });
+    describe('calls onSaveCommentsClick with correct comments', () => {
+      test('when comments is not an empty string', () => {
+        const comments = 'Updated comments';
+        instance.commentsInput = { value: comments };
+        instance.handleSaveCommentsClick();
+        expect(onSaveCommentsClick.callCount).toBe(1);
+        expect(onSaveCommentsClick.lastCall.args).toEqual([comments]);
+      });
 
-    afterAll(() => {
-      simple.restore();
-    });
-
-    test('calls onSaveCommentsClick with correct comments', () => {
-      expect(onSaveCommentsClick.callCount).toBe(1);
-      expect(onSaveCommentsClick.lastCall.args).toEqual([comments]);
+      test('when comments is an empty string', () => {
+        const comments = ' ';
+        instance.commentsInput = { value: comments };
+        instance.handleSaveCommentsClick();
+        expect(onSaveCommentsClick.callCount).toBe(2);
+        expect(onSaveCommentsClick.lastCall.args).toEqual(['-']);
+      });
     });
   });
 });
