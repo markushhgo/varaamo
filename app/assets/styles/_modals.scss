@@ -23,8 +23,10 @@
         position: absolute;
         background-repeat: no-repeat;
         background-size: contain;
-        left: 0;
-        right: 0;
+        right: 43%;
+        @media (max-width: $screen-xs-max){
+          right: 35%;
+        }
         margin: 0 auto;
         height: 50px;
         width: 108px;
