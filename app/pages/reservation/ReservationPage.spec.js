@@ -500,10 +500,11 @@ describe('pages/reservation/ReservationPage', () => {
     const putReservation = simple.mock();
     const values = {
       someField: 'some value',
+      comments: '',
     };
 
     test('calls putReservation action when reservationToEdit not empty', () => {
-      const reservationToEdit = Reservation.build();
+      const reservationToEdit = Reservation.build({ comments: 'some comment' });
       const instance = getWrapper({
         actions: {
           postReservation,
@@ -515,6 +516,8 @@ describe('pages/reservation/ReservationPage', () => {
       expect(postReservation.callCount).toBe(0);
       expect(putReservation.callCount).toBe(1);
       expect(putReservation.lastCall.args[0].preferredLanguage).toEqual('fi');
+      expect(putReservation.lastCall.args[0].comments).toEqual('-');
+      expect(putReservation.lastCall.args[0].someField).toEqual(values.someField);
     });
 
     test('calls postReservation action when reservationToEdit empty', () => {

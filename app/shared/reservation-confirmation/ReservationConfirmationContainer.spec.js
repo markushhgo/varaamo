@@ -73,11 +73,11 @@ describe('pages/resource/reservation-calendar/ReservationConfirmationContainer',
 
   describe('handleEdit', () => {
     test('edits the selected reservation', () => {
-      const reservationsToEdit = [Reservation.build()];
+      const reservationsToEdit = [Reservation.build({ comments: 'some comment' })];
       const instance = getWrapper({ reservationsToEdit }).instance();
-      const newValues = { begin: 'foo', end: 'bar' };
+      const newValues = { begin: 'foo', end: 'bar', comments: '' };
       instance.handleEdit(newValues);
-      const expectedArgs = [{ ...reservationsToEdit[0], ...newValues }];
+      const expectedArgs = [{ ...reservationsToEdit[0], ...newValues, comments: '-' }];
       expect(defaultProps.actions.putReservation.callCount).toBe(1);
       expect(defaultProps.actions.putReservation.lastCall.args).toEqual(expectedArgs);
     });
