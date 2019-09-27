@@ -10,6 +10,7 @@ import { UnconnectedAdminResourcesPage as AdminResourcesPage } from './AdminReso
 
 describe('pages/admin-resources/AdminResourcesPage', () => {
   const changeAdminResourcesPageDate = simple.stub();
+  const clearReservations = simple.stub();
   const fetchFavoritedResources = simple.stub();
   const selectAdminResourceType = simple.stub();
   const openConfirmReservationModal = simple.stub();
@@ -19,6 +20,7 @@ describe('pages/admin-resources/AdminResourcesPage', () => {
     actions: {
       changeAdminResourcesPageDate,
       changeRecurringBaseTime: () => null,
+      clearReservations,
       fetchFavoritedResources,
       selectAdminResourceType,
       openConfirmReservationModal,
@@ -134,6 +136,7 @@ describe('pages/admin-resources/AdminResourcesPage', () => {
       let instance;
 
       beforeAll(() => {
+        clearReservations.reset();
         fetchFavoritedResources.reset();
         simple.mock(window, 'setInterval').returnWith(timer);
         instance = getWrapper({ isAdmin }).instance();
@@ -166,6 +169,10 @@ describe('pages/admin-resources/AdminResourcesPage', () => {
 
       test('saves interval to this.updateResourcesTimer', () => {
         expect(instance.updateResourcesTimer).toBe(timer);
+      });
+
+      test('clears redux state.ui.reservations', () => {
+        expect(clearReservations.callCount).toBe(1);
       });
     });
   });
