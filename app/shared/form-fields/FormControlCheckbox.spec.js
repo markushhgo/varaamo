@@ -47,7 +47,8 @@ describe('shared/form-fields/FormControlCheckbox', () => {
 
       test('gets correct props', () => {
         expect(getColWrapper().props().componentClass).toBe(ControlLabel);
-        expect(getColWrapper().props().xs).toBe(3);
+        expect(getColWrapper().props().xs).toBe(8);
+        expect(getColWrapper().props().sm).toBe(3);
       });
 
       test('contains the label text given in props', () => {
@@ -77,7 +78,8 @@ describe('shared/form-fields/FormControlCheckbox', () => {
       });
 
       test('gets correct props', () => {
-        expect(col.props().xs).toBe(9);
+        expect(col.props().xs).toBe(4);
+        expect(col.props().sm).toBe(9);
       });
 
       test('contains input', () => {

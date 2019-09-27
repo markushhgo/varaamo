@@ -30,7 +30,11 @@ class ReservationInfoModal extends Component {
 
   handleSaveCommentsClick() {
     const comments = this.commentsInput.value;
-    this.props.onSaveCommentsClick(comments);
+    if (typeof (comments) === 'string' && comments.trim().length === 0) {
+      this.props.onSaveCommentsClick('-');
+    } else {
+      this.props.onSaveCommentsClick(comments);
+    }
   }
 
   render() {

@@ -86,6 +86,17 @@ describe('shared/reservation-confirmation/ReservationForm', () => {
         const errors = validate(values, props);
         expect(errors.name).toBeFalsy();
       });
+
+      test('returns an error if value is string and contains only white space', () => {
+        const props = {
+          fields: ['name'],
+          requiredFields: ['name'],
+          t,
+        };
+        const values = { name: '' };
+        const errors = validate(values, props);
+        expect(errors.name).toBeDefined();
+      });
     });
 
     describe('reserverEmailAddress', () => {

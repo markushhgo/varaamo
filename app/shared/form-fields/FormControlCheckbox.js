@@ -12,12 +12,12 @@ function FormControlCheckbox({
 }) {
   return (
     <FormGroup controlId={id} validationState={validationState}>
-      <Col componentClass={ControlLabel} xs={3}>
+      <Col componentClass={ControlLabel} sm={3} xs={8}>
         {label}
         {' '}
         {info && <InfoPopover id={`${id}-info`} placement="right" text={info} />}
       </Col>
-      <Col xs={9}>
+      <Col sm={9} xs={4}>
         <input type="checkbox" {...controlProps} id={id} />
         {help && <HelpBlock>{help}</HelpBlock>}
       </Col>
