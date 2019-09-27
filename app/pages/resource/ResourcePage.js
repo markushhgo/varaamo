@@ -212,21 +212,18 @@ class UnconnectedResourcePage extends Component {
                         )}
                         {!resource.externalReservationUrl && (
                         <div>
+                          {/* Show reservation min period text */}
+                          {resource.minPeriod && (
+                          <div className="app-ResourcePage__content-min-period">
+                            <p>{`${t('ReservationInfo.reservationMinLength')} ${minPeriodText}`}</p>
+                          </div>
+                          )}
                           {/* Show reservation max period text */}
                           {resource.maxPeriod && (
                           <div className="app-ResourcePage__content-max-period">
                             <p>{`${t('ReservationInfo.reservationMaxLength')} ${maxPeriodText}`}</p>
                           </div>
                           )}
-
-                          {/* Show reservation max period text */}
-                          {resource.minPeriod
-                        && (
-                          <div className="app-ResourcePage__content-min-period">
-                            <p>{`${t('ReservationInfo.reservationMinLength')} ${minPeriodText}`}</p>
-                          </div>
-                        )
-                        }
 
                           <ResourceCalendar
                             disableDays={this.disableDays}
