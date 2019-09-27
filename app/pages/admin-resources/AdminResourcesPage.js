@@ -11,6 +11,7 @@ import {
   selectAdminResourceType,
   openConfirmReservationModal,
   unselectAdminResourceType,
+  clearReservations,
 } from 'actions/uiActions';
 import { injectT } from 'i18n';
 import PageWrapper from 'pages/PageWrapper';
@@ -30,6 +31,8 @@ class UnconnectedAdminResourcesPage extends Component {
   }
 
   componentDidMount() {
+    // clearReservations called to make sure that redux ui.reservations is empty
+    this.props.actions.clearReservations();
     const interval = 10 * 60 * 1000;
     this.fetchResources();
     this.updateResourcesTimer = window.setInterval(this.fetchResources, interval);
@@ -134,6 +137,7 @@ function mapDispatchToProps(dispatch) {
   const actionCreators = {
     changeAdminResourcesPageDate,
     changeRecurringBaseTime: recurringReservations.changeBaseTime,
+    clearReservations,
     fetchFavoritedResources,
     selectAdminResourceType,
     openConfirmReservationModal,
