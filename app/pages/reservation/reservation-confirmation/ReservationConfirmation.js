@@ -68,7 +68,7 @@ class ReservationConfirmation extends Component {
             <ReservationDate beginDate={reservation.begin} endDate={reservation.end} />
             <p className="app-ReservationConfirmation__resource-name">
               <img
-                alt={resource.name}
+                alt=""
                 className="app-ReservationConfirmation__icon"
                 src={iconHome}
               />
