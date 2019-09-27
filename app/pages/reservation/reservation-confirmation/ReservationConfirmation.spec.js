@@ -89,6 +89,13 @@ describe('pages/reservation/reservation-confirmation/ReservationConfirmation', (
     expect(name.text()).toBe(defaultProps.resource.name);
   });
 
+  test('renders resource icon with correct props', () => {
+    const resource = getWrapper().find('.app-ReservationConfirmation__resource-name');
+    const icon = resource.find('img');
+    expect(icon).toHaveLength(1);
+    expect(icon.prop('alt')).toBe('');
+  });
+
   test('renders reserverEmailAddress', () => {
     const reserverEmailAddress = 'reserver email address';
     const wrapper = getWrapper({

@@ -55,7 +55,7 @@ class UnconnectedHomePage extends Component {
       <Col className="app-HomePageContent__banner" key={purpose.value} md={3} sm={6} xs={12}>
         <Link className={`app-HomePageContent__banner__linkWrapper ${contrast}`} to={`/search?purpose=${purpose.value}`}>
           <div className="app-HomePageContent__banner-icon">
-            {typeof image === 'string' ? <img alt={purpose.label} src={image} />
+            {typeof image === 'string' ? <img alt="" src={image} />
             // TODO: VAR-80 | VAR-81 Replace those icon with designed icon.
 
               : <FAIcon icon={image} />}
