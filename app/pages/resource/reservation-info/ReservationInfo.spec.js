@@ -15,6 +15,7 @@ describe('pages/resource/reservation-info/ReservationInfo', () => {
         maxReservationsPerUser: 2,
         reservable: true,
         reservableAfter: '2019-03-06T00:00:00Z',
+        reservableMinDaysInAdvance: 2,
         reservationInfo: 'Some information',
       })
     ),
@@ -40,6 +41,8 @@ describe('pages/resource/reservation-info/ReservationInfo', () => {
     test('is rendered correctly when resource.reservableAfter is defined', () => {
       const resAfterText = getWrapper().find('.reservable-after-text');
       expect(resAfterText).toHaveLength(1);
+      const daysInAdvanceText = resAfterText.find('strong');
+      expect(daysInAdvanceText.text()).toEqual('ReservationInfo.reservationEarliestDays');
     });
 
     test('is not rendered if resource.reservableAfter is not defined', () => {

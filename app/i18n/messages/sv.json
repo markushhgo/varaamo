@@ -211,7 +211,7 @@
   "ReservationInfo.maxNumberOfReservations": "Maximalt antal bokningar per användare:",
   "ReservationInfo.reservationMaxLength": "Bokningens maximala längd:",
   "ReservationInfo.reservationMinLength": "Bokningens minimitid:",
-  "ReservationInfo.reservationEarliestDays": "Bokning tidigast inom {time}",
+  "ReservationInfo.reservationEarliestDays": "Boka senast {time} i förväg",
   "ReservationInfoModal.cancelButton": "Annulera evenmanget",
   "ReservationInfoModal.confirmButton": "Bekräfta reserveringen",
   "ReservationInfoModal.denyButton": "Förneka reserveringen",

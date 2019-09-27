@@ -22,10 +22,19 @@ function renderLoginText(isLoggedIn, resource) {
   );
 }
 
-function renderEarliestResDay(date, t) {
-  if (!date) {
+/**
+ * Converts given daysInAdvance number into a text element with an icon.
+ * @param {number} daysInAdvance
+ * @param {function} t
+ */
+function renderEarliestResDay(daysInAdvance, t) {
+  if (!daysInAdvance) {
     return null;
   }
+
+  // create a date (today + daysInAdvace) and use it to create written "days in advance" text.
+  const date = moment().add(daysInAdvance, 'days');
+
   return (
     <p className="reservable-after-text">
       <img alt="" className="app-ResourceHeader__info-icon" src={iconCalendar} />
@@ -65,7 +74,7 @@ function ReservationInfo({ isLoggedIn, resource, t }) {
   return (
     <div className="app-ReservationInfo">
       <WrappedText openLinksInNewTab text={resource.reservationInfo} />
-      {renderEarliestResDay(resource.reservableAfter, t)}
+      {renderEarliestResDay(resource.reservableMinDaysInAdvance, t)}
       {renderMaxPeriodText(resource, t)}
       {renderMaxReservationsPerUserText(resource.maxReservationsPerUser, t)}
       {renderLoginText(isLoggedIn, resource)}
