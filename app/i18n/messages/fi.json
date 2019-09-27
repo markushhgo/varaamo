@@ -209,7 +209,7 @@
   "ReservationInfo.maxNumberOfReservations": "Maksimimäärä varauksia per käyttäjä:",
   "ReservationInfo.reservationMaxLength": "Varauksen maksimipituus:",
   "ReservationInfo.reservationMinLength": "Varauksen vähimmäispituus:",
-  "ReservationInfo.reservationEarliestDays": "Varattavissa vähintään {time} etukäteen",
+  "ReservationInfo.reservationEarliestDays": "Varattava viimeistään {time} ennen",
   "ReservationInfoModal.cancelButton": "Peru tapahtuma",
   "ReservationInfoModal.confirmButton": "Hyväksy tapahtuma",
   "ReservationInfoModal.denyButton": "Hylkää tapahtuma",
