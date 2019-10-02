@@ -12,6 +12,21 @@
    }
   }
 
+
+  .has-error{
+    .control-label,
+    .help-block,
+    label{
+      color: $turku-high-contrast-red;
+    }
+    .form-control{
+      border-color: $turku-high-contrast-red;
+    }
+    .terms-checkbox-field-link{
+      color: $blue;
+    }
+  }
+
   .wrapped-text a {
     color: $blue;
   }

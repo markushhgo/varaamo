@@ -12,6 +12,21 @@
   }
 
   .reservation-form {
+
+    .has-error{
+      .control-label,
+      .help-block,
+      label{
+        color: $turku-high-contrast-red;
+      }
+      .form-control{
+        border-color: $turku-high-contrast-red;
+      }
+      .terms-checkbox-field-link{
+        color: $blue;
+      }
+    }
+
     .well {
       margin-left: -15px;
       margin-right: -15px;
