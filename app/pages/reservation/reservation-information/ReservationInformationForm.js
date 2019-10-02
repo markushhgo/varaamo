@@ -256,7 +256,14 @@ class UnconnectedReservationInformationForm extends Component {
             && <h3 id="additional-info-heading">{t('common.additionalInfo.heading')}</h3>
           }
           {includes(this.props.fields, 'reservationExtraQuestions')
-            && <WrappedText id="additional-info-paragraph" openLinksInNewTab text={resource.reservationAdditionalInformation} />
+            && (
+            <WrappedText
+              allowNamedLinks
+              id="additional-info-paragraph"
+              openLinksInNewTab
+              text={resource.reservationAdditionalInformation}
+            />
+            )
           }
           {this.renderField(
             'reservationExtraQuestions',

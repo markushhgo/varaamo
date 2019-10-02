@@ -209,7 +209,12 @@ class UnconnectedReservationForm extends Component {
           {includes(this.props.fields, 'reservationExtraQuestions') && (
             <Well>
               <p id="additional-info-heading">{t('common.additionalInfo.heading')}</p>
-              <WrappedText id="additional-info-paragraph" openLinksInNewTab text={resource.reservationAdditionalInformation} />
+              <WrappedText
+                allowNamedLinks
+                id="additional-info-paragraph"
+                openLinksInNewTab
+                text={resource.reservationAdditionalInformation}
+              />
               {this.renderField(
                 'reservationExtraQuestions',
                 'textarea',
@@ -270,7 +275,7 @@ class UnconnectedReservationForm extends Component {
           {termsAndConditions && (
             <div className="terms-and-conditions">
               <h5>{t('ReservationForm.termsAndConditionsHeader')}</h5>
-              <WrappedText text={termsAndConditions} />
+              <WrappedText allowNamedLinks openLinksInNewTab text={termsAndConditions} />
             </div>
           )}
           {termsAndConditions && (

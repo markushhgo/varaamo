@@ -73,7 +73,7 @@ function renderMaxReservationsPerUserText(maxReservationsPerUser, t) {
 function ReservationInfo({ isLoggedIn, resource, t }) {
   return (
     <div className="app-ReservationInfo">
-      <WrappedText openLinksInNewTab text={resource.reservationInfo} />
+      <WrappedText allowNamedLinks openLinksInNewTab text={resource.reservationInfo} />
       {renderEarliestResDay(resource.reservableMinDaysInAdvance, t)}
       {renderMaxPeriodText(resource, t)}
       {renderMaxReservationsPerUserText(resource.maxReservationsPerUser, t)}
