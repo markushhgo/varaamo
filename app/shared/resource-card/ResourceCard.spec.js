@@ -414,6 +414,12 @@ describe('shared/resource-card/ResourceCard', () => {
       const testString = 'this is a test string';
       expect(instance.createTextSnippet(testString, 4)).toEqual('this...');
     });
+    test('if given string contains a named link, it is cleansed correctly', () => {
+      const instance = getWrapper().instance();
+      const testString = 'this is a test string with [named link](https://www.google.com)';
+      const expectedResult = 'this is a test string with named link';
+      expect(instance.createTextSnippet(testString, 100)).toEqual(expectedResult);
+    });
   });
 
   describe('handleSearchByType', () => {
