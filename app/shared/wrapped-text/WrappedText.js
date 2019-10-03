@@ -1,9 +1,11 @@
+import constants from 'constants/AppConstants';
+
 import PropTypes from 'prop-types';
 import React from 'react';
 import Linkify from 'react-linkify';
 
 // matches content: "[text](url)"
-const linkRegex = /(\[[^[\]()]*?\]\(.*?(?!\[\]\(\))*?\))/gm;
+const linkRegex = constants.REGEX.namedLink;
 
 /**
  * If text contains [text](url), replaces those parts with:

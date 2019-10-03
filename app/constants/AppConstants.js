@@ -23,6 +23,9 @@ export default {
     timeOut: 5000,
     hidden: false,
   },
+  REGEX: {
+    namedLink: /(\[.*?\]\(.*?(?!\[\]\(\))*?\))/gm
+  },
   REQUIRED_API_HEADERS: {
     Accept: 'application/json',
     'Accept-Language': 'fi',
