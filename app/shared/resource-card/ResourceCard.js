@@ -20,6 +20,7 @@ import iconMap from 'assets/icons/map.svg';
 import BackgroundImage from 'shared/background-image';
 import { getMainImage } from 'utils/imageUtils';
 import { getHourlyPrice, getResourcePageUrlComponents } from 'utils/resourceUtils';
+import { cleanseNamedLinks } from 'utils/textUtils';
 import ResourceAvailability from './label';
 import ResourceCardInfoCell from './info';
 import resourceCardSelector from './resourceCardSelector';
@@ -62,11 +63,14 @@ class ResourceCard extends Component {
     if (text === null) {
       return '';
     }
-    if (text.length <= maxCharacters) {
-      return text;
+
+    const cleansedText = cleanseNamedLinks(text);
+
+    if (cleansedText.length <= maxCharacters) {
+      return cleansedText;
     }
 
-    return `${text.substring(0, maxCharacters)}...`;
+    return `${cleansedText.substring(0, maxCharacters)}...`;
   }
 
   renderDistance(distance) {
