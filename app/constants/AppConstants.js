@@ -24,7 +24,7 @@ export default {
     hidden: false,
   },
   REGEX: {
-    namedLink: /(\[.*?\]\(.*?(?!\[\]\(\))*?\))/gm
+    namedLink: /(\[[^[\]]*?\]\(.*?(?!\[\]\(\))*?\))/gm
   },
   REQUIRED_API_HEADERS: {
     Accept: 'application/json',

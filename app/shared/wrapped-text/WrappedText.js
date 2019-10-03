@@ -24,7 +24,7 @@ function parseNamedLinks(text, linkAttributes) {
 
     if (textSplit.match(linkRegex)) {
       // find link name text between []
-      let linkText = textSplit.match(/(\[[^[\]()]*?\])/gm)[0];
+      let linkText = textSplit.match(/(\[[^[\]]*?\])/gm)[0];
       // remove []
       linkText = linkText.substring(1, linkText.length - 1);
 
