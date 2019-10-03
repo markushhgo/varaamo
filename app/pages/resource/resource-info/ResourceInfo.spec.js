@@ -56,6 +56,7 @@ describe('pages/resource/resource-info/ResourceInfo', () => {
 
     expect(wrappedText).toHaveLength(1);
     expect(wrappedText.prop('text')).toBe(expectedText);
+    expect(wrappedText.prop('allowNamedLinks')).toBe(true);
     expect(wrappedText.prop('openLinksInNewTab')).toBe(true);
   });
 

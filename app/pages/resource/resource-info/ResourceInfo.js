@@ -21,7 +21,8 @@ function ResourceInfo({
       <section aria-labelledby="ResourcePageInfo" className="app-ResourceInfo">
         <h2 className="visually-hidden" id="ResourcePageInfo">{t('ResourcePage.info')}</h2>
         <div className="app-ResourceInfo__description">
-          {resource.description && <WrappedText openLinksInNewTab text={resource.description} />}
+          {resource.description
+          && <WrappedText allowNamedLinks openLinksInNewTab text={resource.description} />}
         </div>
         <Panel defaultExpanded header={t('ResourceInfo.reservationTitle')} id="reservation-panel" role="tablist">
           <Panel.Heading>

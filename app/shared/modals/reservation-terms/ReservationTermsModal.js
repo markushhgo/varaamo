@@ -36,7 +36,7 @@ class UnconnectedReservationTermsModal extends Component {
         <Modal.Body>
           <div>
             <span>{t('ReservationTermsModal.resourceTermsSubTitle', { name })}</span>
-            <span><WrappedText text={genericTerms} /></span>
+            <span><WrappedText allowNamedLinks openLinksInNewTab text={genericTerms} /></span>
           </div>
         </Modal.Body>
 

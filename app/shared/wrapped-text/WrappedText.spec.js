@@ -92,4 +92,24 @@ describe('shared/wrapped-text/WrappedText', () => {
       expect(linkify.props().properties.rel).toBe('noopener noreferrer');
     });
   });
+
+  describe('Named links', () => {
+    const text = 'Text and [named link](http://example.com/) and more text';
+    const expectedLink = <a href="http://example.com/" rel="noopener noreferrer" target="_blank">named link</a>;
+    let content;
+
+    test('are not supported by default', () => {
+      content = getWrapper({ text }).children();
+      const linkify = content.find(Linkify);
+      expect(linkify.length).toBe(1);
+      expect(linkify.children().contains(expectedLink)).toEqual(false);
+    });
+
+    test('are converted correctly when allowNamedLinks is true', () => {
+      content = getWrapper({ text, allowNamedLinks: true, openLinksInNewTab: true }).children();
+      const linkify = content.find(Linkify);
+      expect(linkify.length).toBe(1);
+      expect(linkify.children().contains(expectedLink)).toEqual(true);
+    });
+  });
 });

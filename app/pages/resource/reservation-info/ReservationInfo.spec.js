@@ -34,6 +34,7 @@ describe('pages/resource/reservation-info/ReservationInfo', () => {
     const wrappedText = getWrapper().find(WrappedText);
     expect(wrappedText.length).toBe(1);
     expect(wrappedText.props().text).toBe(defaultProps.resource.reservationInfo);
+    expect(wrappedText.props().allowNamedLinks).toBe(true);
     expect(wrappedText.props().openLinksInNewTab).toBe(true);
   });
 

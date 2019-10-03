@@ -237,6 +237,7 @@ describe('pages/reservation/reservation-information/ReservationInformationForm',
           const wrappedText = wrapper.find('#additional-info-paragraph');
           expect(wrappedText.length).toBe(1);
           expect(wrappedText.prop('text')).toBe(resource.reservationAdditionalInformation);
+          expect(wrappedText.prop('allowNamedLinks')).toBeDefined();
           expect(wrappedText.prop('openLinksInNewTab')).toBeDefined();
         });
       });

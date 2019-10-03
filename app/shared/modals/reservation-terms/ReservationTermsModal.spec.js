@@ -72,6 +72,8 @@ describe('shared/modals/reservation-cancel/ReservationTermsModal', () => {
         const wrappedText = getModalBodyWrapper({ resource: resourceWithTerms }).find(WrappedText);
         expect(wrappedText).toHaveLength(1);
         expect(wrappedText.prop('text')).toBe(resourceWithTerms.genericTerms);
+        expect(wrappedText.prop('allowNamedLinks')).toBe(true);
+        expect(wrappedText.prop('openLinksInNewTab')).toBe(true);
       });
     });
 
