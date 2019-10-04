@@ -1,5 +1,3 @@
-import constants from 'constants/AppConstants';
-
 import React from 'react';
 import Alert from 'react-bootstrap/lib/Alert';
 import simple from 'simple-mock';
@@ -12,24 +10,36 @@ describe('shared/test-site-message/TestSiteMessage', () => {
     return shallowWithIntl(<TestSiteMessage />);
   }
 
-  describe('if SETTINGS.SHOW_TEST_SITE_MESSAGE is true', () => {
-    beforeAll(() => {
-      simple.mock(constants, 'SHOW_TEST_SITE_MESSAGE').returnWith(true);
+  describe('TestSiteMessage ', () => {
+    const OLD_ENV = process.env;
+
+    beforeEach(() => {
+      process.env = { ...OLD_ENV };
+      delete process.env.NODE_ENV;
     });
 
     afterAll(() => {
       simple.restore();
     });
 
-    test('renders an Alert', () => {
-      const alert = getWrapper().find(Alert);
-      expect(alert).toHaveLength(1);
+    afterEach(() => {
+      process.env = OLD_ENV;
     });
-  });
 
-  describe('if SETTINGS.SHOW_TEST_SITE_MESSAGE is not true', () => {
-    test('renders an empty span', () => {
-      expect(getWrapper().equals(<span />)).toBe(true);
+    test('renders an Alert when NODE_ENV = development', () => {
+      process.env.NODE_ENV = 'development';
+      const alert = getWrapper().find(Alert);
+      const returnValue = getWrapper();
+      expect(alert).toHaveLength(1);
+      expect(returnValue.type()).toEqual(Alert);
+    });
+
+    test('does not render an Alert, returns null when NODE_ENV is not development', () => {
+      process.env.NODE_ENV = 'production';
+      const alert = getWrapper().find(Alert);
+      const returnValue = getWrapper();
+      expect(alert).toHaveLength(0);
+      expect(returnValue.type()).toEqual(null);
     });
   });
 });
