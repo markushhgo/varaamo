@@ -121,6 +121,40 @@ describe('pages/reservation/reservation-information/ReservationInformationForm',
         expect(errors.reserverEmailAddress).toBeFalsy();
       });
     });
+    describe('numberOfParticipants', () => {
+      const props = {
+        fields: ['numberOfParticipants'],
+        requiredFields: [],
+        t,
+        resource: Resource.build({
+          peopleCapacity: 10,
+        }),
+      };
+
+      test('returns an error if number of participants is too high', () => {
+        const values = { numberOfParticipants: '11' };
+        const errors = validate(values, props);
+        expect(errors.numberOfParticipants).toBeDefined();
+      });
+
+      test('returns an error if number of participants is a negative number', () => {
+        const values = { numberOfParticipants: '-1' };
+        const errors = validate(values, props);
+        expect(errors.numberOfParticipants).toBeDefined();
+      });
+
+      test('returns an error if number of participants is using a decimal', () => {
+        const values = { numberOfParticipants: '1,5' };
+        const errors = validate(values, props);
+        expect(errors.numberOfParticipants).toBeDefined();
+      });
+
+      test('does not return an error if number of participants is valid', () => {
+        const values = { numberOfParticipants: '1' };
+        const errors = validate(values, props);
+        expect(errors.numberOfParticipants).toBeFalsy();
+      });
+    });
   });
 
   describe('rendering', () => {
