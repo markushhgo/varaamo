@@ -41,6 +41,7 @@ describe('shared/modals/reservation-cancel/ReservationTermsModal', () => {
 
       test('contains a close button', () => {
         expect(getModalHeaderWrapper().props().closeButton).toBe(true);
+        expect(getModalHeaderWrapper().props().closeLabel).toBe('ModalHeader.closeButtonText');
       });
 
       test('contains title', () => {

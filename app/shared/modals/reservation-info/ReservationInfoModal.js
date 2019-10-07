@@ -68,7 +68,7 @@ class ReservationInfoModal extends Component {
         onHide={hideReservationInfoModal}
         show={show}
       >
-        <Modal.Header closeButton>
+        <Modal.Header closeButton closeLabel={t('ModalHeader.closeButtonText')}>
           <Modal.Title>{t('ReservationInfoModal.title')}</Modal.Title>
         </Modal.Header>
 
