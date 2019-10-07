@@ -59,6 +59,7 @@ describe('shared/modals/reservation-success/ReservationSuccessModal', () => {
       const modalHeader = wrapper.find(Modal.Header);
       expect(modalHeader.length).toBe(1);
       expect(modalHeader.props().closeButton).toBe(true);
+      expect(modalHeader.props().closeLabel).toBe('ModalHeader.closeButtonText');
     });
 
     test('renders a ModalTitle with correct title', () => {

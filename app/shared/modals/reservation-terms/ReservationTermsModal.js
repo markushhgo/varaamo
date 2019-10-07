@@ -27,7 +27,7 @@ class UnconnectedReservationTermsModal extends Component {
         onHide={actions.closeResourceTermsModal}
         show={show}
       >
-        <Modal.Header closeButton>
+        <Modal.Header closeButton closeLabel={t('ModalHeader.closeButtonText')}>
           <Modal.Title>
             {t('ReservationTermsModal.resourceTermsTitle')}
           </Modal.Title>

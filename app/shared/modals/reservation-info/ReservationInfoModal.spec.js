@@ -69,6 +69,7 @@ describe('shared/modals/reservation-info/ReservationInfoModal', () => {
 
       test('contains a close button', () => {
         expect(modalHeader.props().closeButton).toBe(true);
+        expect(modalHeader.props().closeLabel).toBe('ModalHeader.closeButtonText');
       });
 
       test('renders a ModalTitle with correct title', () => {

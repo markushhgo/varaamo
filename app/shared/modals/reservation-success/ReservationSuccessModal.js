@@ -30,7 +30,7 @@ function ReservationSuccessModal({
       onHide={closeReservationSuccessModal}
       show={show}
     >
-      <Modal.Header closeButton>
+      <Modal.Header closeButton closeLabel={t('ModalHeader.closeButtonText')}>
         <Modal.Title>
           {
             isPreliminaryReservation

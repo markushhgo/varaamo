@@ -40,7 +40,7 @@ class UnconnectedReservationCancelModalContainer extends Component {
         onHide={actions.closeReservationCancelModal}
         show={show}
       >
-        <Modal.Header closeButton>
+        <Modal.Header closeButton closeLabel={t('ModalHeader.closeButtonText')}>
           <Modal.Title>
             {cancelAllowed
               ? t('ReservationCancelModal.cancelAllowedTitle')
