@@ -24,6 +24,24 @@ const validators = {
     }
     return null;
   },
+  numberOfParticipants: (t, { numberOfParticipants }, resource) => {
+    if (numberOfParticipants) {
+      // Give error when numbers are too high //
+      if (numberOfParticipants > resource.peopleCapacity) {
+        return t('ReservationForm.numberOfParticipants.overError', { peopleCapacity: resource.peopleCapacity });
+      }
+      // Give error if negative number is used //
+      if (numberOfParticipants < 1) {
+        return t('ReservationForm.numberOfParticipants.underError');
+      }
+      // Give error if decimal is used //
+      const number = (Number(numberOfParticipants));
+      if (!Number.isInteger(number)) {
+        return t('ReservationForm.numberOfParticipants.decimalError');
+      }
+    }
+    return null;
+  },
 };
 
 const maxLengths = {
@@ -44,7 +62,9 @@ const maxLengths = {
   reserverPhoneNumber: 30,
 };
 
-export function validate(values, { fields, requiredFields, t }) {
+export function validate(values, {
+  fields, requiredFields, t, resource,
+}) {
   const errors = {};
   const currentRequiredFields = values.staffEvent
     ? constants.REQUIRED_STAFF_EVENT_FIELDS
@@ -52,7 +72,7 @@ export function validate(values, { fields, requiredFields, t }) {
   fields.forEach((field) => {
     const validator = validators[field];
     if (validator) {
-      const error = validator(t, values);
+      const error = validator(t, values, resource);
       if (error) {
         errors[field] = error;
       }
@@ -232,7 +252,7 @@ class UnconnectedReservationInformationForm extends Component {
             'numberOfParticipants',
             'number',
             t('common.numberOfParticipantsLabel'),
-            { min: '0' }
+            { min: '1', max: resource.peopleCapacity }
           )}
           {this.renderField(
             'requireAssistance',
