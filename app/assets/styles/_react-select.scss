@@ -22,10 +22,6 @@ $selectDropdownPaddingRight: 4px;
     box-shadow: none;
     flex: 1;
 
-    &:hover, :focus-within {
-      border: 1px  solid $input-border;
-    }
-
     &--is-focused {
       outline: none;
       border-color: $input-border-focus;
