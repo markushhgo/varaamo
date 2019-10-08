@@ -30,7 +30,7 @@ class SelectControl extends React.Component {
       className,
       isLoading = false,
       isClearable = true,
-      isSearchable = true,
+      isSearchable = false,
       isMulti,
       label,
       onChange,
