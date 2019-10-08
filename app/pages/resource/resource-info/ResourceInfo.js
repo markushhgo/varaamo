@@ -11,9 +11,9 @@ import { getServiceMapUrl } from 'utils/unitUtils';
 import ReservationInfo from '../reservation-info';
 
 function ResourceInfo({
-  isLoggedIn, resource, unit, t, equipment
+  currentLanguage, isLoggedIn, resource, unit, t, equipment
 }) {
-  const serviceMapUrl = getServiceMapUrl(unit);
+  const serviceMapUrl = getServiceMapUrl(unit, currentLanguage);
   const equipmentList = equipment.map((thing, index) => <li key={index}>{thing}</li>);
 
   return (
@@ -97,6 +97,7 @@ function ResourceInfo({
 }
 
 ResourceInfo.propTypes = {
+  currentLanguage: PropTypes.string,
   equipment: PropTypes.array,
   isLoggedIn: PropTypes.bool.isRequired,
   resource: PropTypes.object.isRequired,

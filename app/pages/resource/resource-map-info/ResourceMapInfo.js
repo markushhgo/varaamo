@@ -13,8 +13,8 @@ function formatAddress({ addressZip, municipality, streetAddress }) {
   return parts.filter(part => part).join(', ');
 }
 
-function ResourceMapInfo({ unit, t }) {
-  const serviceMapUrl = getServiceMapUrl(unit);
+function ResourceMapInfo({ currentLanguage, unit, t }) {
+  const serviceMapUrl = getServiceMapUrl(unit, currentLanguage);
   return (
     <div className="app-ResourceMapInfo">
       <Grid>
@@ -41,6 +41,7 @@ function ResourceMapInfo({ unit, t }) {
 }
 
 ResourceMapInfo.propTypes = {
+  currentLanguage: PropTypes.string,
   t: PropTypes.func.isRequired,
   unit: PropTypes.object.isRequired,
 };

@@ -5,6 +5,7 @@ import { createSelector, createStructuredSelector } from 'reselect';
 import { isAdminSelector, isLoggedInSelector } from 'state/selectors/authSelectors';
 import { createResourceSelector, unitsSelector } from 'state/selectors/dataSelectors';
 import { contrastSelector } from 'state/selectors/accessibilitySelectors';
+import { currentLanguageSelector } from 'state/selectors/translationSelectors';
 import dateSelector from 'state/selectors/dateSelector';
 import requestIsActiveSelectorFactory from 'state/selectors/factories/requestIsActiveSelectorFactory';
 
@@ -28,6 +29,7 @@ const resourcePageSelector = createStructuredSelector({
   showMap: showMapSelector,
   unit: unitSelector,
   contrast: contrastOptionsSelector,
+  currentLanguage: currentLanguageSelector,
 });
 
 export default resourcePageSelector;

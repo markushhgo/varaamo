@@ -112,6 +112,14 @@ describe('pages/resource/resourcePageSelector', () => {
     expect(selected.contrast).toBeDefined();
   });
 
+  test('returns currentLanguage', () => {
+    const state = getState();
+    const props = getProps();
+    const selected = resourcePageSelector(state, props);
+
+    expect(selected.currentLanguage).toBeDefined();
+  });
+
   test('returns the unit corresponding to the resource.unit', () => {
     const unit = Unit.build();
     const resource = Resource.build({ unit: unit.id });

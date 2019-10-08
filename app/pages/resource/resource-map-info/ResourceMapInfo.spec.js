@@ -5,10 +5,12 @@ import Immutable from 'seamless-immutable';
 import Resource from 'utils/fixtures/Resource';
 import Unit from 'utils/fixtures/Unit';
 import { shallowWithIntl } from 'utils/testUtils';
+import { getServiceMapUrl } from 'utils/unitUtils';
 import ResourceMapInfo from './ResourceMapInfo';
 
 describe('pages/resource/resource-map-info/ResourceMapInfo', () => {
   const defaultProps = {
+    currentLanguage: 'fi',
     resource: Immutable(Resource.build()),
     unit: Immutable(
       Unit.build({
@@ -27,7 +29,7 @@ describe('pages/resource/resource-map-info/ResourceMapInfo', () => {
 
   test('renders Service map link as a Button with correct url', () => {
     const button = getWrapper().find(Button);
-    const expected = 'https://palvelukartta.turku.fi/unit/123#!route-details';
+    const expected = getServiceMapUrl(defaultProps.unit, defaultProps.currentLanguage);
 
     expect(button).toHaveLength(1);
     expect(button.prop('href')).toBe(expected);
