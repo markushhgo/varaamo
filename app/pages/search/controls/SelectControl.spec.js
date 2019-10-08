@@ -65,7 +65,7 @@ describe('pages/search/controls/SelectControl', () => {
     expect(select.prop('name')).toBe(defaults.name);
     expect(typeof select.prop('onChange')).toBe('function');
     expect(select.prop('placeholder')).toBe('common.select');
-    expect(select.prop('isSearchable')).toBe(true);
+    expect(select.prop('isSearchable')).toBe(false);
     expect(select.prop('value')).toBe(defaults.options[0]);
   });
 
