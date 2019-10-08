@@ -138,7 +138,8 @@ class UnconnectedResourcePage extends Component {
       t,
       unit,
       history,
-      contrast
+      contrast,
+      currentLanguage,
     } = this.props;
     const { params } = match;
     const { isOpen, photoIndex } = this.state;
@@ -169,7 +170,7 @@ class UnconnectedResourcePage extends Component {
             showMap={showMap}
             unit={unit}
           />
-          {showMap && unit && <ResourceMapInfo unit={unit} />}
+          {showMap && unit && <ResourceMapInfo currentLanguage={currentLanguage} unit={unit} />}
           {showMap && (
             <ResourceMap
               location={location}
@@ -187,6 +188,7 @@ class UnconnectedResourcePage extends Component {
                       mainImageMobileVisibility: true,
                     })}
                   <ResourceInfo
+                    currentLanguage={currentLanguage}
                     equipment={equipment}
                     isLoggedIn={isLoggedIn}
                     resource={resource}
@@ -292,6 +294,7 @@ UnconnectedResourcePage.propTypes = {
   unit: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
   contrast: PropTypes.string,
+  currentLanguage: PropTypes.string,
 };
 UnconnectedResourcePage = injectT(UnconnectedResourcePage); // eslint-disable-line
 

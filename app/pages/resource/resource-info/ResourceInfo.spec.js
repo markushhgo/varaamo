@@ -6,11 +6,13 @@ import WrappedText from 'shared/wrapped-text';
 import Resource from 'utils/fixtures/Resource';
 import Unit from 'utils/fixtures/Unit';
 import { shallowWithIntl } from 'utils/testUtils';
+import { getServiceMapUrl } from 'utils/unitUtils';
 import ResourceInfo from './ResourceInfo';
 import ReservationInfo from '../reservation-info';
 
 describe('pages/resource/resource-info/ResourceInfo', () => {
   const defaultProps = {
+    currentLanguage: 'fi',
     isLoggedIn: false,
     resource: Immutable(
       Resource.build({
@@ -24,7 +26,13 @@ describe('pages/resource/resource-info/ResourceInfo', () => {
         },
       })
     ),
-    unit: Immutable(Unit.build()),
+    unit: Immutable(Unit.build({
+      addressZip: '12345',
+      id: 'aaa',
+      mapServiceId: '123',
+      municipality: 'some city',
+      streetAddress: 'Street address 123',
+    })),
     equipment: [
       'equipment 1',
       'equipment 2',
@@ -143,7 +151,7 @@ describe('pages/resource/resource-info/ResourceInfo', () => {
       streetAddress: 'Test street 12',
       wwwUrl: 'some-url',
     });
-    const expected = 'https://palvelukartta.turku.fi/unit/123#!route-details';
+    const expected = getServiceMapUrl(defaultProps.unit, defaultProps.currentLanguage);
     const link = getWrapper({ unit })
       .find('.app-ResourceInfo__servicemap')
       .find('a');

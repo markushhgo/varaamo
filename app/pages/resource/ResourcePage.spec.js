@@ -68,6 +68,7 @@ describe('pages/resource/ResourcePage', () => {
     showMap: false,
     unit: Immutable(unit),
     contrast: '',
+    currentLanguage: 'fi',
   };
 
   function getWrapper(props) {
@@ -117,6 +118,7 @@ describe('pages/resource/ResourcePage', () => {
       expect(resourceInfo.prop('resource')).toEqual(defaultProps.resource);
       expect(resourceInfo.prop('unit')).toEqual(defaultProps.unit);
       expect(resourceInfo.prop('equipment')).toEqual(equipmentList);
+      expect(resourceInfo.prop('currentLanguage')).toBe(defaultProps.currentLanguage);
     });
 
     test('renders ResourceCalendar with correct props', () => {
@@ -179,6 +181,7 @@ describe('pages/resource/ResourcePage', () => {
         const resourceMapInfo = wrapper.find(ResourceMapInfo);
         expect(resourceMapInfo).toHaveLength(1);
         expect(resourceMapInfo.prop('unit')).toBe(defaultProps.unit);
+        expect(resourceMapInfo.prop('currentLanguage')).toBe(defaultProps.currentLanguage);
       });
 
       test('renders a ResourceMap', () => {
