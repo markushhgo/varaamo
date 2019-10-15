@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/lib/Button';
 import Col from 'react-bootstrap/lib/Col';
 import Grid from 'react-bootstrap/lib/Grid';
 import Row from 'react-bootstrap/lib/Row';
+import classNames from 'classnames';
 
 import { injectT } from 'i18n';
 
@@ -30,16 +31,18 @@ function MapToggle({
           <Col sm={6}>
             <div className="pull-right">
               <Button
-                className="app-MapToggle__button-list"
-                disabled={!mapVisible}
-                onClick={onClick}
+                aria-selected={!mapVisible}
+                className={classNames('app-MapToggle__button-list', !mapVisible && 'active-tab')}
+                onClick={!mapVisible ? undefined : onClick}
+                role="tab"
               >
                 {t('MapToggle.showList')}
               </Button>
               <Button
-                className="app-MapToggle__button-map"
-                disabled={mapVisible}
-                onClick={onClick}
+                aria-selected={mapVisible}
+                className={classNames('app-MapToggle__button-map', mapVisible && 'active-tab')}
+                onClick={mapVisible ? undefined : onClick}
+                role="tab"
               >
                 {t('MapToggle.showMap')}
               </Button>

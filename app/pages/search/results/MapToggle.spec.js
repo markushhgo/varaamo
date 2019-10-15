@@ -50,24 +50,36 @@ describe('pages/search/results/MapToggle', () => {
   });
 
   describe('buttons', () => {
-    test('renders list button disabled if map is not visible', () => {
+    test('renders list button as selected if map is not visible', () => {
       const wrapper = getWrapper({ mapVisible: false });
       const listButton = wrapper.find('.app-MapToggle__button-list');
       const mapButton = wrapper.find('.app-MapToggle__button-map');
+
       expect(listButton.length).toBe(1);
-      expect(listButton.prop('disabled')).toBe(true);
+      expect(listButton.prop('role')).toBe('tab');
+      expect(listButton.prop('aria-selected')).toBe(true);
+      expect(listButton.hasClass('active-tab')).toBe(true);
+
       expect(mapButton.length).toBe(1);
-      expect(mapButton.prop('disabled')).toBe(false);
+      expect(mapButton.prop('role')).toBe('tab');
+      expect(mapButton.prop('aria-selected')).toBe(false);
+      expect(mapButton.hasClass('active-tab')).toBe(false);
     });
 
-    test('renders map button disabled if map is visible', () => {
+    test('renders map button as selected if map is visible', () => {
       const wrapper = getWrapper({ mapVisible: true });
       const listButton = wrapper.find('.app-MapToggle__button-list');
       const mapButton = wrapper.find('.app-MapToggle__button-map');
+
       expect(listButton.length).toBe(1);
-      expect(listButton.prop('disabled')).toBe(false);
+      expect(listButton.prop('role')).toBe('tab');
+      expect(listButton.prop('aria-selected')).toBe(false);
+      expect(listButton.hasClass('active-tab')).toBe(false);
+
       expect(mapButton.length).toBe(1);
-      expect(mapButton.prop('disabled')).toBe(true);
+      expect(mapButton.prop('role')).toBe('tab');
+      expect(mapButton.prop('aria-selected')).toBe(true);
+      expect(mapButton.hasClass('active-tab')).toBe(true);
     });
   });
 });
