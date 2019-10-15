@@ -52,17 +52,17 @@
       border-color: darken($turku-yellow, 5);
       box-shadow: none;
     }
-    .btn.disabled,
-    .btn[disabled] {
+    .btn.active-tab,
+    .btn[active-tab] {
       background-color: $hel-silver;
       border-color: $hel-silver;
       opacity: 1;
       cursor: default;
     }
-    .btn.disabled:hover,
-    .btn[disabled]:hover,
-    .btn.disabled:active,
-    .btn[disabled]:active {
+    .btn.active-tab:hover,
+    .btn[active-tab]:hover,
+    .btn.active-tab:active,
+    .btn[active-tab]:active {
       border-color: $hel-silver;
     }
   }
