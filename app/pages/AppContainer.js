@@ -14,6 +14,7 @@ import Header from 'shared/header';
 import TestSiteMessage from 'shared/test-site-message';
 import Notifications from 'shared/notifications';
 import { getCustomizationClassName } from 'utils/customizationUtils';
+import { currentLanguageSelector } from 'state/selectors/translationSelectors';
 
 const userIdSelector = state => state.auth.userId;
 const fontSizeSelector = state => state.ui.accessibility.fontSize;
@@ -22,6 +23,7 @@ const fontSizeSelector = state => state.ui.accessibility.fontSize;
 export const selector = createStructuredSelector({
   userId: userIdSelector,
   fontSize: fontSizeSelector,
+  currentLanguage: currentLanguageSelector,
 });
 
 export class UnconnectedAppContainer extends Component {
@@ -49,7 +51,7 @@ export class UnconnectedAppContainer extends Component {
     const { fontSize } = this.props;
     return (
       <div className={classNames('app', getCustomizationClassName(), (fontSize))}>
-        <Helmet title="Varaamo" />
+        <Helmet htmlAttributes={{ lang: this.props.currentLanguage }} title="Varaamo" />
 
         <Header location={this.props.location}>
           <Favicon />
@@ -73,6 +75,7 @@ UnconnectedAppContainer.propTypes = {
   location: PropTypes.object.isRequired,
   userId: PropTypes.string,
   fontSize: PropTypes.string,
+  currentLanguage: PropTypes.string,
 };
 
 const actions = { fetchUser };
