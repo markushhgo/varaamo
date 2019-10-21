@@ -33,6 +33,9 @@ $externalIconMarginLeft: 5px;
   .navbar-toggle .icon-bar {
     color: $white;
   }
+  .navbar-toggle .icon-bar {
+    background-color: $white;
+  }
 
   .navbar-brand, .navbar-toggle {
     font-size: inherit;
@@ -95,6 +98,9 @@ $externalIconMarginLeft: 5px;
     .navbar-toggle,
     .navbar-toggle .icon-bar {
       color: $black;
+    }
+    .navbar-toggle .icon-bar {
+      background-color: $black;
     }
   }
 
