@@ -157,5 +157,15 @@ $selectDropdownPaddingRight: 4px;
     flex-direction: column;
     flex: 1;
   }
+  .app-SelectControl__clear-button{
+    display: none;
+    &.is-visible {
+      display: initial;
+    }
+    img {
+      width: 24px;
+    }
+  }
+
 }
 
