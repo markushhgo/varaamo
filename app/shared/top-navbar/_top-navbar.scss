@@ -395,6 +395,10 @@
 
     // Mobile
 
+  .mobile-buttons {
+    float: right;
+  }
+
   .mobile_lang_dropdown {
     list-style: none;
     text-transform: uppercase;
@@ -427,6 +431,7 @@
   }
   .navbar-toggle {
     margin-left: 15px;
+    float: none;
 
     &.lang {
       margin-left: 0;
