@@ -44,6 +44,7 @@
   "common.cancel": "Cancel",
   "common.cancelled": "Cancelled",
   "common.cancelling": "Cancelling...",
+  "common.checkError": "Error: ",
   "common.comments": "Comments",
   "common.commentsLabel": "Comments",
   "common.commentsPlaceholder": "Any additional information about the reservation",

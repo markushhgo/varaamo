@@ -98,6 +98,7 @@ export function validate(values, {
 
 class UnconnectedReservationInformationForm extends Component {
   renderField(name, type, label, controlProps = {}, help = null, info = null, altCheckbox = false) {
+    const { t } = this.props;
     if (!includes(this.props.fields, name)) {
       return null;
     }
@@ -111,6 +112,7 @@ class UnconnectedReservationInformationForm extends Component {
         help={help}
         info={info}
         label={`${label}${isRequired ? '*' : ''}`}
+        labelErrorPrefix={t('common.checkError')}
         name={name}
         type={type}
       />
