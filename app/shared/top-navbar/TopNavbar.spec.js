@@ -1,6 +1,7 @@
 import React from 'react';
 import NavItem from 'react-bootstrap/lib/NavItem';
 import MenuItem from 'react-bootstrap/lib/MenuItem';
+import NavDropdown from 'react-bootstrap/lib/NavDropdown';
 
 import { shallowWithIntl } from 'utils/testUtils';
 import TopNavbar from './TopNavbar';
@@ -10,6 +11,7 @@ describe('shared/top-navbar/TopNavbar', () => {
   function getWrapper(props) {
     const defaults = {
       changeLocale: () => null,
+      toggleMobileNavbar: () => null,
       currentLanguage: 'fi',
       isLoggedIn: false,
       userName: 'Luke Skywalker',
@@ -17,7 +19,7 @@ describe('shared/top-navbar/TopNavbar', () => {
     return shallowWithIntl(<TopNavbar {...defaults} {...props} />);
   }
 
-  describe('renders mobile', () => {
+  describe('renders mobile, ', () => {
     test('renders MobileNavbar', () => {
       const element = getWrapper().find(MobileNavbar);
       expect(element.length).toBe(1);
@@ -28,6 +30,65 @@ describe('shared/top-navbar/TopNavbar', () => {
       expect(first.length).toBe(2);
       const second = getWrapper().find('.navbar-toggle.lang');
       expect(second.length).toBe(1);
+    });
+
+    test('mobile-buttons div', () => {
+      const element = getWrapper().find('.mobile-buttons');
+      expect(element).toHaveLength(1);
+    });
+
+    describe('language dropdown ', () => {
+      function getLanguageDropdownWrap(props) {
+        return getWrapper(props).find('button').filter('.navbar-toggle').filter('.lang');
+      }
+
+      test('with correct props', () => {
+        const element = getLanguageDropdownWrap();
+        expect(element).toHaveLength(1);
+        expect(element.prop('className')).toBe('navbar-toggle lang');
+        expect(element.prop('tabIndex')).toBe('-1');
+        expect(element.prop('type')).toBe('button');
+      });
+
+      test('div with correct props', () => {
+        const element = getLanguageDropdownWrap().find('div');
+        expect(element).toHaveLength(1);
+        expect(element.prop('className')).toBe('mobile_lang');
+        expect(element.prop('type')).toBe('button');
+      });
+
+      test('NavDropdown with correct props', () => {
+        const changeLocale = () => null;
+        const currentLanguage = 'fi';
+        const nav = getLanguageDropdownWrap({ changeLocale, currentLanguage }).find(NavDropdown);
+
+        expect(nav).toHaveLength(1);
+        expect(nav.prop('className')).toBe('mobile_lang_dropdown');
+        expect(nav.prop('eventKey')).toBe('lang');
+        expect(nav.prop('id')).toBe('mobile');
+        expect(nav.prop('onSelect')).toBe(changeLocale);
+        expect(nav.prop('title')).toBe(currentLanguage);
+      });
+    });
+
+    describe('mobile accessibility', () => {
+      function getMobileA11yWrapper(props) {
+        return getWrapper(props).find('button').last();
+      }
+
+      test('button with correct props', () => {
+        const element = getMobileA11yWrapper();
+        expect(element).toHaveLength(1);
+        expect(element.prop('aria-controls')).toBe('mobileNavbar');
+        expect(element.prop('className')).toBe('navbar-toggle');
+        expect(element.prop('type')).toBe('button');
+      });
+
+      test('div with correct prop', () => {
+        const element = getMobileA11yWrapper().find('div');
+        expect(element).toHaveLength(1);
+        expect(element.prop('className')).toBe('mobile_accessibility');
+      });
     });
   });
 
@@ -46,11 +107,28 @@ describe('shared/top-navbar/TopNavbar', () => {
       expect(actual).toBe(changeLocale);
     });
 
-    test('renders MenuItems for other languages', () => {
+    test('renders correct MenuItems when language is Finnish', () => {
       const currentLanguage = 'fi';
       const menuItems = getLanguageNavWrapper({ currentLanguage }).find(MenuItem);
-      expect(menuItems).toHaveLength(1);
-      expect(menuItems.at(0).prop('eventKey')).toBe('sv');
+      expect(menuItems).toHaveLength(2);
+      expect(menuItems.at(0).prop('active')).toBe(true);
+      expect(menuItems.at(0).prop('aria-label')).toBe('Suomi');
+      expect(menuItems.at(0).prop('eventKey')).toBe('fi');
+      expect(menuItems.at(1).prop('active')).toBeUndefined();
+      expect(menuItems.at(1).prop('aria-label')).toBe('Svenska');
+      expect(menuItems.at(1).prop('eventKey')).toBe('sv');
+    });
+
+    test('renders correct MenuItems when language is Swedish', () => {
+      const currentLanguage = 'sv';
+      const menuItems = getLanguageNavWrapper({ currentLanguage }).find(MenuItem);
+      expect(menuItems).toHaveLength(2);
+      expect(menuItems.at(0).prop('active')).toBeUndefined();
+      expect(menuItems.at(0).prop('aria-label')).toBe('Suomi');
+      expect(menuItems.at(0).prop('eventKey')).toBe('fi');
+      expect(menuItems.at(1).prop('active')).toBe(true);
+      expect(menuItems.at(1).prop('aria-label')).toBe('Svenska');
+      expect(menuItems.at(1).prop('eventKey')).toBe('sv');
     });
   });
 

@@ -98,6 +98,39 @@
         display: block;
         cursor: default;
 
+        button {
+          border: 0;
+          background-color: transparent;
+          padding-left: 0px;
+          margin-left: 5px;
+          cursor: pointer;
+          @include add-focus;
+          &:hover {
+            text-decoration: none;
+          }
+
+          &.active {
+            text-decoration: underline;
+          }
+        }
+
+        // first
+        button:nth-child(1) {
+          font-size: 1em;
+        }
+
+        // second
+        button:nth-child(2) {
+          font-size: 1.25em;
+          line-height: 1.2;
+        }
+
+        // third
+        button:nth-child(3) {
+          font-size: 1.5em;
+          line-height: 1;
+        }
+
         span {
           padding-left: 0px;
           margin-left: 5px;
@@ -114,23 +147,6 @@
             text-decoration: underline;
           }
         }
-        // firstA
-        span:nth-child(1) {
-          font-size: 1em;
-        }
-
-        // secondA
-        span:nth-child(2) {
-          font-size: 1.25em;
-          line-height: 1.2;
-        }
-
-        // thirdA
-        span:nth-child(3) {
-          font-size: 1.5em;
-          line-height: 1;
-        }
-
       }
 
       &__contrast {
@@ -140,6 +156,8 @@
         margin-left: 15px;
 
         .contrast_button {
+          border: 0;
+          background-color: transparent;
           background-image: url('../../assets/icons/iconContrastSV.svg');
           background-size: 1.5em 1.5em;
           width: 1.5em;
@@ -178,10 +196,12 @@
 
         a#language-nav-dropdown {
           text-transform: uppercase;
-          padding-right:5px;
-          margin: 0 10px 0 15px;
+          margin: 0;
+          padding-left: 15px;
+          padding-right: 15px;
 
           @include add-focus;
+
         }
       }
 
@@ -193,7 +213,6 @@
 
     // Start: Remove responsive features from bootstrap nav to create a single-line top nav
     .navbar-header {
-//      float: left;
       margin-left: -15px;
       margin-right: -15px;
 
@@ -250,12 +269,16 @@
         bottom: 21px;
       }
 
+      >.active > #language-nav-dropdown:after,
+      > li > #language-nav-dropdown:hover:after {
+        border: none;
+      }
+
       .open .dropdown-menu {
         position: absolute;
         float: left;
         background-color: #ffffff;
-        border: 1px solid #ccc;
-        border: 1px solid rgba(0, 0, 0, 0.15);
+        border: none;
         box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
         min-width: 10px;
 
@@ -266,8 +289,22 @@
         }
 
         li > a {
+          margin: 0 auto;
+          text-align: center;
+          padding: 0.875em 0;
           @include add-focus(){
+            outline-offset: -3px;
             background-color: transparent;
+          }
+        }
+
+        .active > a {
+          background-color:lightgray;
+          @include add-focus(){
+            background-color:lightgray;
+          };
+          &:hover {
+            background-color: lightgray;
           }
         }
 
@@ -319,17 +356,11 @@
 
       .dropdown-menu {
         right: 0;
-        left: auto;
+        left: -2px;
         font-size: 1em;
       }
     }
     // End: Remove responsive features
-
-    &.navbar-default .navbar-nav .open .dropdown-menu > li > a:hover {
-      background-color: $white;
-    }
-
-
 
     // High-contrast
 
@@ -412,26 +443,37 @@
 
     .dropdown-menu {
       min-width: 10px;
-      right: -20px;
-      left:-20px;
+      right: -12px;
+      left: -12px;
       text-align: center;
       padding: 0;
       font-size: 1em;
+      margin-top: 12px;
 
       > li >a:hover,a:active,a:focus {
         color: $black;
         text-decoration: none;
-        background-color: $white;
+      }
+
+      > li.active > a, > li.active > a:focus{
+        background-color: lightgray;
       }
 
       > li > a{
         padding: 0.875em 0;
+        @include add-focus(){
+          outline-offset: -3px;
+        }
       }
     }
   }
   .navbar-toggle {
     margin-left: 15px;
     float: none;
+
+    &:focus-within {
+      @include focusElement;
+    }
 
     &.lang {
       margin-left: 0;
@@ -442,14 +484,6 @@
       cursor: pointer;
     }
   }
-
-  .dropdown-toggle:focus{
-    outline: 5px auto -webkit-focus-ring-color;
-    outline-offset: -2px;
-    @include focusElement;
-  }
-
-
 
   .navbar-collapse > ul li.app-TopNavbar__language.dropdown,
   .navbar-collapse > ul li.navbar__font,

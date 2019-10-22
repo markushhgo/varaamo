@@ -29,34 +29,31 @@ describe('shared/top-navbar/accessibility/TopNavbarFontChanger', () => {
     expect(text).toContain('Nav.FontSize.title');
   });
 
-  test('renders buttonspan elements', () => {
-    const elements = content.find('span');
+  test('renders button elements', () => {
+    const elements = content.find('button');
     expect(elements.length).toBe(3);
   });
 
   describe('buttons have correct props at default', () => {
     test('first button', () => {
-      const element = content.find('span').first();
+      const element = content.find('button').first();
       expect(element.prop('aria-pressed')).toBe(true);
       expect(element.prop('className')).toBe('active');
-      expect(element.prop('role')).toBe('button');
-      expect(element.prop('tabIndex')).toBe('0');
+      expect(element.prop('type')).toBe('button');
     });
 
     test('second button', () => {
-      const element = content.find('span').at(1);
+      const element = content.find('button').at(1);
       expect(element.prop('aria-pressed')).toBe(false);
       expect(element.prop('className')).toBe('');
-      expect(element.prop('role')).toBe('button');
-      expect(element.prop('tabIndex')).toBe('0');
+      expect(element.prop('type')).toBe('button');
     });
 
     test('third button', () => {
-      const element = content.find('span').last();
+      const element = content.find('button').last();
       expect(element.prop('aria-pressed')).toBe(false);
       expect(element.prop('className')).toBe('');
-      expect(element.prop('role')).toBe('button');
-      expect(element.prop('tabIndex')).toBe('0');
+      expect(element.prop('type')).toBe('button');
     });
   });
 
@@ -77,47 +74,37 @@ describe('shared/top-navbar/accessibility/TopNavbarFontChanger', () => {
       expect(fontSize).toBe(instance.thirdA);
     });
   });
-  describe('span elements get active class when selected', () => {
-    test('first span get active', () => {
+  describe('button elements get active class when selected', () => {
+    test('first button get active', () => {
       content.setProps({ fontSize: ACC.FONT_SIZES.SMALL });
-      const element = content.find('span').at(0).find('.active');
+      const element = content.find('button').at(0).find('.active');
       expect(element.length).toBe(1);
     });
 
-    test('second span get active', () => {
+    test('second button get active', () => {
       content.setProps({ fontSize: ACC.FONT_SIZES.MEDIUM });
-      const element = content.find('span').at(1).find('.active');
+      const element = content.find('button').at(1).find('.active');
       expect(element.length).toBe(1);
     });
 
-    test('third span get active', () => {
+    test('third button get active', () => {
       content.setProps({ fontSize: ACC.FONT_SIZES.LARGE });
-      const element = content.find('span').at(2).find('.active');
+      const element = content.find('button').at(2).find('.active');
       expect(element.length).toBe(1);
     });
 
-    test('only one span is active', () => {
-      const element = content.find('span').find('.active');
+    test('only one button is active', () => {
+      const element = content.find('button').find('.active');
       expect(element.length).toBe(1);
     });
   });
 
-  describe('span onClicks work', () => {
+  describe('button onClicks work', () => {
     test('calls props.changeFontSize', () => {
       const changeFontSize = simple.mock();
       const instance = getWrapper({ changeFontSize }).instance();
       instance.handleFontSizeClick(ACC.FONT_SIZES.SMALL);
       expect(changeFontSize.callCount).toBe(1);
-      expect(changeFontSize.lastCall.args).toEqual([ACC.FONT_SIZES.SMALL]);
-    });
-  });
-
-  describe('span onKeyDown works', () => {
-    test('calls props.changeFontSize ', () => {
-      const changeFontSize = simple.mock();
-      const instance = getWrapper({ changeFontSize }).instance();
-      const kbEvent = { keyCode: 13 };
-      instance.handleKeyDown(ACC.FONT_SIZES.SMALL, kbEvent);
       expect(changeFontSize.lastCall.args).toEqual([ACC.FONT_SIZES.SMALL]);
     });
   });

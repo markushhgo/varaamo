@@ -40,6 +40,13 @@ class TopNavbar extends Component {
     this.handleLoginClick = this.handleLoginClick.bind(this);
   }
 
+  componentDidUpdate(prevState) {
+    if (!prevState.expandMobileNavbar && this.state.expandMobileNavbar) {
+      document.getElementById('contrastButton').focus();
+      event.preventDefault();
+    }
+  }
+
   collapseItem() {
     this.setState({ expanded: false });
   }
@@ -92,36 +99,42 @@ class TopNavbar extends Component {
               </Link>
             </Navbar.Brand>
             <div className="mobile-buttons">
-              <button className="navbar-toggle lang" data-target="#mobile" data-toggle="collapse" type="button">
+              <button className="navbar-toggle lang" data-target="#mobile" data-toggle="collapse" tabIndex="-1" type="button">
                 <div aria-label={t('Navbar.aria.topNavbar.mobileLocale')} className="mobile_lang" role="list" type="button">
                   <NavDropdown
                     className="mobile_lang_dropdown"
                     eventKey="lang"
                     id="mobile"
-                    noCaret
                     onSelect={changeLocale}
-                    tabIndex="0"
                     title={currentLanguage}
                   >
-                    {currentLanguage !== 'fi' && <MenuItem eventKey="fi">FI</MenuItem>}
-                    {currentLanguage !== 'sv' && <MenuItem eventKey="sv">SV</MenuItem>}
+                    {currentLanguage === 'fi'
+                      ? (<MenuItem active aria-label="Suomi" eventKey="fi">FI</MenuItem>)
+                      : (<MenuItem aria-label="Suomi" eventKey="fi">FI</MenuItem>)
+                    }
+                    {currentLanguage === 'sv'
+                      ? (<MenuItem active aria-label="Svenska" eventKey="sv">SV</MenuItem>)
+                      : (<MenuItem aria-label="Svenska" eventKey="sv">SV</MenuItem>)
+                    }
                   </NavDropdown>
                 </div>
               </button>
-              <button aria-controls="mobileNavbar" aria-label={t('Navbar.aria.topNavbar.mobileAccessibility')} className="navbar-toggle" type="button">
+              <button
+                aria-controls="mobileNavbar"
+                aria-label={t('Navbar.aria.topNavbar.mobileAccessibility')}
+                className="navbar-toggle"
+                onClick={() => this.toggleMobileNavbar()}
+                type="button"
+              >
                 <div
                   className="mobile_accessibility"
-                  onClick={() => this.toggleMobileNavbar()}
-                  onKeyDown={ev => ((ev.keyCode === 13) ? (this.toggleMobileNavbar()) : '')}
-                  tabIndex="0"
-                  type="button"
                 >
                   <FontAwesomeIcon icon={faWheelchair} />
                 </div>
               </button>
 
               <Navbar.Toggle aria-label={t('Navbar.aria.topNavbar.mobileLogin')} data-target="#navCollapse">
-                <div className="mobile_login" tabIndex="0" type="button">
+                <div className="mobile_login">
                   <FontAwesomeIcon icon={faUserAlt} />
                 </div>
               </Navbar.Toggle>
@@ -137,13 +150,19 @@ class TopNavbar extends Component {
                 className="app-TopNavbar__language"
                 eventKey="lang"
                 id="language-nav-dropdown"
-                noCaret
                 onSelect={changeLocale}
                 tabIndex="0"
                 title={currentLanguage}
               >
-                {currentLanguage !== 'fi' && <MenuItem eventKey="fi">FI</MenuItem>}
-                {currentLanguage !== 'sv' && <MenuItem eventKey="sv">SV</MenuItem>}
+                {currentLanguage === 'fi'
+                  ? (<MenuItem active aria-label="Suomi" eventKey="fi">FI</MenuItem>)
+                  : (<MenuItem aria-label="Suomi" eventKey="fi">FI</MenuItem>)
+                    }
+                {currentLanguage === 'sv'
+                  ? (<MenuItem active aria-label="Svenska" eventKey="sv">SV</MenuItem>)
+                  : (<MenuItem aria-label="Svenska" eventKey="sv">SV</MenuItem>)
+                    }
+
               </NavDropdown>
 
               {isLoggedIn && (

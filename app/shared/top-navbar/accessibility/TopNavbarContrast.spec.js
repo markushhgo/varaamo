@@ -28,17 +28,16 @@ describe('shared/top-navbar/accessibility/TopNavbarContrast', () => {
     expect(text).toBe('Nav.Contrast.title');
   });
 
-  test('renders contrast_button', () => {
-    const element = content.find('.contrast_button');
+  test('renders contrast button', () => {
+    const element = content.find('button');
     expect(element.length).toBe(1);
   });
 
   describe('button', () => {
-    test('reacts to onKeyDown', () => {
+    test('reacts to onClick', () => {
       const changeContrast = simple.mock();
       const instance = getWrapper({ changeContrast }).instance();
-      const kbEvent = { keyCode: 13 };
-      instance.handleKeyDown(kbEvent);
+      instance.handleOnClick();
       expect(changeContrast.callCount).toBe(1);
     });
 
@@ -53,12 +52,13 @@ describe('shared/top-navbar/accessibility/TopNavbarContrast', () => {
     });
 
     test('has correct props', () => {
-      const element = content.find('div').last();
+      const element = content.find('button').last();
       expect(element.prop('aria-label')).toBe('Nav.Contrast.title');
       expect(element.prop('aria-pressed')).toBe(false);
       expect(element.prop('className')).toBe('contrast_button');
-      expect(element.prop('role')).toBe('button');
+      expect(element.prop('id')).toBe('contrastButton');
       expect(element.prop('tabIndex')).toBe('0');
+      expect(element.prop('type')).toBe('button');
     });
   });
 });

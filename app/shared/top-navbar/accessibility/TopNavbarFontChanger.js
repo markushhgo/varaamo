@@ -20,7 +20,6 @@ class FontSizeChanger extends Component {
   constructor(props) {
     super(props);
     this.handleFontSizeClick = this.handleFontSizeClick.bind(this);
-    this.handleKeyDown = this.handleKeyDown.bind(this);
   }
 
   getActiveFontButton(size) {
@@ -47,29 +46,21 @@ class FontSizeChanger extends Component {
     return ((span === spanID));
   }
 
-  handleKeyDown(size, ev) {
-    if (ev.keyCode === 13) {
-      this.props.changeFontSize(size);
-    }
-  }
-
   handleFontSizeClick(size) {
     this.props.changeFontSize(size);
   }
 
   renderFontButton(spanID, fontSize) {
     return (
-      <span
+      <button
         aria-pressed={this.setAriaPressed(spanID)}
         className={this.setActiveClass(spanID)}
         onClick={() => this.handleFontSizeClick(fontSize)}
-        onKeyDown={ev => this.handleKeyDown(fontSize, ev)}
-        role="button"
-        tabIndex="0"
+        type="button"
       >
 A
 
-      </span>
+      </button>
     );
   }
 
