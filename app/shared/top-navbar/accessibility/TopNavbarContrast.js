@@ -17,19 +17,17 @@ class ContrastChanger extends Component {
     };
   }
 
-
-  handleKeyDown = (ev) => {
-    if (ev.keyCode === 13) {
-      this.props.changeContrast();
-      this.toggleAriaState();
-    }
-  }
-
+  /**
+   * Toggles page contrast and button aria-pressed value(false/true)
+   */
   handleOnClick = () => {
     this.props.changeContrast();
     this.toggleAriaState();
   }
 
+  /**
+   * Toggles state.ariaState
+   */
   toggleAriaState() {
     this.setState(prevState => ({ ariaState: !prevState.ariaState }));
   }
@@ -40,14 +38,14 @@ class ContrastChanger extends Component {
       <li className="navbar__contrast" role="presentation">
         <div aria-label={t('Nav.Contrast.title')} className="accessibility__contrast">
           {t('Nav.Contrast.title')}
-          <div
+          <button
             aria-label={t('Nav.Contrast.title')}
             aria-pressed={this.state.ariaState}
             className="contrast_button"
+            id="contrastButton"
             onClick={this.handleOnClick}
-            onKeyDown={this.handleKeyDown}
-            role="button"
             tabIndex="0"
+            type="button"
           />
         </div>
       </li>

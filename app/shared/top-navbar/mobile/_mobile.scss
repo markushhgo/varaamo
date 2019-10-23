@@ -2,6 +2,10 @@
   .mobile-Navbar_mobile.is-collapsed {
     max-height:0;
     overflow: hidden;
+
+    ul > li {
+      display: none;
+    }
   }
 
   .mobile-Navbar_mobile {
@@ -39,38 +43,16 @@
         padding-top: 7px;
         padding-bottom: 7px;
 
-        span {
+        button {
+          border: 0;
+          background-color: transparent;
           padding-left: 5px;
           cursor: pointer;
+          @include add-focus;
 
           &.active {
             text-decoration: underline;
           }
-
-          &#firstA {
-            font-size: 1em;
-            padding-left: 30px;
-          }
-
-          &#secondA {
-            font-size: 1.25em;
-          }
-
-          &#thirdA {
-            font-size: 1.5em;
-          }
-        }
-        span:nth-child(1) {
-          font-size: 1em;
-          padding-left: 30px;
-        }
-
-        span:nth-child(2) {
-          font-size: 1.25em;
-        }
-
-        span:nth-child(3) {
-          font-size: 1.5em;
         }
         .contrast_button {
           filter: invert(100%);
@@ -80,6 +62,19 @@
 
     .accessibility__buttonGroup {
       line-height: 1;
+
+      button:nth-child(1) {
+        font-size: 1em;
+        margin-left: 30px;
+      }
+
+      button:nth-child(2) {
+        font-size: 1.25em;
+      }
+
+      button:nth-child(3) {
+        font-size: 1.5em;
+      }
     }
 
     .container{
@@ -92,8 +87,11 @@
     }
 
   .contrast_button {
+    border: 0;
+    background-color: transparent;
     background-image: url('../../../assets/icons/iconContrastSV.svg');
     background-size: 1.5em 1.5em;
+    color: $black;
     width: 1.5em;
     height: 1.5em;
     float: right;
