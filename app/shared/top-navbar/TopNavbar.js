@@ -38,6 +38,7 @@ class TopNavbar extends Component {
     };
 
     this.handleLoginClick = this.handleLoginClick.bind(this);
+    this.toggleMobileNavbar = this.toggleMobileNavbar.bind(this);
   }
 
   componentDidUpdate(prevState) {
@@ -123,7 +124,7 @@ class TopNavbar extends Component {
                 aria-controls="mobileNavbar"
                 aria-label={t('Navbar.aria.topNavbar.mobileAccessibility')}
                 className="navbar-toggle"
-                onClick={() => this.toggleMobileNavbar()}
+                onClick={this.toggleMobileNavbar}
                 type="button"
               >
                 <div

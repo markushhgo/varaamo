@@ -19,6 +19,33 @@ describe('shared/top-navbar/TopNavbar', () => {
     return shallowWithIntl(<TopNavbar {...defaults} {...props} />);
   }
 
+  describe('componentDidUpdate', () => {
+    let element;
+    let instance;
+    let spy;
+    beforeEach(() => {
+      element = getWrapper();
+      instance = getWrapper().instance();
+      spy = jest.spyOn(instance, 'componentDidUpdate');
+    });
+    test('has been called when !expandMobileNavbar -> expandMobileNavbar', () => {
+      expect(element.state('expandMobileNavbar')).toBe(false);
+      element.find('button').at(1).simulate('click');
+      expect(element.state('expandMobileNavbar')).toBe(true);
+      instance.componentDidUpdate({ expandMobileNavbar: false });
+      expect(spy).toHaveBeenCalled();
+    });
+
+    test('has been called when expandMobileNavbar -> !expandMobileNavbar', () => {
+      element.setState({ expandMobileNavbar: true });
+      expect(element.state('expandMobileNavbar')).toBe(true);
+      element.find('button').at(1).simulate('click');
+      expect(element.state('expandMobileNavbar')).toBe(false);
+      instance.componentDidUpdate({ expandMobileNavbar: true });
+      expect(spy).toHaveBeenCalled();
+    });
+  });
+
   describe('renders mobile, ', () => {
     test('renders MobileNavbar', () => {
       const element = getWrapper().find(MobileNavbar);
@@ -81,6 +108,7 @@ describe('shared/top-navbar/TopNavbar', () => {
         expect(element).toHaveLength(1);
         expect(element.prop('aria-controls')).toBe('mobileNavbar');
         expect(element.prop('className')).toBe('navbar-toggle');
+        expect(element.prop('onClick')).toBeDefined();
         expect(element.prop('type')).toBe('button');
       });
 

@@ -36,11 +36,20 @@ class FontSizeChanger extends Component {
   }
 
 
+  /**
+   * Checks if spanID is the active fontsize
+   * @param {string} spanID
+   */
   setActiveClass(spanID) {
     const span = this.getActiveFontButton(this.props.fontSize);
     return ((span === spanID) ? 'active' : '');
   }
 
+  /**
+   * Checks if spanID is the active fontsize
+   * @param {string} spanID
+   * @returns {Boolean} true/false
+   */
   setAriaPressed(spanID) {
     const span = this.getActiveFontButton(this.props.fontSize);
     return ((span === spanID));
@@ -50,6 +59,13 @@ class FontSizeChanger extends Component {
     this.props.changeFontSize(size);
   }
 
+  /**
+   *
+   * @param {string} spanID
+   * @param {string} fontSize
+   *
+   * @returns {html} <button> element
+   */
   renderFontButton(spanID, fontSize) {
     return (
       <button

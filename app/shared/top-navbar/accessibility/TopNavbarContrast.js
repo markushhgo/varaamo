@@ -17,11 +17,17 @@ class ContrastChanger extends Component {
     };
   }
 
+  /**
+   * Toggles page contrast and button aria-pressed value(false/true)
+   */
   handleOnClick = () => {
     this.props.changeContrast();
     this.toggleAriaState();
   }
 
+  /**
+   * Toggles state.ariaState
+   */
   toggleAriaState() {
     this.setState(prevState => ({ ariaState: !prevState.ariaState }));
   }
