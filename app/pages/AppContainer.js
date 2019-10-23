@@ -11,6 +11,7 @@ import { fetchUser } from 'actions/userActions';
 import Favicon from 'shared/favicon';
 import Footer from 'shared/footer';
 import Header from 'shared/header';
+import SkipLink from 'shared/skip-link';
 import TestSiteMessage from 'shared/test-site-message';
 import Notifications from 'shared/notifications';
 import { getCustomizationClassName } from 'utils/customizationUtils';
@@ -51,13 +52,15 @@ export class UnconnectedAppContainer extends Component {
     const { fontSize } = this.props;
     return (
       <div className={classNames('app', getCustomizationClassName(), (fontSize))}>
+        <SkipLink />
+
         <Helmet htmlAttributes={{ lang: this.props.currentLanguage }} title="Varaamo" />
 
         <Header location={this.props.location}>
           <Favicon />
           <TestSiteMessage />
         </Header>
-        <main aria-label="Main" className={classNames('app-content')}>
+        <main aria-label="Main" className={classNames('app-content')} id="main-content" tabIndex="-1">
           <Grid>
             <Notifications />
           </Grid>

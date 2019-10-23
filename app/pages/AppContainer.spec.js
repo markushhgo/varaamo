@@ -5,6 +5,7 @@ import { Helmet } from 'react-helmet';
 
 import Header from 'shared/header';
 import Notifications from 'shared/notifications';
+import SkipLink from 'shared/skip-link';
 import { getState } from 'utils/testUtils';
 import * as customizationUtils from 'utils/customizationUtils';
 import { selector, UnconnectedAppContainer as AppContainer } from './AppContainer';
@@ -69,6 +70,10 @@ describe('pages/AppContainer', () => {
 
   describe('render', () => {
     const wrapper = getWrapper();
+
+    test('renders SkipLink', () => {
+      expect(getWrapper().find(SkipLink)).toHaveLength(1);
+    });
 
     test('renders Header', () => {
       expect(getWrapper().find(Header)).toHaveLength(1);
