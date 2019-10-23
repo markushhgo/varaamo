@@ -46,6 +46,7 @@
   "common.cancel": "Avbryt",
   "common.cancelled": "Avbokad",
   "common.cancelling": "Avbokas...",
+  "common.checkError": "Kontrollera: ",
   "common.comments": "Kommentarer",
   "common.commentsLabel": "Kommentarer",
   "common.commentsPlaceholder": "Eventuell ytterligare information om bokningen",

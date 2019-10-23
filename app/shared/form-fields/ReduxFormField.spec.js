@@ -12,6 +12,7 @@ describe('shared/form-fields/ReduxFormField', () => {
     controlProps: { someProp: 'some', otherProp: 'other' },
     input: { name: 'email' },
     label: 'Enter your email',
+    labelErrorPrefix: 'Error: ',
     meta: { error: 'some error' },
     name: 'email',
     type: 'text',
@@ -104,6 +105,11 @@ describe('shared/form-fields/ReduxFormField', () => {
     test('label is the label given in props', () => {
       const actualProps = getWrapper().find(FormControl).props();
       expect(actualProps.label).toBe(defaultProps.label);
+    });
+
+    test('labelErrorPrefix is the labelErrorPrefix given in props', () => {
+      const actualProps = getWrapper().find(FormControl).props();
+      expect(actualProps.labelErrorPrefix).toBe(defaultProps.labelErrorPrefix);
     });
 
     test('type is the type given in props', () => {

@@ -9,11 +9,14 @@ import HelpBlock from 'react-bootstrap/lib/HelpBlock';
 import InfoPopover from 'shared/info-popover';
 
 function FormControl({
-  controlProps = {}, help, id, info, label, type, validationState
+  controlProps = {}, help, id, info, label, labelErrorPrefix, type, validationState
 }) {
+  const helpBlockId = `${id}-help-block`;
+
   return (
     <FormGroup controlId={id} validationState={validationState}>
       <Col componentClass={ControlLabel} sm={3}>
+        {validationState && labelErrorPrefix}
         {label}
         {' '}
         {info && <InfoPopover id={`${id}-info`} placement="right" text={info} />}
@@ -21,10 +24,12 @@ function FormControl({
       <Col sm={9}>
         <RBFormControl
           {...controlProps}
+          aria-describedby={helpBlockId}
+          aria-invalid={validationState ? 'true' : 'false'}
           componentClass={type === 'textarea' ? 'textarea' : undefined}
           type={type !== 'textarea' ? type : undefined}
         />
-        {help && <HelpBlock>{help}</HelpBlock>}
+        <HelpBlock id={helpBlockId}>{help}</HelpBlock>
       </Col>
     </FormGroup>
   );
@@ -36,6 +41,7 @@ FormControl.propTypes = {
   id: PropTypes.string.isRequired,
   info: PropTypes.string,
   label: PropTypes.string.isRequired,
+  labelErrorPrefix: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   validationState: PropTypes.string,
 };
