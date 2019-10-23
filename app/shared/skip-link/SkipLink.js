@@ -5,12 +5,14 @@ import { injectT } from 'i18n';
 
 function SkipLink({ t }) {
   return (
-    <a
-      className="visually-hidden skip-link"
-      href="#main-content"
-    >
-      {t('SkipLink.text')}
-    </a>
+    <div className="accessibility-shortcuts">
+      <a
+        className="visually-hidden skip-link"
+        href="#main-content"
+      >
+        {t('SkipLink.text')}
+      </a>
+    </div>
   );
 }
 

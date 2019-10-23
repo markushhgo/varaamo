@@ -8,6 +8,12 @@ describe('shared/skip-link/SkipLink', () => {
     return shallowWithIntl(<SkipLink />);
   }
 
+  test('div container exists', () => {
+    const element = getWrapper().find('div');
+    expect(element).toHaveLength(1);
+    expect(element.prop('className')).toBe('accessibility-shortcuts');
+  });
+
   describe('SkipLink', () => {
     let element;
     beforeAll(() => {

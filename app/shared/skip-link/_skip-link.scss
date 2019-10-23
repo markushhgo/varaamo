@@ -1,16 +1,18 @@
-.visually-hidden {
-
-  &.skip-link {
-
-    &:focus,
-    &:active {
-      position: relative;
-      left: 0;
-      width: auto;
-      height: auto;
-      overflow: visible;
-      text-align: center;
-      background-color: lightgray;
+.accessibility-shortcuts{
+  text-align: center;
+  background-color:#37475e;
+  .visually-hidden {
+    &.skip-link {
+      &:focus,
+      &:active {
+        position: relative;
+        left: 0;
+        width: auto;
+        height: auto;
+        overflow: visible;
+        outline: none;
+        color:$white;
+      }
     }
   }
 }

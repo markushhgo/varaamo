@@ -6,8 +6,13 @@ h1,h2,h3,h4,h5,h6,
 }
 
 html {
-//  letter-spacing: 0.12em;
-//  word-spacing: 0.16em;
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
 
 
