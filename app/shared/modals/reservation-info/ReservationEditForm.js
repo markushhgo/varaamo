@@ -74,6 +74,7 @@ class UnconnectedReservationEditForm extends Component {
         component={ReduxFormField}
         controlProps={controlProps}
         label={t(`common.${propertyName}Label`)}
+        labelErrorPrefix={t('common.checkError')}
         name={propertyName}
         type={type}
       />
