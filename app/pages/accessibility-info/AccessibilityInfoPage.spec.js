@@ -25,8 +25,8 @@ describe('pages/accessibility-info/AccessibilityInfoPage', () => {
     expect(pageWrapper.prop('title')).toBe('AccessibilityInfo.title');
   });
 
-  test('renders div that contains text', () => {
-    const element = getWrapper().find('div');
+  test('renders <article> that contains text', () => {
+    const element = getWrapper().find('article');
     expect(element).toHaveLength(1);
   });
 });

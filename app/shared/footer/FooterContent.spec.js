@@ -27,8 +27,8 @@ describe('shared/footer/FooterContent', () => {
     test('contains Link to Saavutettavuusseloste', () => {
       const seloste = getWrapper().find(Link);
       expect(seloste).toHaveLength(1);
-      expect(seloste.prop('className')).toBe('seloste-link');
-      expect(seloste.prop('to')).toBe('/saavutettavuusseloste');
+      expect(seloste.prop('className')).toBe('accessibility-info-link');
+      expect(seloste.prop('to')).toBe('/accessibility-info');
     });
 
     describe('contains feedback link with correct props', () => {
