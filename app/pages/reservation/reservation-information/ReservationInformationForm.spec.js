@@ -176,9 +176,11 @@ describe('pages/reservation/reservation-information/ReservationInformationForm',
       return shallowWithIntl(<ReservationInformationForm {...defaultProps} {...extraProps} />);
     }
 
-    test('renders a Form component', () => {
-      const form = getWrapper().find(Form);
+    test('renders a Form component with correct props', () => {
+      const handleSubmit = () => null;
+      const form = getWrapper({ handleSubmit }).find(Form);
       expect(form.length).toBe(1);
+      expect(form.prop('onSubmit')).toBeDefined();
     });
 
     describe('form fields', () => {
