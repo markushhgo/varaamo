@@ -12,6 +12,7 @@ import ReservationPage from '../app/pages/reservation';
 import ResourcePage from '../app/pages/resource';
 import SearchPage from '../app/pages/search';
 import UserReservationsPage from '../app/pages/user-reservations';
+import AccessibilityInfoPage from '../app/pages/accessibility-info';
 
 export default () => (
   <AppContainer>
@@ -20,6 +21,7 @@ export default () => (
       <Route component={SearchPage} componentName="Search" path="/search" />
       <Route component={AboutPage} componentName="About" path="/about" />
       <Route component={ResourcePage} componentName="Resource" path="/resources/:id" />
+      <Route component={AccessibilityInfoPage} componentName="Seloste" path="/accessibility-info" />
 
       <PrivateRoute
         component={AdminResourcesPage}
