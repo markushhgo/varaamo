@@ -19,6 +19,11 @@ $selectDropdownPaddingRight: 4px;
     @include add-focus(3px);
   }
 
+  &--is-disabled {
+    background-color: $silver;
+    color: $dark-gray;
+  }
+
   .app-Select__control {
     border: $selectBorderWidth solid $input-border;
     border-radius: $selectBorderRadius;

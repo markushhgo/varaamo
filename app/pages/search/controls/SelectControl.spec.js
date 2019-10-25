@@ -55,6 +55,7 @@ describe('pages/search/controls/SelectControl', () => {
 
     expect(select.length).toBe(1);
     expect(select.prop('disabled')).toBe(true);
+    expect(select.hasClass('app-Select--is-disabled')).toBe(true);
   });
 
   test('renders select element with correct props', () => {

@@ -89,7 +89,7 @@ class SelectControl extends React.Component {
             && (
               <React.Fragment>
                 <select
-                  className={classNames('app-Select', className)}
+                  className={classNames('app-Select', className, isDisabled && 'app-Select--is-disabled')}
                   disabled={isDisabled}
                   id={id}
                   name={name}
