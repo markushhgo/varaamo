@@ -74,6 +74,7 @@
   "common.userEmailLabel": "Account email",
   "common.yes": "Yes",
   "SelectControl.noOptions": "No options",
+  "SelectControl.clearLabel": "Clear selection",
   "ConfirmReservationModal.beforeText": "Original reservation time:",
   "ConfirmReservationModal.editTitle": "Changing reservation",
   "ConfirmReservationModal.formInfo": "Please fill in the following data for your preliminary reservation. The fields marked with an asterisk (*) are mandatory.",
