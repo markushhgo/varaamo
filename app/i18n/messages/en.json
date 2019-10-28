@@ -328,6 +328,7 @@
   "SortBy.type.label": "Type",
   "SortBy.premise.label": "Premise",
   "SortBy.people.label": "People",
+  "SortBy.sortingStyle":"Search result sorting order is ",
   "TestSiteMessage.text": "This is the test version of Varaamo",
   "TimeRangeControl.timeRangeTitle": "Time range and minimum duration",
   "TimeRangeControl.title": "{date} at {start}-{end} {hours}h booking",
