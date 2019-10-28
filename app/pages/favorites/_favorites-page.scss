@@ -1,0 +1,23 @@
+.favorite {
+  margin-bottom: 20px;
+  @include box-shadow;
+}
+
+.favorite-image-container {
+
+
+}
+.favorite-image{
+  height: 180px;
+  width: 180px;
+
+  @media(max-width: $screen-sm-max) {
+    height: 0;
+    width: 0;
+    display: none;
+  }
+}
+
+.favorite-name-container {
+
+}

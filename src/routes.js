@@ -12,6 +12,7 @@ import ReservationPage from '../app/pages/reservation';
 import ResourcePage from '../app/pages/resource';
 import SearchPage from '../app/pages/search';
 import UserReservationsPage from '../app/pages/user-reservations';
+import FavoritesPage from '../app/pages/favorites';
 
 export default () => (
   <AppContainer>
@@ -27,8 +28,8 @@ export default () => (
         path="/admin-resources"
       />
       <PrivateRoute
-        component={AdminResourcesPage}
-        componentName="AdminResources"
+        component={FavoritesPage}
+        componentName="Favorites"
         path="/favourites"
       />
       <PrivateRoute
