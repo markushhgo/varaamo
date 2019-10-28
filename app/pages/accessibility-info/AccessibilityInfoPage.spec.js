@@ -1,13 +1,18 @@
 import React from 'react';
+import { FormattedHTMLMessage } from 'react-intl';
 
 import PageWrapper from 'pages/PageWrapper';
 import { shallowWithIntl } from 'utils/testUtils';
 import AccessibilityInfoPage from './AccessibilityInfoPage';
+import { FinnishText, SwedishText } from './content';
 
 
 describe('pages/accessibility-info/AccessibilityInfoPage', () => {
-  function getWrapper() {
-    return shallowWithIntl(<AccessibilityInfoPage />);
+  const defaultProps = {
+    currentLanguage: 'fi'
+  };
+  function getWrapper(props) {
+    return shallowWithIntl(<AccessibilityInfoPage {...defaultProps} {...props} />);
   }
 
   test('componentDidMount', () => {
@@ -25,8 +30,18 @@ describe('pages/accessibility-info/AccessibilityInfoPage', () => {
     expect(pageWrapper.prop('title')).toBe('AccessibilityInfo.title');
   });
 
-  test('renders <article> that contains text', () => {
-    const element = getWrapper().find('article');
-    expect(element).toHaveLength(1);
+  describe('render <FormattedHTMLMessage>', () => {
+    test('with correct props when language is Finnish', () => {
+      const element = getWrapper().find(FormattedHTMLMessage);
+      expect(element).toHaveLength(1);
+      expect(element.prop('defaultMessage')).toBe(FinnishText);
+      expect(element.prop('id')).toBe('AccessibilityContent');
+    });
+    test('with correct props when language is Swedish', () => {
+      const element = getWrapper({ currentLanguage: 'sv' }).find(FormattedHTMLMessage);
+      expect(element).toHaveLength(1);
+      expect(element.prop('defaultMessage')).toBe(SwedishText);
+      expect(element.prop('id')).toBe('AccessibilityContent');
+    });
   });
 });
