@@ -330,6 +330,7 @@
   "SortBy.type.label": "Tyyppi",
   "SortBy.premise.label": "Toimipiste",
   "SortBy.people.label": "Henkilömäärä",
+  "SortBy.sortingStyle":"Hakutulosten järjestelytapa on ",
   "TimeRangeControl.timeRangeTitle": "Käytä aikaväliä ja varauksen minimipituutta",
   "TimeRangeControl.title": "{date} klo {start}-{end} {hours}h varaus",
   "TimeRangeControl.start.label": "Alkamisaika",
