@@ -8,11 +8,11 @@ import Well from 'react-bootstrap/lib/Well';
 import Panel from 'react-bootstrap/lib/Panel';
 
 import { fetchFavoritedResources } from 'actions/resourceActions';
-import { getResourcePageUrl } from 'utils/resourceUtils';
+import { fetchUnits } from 'actions/unitActions';
 import { injectT } from 'i18n';
 import PageWrapper from 'pages/PageWrapper';
 import favoritesPageSelector from './favoritesPageSelector';
-import FavoriteItem from './favoriteItem';
+import { FavoriteItem } from './favoriteItem';
 
 class UnconnectedFavoritesPage extends Component {
   constructor(props) {
@@ -24,11 +24,22 @@ class UnconnectedFavoritesPage extends Component {
     this.fetchResources();
   }
 
+
+  handleLinkClick = () => {
+    const scrollTop = window.pageYOffset
+      || document.documentElement.scrollTop
+      || document.body.scrollTop;
+    const { location, history } = this.props;
+    const { pathname, search } = location;
+    history.replace({ pathname, search, state: { scrollTop } });
+  };
+
   fetchResources(date = this.props.date) {
     this.props.actions.fetchFavoritedResources(moment(date), 'favoritesPage');
+    this.props.actions.fetchUnits();
   }
 
-
+  /*
   renderFavorite(resource, t) {
     const link = getResourcePageUrl(resource);
     const len = this.props.resources.length % 2;
@@ -46,23 +57,36 @@ class UnconnectedFavoritesPage extends Component {
       </div>
     );
   }
-
+*/
   render() {
     const {
-      isLoggedin, isFetchingResources, contrast, t, resources, favorites, date
+      isLoggedin, isFetchingResources,
+      contrast, t, resources, favorites, resourcesLoaded,
+      date
     } = this.props;
     return (
-      <PageWrapper className="favorites" title="favorite">
-        <Loader loaded={Boolean(!isFetchingResources || resources.length)}>
-          {true && (
+      <div className="app-Favorites">
+        <PageWrapper className="favorites" title={t('Navbar.userFavorites')}>
+          <Loader loaded={Boolean(!isFetchingResources || resources.length)}>
+            {resourcesLoaded && (
             <div className="container-fluid">
-              <div className="favorite-row">
-                {resources.map((resource, key) => FavoriteItem(resource, t, key, date))}
+              <h1>{t('Navbar.userFavorites')}</h1>
+              <div className="favorites-list">
+                <div className="favorite-row">
+                  {resources.map((resource, key) => FavoriteItem(
+                    resource, t, key, date, this.handleLinkClick
+                  ))
+                  }
+                </div>
               </div>
             </div>
-          )}
-        </Loader>
-      </PageWrapper>
+            )}
+            {!resourcesLoaded && (
+            <div>did not load?</div>
+            )}
+          </Loader>
+        </PageWrapper>
+      </div>
     );
   }
 }
@@ -76,6 +100,9 @@ UnconnectedFavoritesPage.propTypes = {
   isLoggedin: PropTypes.bool,
   isFetchingResources: PropTypes.bool.isRequired,
   resources: PropTypes.array.isRequired,
+  resourcesLoaded: PropTypes.bool,
+  location: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired,
 };
 
 UnconnectedFavoritesPage = injectT(UnconnectedFavoritesPage); // eslint-disable-line
@@ -83,6 +110,7 @@ UnconnectedFavoritesPage = injectT(UnconnectedFavoritesPage); // eslint-disable-
 function mapDispatchToProps(dispatch) {
   const actionCreators = {
     fetchFavoritedResources,
+    fetchUnits
   };
 
   return { actions: bindActionCreators(actionCreators, dispatch) };
