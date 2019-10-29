@@ -31,9 +31,11 @@ class UnconnectedFavoritesPage extends Component {
 
   renderFavorite(resource, t) {
     const link = getResourcePageUrl(resource);
+    const len = this.props.resources.length % 2;
+    const x = len === 1 ? '3' : '2';
 
     return (
-      <div className="app-ResourceCard">
+      <div className="favorite col-md-3 col-sm-6 col-xs-12">
         <div className="favorite-name col-xs-12">
           {t('SortBy.name.label')}
           {resource.name}
@@ -47,14 +49,16 @@ class UnconnectedFavoritesPage extends Component {
 
   render() {
     const {
-      isLoggedin, isFetchingResources, contrast, t, resources, favorites
+      isLoggedin, isFetchingResources, contrast, t, resources, favorites, date
     } = this.props;
     return (
-      <PageWrapper className="favourites" title="favorite">
+      <PageWrapper className="favorites" title="favorite">
         <Loader loaded={Boolean(!isFetchingResources || resources.length)}>
           {true && (
-            <div>
-              {resources.map((resource, key) => FavoriteItem(resource, t, key))}
+            <div className="container-fluid">
+              <div className="favorite-row">
+                {resources.map((resource, key) => FavoriteItem(resource, t, key, date))}
+              </div>
             </div>
           )}
         </Loader>
@@ -66,9 +70,9 @@ class UnconnectedFavoritesPage extends Component {
 UnconnectedFavoritesPage.propTypes = {
   actions: PropTypes.object.isRequired,
   contrast: PropTypes.string,
+  date: PropTypes.string,
   favorites: PropTypes.array,
   t: PropTypes.func.isRequired,
-  date: PropTypes.string,
   isLoggedin: PropTypes.bool,
   isFetchingResources: PropTypes.bool.isRequired,
   resources: PropTypes.array.isRequired,
