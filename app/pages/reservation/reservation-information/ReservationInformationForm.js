@@ -260,7 +260,13 @@ class UnconnectedReservationInformationForm extends Component {
               { autoComplete: 'address-level2' },
             )
           }
-          <h3>{t('ReservationInformationForm.eventInformationTitle')}</h3>
+          {(includes(this.props.fields, 'eventSubject')
+          || includes(this.props.fields, 'eventDescription')
+          || includes(this.props.fields, 'numberofParticipants')
+          || includes(this.props.fields, 'requireAssistance')
+          || includes(this.props.fields, 'comments'))
+          && <h3 className="ReservationInformationForm">{t('ReservationInformationForm.eventInformationTitle')}</h3>
+        }
           {this.renderField(
             'eventSubject',
             'eventSubject',
