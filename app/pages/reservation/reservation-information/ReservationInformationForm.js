@@ -301,6 +301,16 @@ class UnconnectedReservationInformationForm extends Component {
             true
           )}
           {this.renderField(
+            'requireWorkstation',
+            'requireWorkstation',
+            'checkbox',
+            t('common.requireWorkstationLabel'),
+            {},
+            null,
+            null,
+            true
+          )}
+          {this.renderField(
             'comments',
             'comments',
             'textarea',
