@@ -4,15 +4,14 @@ import React, { Component } from 'react';
 import Loader from 'react-loader';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import Well from 'react-bootstrap/lib/Well';
-import Panel from 'react-bootstrap/lib/Panel';
 
-import { fetchFavoritedResources } from 'actions/resourceActions';
+import { fetchFavoritedResources, favoriteResource, unfavoriteResource } from 'actions/resourceActions';
 import { fetchUnits } from 'actions/unitActions';
+import { clearFavorites } from 'actions/uiActions';
 import { injectT } from 'i18n';
 import PageWrapper from 'pages/PageWrapper';
 import favoritesPageSelector from './favoritesPageSelector';
-import { FavoriteItem } from './favoriteItem';
+import FavoriteItem from './favoriteItem';
 
 class UnconnectedFavoritesPage extends Component {
   constructor(props) {
@@ -24,6 +23,9 @@ class UnconnectedFavoritesPage extends Component {
     this.fetchResources();
   }
 
+  componentWillUnmount() {
+    this.props.actions.clearFavorites();
+  }
 
   handleLinkClick = () => {
     const scrollTop = window.pageYOffset
@@ -39,50 +41,42 @@ class UnconnectedFavoritesPage extends Component {
     this.props.actions.fetchUnits();
   }
 
-  /*
-  renderFavorite(resource, t) {
-    const link = getResourcePageUrl(resource);
-    const len = this.props.resources.length % 2;
-    const x = len === 1 ? '3' : '2';
-
-    return (
-      <div className="favorite col-md-3 col-sm-6 col-xs-12">
-        <div className="favorite-name col-xs-12">
-          {t('SortBy.name.label')}
-          {resource.name}
-        </div>
-        <div className="favorite-link col-xs-12">
-          <a href={link}>Link</a>
-        </div>
-      </div>
-    );
-  }
-*/
   render() {
     const {
-      isLoggedin, isFetchingResources,
-      contrast, t, resources, favorites, resourcesLoaded,
-      date
+      isFetchingResources,
+      t, resources, resourcesLoaded,
+      date, actions, isLargerFontSize, fontSize
     } = this.props;
+    const isBiggestFontSize = fontSize === '__font-size-large';
+
     return (
       <div className="app-Favorites">
-        <PageWrapper className="favorites" title={t('Navbar.userFavorites')}>
+        <PageWrapper title={t('Navbar.userFavorites')}>
           <Loader loaded={Boolean(!isFetchingResources || resources.length)}>
             {resourcesLoaded && (
-            <div className="container-fluid">
+            <React.Fragment>
               <h1>{t('Navbar.userFavorites')}</h1>
               <div className="favorites-list">
-                <div className="favorite-row">
-                  {resources.map((resource, key) => FavoriteItem(
-                    resource, t, key, date, this.handleLinkClick
+                <div className={`favorite-row${isBiggestFontSize ? '__large' : ''}`}>
+                  {resources.map((resource, key) => (
+                    <FavoriteItem
+                      actions={actions}
+                      date={date}
+                      handleClick={this.handleLinkClick}
+                      isLarger={isLargerFontSize}
+                      key={key}
+                      resource={resource}
+                    />
                   ))
                   }
                 </div>
               </div>
-            </div>
+            </React.Fragment>
             )}
             {!resourcesLoaded && (
-            <div>did not load?</div>
+            <div className="">
+              <h1>{t('Notifications.errorMessage')}</h1>
+            </div>
             )}
           </Loader>
         </PageWrapper>
@@ -93,11 +87,10 @@ class UnconnectedFavoritesPage extends Component {
 
 UnconnectedFavoritesPage.propTypes = {
   actions: PropTypes.object.isRequired,
-  contrast: PropTypes.string,
   date: PropTypes.string,
-  favorites: PropTypes.array,
+  fontSize: PropTypes.string,
+  isLargerFontSize: PropTypes.bool,
   t: PropTypes.func.isRequired,
-  isLoggedin: PropTypes.bool,
   isFetchingResources: PropTypes.bool.isRequired,
   resources: PropTypes.array.isRequired,
   resourcesLoaded: PropTypes.bool,
@@ -110,7 +103,10 @@ UnconnectedFavoritesPage = injectT(UnconnectedFavoritesPage); // eslint-disable-
 function mapDispatchToProps(dispatch) {
   const actionCreators = {
     fetchFavoritedResources,
-    fetchUnits
+    fetchUnits,
+    favoriteResource,
+    unfavoriteResource,
+    clearFavorites,
   };
 
   return { actions: bindActionCreators(actionCreators, dispatch) };
