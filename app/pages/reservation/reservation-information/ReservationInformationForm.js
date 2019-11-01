@@ -173,7 +173,6 @@ class UnconnectedReservationInformationForm extends Component {
                 'checkbox',
                 t('ReservationForm.staffEventLabel'),
                 {},
-                t('ReservationForm.staffEventHelp'),
               )}
             </Well>
           )}
@@ -274,7 +273,6 @@ class UnconnectedReservationInformationForm extends Component {
             t('common.eventSubjectLabel'),
             {},
             null,
-            t('ReservationForm.eventSubjectInfo'),
           )}
           {this.renderField(
             'eventDescription',
