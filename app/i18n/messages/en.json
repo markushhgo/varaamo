@@ -126,6 +126,7 @@
   "Navbar.userFavorites": "Favorites",
   "Navbar.header": "Welcome",
   "Navbar.homeLink": "Welcome",
+  "Navbar.language.active":"English",
   "Navbar.language-english": "English language",
   "Navbar.language-finnish": "Finnish language",
   "Navbar.language-swedish": "Swedish language",
