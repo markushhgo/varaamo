@@ -91,11 +91,40 @@ describe('shared/top-navbar/TopNavbar', () => {
         const nav = getLanguageDropdownWrap({ changeLocale, currentLanguage }).find(NavDropdown);
 
         expect(nav).toHaveLength(1);
+        expect(nav.prop('aria-label')).toBe('Navbar.language.active');
         expect(nav.prop('className')).toBe('mobile_lang_dropdown');
         expect(nav.prop('eventKey')).toBe('lang');
         expect(nav.prop('id')).toBe('mobile');
         expect(nav.prop('onSelect')).toBe(changeLocale);
         expect(nav.prop('title')).toBe(currentLanguage);
+      });
+
+      test('renders correct MenuItems when language is Finnish', () => {
+        const currentLanguage = 'fi';
+        const element = getLanguageDropdownWrap(
+          { currentLanguage }
+        ).find(NavDropdown).find(MenuItem);
+        expect(element).toHaveLength(2);
+        expect(element.at(0).prop('active')).toBe(true);
+        expect(element.at(0).prop('aria-label')).toBe('Navbar.language-finnish');
+        expect(element.at(0).prop('eventKey')).toBe('fi');
+        expect(element.at(1).prop('active')).toBeUndefined();
+        expect(element.at(1).prop('aria-label')).toBe('Navbar.language-swedish');
+        expect(element.at(1).prop('eventKey')).toBe('sv');
+      });
+
+      test('renders correct MenuItems when language is Swedish', () => {
+        const currentLanguage = 'sv';
+        const element = getLanguageDropdownWrap(
+          { currentLanguage }
+        ).find(NavDropdown).find(MenuItem);
+        expect(element).toHaveLength(2);
+        expect(element.at(0).prop('active')).toBeUndefined();
+        expect(element.at(0).prop('aria-label')).toBe('Navbar.language-finnish');
+        expect(element.at(0).prop('eventKey')).toBe('fi');
+        expect(element.at(1).prop('active')).toBe(true);
+        expect(element.at(1).prop('aria-label')).toBe('Navbar.language-swedish');
+        expect(element.at(1).prop('eventKey')).toBe('sv');
       });
     });
 
@@ -136,15 +165,26 @@ describe('shared/top-navbar/TopNavbar', () => {
       expect(actual).toBe(changeLocale);
     });
 
+    test('has correct props', () => {
+      const currentLanguage = 'sv';
+      const element = getLanguageNavWrapper({ currentLanguage });
+      expect(element.prop('aria-label')).toBe('Navbar.language.active');
+      expect(element.prop('className')).toBe('app-TopNavbar__language');
+      expect(element.prop('eventKey')).toBe('lang');
+      expect(element.prop('id')).toBe('language-nav-dropdown');
+      expect(element.prop('tabIndex')).toBe('0');
+      expect(element.prop('title')).toBe(currentLanguage);
+    });
+
     test('renders correct MenuItems when language is Finnish', () => {
       const currentLanguage = 'fi';
       const menuItems = getLanguageNavWrapper({ currentLanguage }).find(MenuItem);
       expect(menuItems).toHaveLength(2);
       expect(menuItems.at(0).prop('active')).toBe(true);
-      expect(menuItems.at(0).prop('aria-label')).toBe('Suomi');
+      expect(menuItems.at(0).prop('aria-label')).toBe('Navbar.language-finnish');
       expect(menuItems.at(0).prop('eventKey')).toBe('fi');
       expect(menuItems.at(1).prop('active')).toBeUndefined();
-      expect(menuItems.at(1).prop('aria-label')).toBe('Svenska');
+      expect(menuItems.at(1).prop('aria-label')).toBe('Navbar.language-swedish');
       expect(menuItems.at(1).prop('eventKey')).toBe('sv');
     });
 
@@ -153,10 +193,10 @@ describe('shared/top-navbar/TopNavbar', () => {
       const menuItems = getLanguageNavWrapper({ currentLanguage }).find(MenuItem);
       expect(menuItems).toHaveLength(2);
       expect(menuItems.at(0).prop('active')).toBeUndefined();
-      expect(menuItems.at(0).prop('aria-label')).toBe('Suomi');
+      expect(menuItems.at(0).prop('aria-label')).toBe('Navbar.language-finnish');
       expect(menuItems.at(0).prop('eventKey')).toBe('fi');
       expect(menuItems.at(1).prop('active')).toBe(true);
-      expect(menuItems.at(1).prop('aria-label')).toBe('Svenska');
+      expect(menuItems.at(1).prop('aria-label')).toBe('Navbar.language-swedish');
       expect(menuItems.at(1).prop('eventKey')).toBe('sv');
     });
   });
