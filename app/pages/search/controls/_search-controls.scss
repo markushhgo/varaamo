@@ -316,13 +316,16 @@
   #time-filter-start-select,
   #time-filter-end-select,
   #time-filter-duration-select {
-    @media (min-width: $screen-lg-min) {
+    @media (min-width: 1401px) {
       width: 410px;
+    }
+    @media (min-width: $screen-lg-min) and (max-width: 1400px) {
+      width: 360px;
     }
     @media (min-width: $screen-md-min) and (max-width: $screen-md-max) {
       width: 295px;
     }
-    @media (max-width: $screen-xs-min) {
+    @media (max-width: $screen-xs-max) {
       width: 95%;
     }
   }
