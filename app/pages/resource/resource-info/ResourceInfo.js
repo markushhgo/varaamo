@@ -26,7 +26,7 @@ function ResourceInfo({
         </div>
         <Panel defaultExpanded header={t('ResourceInfo.reservationTitle')}>
           <Panel.Heading>
-            <Panel.Title componentClass="h2">
+            <Panel.Title componentClass="h3">
               {t('ResourceInfo.reservationTitle')}
             </Panel.Title>
           </Panel.Heading>
@@ -34,7 +34,7 @@ function ResourceInfo({
         </Panel>
         <Panel header={t('ResourceInfo.additionalInfoTitle')}>
           <Panel.Heading>
-            <Panel.Title componentClass="h2">
+            <Panel.Title componentClass="h3">
               {t('ResourceInfo.additionalInfoTitle')}
             </Panel.Title>
           </Panel.Heading>
@@ -65,7 +65,7 @@ function ResourceInfo({
         {equipmentList.length > 0 && (
           <Panel defaultExpanded header={t('ResourceInfo.equipmentHeader')}>
             <Panel.Heading>
-              <Panel.Title componentClass="h2">
+              <Panel.Title componentClass="h3">
                 {t('ResourceInfo.equipmentHeader')}
               </Panel.Title>
             </Panel.Heading>
