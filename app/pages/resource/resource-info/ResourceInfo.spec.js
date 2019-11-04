@@ -83,9 +83,9 @@ describe('pages/resource/resource-info/ResourceInfo', () => {
     const panels = getWrapper().find(Panel).find(Panel.Heading).find(Panel.Title);
 
     expect(panels).toHaveLength(3);
-    expect(panels.at(0).prop('componentClass')).toBe('h2');
-    expect(panels.at(1).prop('componentClass')).toBe('h2');
-    expect(panels.at(2).prop('componentClass')).toBe('h2');
+    expect(panels.at(0).prop('componentClass')).toBe('h3');
+    expect(panels.at(1).prop('componentClass')).toBe('h3');
+    expect(panels.at(2).prop('componentClass')).toBe('h3');
 
     expect(panels.at(0).prop('children')).toBe('ResourceInfo.reservationTitle');
     expect(panels.at(1).prop('children')).toBe('ResourceInfo.additionalInfoTitle');
