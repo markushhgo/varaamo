@@ -361,5 +361,8 @@
   "UserReservationsPage.regularReservationsHeader": "Standard reservations",
   "UserReservationsPage.title": "My reservations",
   "Nav.FontSize.title": "Fontsize",
+  "Nav.FontSize.small":"Small",
+  "Nav.FontSize.medium":"Medium",
+  "Nav.FontSize.large":"Large",
   "Nav.Contrast.title": "Contrast"
 }

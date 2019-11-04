@@ -365,5 +365,8 @@
   "UserReservationsPage.regularReservationsHeader": "Vanliga bokningar",
   "UserReservationsPage.title": "Mina bokningar",
   "Nav.FontSize.title": "Fontstorlek",
+  "Nav.FontSize.small":"Liten",
+  "Nav.FontSize.medium":"Medelstor",
+  "Nav.FontSize.large":"Stor",
   "Nav.Contrast.title": "Kontrast"
 }
