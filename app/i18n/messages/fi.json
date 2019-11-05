@@ -364,5 +364,8 @@
   "UserReservationsPage.regularReservationsHeader": "Tavalliset varaukset",
   "UserReservationsPage.title": "Omat varaukset",
   "Nav.FontSize.title": "Tekstikoko",
+  "Nav.FontSize.small":"Pieni",
+  "Nav.FontSize.medium":"Keskisuuri",
+  "Nav.FontSize.large":"Suuri",
   "Nav.Contrast.title": "Kontrasti"
 }
