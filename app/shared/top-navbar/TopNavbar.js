@@ -88,7 +88,7 @@ class TopNavbar extends Component {
     return (
       <div>
         <MobileNavbar contrast={contrast} toggle={this.state.expandMobileNavbar} />
-        <Navbar aria-label={t('Navbar.aria.topNavbar.title')} className={classNames('app-TopNavbar', contrast)} expanded={this.state.expanded} onToggle={() => this.toggleCollapse()}>
+        <Navbar className={classNames('app-TopNavbar', contrast)} expanded={this.state.expanded} onToggle={() => this.toggleCollapse()}>
 
           <Navbar.Header>
             <Navbar.Brand>
@@ -140,7 +140,7 @@ class TopNavbar extends Component {
             </div>
           </Navbar.Header>
           <Navbar.Collapse id="navCollapse" role="presentation">
-            <Nav aria-label={t('Navbar.aria.topNavbar.options')} pullRight role="list">
+            <Nav pullRight role="list">
               <ContrastChanger />
 
               <FontChanger />
@@ -167,7 +167,7 @@ class TopNavbar extends Component {
 
               {isLoggedIn && (
                 <NavDropdown
-                  aria-label="Logout"
+                  aria-label={t('Navbar.logout')}
                   className="app-TopNavbar__name"
                   eventKey="lang"
                   id="user-nav-dropdown"
