@@ -116,7 +116,6 @@ A
           {this.renderFontButton(this.third, ACC.FONT_SIZES.LARGE)}
         </div>
       </li>
-
     );
   }
 }

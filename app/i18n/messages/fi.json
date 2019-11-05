@@ -113,6 +113,12 @@
   "MapToggle.showMap": "Kartta",
   "MiniModal.buttonText": "Valmis",
   "ModalHeader.closeButtonText": "Sulje",
+  "Nav.FontSize.title": "Tekstikoko",
+  "Nav.FontSize.small":"pieni tekstikoko",
+  "Nav.FontSize.medium":"keskisuuri tekstikoko",
+  "Nav.FontSize.large":"suuri tekstikoko",
+  "Nav.Contrast.title": "Kontrasti",
+  "Nav.Contrast.button": "vaihda kontrastia",
   "Navbar.aboutLink": "Lisää tietoa",
   "Navbar.adminResources": "Omat tilat",
   "Navbar.adminMaintenance": "Ylläpito",
@@ -362,10 +368,5 @@
   "UserReservationsPage.preliminaryReservationsHeader": "Käsiteltävät varaukset",
   "UserReservationsPage.regularEmptyMessage": "Ei tavallisia varauksia näytettäväksi.",
   "UserReservationsPage.regularReservationsHeader": "Tavalliset varaukset",
-  "UserReservationsPage.title": "Omat varaukset",
-  "Nav.FontSize.title": "Tekstikoko",
-  "Nav.FontSize.small":"Pieni",
-  "Nav.FontSize.medium":"Keskisuuri",
-  "Nav.FontSize.large":"Suuri",
-  "Nav.Contrast.title": "Kontrasti"
+  "UserReservationsPage.title": "Omat varaukset"
 }

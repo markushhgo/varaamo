@@ -47,6 +47,30 @@ describe('shared/top-navbar/TopNavbar', () => {
     });
   });
 
+  describe('collapse functions', () => {
+    let element;
+    let instance;
+    beforeEach(() => {
+      element = getWrapper();
+      instance = element.instance();
+    });
+    test('collapseItem sets expanded to false', () => {
+      element.setState({ expanded: true });
+      expect(element.state('expanded')).toBe(true);
+      instance.collapseItem();
+      expect(element.state('expanded')).toBe(false);
+    });
+
+    test('toggleCollapse toggles expanded to !prevState.expanded', () => {
+      element.setState({ expanded: true });
+      expect(element.state('expanded')).toBe(true);
+      instance.toggleCollapse();
+      expect(element.state('expanded')).toBe(false);
+      instance.toggleCollapse();
+      expect(element.state('expanded')).toBe(true);
+    });
+  });
+
   describe('renders mobile, ', () => {
     test('renders MobileNavbar', () => {
       const element = getWrapper().find(MobileNavbar);
