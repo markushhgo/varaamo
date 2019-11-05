@@ -167,7 +167,7 @@ class TopNavbar extends Component {
 
               {isLoggedIn && (
                 <NavDropdown
-                  aria-label="Logout"
+                  aria-label={t('Navbar.logout')}
                   className="app-TopNavbar__name"
                   eventKey="lang"
                   id="user-nav-dropdown"

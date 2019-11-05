@@ -239,6 +239,10 @@ describe('shared/top-navbar/TopNavbar', () => {
       const userNavDropDown = getLoggedInNotAdminWrapper().find('#user-nav-dropdown');
       expect(userNavDropDown).toHaveLength(1);
       expect(userNavDropDown.at(0).prop('title')).toBe(props.userName);
+      expect(userNavDropDown.prop('aria-label')).toBe('Navbar.logout');
+      expect(userNavDropDown.prop('className')).toBe('app-TopNavbar__name');
+      expect(userNavDropDown.prop('id')).toBe('user-nav-dropdown');
+      expect(userNavDropDown.prop('noCaret')).toBeTruthy();
     });
 
     test('renders a logout link/button', () => {
