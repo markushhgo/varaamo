@@ -28,6 +28,7 @@ class ReservationInformation extends Component {
     selectedTime: PropTypes.object.isRequired,
     t: PropTypes.func.isRequired,
     unit: PropTypes.object.isRequired,
+    user: PropTypes.object.isRequired,
   };
 
   onConfirm = (values) => {
@@ -73,7 +74,18 @@ class ReservationInformation extends Component {
     if (isEditing) {
       rv = { ...rv, staffEvent: isStaffEvent(reservation, resource) };
     }
+    if (!reservation) {
+      rv = this.getFormInitialValuesFromUser();
+    }
     return rv;
+  }
+
+  getFormInitialValuesFromUser = () => {
+    const { user } = this.props;
+    if (user.displayName && user.email) {
+      return { reserverName: user.displayName, reserverEmailAddress: user.email };
+    }
+    return {};
   }
 
   getRequiredFormFields(resource, termsAndConditions) {
@@ -111,8 +123,8 @@ class ReservationInformation extends Component {
       selectedTime,
       t,
       unit,
+      user,
     } = this.props;
-
     const termsAndConditions = getTermsAndConditions(resource);
     const beginText = moment(selectedTime.begin).format('D.M.YYYY HH:mm');
     const endText = moment(selectedTime.end).format('HH:mm');
@@ -135,6 +147,7 @@ class ReservationInformation extends Component {
             requiredFields={this.getRequiredFormFields(resource, termsAndConditions)}
             resource={resource}
             termsAndConditions={termsAndConditions}
+            user={user}
           />
         </Col>
         <Col lg={4} sm={12}>
