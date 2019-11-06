@@ -253,6 +253,16 @@ describe('pages/reservation/reservation-information/ReservationInformation', () 
       const actual = instance.getFormInitialValuesFromUser();
       expect(actual).toEqual(expected);
     });
+
+    test('returns empty object if displayName and email dont exist', () => {
+      const user = User.build({});
+      const wrapper = getWrapper({ user });
+      const instance = wrapper.instance();
+      expect(instance.props.user.displayName).toBeUndefined();
+      expect(instance.props.user.email).toBeUndefined();
+      const actual = instance.getFormInitialValuesFromUser();
+      expect(actual).toEqual({});
+    });
   });
 
   describe('getRequiredFormFields', () => {
