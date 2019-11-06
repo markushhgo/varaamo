@@ -207,7 +207,7 @@ describe('pages/reservation/reservation-information/ReservationInformation', () 
   });
 
   describe('getFormInitialValuesFromUser', () => {
-    test('returns object with correct values if displayName and email exist', () => {
+    test('returns object with both values if displayName and email exist', () => {
       const user = User.build({
         displayName: 'Etunimi Sukunimi',
         email: 'sähkö@posti.fi',
@@ -224,28 +224,34 @@ describe('pages/reservation/reservation-information/ReservationInformation', () 
       expect(actual).toEqual(expected);
     });
 
-    test('returns an empty object when displayName doesnt exist', () => {
+    test('returns object with reserverEmailAddress if displayName doesnt exist', () => {
       const user = User.build({
         email: 'sähkö@posti.fi'
       });
+      const expected = {
+        reserverEmailAddress: user.email
+      };
       const wrapper = getWrapper({ user });
       const instance = wrapper.instance();
       expect(instance.props.user.displayName).toBeUndefined();
       expect(instance.props.user.email).toBeDefined();
       const actual = instance.getFormInitialValuesFromUser();
-      expect(actual).toEqual({});
+      expect(actual).toEqual(expected);
     });
 
-    test('returns an empty object when email doesnt exist', () => {
+    test('returns object with reserverName if email doesnt exist', () => {
       const user = User.build({
         displayName: 'Etunimi Sukunimi'
       });
+      const expected = {
+        reserverName: user.displayName
+      };
       const wrapper = getWrapper({ user });
       const instance = wrapper.instance();
       expect(instance.props.user.displayName).toBeDefined();
       expect(instance.props.user.email).toBeUndefined();
       const actual = instance.getFormInitialValuesFromUser();
-      expect(actual).toEqual({});
+      expect(actual).toEqual(expected);
     });
   });
 

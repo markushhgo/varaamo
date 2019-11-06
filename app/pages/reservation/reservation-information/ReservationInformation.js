@@ -82,8 +82,11 @@ class ReservationInformation extends Component {
 
   getFormInitialValuesFromUser = () => {
     const { user } = this.props;
-    if (user.displayName && user.email) {
-      return { reserverName: user.displayName, reserverEmailAddress: user.email };
+    if (user.displayName || user.email) {
+      return {
+        reserverName: user.displayName ? (user.displayName) : (undefined),
+        reserverEmailAddress: user.email ? (user.email) : (undefined)
+      };
     }
     return {};
   }
