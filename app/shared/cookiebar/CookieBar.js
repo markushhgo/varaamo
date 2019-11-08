@@ -19,7 +19,7 @@ function CookieBar() {
     buttonText = 'Hyväksyn';
     declineButtonText = 'Hylkää';
     cookieDescription = 'Käytämme evästeitä parantaaksemme käyttökokemustasi. Jatkamalla Varaamon käyttöä hyväksyt evästeiden käytön.';
-    cookiePolicy = <a href="http://www.turku.fi" style={{ color: 'white' }}>Linkki Evästekäytäntöön</a>;
+    cookiePolicy = <a href="https://varaamo.turku.fi:8007/cookieInformation-fi.html" style={{ color: 'white' }}>Linkki Evästekäytäntöön</a>;
   }
   return (
     <CookieConsent
