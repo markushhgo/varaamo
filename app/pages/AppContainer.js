@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { withRouter } from 'react-router-dom';
 
+import CookieBar from 'shared/cookiebar/CookieBar';
 import { fetchUser } from 'actions/userActions';
 import Favicon from 'shared/favicon';
 import Footer from 'shared/footer';
@@ -63,6 +64,7 @@ export class UnconnectedAppContainer extends Component {
           {this.props.children}
         </main>
         <Footer />
+        <CookieBar />
       </div>
     );
   }
