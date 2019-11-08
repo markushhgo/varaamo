@@ -40,10 +40,11 @@ class MainNavbar extends React.Component {
     return (
       <Navbar aria-label={t('Navbar.aria.mainNavbar.title')} className={classNames('app-MainNavbar', contrast)} expanded={this.state.expanded} onToggle={() => this.toggleCollapse()}>
         <Navbar.Header>
-          <Navbar.Toggle aria-label={t('Navbar.aria.topNavbar.mobileToggle')} />
           <Navbar.Brand>
             <Link to="/">Varaamo</Link>
           </Navbar.Brand>
+          <Navbar.Toggle aria-label={t('Navbar.aria.topNavbar.mobileToggle')} />
+
         </Navbar.Header>
         <Navbar.Collapse>
           <Nav activeKey={activeLink}>

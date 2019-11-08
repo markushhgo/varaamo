@@ -4,11 +4,11 @@ import Button from 'react-bootstrap/lib/Button';
 import Grid from 'react-bootstrap/lib/Grid';
 import { FormattedNumber } from 'react-intl';
 import round from 'lodash/round';
-import iconHome from 'hel-icons/dist/shapes/home.svg';
-import iconMapMarker from 'hel-icons/dist/shapes/map-marker.svg';
-import iconTicket from 'hel-icons/dist/shapes/ticket.svg';
-import iconUser from 'hel-icons/dist/shapes/user-o.svg';
 
+import iconHome from 'assets/icons/home.svg';
+import iconMapMarker from 'assets/icons/map-marker.svg';
+import iconTicket from 'assets/icons/ticket.svg';
+import iconUser from 'assets/icons/user-o.svg';
 import { injectT } from 'i18n';
 import iconClock from 'assets/icons/clock-o.svg';
 import iconMap from 'assets/icons/map.svg';

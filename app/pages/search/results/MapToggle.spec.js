@@ -9,7 +9,8 @@ describe('pages/search/results/MapToggle', () => {
       mapVisible: false,
       onClick: () => null,
       resultCount: 0,
-      contrast: ''
+      contrast: '',
+      hideToggleButtons: false,
     };
     return shallowWithIntl(<MapToggle {...defaults} {...props} />);
   }
@@ -18,7 +19,6 @@ describe('pages/search/results/MapToggle', () => {
     const wrapper = getWrapper();
     expect(wrapper).toHaveLength(1);
     expect(wrapper.is('section.app-MapToggle')).toBe(true);
-    expect(wrapper.prop('role')).toBe('presentation');
   });
 
   test('div.app-MapToggle has no additional classes when isHighContrast = false', () => {
@@ -37,7 +37,7 @@ describe('pages/search/results/MapToggle', () => {
     test('renders app-MapToggle__results-count with correct props', () => {
       const countElement = getWrapper().find('.app-MapToggle__results-count');
       expect(countElement).toHaveLength(1);
-      expect(countElement.prop('role')).toBe('presentation');
+      expect(countElement.prop('role')).toBe('status');
     });
 
     test('renders correct string if there are results', () => {
@@ -50,24 +50,46 @@ describe('pages/search/results/MapToggle', () => {
   });
 
   describe('buttons', () => {
-    test('renders list button disabled if map is not visible', () => {
-      const wrapper = getWrapper({ mapVisible: false });
+    test('renders list button as selected if map is not visible', () => {
+      const wrapper = getWrapper({ mapVisible: false, hideToggleButtons: false });
       const listButton = wrapper.find('.app-MapToggle__button-list');
       const mapButton = wrapper.find('.app-MapToggle__button-map');
+
       expect(listButton.length).toBe(1);
-      expect(listButton.prop('disabled')).toBe(true);
+      expect(listButton.prop('role')).toBe('tab');
+      expect(listButton.prop('aria-selected')).toBe(true);
+      expect(listButton.hasClass('active-tab')).toBe(true);
+
       expect(mapButton.length).toBe(1);
-      expect(mapButton.prop('disabled')).toBe(false);
+      expect(mapButton.prop('role')).toBe('tab');
+      expect(mapButton.prop('aria-selected')).toBe(false);
+      expect(mapButton.hasClass('active-tab')).toBe(false);
     });
 
-    test('renders map button disabled if map is visible', () => {
-      const wrapper = getWrapper({ mapVisible: true });
+    test('renders map button as selected if map is visible', () => {
+      const wrapper = getWrapper({ mapVisible: true, hideToggleButtons: false });
       const listButton = wrapper.find('.app-MapToggle__button-list');
       const mapButton = wrapper.find('.app-MapToggle__button-map');
+
       expect(listButton.length).toBe(1);
-      expect(listButton.prop('disabled')).toBe(false);
+      expect(listButton.prop('role')).toBe('tab');
+      expect(listButton.prop('aria-selected')).toBe(false);
+      expect(listButton.hasClass('active-tab')).toBe(false);
+
       expect(mapButton.length).toBe(1);
-      expect(mapButton.prop('disabled')).toBe(true);
+      expect(mapButton.prop('role')).toBe('tab');
+      expect(mapButton.prop('aria-selected')).toBe(true);
+      expect(mapButton.hasClass('active-tab')).toBe(true);
+    });
+
+    test('Hide Buttons when hideToggleButtons is true', () => {
+      const wrapper = getWrapper({ hideToggleButtons: true });
+      const listButton = wrapper.find('.app-MapToggle__button-list');
+      const mapButton = wrapper.find('.app-MapToggle__button-map');
+
+      expect(listButton.length).toBe(0);
+
+      expect(mapButton.length).toBe(0);
     });
   });
 });
