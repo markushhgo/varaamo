@@ -14,7 +14,7 @@ function CookieBar() {
     buttonText = 'Godkänn';
     declineButtonText = 'Avvisa';
     cookieDescription = 'Vi använder cookies för att kunna ge dig en bättre upplevelse. Genom att du fortsätter att använda Varaamo så accepterar du användingen av cookies.';
-    cookiePolicy = <a href="http://www.turku.fi" style={{ color: 'white' }}>Länk till Cookie Policy</a>;
+    cookiePolicy = <a href="https://varaamo.turku.fi:8007/cookieInformation-sv.html" style={{ color: 'white' }}>Länk till Cookie Policy</a>;
   } else {
     buttonText = 'Hyväksyn';
     declineButtonText = 'Hylkää';
