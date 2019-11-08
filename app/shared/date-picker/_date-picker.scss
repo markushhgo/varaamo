@@ -1,7 +1,7 @@
 .date-picker {
   position: relative;
   border: 1px solid $input-border;
-  @include add-focus
+  @include add-focus;
 
   &::after {
     $arrow-size: 6px;
