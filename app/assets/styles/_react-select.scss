@@ -163,8 +163,11 @@ $selectDropdownPaddingRight: 4px;
   padding-top: 15px;
 
   #purpose, #unit, #people, #app-Sort { // Fixed dropdown button size
-    @media (min-width: $screen-lg-min) {
+    @media (min-width: 1401px) {
       width: 410px;
+    }
+    @media (min-width: $screen-lg-min) and (max-width: 1400px) {
+      width: 360px;
     }
     @media (min-width: $screen-md-min) and (max-width: $screen-md-max) {
       width: 295px;
