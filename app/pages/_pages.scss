@@ -29,7 +29,7 @@
   flex: 0 0 auto;
   padding: 5px 10px;
   margin: auto 8px auto 12px;
-@media (max-width: $screen-xs-max) {
+@media (max-width: $screen-sm-max) {
   margin: auto 12px 12px auto;
 }
 }
@@ -45,7 +45,7 @@
   flex: 0 0 auto;
   padding: 5px 10px;
   margin: auto 12px auto auto;
-  @media (max-width: $screen-xs-max) {
+  @media (max-width: $screen-sm-max) {
     margin: auto auto 12px 12px;
   }
 }
