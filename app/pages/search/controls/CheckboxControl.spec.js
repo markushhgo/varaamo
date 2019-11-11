@@ -19,7 +19,6 @@ describe('pages/search/controls/CheckboxControl', () => {
   test('renders a section.app-CheckboxControl', () => {
     const wrapper = getWrapper({});
     expect(wrapper.is('section.app-CheckboxControl')).toBe(true);
-    expect(wrapper.prop('aria-label')).toBe(defaults.label);
   });
 
   test('renders a Toggle with correct props', () => {

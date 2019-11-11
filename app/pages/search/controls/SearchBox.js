@@ -55,7 +55,7 @@ class SearchBox extends React.Component {
   render() {
     const { t, value } = this.props;
     return (
-      <form aria-label={t('SearchBox.placeholder')} className="app-SearchBox" onSubmit={this.handleSubmit}>
+      <form className="app-SearchBox" onSubmit={this.handleSubmit}>
         <FormGroup controlId="mainTextField">
           <ControlLabel>{t('SearchBox.placeholder')}</ControlLabel>
           <FormControl

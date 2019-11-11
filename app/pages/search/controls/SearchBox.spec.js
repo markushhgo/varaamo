@@ -29,7 +29,6 @@ describe('pages/search/controls/SearchBox', () => {
   test('renders a form.app-SearchBox and props', () => {
     const wrapper = getWrapper();
     expect(wrapper.is('form.app-SearchBox')).toBe(true);
-    expect(wrapper.prop('aria-label')).toBe('SearchBox.placeholder');
   });
 
   test('renders ControlLabel', () => {
