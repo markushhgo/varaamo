@@ -20,7 +20,6 @@ describe('pages/search/controls/TimeRangeControl', () => {
   test('renders a section.app-TimeRangeControl', () => {
     const wrapper = getWrapper();
     expect(wrapper.is('section.app-TimeRangeControl')).toBe(true);
-    expect(wrapper.prop('aria-label')).toBe('TimeRangeControl.timeRangeTitle');
   });
 
   test('renders start select control with correct props', () => {
