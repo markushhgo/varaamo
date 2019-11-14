@@ -76,7 +76,12 @@ describe('shared/top-navbar/TopNavbar', () => {
     });
 
     test('toggleMobileNavbar toggles expandMobileNavbar state', () => {
-      element.setState({ expandedMobileNavbar: false });
+      element.setState({ expandMobileNavbar: false });
+      expect(element.state('expandMobileNavbar')).toBe(false);
+      instance.toggleMobileNavbar();
+      expect(element.state('expandMobileNavbar')).toBe(true);
+      instance.toggleMobileNavbar();
+      expect(element.state('expandMobileNavbar')).toBe(false);
     });
   });
 
