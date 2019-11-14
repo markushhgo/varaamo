@@ -95,7 +95,7 @@ class DatePickerControl extends React.Component {
       .toDate();
 
     return (
-      <section aria-label={t('DatePickerControl.label')} className="app-DatePickerControl">
+      <section className="app-DatePickerControl">
         <form onSubmit={this.handleDateInputSubmit}>
           <FormGroup controlId="datePickerField">
             <ControlLabel>{t('DatePickerControl.label')}</ControlLabel>

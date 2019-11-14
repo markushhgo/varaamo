@@ -12,7 +12,7 @@ function CheckboxControl({
   const labelClassNames = classNames('app-CheckboxControl__label', labelClassName);
 
   return (
-    <section aria-label={label} className="app-CheckboxControl">
+    <section className="app-CheckboxControl">
       <Toggle
         checked={value}
         className={toggleClassNames}
