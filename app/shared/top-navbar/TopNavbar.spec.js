@@ -1,22 +1,27 @@
 import React from 'react';
 import NavItem from 'react-bootstrap/lib/NavItem';
-import MenuItem from 'react-bootstrap/lib/MenuItem';
-import NavDropdown from 'react-bootstrap/lib/NavDropdown';
+import Navbar from 'react-bootstrap/lib/Navbar';
+import Button from 'react-bootstrap/lib/Button';
 
+import LanguageDropdown from './language-dropdown/LanguageDropdown';
+import LoginControls from './login-logout-controls/LoginControls';
+import LogoutControls from './login-logout-controls/LogoutControls';
 import { shallowWithIntl } from 'utils/testUtils';
 import TopNavbar from './TopNavbar';
 import MobileNavbar from './mobile/MobileNavbar';
 
 describe('shared/top-navbar/TopNavbar', () => {
+  const defaults = {
+    changeLocale: () => null,
+    toggleMobileNavbar: () => null,
+    handleLanguageChange: () => null,
+    handleLoginClick: () => null,
+    currentLanguage: 'fi',
+    idToken: 'some-token',
+    isLoggedIn: false,
+    userName: 'Luke Skywalker',
+  };
   function getWrapper(props) {
-    const defaults = {
-      changeLocale: () => null,
-      toggleMobileNavbar: () => null,
-      currentLanguage: 'fi',
-      idToken: 'some-token',
-      isLoggedIn: false,
-      userName: 'Luke Skywalker',
-    };
     return shallowWithIntl(<TopNavbar {...defaults} {...props} />);
   }
 
@@ -69,7 +74,74 @@ describe('shared/top-navbar/TopNavbar', () => {
       instance.toggleCollapse();
       expect(element.state('expanded')).toBe(true);
     });
+
+    test('toggleMobileNavbar toggles expandMobileNavbar state', () => {
+      element.setState({ expandMobileNavbar: false });
+      expect(element.state('expandMobileNavbar')).toBe(false);
+      instance.toggleMobileNavbar();
+      expect(element.state('expandMobileNavbar')).toBe(true);
+      instance.toggleMobileNavbar();
+      expect(element.state('expandMobileNavbar')).toBe(false);
+    });
   });
+
+  describe('handle functions', () => {
+    let element;
+    let instance;
+    let spy;
+    const handleLoginClickMock = jest.fn();
+    const handleLogoutClickMock = jest.fn();
+    const handleLanguageChangeMock = jest.fn();
+    beforeEach(() => {
+      element = getWrapper({ isLoggedIn: true });
+      element.instance().handleLoginClick = handleLoginClickMock;
+      element.instance().handleLogoutClick = handleLogoutClickMock;
+      element.instance().handleLanguageChange = handleLanguageChangeMock;
+      element.instance().forceUpdate();
+      instance = element.instance();
+    });
+
+    test('handleLoginClick is called', () => {
+      spy = jest.spyOn(instance, 'handleLoginClick');
+      instance.handleLoginClick();
+      expect(spy).toHaveBeenCalled();
+    });
+
+    test('handleLogoutClick is called', () => {
+      spy = jest.spyOn(instance, 'handleLogoutClick');
+      element.find(Button).simulate('click');
+      expect(spy).toHaveBeenCalled();
+    });
+
+    test('handleLanguageChange is called', () => {
+      spy = jest.spyOn(instance, 'handleLanguageChange');
+      instance.handleLanguageChange();
+      expect(spy).toHaveBeenCalled();
+    });
+  });
+
+  describe('renders Navbar', () => {
+    test('with default props', () => {
+      const wrap = getWrapper();
+      wrap.setState({ expanded: false });
+      const element = wrap.find(Navbar);
+      expect(element).toHaveLength(1);
+      expect(element.prop('className')).toBe('app-TopNavbar');
+      expect(element.prop('expanded')).toBe(false);
+      expect(element.prop('onToggle')).toBeDefined();
+    });
+
+    test('with correct className when high-contrast', () => {
+      const element = getWrapper({ contrast: 'high-contrast' }).find(Navbar);
+      expect(element.prop('className')).toBe('app-TopNavbar high-contrast');
+    });
+
+    test('with correct className when default contrast', () => {
+      const element = getWrapper({ contrast: '' }).find(Navbar);
+      expect(element.prop('className')).toBe('app-TopNavbar');
+    });
+  });
+
 
   describe('renders mobile, ', () => {
     test('renders MobileNavbar', () => {
@@ -109,46 +181,23 @@ describe('shared/top-navbar/TopNavbar', () => {
         expect(element.prop('type')).toBe('button');
       });
 
-      test('NavDropdown with correct props', () => {
-        const changeLocale = () => null;
-        const currentLanguage = 'fi';
-        const nav = getLanguageDropdownWrap({ changeLocale, currentLanguage }).find(NavDropdown);
-
-        expect(nav).toHaveLength(1);
-        expect(nav.prop('aria-label')).toBe('Navbar.language.active');
-        expect(nav.prop('className')).toBe('mobile_lang_dropdown');
-        expect(nav.prop('eventKey')).toBe('lang');
-        expect(nav.prop('id')).toBe('mobile');
-        expect(nav.prop('onSelect')).toBe(changeLocale);
-        expect(nav.prop('title')).toBe(currentLanguage);
+      test('LanguageDropdown with correct props', () => {
+        const element = getLanguageDropdownWrap().find(LanguageDropdown);
+        expect(element).toHaveLength(1);
+        expect(element.prop('changeLocale')).toBe(defaults.changeLocale);
+        expect(element.prop('classNameOptional')).toBe('mobile_lang_dropdown');
+        expect(element.prop('currentLanguage')).toBe(defaults.currentLanguage);
+        expect(element.prop('handleLanguageChange')).toBeDefined();
+        expect(element.prop('id')).toBe('mobileLang');
       });
 
-      test('renders correct MenuItems when language is Finnish', () => {
-        const currentLanguage = 'fi';
-        const element = getLanguageDropdownWrap(
-          { currentLanguage }
-        ).find(NavDropdown).find(MenuItem);
-        expect(element).toHaveLength(2);
-        expect(element.at(0).prop('active')).toBe(true);
-        expect(element.at(0).prop('aria-label')).toBe('Navbar.language-finnish');
-        expect(element.at(0).prop('eventKey')).toBe('fi');
-        expect(element.at(1).prop('active')).toBeUndefined();
-        expect(element.at(1).prop('aria-label')).toBe('Navbar.language-swedish');
-        expect(element.at(1).prop('eventKey')).toBe('sv');
-      });
-
-      test('renders correct MenuItems when language is Swedish', () => {
-        const currentLanguage = 'sv';
-        const element = getLanguageDropdownWrap(
-          { currentLanguage }
-        ).find(NavDropdown).find(MenuItem);
-        expect(element).toHaveLength(2);
-        expect(element.at(0).prop('active')).toBeUndefined();
-        expect(element.at(0).prop('aria-label')).toBe('Navbar.language-finnish');
-        expect(element.at(0).prop('eventKey')).toBe('fi');
-        expect(element.at(1).prop('active')).toBe(true);
-        expect(element.at(1).prop('aria-label')).toBe('Navbar.language-swedish');
-        expect(element.at(1).prop('eventKey')).toBe('sv');
+      test('LanguageDropdown gets currentLanguage', () => {
+        const propSV = { currentLanguage: 'sv' };
+        const propFI = { currentLanguage: 'fi' };
+        const elementSV = getLanguageDropdownWrap(propSV).find(LanguageDropdown);
+        const elementFI = getLanguageDropdownWrap(propFI).find(LanguageDropdown);
+        expect(elementSV.prop('currentLanguage')).toBe(propSV.currentLanguage);
+        expect(elementFI.prop('currentLanguage')).toBe(propFI.currentLanguage);
       });
     });
 
@@ -166,6 +215,13 @@ describe('shared/top-navbar/TopNavbar', () => {
         expect(element.prop('type')).toBe('button');
       });
 
+      test('button onClick works', () => {
+        const element = getWrapper();
+        element.setState({ expandMobileNavbar: false });
+        element.find('button').last().simulate('click');
+        expect(element.state('expandMobileNavbar')).toBe(true);
+      });
+
       test('div with correct prop', () => {
         const element = getMobileA11yWrapper().find('div');
         expect(element).toHaveLength(1);
@@ -174,89 +230,67 @@ describe('shared/top-navbar/TopNavbar', () => {
     });
   });
 
-  describe('language nav', () => {
-    function getLanguageNavWrapper(props) {
-      return getWrapper(props).find('#language-nav-dropdown');
+  describe('desktop language dropdown', () => {
+    function getLanguageDropdownWrap(props) {
+      return getWrapper(props).find('#navCollapse').find(LanguageDropdown);
     }
 
     test('is rendered', () => {
-      expect(getLanguageNavWrapper()).toHaveLength(1);
+      expect(getLanguageDropdownWrap()).toHaveLength(1);
     });
 
-    test('has changeLocale as onSelect prop', () => {
-      const changeLocale = () => null;
-      const actual = getLanguageNavWrapper({ changeLocale }).prop('onSelect');
-      expect(actual).toBe(changeLocale);
+    test('LanguageDropdown has correct props', () => {
+      const element = getLanguageDropdownWrap();
+      expect(element).toHaveLength(1);
+      expect(element.prop('changeLocale')).toBe(defaults.changeLocale);
+      expect(element.prop('currentLanguage')).toBe(defaults.currentLanguage);
+      expect(element.prop('handleLanguageChange')).toBeDefined();
+      expect(element.prop('id')).toBe('desktopLang');
     });
 
-    test('has correct props', () => {
-      const currentLanguage = 'sv';
-      const element = getLanguageNavWrapper({ currentLanguage });
-      expect(element.prop('aria-label')).toBe('Navbar.language.active');
-      expect(element.prop('className')).toBe('app-TopNavbar__language');
-      expect(element.prop('eventKey')).toBe('lang');
-      expect(element.prop('id')).toBe('language-nav-dropdown');
-      expect(element.prop('tabIndex')).toBe('0');
-      expect(element.prop('title')).toBe(currentLanguage);
-    });
-
-    test('renders correct MenuItems when language is Finnish', () => {
-      const currentLanguage = 'fi';
-      const menuItems = getLanguageNavWrapper({ currentLanguage }).find(MenuItem);
-      expect(menuItems).toHaveLength(2);
-      expect(menuItems.at(0).prop('active')).toBe(true);
-      expect(menuItems.at(0).prop('aria-label')).toBe('Navbar.language-finnish');
-      expect(menuItems.at(0).prop('eventKey')).toBe('fi');
-      expect(menuItems.at(1).prop('active')).toBeUndefined();
-      expect(menuItems.at(1).prop('aria-label')).toBe('Navbar.language-swedish');
-      expect(menuItems.at(1).prop('eventKey')).toBe('sv');
-    });
-
-    test('renders correct MenuItems when language is Swedish', () => {
-      const currentLanguage = 'sv';
-      const menuItems = getLanguageNavWrapper({ currentLanguage }).find(MenuItem);
-      expect(menuItems).toHaveLength(2);
-      expect(menuItems.at(0).prop('active')).toBeUndefined();
-      expect(menuItems.at(0).prop('aria-label')).toBe('Navbar.language-finnish');
-      expect(menuItems.at(0).prop('eventKey')).toBe('fi');
-      expect(menuItems.at(1).prop('active')).toBe(true);
-      expect(menuItems.at(1).prop('aria-label')).toBe('Navbar.language-swedish');
-      expect(menuItems.at(1).prop('eventKey')).toBe('sv');
+    test('LanguageDropdown gets currentLanguage', () => {
+      const elementSV = getLanguageDropdownWrap({ currentLanguage: 'sv' });
+      const elementFI = getLanguageDropdownWrap({ currentLanguage: 'fi' });
+      expect(elementSV.prop('currentLanguage')).toBe('sv');
+      expect(elementFI.prop('currentLanguage')).toBe('fi');
     });
   });
 
-  describe('if user is logged in but is not an admin', () => {
+  describe('if user is logged in ', () => {
     const props = {
-      isAdmin: false,
       isLoggedIn: true,
       userName: 'Luke',
     };
-    function getLoggedInNotAdminWrapper() {
+    function getLoggedInWrapper() {
       return getWrapper({ ...props });
     }
-
-    test('renders the name of the logged in user', () => {
-      const userNavDropDown = getLoggedInNotAdminWrapper().find('#user-nav-dropdown');
-      expect(userNavDropDown).toHaveLength(1);
-      expect(userNavDropDown.at(0).prop('title')).toBe(props.userName);
-      expect(userNavDropDown.prop('aria-label')).toBe('Navbar.logout');
-      expect(userNavDropDown.prop('className')).toBe('app-TopNavbar__name');
-      expect(userNavDropDown.prop('id')).toBe('user-nav-dropdown');
-      expect(userNavDropDown.prop('noCaret')).toBeTruthy();
+    test('renders LogoutControls component with correct props', () => {
+      const element = getLoggedInWrapper().find(LogoutControls);
+      expect(element).toHaveLength(1);
+      expect(element.prop('handleLogoutClick')).toBeDefined();
+      expect(element.prop('userName')).toBe(props.userName);
     });
 
-    test('renders a logout link/button', () => {
-      const logoutLink = getLoggedInNotAdminWrapper()
-        .find(MenuItem)
-        .filter({ eventKey: 'logout' });
-      expect(logoutLink).toHaveLength(1);
+    test('renders username text in mobileview', () => {
+      const element = getLoggedInWrapper().find('li').find('.app-TopNavbar__mobile.username');
+      expect(element).toHaveLength(1);
+      expect(element.prop('className')).toBe('app-TopNavbar__mobile username');
+      expect(element.find('NavbarText').prop('children')).toBe(props.userName);
     });
 
-    test('does not render a link to login page', () => {
-      const loginLink = getLoggedInNotAdminWrapper()
-        .find(NavItem)
-        .filter('#app-TopNavbar__login');
-      expect(loginLink).toHaveLength(0);
+    test('renders NavItem for logout button in mobileview', () => {
+      const element = getLoggedInWrapper().find(NavItem).find('.app-TopNavbar__mobile.logout');
+      expect(element).toHaveLength(1);
+      expect(element.prop('className')).toBe('app-TopNavbar__mobile logout');
+      expect(element.prop('id')).toBe('mobile_logout');
+    });
+
+    test('renders logout button in mobileview', () => {
+      const element = getLoggedInWrapper().find(NavItem).find(Button);
+      expect(element).toHaveLength(1);
+      expect(element.prop('onClick')).toBeDefined();
+      expect(element.prop('type')).toBe('button');
+      expect(element.prop('children')).toBe('Navbar.logout');
     });
   });
 
@@ -268,18 +302,10 @@ describe('shared/top-navbar/TopNavbar', () => {
       return getWrapper({ ...props });
     }
 
-    test('renders a link to login page', () => {
-      const wrapper = getNotLoggedInWrapper();
-      const loginLink = wrapper.find(NavItem).filter('#app-TopNavbar__login');
-      expect(loginLink).toHaveLength(1);
-      expect(loginLink.at(0).prop('onClick')).toBe(wrapper.instance().handleLoginClick);
-    });
-
-    test('does not render a logout link/button', () => {
-      const logoutLink = getNotLoggedInWrapper()
-        .find(NavItem)
-        .filter({ eventKey: 'logout' });
-      expect(logoutLink).toHaveLength(0);
+    test('renders LoginControls component', () => {
+      const element = getNotLoggedInWrapper().find(LoginControls);
+      expect(element).toHaveLength(1);
+      expect(element.prop('handleLoginClick')).toBeDefined();
     });
   });
 });
