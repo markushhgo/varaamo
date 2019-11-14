@@ -8,31 +8,22 @@ function CookieBar() {
   let buttonText;
   let declineButtonText;
   let cookieDescription;
-  let cookiePolicy;
+  const cookiePolicy = {};
 
   if (userLang === 'sv') {
     buttonText = 'Godkänn';
     declineButtonText = 'Avvisa';
     cookieDescription = 'Vi använder cookies för att kunna ge dig en bättre upplevelse. Genom att du fortsätter att använda Varaamo så accepterar du användingen av cookies.';
-    cookiePolicy = (
-      <div className="cookiePolicy">
-        {' '}
-        <a href="https://varaamo.turku.fi:8007/cookieInformation-sv.html" style={{ color: 'white' }}>Länk till Cookie Policy</a>
-        {' '}
-      </div>
-    );
+    cookiePolicy.href = 'https://varaamo.turku.fi:8007/cookieInformation-sv.html';
+    cookiePolicy.text = 'Länk till Cookie Policy';
   } else {
     buttonText = 'Hyväksyn';
     declineButtonText = 'Hylkää';
     cookieDescription = 'Käytämme evästeitä parantaaksemme käyttökokemustasi. Jatkamalla Varaamon käyttöä hyväksyt evästeiden käytön.';
-    cookiePolicy = (
-      <div className="cookiePolicy">
-        {' '}
-        <a href="https://varaamo.turku.fi:8007/cookieInformation-fi.html" style={{ color: 'white' }}>Linkki Evästekäytäntöön</a>
-        {' '}
-      </div>
-    );
+    cookiePolicy.href = 'https://varaamo.turku.fi:8007/cookieInformation-fi.html';
+    cookiePolicy.text = 'Linkki Evästekäytäntöön';
   }
+
   return (
     <CookieConsent
       buttonClasses="cookie-accept-button"
@@ -44,12 +35,14 @@ function CookieBar() {
       declineButtonText={declineButtonText}
       disableButtonStyles
       enableDeclineButton
+      expires={90}
       onDecline={() => { window.location.replace('http://www.turku.fi'); }}
       setDeclineCookie={false}
     >
       {cookieDescription}
-      {' '}
-      {cookiePolicy}
+      <div className="cookiePolicy">
+        <a href={cookiePolicy.href} style={{ color: 'white' }}>{cookiePolicy.text}</a>
+      </div>
     </CookieConsent>
   );
 }
