@@ -98,13 +98,13 @@ describe('shared/top-navbar/language-dropdown', () => {
         expect(element.prop('className')).toBe('langDrop');
       });
 
-      test('with className prop from passed props.class', () => {
+      test('with className prop from passed props.classNameOptional', () => {
         const extraProp = {
-          class: 'passedFromSomewhere'
+          classNameOptional: 'passedFromSomewhere'
         };
         const wrapperClass = getWrapper(extraProp);
         const element = wrapperClass.find('a').first();
-        expect(element.prop('className')).toBe(extraProp.class);
+        expect(element.prop('className')).toBe(extraProp.classNameOptional);
       });
 
       test('with correct props', () => {

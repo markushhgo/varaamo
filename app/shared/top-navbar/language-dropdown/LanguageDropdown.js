@@ -44,7 +44,7 @@ function LanguageDropdown(props) {
           aria-expanded={langOpen}
           aria-haspopup="true"
           aria-label={t('Navbar.language.active')}
-          className={`${props.class ? props.class : 'langDrop'}`}
+          className={`${props.classNameOptional ? props.classNameOptional : 'langDrop'}`}
           href="#"
           id="langdropdown"
           onClick={toggleDropdown}
@@ -67,7 +67,7 @@ function LanguageDropdown(props) {
 }
 
 LanguageDropdown.propTypes = {
-  class: PropTypes.string,
+  classNameOptional: PropTypes.string,
   currentLanguage: PropTypes.string,
   t: PropTypes.func,
   handleLanguageChange: PropTypes.func,

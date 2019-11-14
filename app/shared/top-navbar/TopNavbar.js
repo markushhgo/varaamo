@@ -108,7 +108,7 @@ class TopNavbar extends Component {
                 <div aria-label={t('Navbar.aria.topNavbar.mobileLocale')} className="mobile_lang" role="list" type="button">
                   <LanguageDropdown
                     changeLocale={changeLocale}
-                    class="mobile_lang_dropdown"
+                    classNameOptional="mobile_lang_dropdown"
                     currentLanguage={currentLanguage}
                     handleLanguageChange={this.handleLanguageChange}
                     id="mobileLang"

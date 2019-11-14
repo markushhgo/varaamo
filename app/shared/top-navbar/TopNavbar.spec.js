@@ -185,7 +185,7 @@ describe('shared/top-navbar/TopNavbar', () => {
         const element = getLanguageDropdownWrap().find(LanguageDropdown);
         expect(element).toHaveLength(1);
         expect(element.prop('changeLocale')).toBe(defaults.changeLocale);
-        expect(element.prop('class')).toBe('mobile_lang_dropdown');
+        expect(element.prop('classNameOptional')).toBe('mobile_lang_dropdown');
         expect(element.prop('currentLanguage')).toBe(defaults.currentLanguage);
         expect(element.prop('handleLanguageChange')).toBeDefined();
         expect(element.prop('id')).toBe('mobileLang');
