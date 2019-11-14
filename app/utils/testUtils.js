@@ -1,4 +1,4 @@
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import forEach from 'lodash/forEach';
 import forIn from 'lodash/forIn';
 import get from 'lodash/get';
@@ -227,6 +227,12 @@ function shallowWithIntl(node, context) {
   return shallow(nodeWithIntl, { context: { ...context, intl } }).shallow({ context });
 }
 
+// Utility for full DOM rendering
+function mountWithIntl(node, context) {
+  const nodeWithIntl = React.cloneElement(node, { intl });
+  return mount(nodeWithIntl, { context: { ...context, intl } }).mount({ context });
+}
+
 export {
   createApiTest,
   getDefaultRouterProps,
@@ -234,4 +240,5 @@ export {
   getState,
   makeButtonTests,
   shallowWithIntl,
+  mountWithIntl
 };
