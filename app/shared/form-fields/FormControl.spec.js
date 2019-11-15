@@ -12,8 +12,10 @@ import FormControl from './FormControl';
 describe('shared/form-fields/FormControl', () => {
   const defaultProps = {
     controlProps: { someProp: 'some', otherProp: 'other' },
+    fieldName: 'email',
     id: 'email',
     label: 'Enter your email',
+    labelErrorPrefix: 'Error: ',
     type: 'text',
     validationState: 'error',
   };
@@ -57,6 +59,20 @@ describe('shared/form-fields/FormControl', () => {
         ).toEqual(expect.arrayContaining([defaultProps.label]));
       });
 
+      describe('labelErrorPrefix text', () => {
+        test('is included in label text when field has an error', () => {
+          expect(
+            getColWrapper().props().children
+          ).toEqual(expect.arrayContaining([defaultProps.labelErrorPrefix]));
+        });
+
+        test('is not included in label text when field doesnt have an error', () => {
+          expect(
+            getColWrapper({ validationState: undefined }).props().children
+          ).toEqual(expect.not.arrayContaining([defaultProps.labelErrorPrefix]));
+        });
+      });
+
       test('does not contain InfoPopover if info not given', () => {
         const popover = getColWrapper().find(InfoPopover);
         expect(popover).toHaveLength(0);
@@ -92,6 +108,25 @@ describe('shared/form-fields/FormControl', () => {
     test('is rendered', () => {
       const rbFormControl = getWrapper().find(RBFormControl);
       expect(rbFormControl.length).toBe(1);
+      expect(rbFormControl.prop('name')).toEqual(defaultProps.fieldName);
+    });
+
+    describe('when input error has occurred', () => {
+      test('gets correct aria props', () => {
+        const rbFormControl = getWrapper({ validationState: 'error' }).find(RBFormControl);
+        expect(rbFormControl.length).toBe(1);
+        expect(rbFormControl.prop('aria-invalid')).toBe('true');
+        expect(rbFormControl.prop('aria-describedby')).toEqual(`${defaultProps.id}-help-block`);
+      });
+    });
+
+    describe('when input error has not occurred', () => {
+      test('gets correct aria props', () => {
+        const rbFormControl = getWrapper({ validationState: undefined }).find(RBFormControl);
+        expect(rbFormControl.length).toBe(1);
+        expect(rbFormControl.prop('aria-invalid')).toBe('false');
+        expect(rbFormControl.prop('aria-describedby')).toEqual(`${defaultProps.id}-help-block`);
+      });
     });
 
     describe('when type of the control is "textarea"', () => {
@@ -119,27 +154,17 @@ describe('shared/form-fields/FormControl', () => {
   });
 
   describe('HelpBlock component', () => {
-    describe('if help is given in props', () => {
-      const help = 'some help';
+    const help = 'some help';
 
-      test('is rendered', () => {
-        const helpBlock = getWrapper({ help }).find(HelpBlock);
-        expect(helpBlock.length).toBe(1);
-      });
-
-      test('displays the help text given in props', () => {
-        const helpBlock = getWrapper({ help }).find(HelpBlock);
-        expect(helpBlock.props().children).toBe(help);
-      });
+    test('is rendered', () => {
+      const helpBlock = getWrapper({ help }).find(HelpBlock);
+      expect(helpBlock.length).toBe(1);
+      expect(helpBlock.prop('id')).toEqual(`${defaultProps.id}-help-block`);
     });
 
-    describe('if help is not given in props', () => {
-      const help = undefined;
-
-      test('is not rendered', () => {
-        const helpBlock = getWrapper({ help }).find(HelpBlock);
-        expect(helpBlock.length).toBe(0);
-      });
+    test('displays the help text given in props', () => {
+      const helpBlock = getWrapper({ help }).find(HelpBlock);
+      expect(helpBlock.props().children).toBe(help);
     });
   });
 });

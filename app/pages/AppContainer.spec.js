@@ -1,9 +1,12 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import simple from 'simple-mock';
+import { Helmet } from 'react-helmet';
 
 import Header from 'shared/header';
+import Footer from 'shared/footer';
 import Notifications from 'shared/notifications';
+import SkipLink from 'shared/skip-link';
 import { getState } from 'utils/testUtils';
 import * as customizationUtils from 'utils/customizationUtils';
 import { selector, UnconnectedAppContainer as AppContainer } from './AppContainer';
@@ -14,7 +17,8 @@ describe('pages/AppContainer', () => {
       children: <div id="child-div" />,
       fetchUser: () => null,
       location: {},
-      userId: null,
+      user: null,
+      currentLanguage: 'fi',
     };
     return shallow(<AppContainer {...defaults} {...props} />);
   }
@@ -31,7 +35,11 @@ describe('pages/AppContainer', () => {
     function getSelected(props = defaultProps) {
       const state = getState({
         auth: {
-          userId: 'u-1',
+          user: {
+            profile: {
+              sub: 'u-1',
+            },
+          },
         },
         'ui.search': {
           results: searchResultIds,
@@ -48,8 +56,9 @@ describe('pages/AppContainer', () => {
     }
 
     describe('with path in root', () => {
-      test('returns userId from state', () => {
-        expect(getSelected().userId).toBe('u-1');
+      test('returns user from state', () => {
+        const user = { profile: { sub: 'u-1' } };
+        expect(getSelected().user).toEqual(user);
       });
     });
 
@@ -60,7 +69,8 @@ describe('pages/AppContainer', () => {
         },
       };
       test('returns userId from state', () => {
-        expect(getSelected(customProps).userId).toBe('u-1');
+        const user = { profile: { sub: 'u-1' } };
+        expect(getSelected(customProps).user).toEqual(user);
       });
     });
   });
@@ -68,8 +78,20 @@ describe('pages/AppContainer', () => {
   describe('render', () => {
     const wrapper = getWrapper();
 
+    test('renders SkipLink', () => {
+      expect(getWrapper().find(SkipLink)).toHaveLength(1);
+    });
+
     test('renders Header', () => {
       expect(getWrapper().find(Header)).toHaveLength(1);
+    });
+
+    test('renders main', () => {
+      const element = getWrapper().find('main');
+      expect(element).toHaveLength(1);
+      expect(element.prop('className')).toBe('app-content');
+      expect(element.prop('id')).toBe('main-content');
+      expect(element.prop('tabIndex')).toBe('-1');
     });
 
     test('renders Notifications', () => {
@@ -79,6 +101,22 @@ describe('pages/AppContainer', () => {
     test('renders props.children', () => {
       const children = wrapper.find('#child-div');
       expect(children).toHaveLength(1);
+    });
+
+    test('renders Footer', () => {
+      expect(getWrapper().find(Footer)).toHaveLength(1);
+    });
+
+    test('html lang attribute is set correctly when language is Finnish', () => {
+      const lang = { lang: 'fi' };
+      const element = wrapper.find(Helmet);
+      expect(element.props().htmlAttributes).toEqual(lang);
+    });
+
+    test('html lang attribute is set correctly when language is Swedish', () => {
+      const lang = { lang: 'sv' };
+      const element = getWrapper({ currentLanguage: 'sv' }).find(Helmet);
+      expect(element.props().htmlAttributes).toEqual(lang);
     });
   });
 
@@ -110,56 +148,45 @@ describe('pages/AppContainer', () => {
 
       expect(instance.removeFacebookAppendedHash.callCount).toBe(1);
     });
-
-    describe('when user is not logged in', () => {
-      test('does not fetch user data', () => {
-        const fetchUser = simple.mock();
-        const instance = getWrapper({ fetchUser, userId: null }).instance();
-        instance.componentDidMount();
-        expect(fetchUser.callCount).toBe(0);
-      });
-    });
-
-    describe('when user is logged in', () => {
-      test('fetches user data', () => {
-        const fetchUser = simple.mock();
-        const userId = 'u-1';
-        const instance = getWrapper({ fetchUser, userId }).instance();
-        instance.componentDidMount();
-        expect(fetchUser.callCount).toBe(1);
-        expect(fetchUser.lastCall.arg).toBe(userId);
-      });
-    });
   });
 
   describe('componentWillUpdate', () => {
-    describe('when userId does not change', () => {
+    describe('when user does not change', () => {
       test('does not fetch user data', () => {
         const fetchUser = simple.mock();
-        const userId = 'u-1';
-        const instance = getWrapper({ fetchUser, userId }).instance();
-        instance.componentWillUpdate({ userId });
+        const user = {
+          profile: {
+            sub: 'u-1'
+          }
+        };
+        const instance = getWrapper({ fetchUser, user }).instance();
+        instance.componentWillUpdate({ user });
         expect(fetchUser.callCount).toBe(0);
       });
     });
 
-    describe('when userId does change', () => {
-      test('fetches user data if new userId is not null', () => {
+    describe('when user does change', () => {
+      test('fetches user data if new user is not null', () => {
         const fetchUser = simple.mock();
-        const userId = 'u-1';
-        const newId = 'u-99';
-        const instance = getWrapper({ fetchUser, userId }).instance();
-        instance.componentWillUpdate({ userId: newId });
+        const user = null;
+        const newUserId = 'u-99';
+        const newUser = {
+          profile: {
+            sub: newUserId
+          }
+        };
+        const instance = getWrapper({ fetchUser, user }).instance();
+        instance.componentWillUpdate({ user: newUser });
         expect(fetchUser.callCount).toBe(1);
-        expect(fetchUser.lastCall.arg).toBe(newId);
+        expect(fetchUser.lastCall.arg).toBe(newUserId);
       });
 
-      test('does not fetch user data if new userId is null', () => {
+      test('does not fetch user data if new user is null', () => {
         const fetchUser = simple.mock();
-        const userId = 'u-1';
-        const newId = null;
-        const instance = getWrapper({ fetchUser, userId }).instance();
-        instance.componentWillUpdate({ userId: newId });
+        const user = { profile: { sub: 'u-1' } };
+        const newUser = null;
+        const instance = getWrapper({ fetchUser, user }).instance();
+        instance.componentWillUpdate({ user: newUser });
         expect(fetchUser.callCount).toBe(0);
       });
     });

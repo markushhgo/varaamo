@@ -10,6 +10,23 @@ import { injectT } from 'i18n';
 import DatePicker from 'shared/date-picker';
 import SelectControl from 'pages/search/controls/SelectControl';
 
+
+/**
+ * Handles converting untranslated option labels into translated labels.
+ * @param {Object[]} options, contains objects which have properties label and value
+ * @param {function} t
+ * @returns a new array of options with translated labels.
+ */
+function translateOptions(options, t) {
+  const translatedOptions = options.map(option => (
+    {
+      label: t(option.label),
+      value: option.value
+    }
+  ));
+  return translatedOptions;
+}
+
 function RecurringReservationControls({
   changeFrequency,
   changeLastTime,
@@ -27,7 +44,7 @@ function RecurringReservationControls({
   return (
     <div className="recurring-reservation-controls">
       <Row>
-        <Col sm={5} xs={12}>
+        <Col sm={6} xs={12}>
           <div className="recurring-reservation-frequency-control">
             <label htmlFor="recurrence-frequency-select">
               {t('RecurringReservationControls.frequencyLabel')}
@@ -39,13 +56,13 @@ function RecurringReservationControls({
               isClearable={false}
               name="recurrence-frequency-select"
               onChange={changeFrequency}
-              options={frequencyOptions}
+              options={translateOptions(frequencyOptions, t)}
               value={frequency}
             />
           </div>
         </Col>
         {frequency !== '' && (
-          <Col sm={3} xs={12}>
+          <Col sm={6} xs={12}>
             <FormGroup controlId="numberOfOccurrencesGroup">
               <ControlLabel>
                 {t('RecurringReservationControls.numberOfOccurrencesLabel')}
@@ -60,7 +77,7 @@ function RecurringReservationControls({
           </Col>
         )}
         {frequency !== '' && (
-          <Col sm={4} xs={12}>
+          <Col sm={12} xs={12}>
             <FormGroup controlId="LastTimeGroup">
               <ControlLabel>{t('RecurringReservationControls.lastTimeLabel')}</ControlLabel>
               <DatePicker

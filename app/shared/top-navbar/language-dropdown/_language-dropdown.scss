@@ -1,0 +1,82 @@
+.app-TopNavbar {
+
+  &__lang#mobileLang{
+    a.langDrop,#langdropdown{
+      &:focus {
+        outline: none;
+      }
+    }
+    &.open {
+      ul {
+        left: 0;
+      }
+    }
+  }
+  &__lang {
+
+    a.langDrop,#langdropdown{
+      text-transform: uppercase;
+      padding: 18px 15px;
+      margin: 0;
+      &:focus,
+      &:hover,
+      &:hover::after {
+        text-decoration: none;
+        border: none;
+        color: $black;
+      }
+    }
+
+
+    ul {
+      list-style: none;
+    }
+    &.closed {
+      ul {
+        display: none;
+      }
+    }
+
+    &.open {
+      > a:hover::after, >a::after {
+        border: none;
+      }
+      ul {
+        display: block;
+        position: absolute;
+        float: left;
+        background-color: #ffffff;
+        border: none;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+        min-width: 10px;
+        position: absolute;
+        z-index: 1000;
+
+        padding: 0;
+        width: 100%;
+
+
+
+        li {
+
+          a {
+            display: block;
+            text-align: center;
+            padding: 0.875em 0;
+            margin: 0;
+
+            &:hover,&:focus {
+              color: $black;
+              text-decoration: underline;
+            }
+
+            &.active{
+              background-color: lightgray;
+            }
+          }
+        }
+      }
+    }
+
+  }
+}

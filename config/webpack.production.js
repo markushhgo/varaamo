@@ -54,10 +54,13 @@ module.exports = merge(common, {
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('production'),
       SETTINGS: {
-        API_URL: JSON.stringify(process.env.API_URL || 'https://varaamo.turku.fi/v1'),
+        API_URL: JSON.stringify(process.env.API_URL || 'https://varaamo.turku.fi:5010/v1'),
         SHOW_TEST_SITE_MESSAGE: Boolean(process.env.SHOW_TEST_SITE_MESSAGE),
         TRACKING: Boolean(process.env.PIWIK_SITE_ID),
         CUSTOM_MUNICIPALITY_OPTIONS: process.env.CUSTOM_MUNICIPALITY_OPTIONS,
+        CLIENT_ID: JSON.stringify(process.env.CLIENT_ID),
+        OPENID_AUDIENCE: JSON.stringify(process.env.OPENID_AUDIENCE),
+        OPENID_AUTHORITY: JSON.stringify(process.env.OPENID_AUTHORITY),
       },
     }),
     new MiniCssExtractPlugin({

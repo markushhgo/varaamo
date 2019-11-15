@@ -29,7 +29,6 @@ describe('pages/search/controls/DatePickerControl', () => {
   test('renders a section.app-DatePickerControl and correct props', () => {
     const wrapper = getWrapper();
     expect(wrapper.is('section.app-DatePickerControl')).toBe(true);
-    expect(wrapper.prop('aria-label')).toBe('DatePickerControl.label');
   });
 
   test('renders form with correct props', () => {
@@ -96,6 +95,8 @@ describe('pages/search/controls/DatePickerControl', () => {
     const button = wrapper.find(Button);
     expect(button).toHaveLength(1);
     expect(button.prop('onClick')).toBe(wrapper.instance().handleDateButtonClick);
+    expect(button.prop('tabIndex')).toBe('-1');
+    expect(button.prop('aria-hidden')).toBe('true');
   });
 
   test('renders Button img with correct props', () => {
