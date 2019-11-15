@@ -18,8 +18,8 @@ class Html extends Component {
       _paq.push(['trackPageView']);
       _paq.push(['enableLinkTracking']);
       (function() {
-        var u="//testivaraamo.turku.fi:8003/";
-        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        var u="//testivaraamo.turku.fi:8003/matomo/";
+        _paq.push(['setTrackerUrl', u+'piwik.php']);
         _paq.push(['setSiteId', ${piwikSiteId}]);
         var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
         g.type='text/javascript';
@@ -29,7 +29,7 @@ class Html extends Component {
         s.parentNode.insertBefore(g,s);
       })();
     `;
-    const imgSrc = `//localhost/matomo/piwik.php?idsite=${piwikSiteId}`;
+    const imgSrc = `//testivaraamo.turku.fi:8003/matomo/piwik.php?idsite=${piwikSiteId}`;
     return (
       <div>
         <script dangerouslySetInnerHTML={{ __html: scriptString }} />
