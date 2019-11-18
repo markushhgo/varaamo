@@ -11,6 +11,7 @@ import { UnconnectedAdminResourcesPage as AdminResourcesPage } from './AdminReso
 describe('pages/admin-resources/AdminResourcesPage', () => {
   const changeAdminResourcesPageDate = simple.stub();
   const fetchFavoritedResources = simple.stub();
+  const fetchUnits = simple.stub();
   const selectAdminResourceType = simple.stub();
   const openConfirmReservationModal = simple.stub();
   const unselectAdminResourceType = simple.stub();
@@ -20,6 +21,7 @@ describe('pages/admin-resources/AdminResourcesPage', () => {
       changeAdminResourcesPageDate,
       changeRecurringBaseTime: () => null,
       fetchFavoritedResources,
+      fetchUnits,
       selectAdminResourceType,
       openConfirmReservationModal,
       unselectAdminResourceType,
@@ -27,6 +29,7 @@ describe('pages/admin-resources/AdminResourcesPage', () => {
     date: '2017-01-10',
     selectedResourceTypes: [],
     isAdmin: true,
+    isSuperUser: false,
     isLoggedin: true,
     isFetchingResources: false,
     location: { id: '123' },
@@ -117,6 +120,12 @@ describe('pages/admin-resources/AdminResourcesPage', () => {
   });
 
   describe('componentDidMount', () => {
+    test('calls fetchResources', () => {
+      const instance = getWrapper().instance();
+      instance.fetchResources = simple.mock();
+      instance.componentDidMount();
+      expect(instance.fetchResources.callCount).toBe(1);
+    });
     describe('if user is an admin', () => {
       const isAdmin = true;
       const timer = 5;
@@ -124,6 +133,7 @@ describe('pages/admin-resources/AdminResourcesPage', () => {
 
       beforeAll(() => {
         fetchFavoritedResources.reset();
+        fetchUnits.reset();
         simple.mock(window, 'setInterval').returnWith(timer);
         instance = getWrapper({ isAdmin }).instance();
         instance.componentDidMount();
@@ -131,6 +141,10 @@ describe('pages/admin-resources/AdminResourcesPage', () => {
 
       afterAll(() => {
         simple.restore();
+      });
+
+      test('fetches units', () => {
+        expect(fetchUnits.callCount).toBe(1);
       });
 
       test('fetches favorited resources', () => {
@@ -218,6 +232,36 @@ describe('pages/admin-resources/AdminResourcesPage', () => {
     test('it clears fetchResources interval', () => {
       expect(window.clearInterval.callCount).toBe(1);
       expect(window.clearInterval.lastCall.args).toEqual([timer]);
+    });
+  });
+
+  describe('fetchResources', () => {
+    test('when user is not SuperUser', () => {
+      fetchFavoritedResources.reset();
+      fetchUnits.reset();
+      const isSuperUser = false;
+      const instance = getWrapper({ isSuperUser }).instance();
+      instance.fetchResources();
+      expect(fetchUnits.callCount).toBe(1);
+      expect(fetchFavoritedResources.callCount).toBe(1);
+      const args = fetchFavoritedResources.lastCall.args;
+      expect(args[0].format('YYYY-MM-DD')).toBe('2017-01-10');
+      expect(args[1]).toBe('adminResourcesPage');
+      expect(args[2]).toBe(false);
+    });
+
+    test('when user is SuperUser', () => {
+      fetchFavoritedResources.reset();
+      fetchUnits.reset();
+      const isSuperUser = true;
+      const instance = getWrapper({ isSuperUser }).instance();
+      instance.fetchResources();
+      expect(fetchUnits.callCount).toBe(1);
+      expect(fetchFavoritedResources.callCount).toBe(1);
+      const args = fetchFavoritedResources.lastCall.args;
+      expect(args[0].format('YYYY-MM-DD')).toBe('2017-01-10');
+      expect(args[1]).toBe('adminResourcesPage');
+      expect(args[2]).toBe(true);
     });
   });
 

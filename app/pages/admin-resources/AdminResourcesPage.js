@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import { fetchFavoritedResources } from 'actions/resourceActions';
+import { fetchUnits } from 'actions/unitActions';
 import {
   changeAdminResourcesPageDate,
   selectAdminResourceType,
@@ -47,7 +48,9 @@ class UnconnectedAdminResourcesPage extends Component {
   }
 
   fetchResources(date = this.props.date) {
-    this.props.actions.fetchFavoritedResources(moment(date), 'adminResourcesPage');
+    const { isSuperUser } = this.props;
+    this.props.actions.fetchUnits();
+    this.props.actions.fetchFavoritedResources(moment(date), 'adminResourcesPage', isSuperUser);
   }
 
   handleSelect(selection) {
@@ -112,6 +115,7 @@ UnconnectedAdminResourcesPage.propTypes = {
   date: PropTypes.string.isRequired,
   selectedResourceTypes: PropTypes.arrayOf(PropTypes.string).isRequired,
   isAdmin: PropTypes.bool.isRequired,
+  isSuperUser: PropTypes.bool.isRequired,
   isLoggedin: PropTypes.bool.isRequired,
   isFetchingResources: PropTypes.bool.isRequired,
   location: PropTypes.object.isRequired,
@@ -127,6 +131,7 @@ function mapDispatchToProps(dispatch) {
     changeAdminResourcesPageDate,
     changeRecurringBaseTime: recurringReservations.changeBaseTime,
     fetchFavoritedResources,
+    fetchUnits,
     selectAdminResourceType,
     openConfirmReservationModal,
     unselectAdminResourceType,
