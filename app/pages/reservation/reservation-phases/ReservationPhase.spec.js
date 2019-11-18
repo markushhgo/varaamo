@@ -68,4 +68,11 @@ describe('pages/reservation/reservation-phases/ReservationPhase', () => {
     expect(index).toHaveLength(1);
     expect(index.props().children).toBe(3);
   });
+
+  test('renders with correct title', () => {
+    const title = getWrapper({
+      title: 'some title',
+    }).find('.app-ReservationPage__phase-title');
+    expect(title).toHaveLength(1);
+  });
 });
