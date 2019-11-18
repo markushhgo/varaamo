@@ -6,8 +6,13 @@ import uniq from 'lodash/uniq';
 import moment from 'moment';
 import { createSelector, createStructuredSelector } from 'reselect';
 
-import { isAdminSelector, isLoggedInSelector, currentUserSelector } from 'state/selectors/authSelectors';
-import { resourcesSelector } from 'state/selectors/dataSelectors';
+import {
+  isSuperUserSelector,
+  isAdminSelector,
+  isLoggedInSelector,
+  isManagerForSelector,
+} from 'state/selectors/authSelectors';
+import { resourcesSelector, unitsSelector } from 'state/selectors/dataSelectors';
 import requestIsActiveSelectorFactory from 'state/selectors/factories/requestIsActiveSelectorFactory';
 
 const dateSelector = state => state.ui.pages.adminResources.date || moment().format('YYYY-MM-DD');
@@ -15,23 +20,37 @@ const resourceIdsSelector = state => state.ui.pages.adminResources.resourceIds;
 const selectedResourceTypesSelector = state => state.ui.pages.adminResources.selectedResourceTypes;
 
 /**
- * if staffPerms.unit is undefined then an empty string [''] is returned.
+ * if staffStatus.isManagerFor:[] is undefined then an empty string [''] is returned.
+ * if staffStatus.isSuperuser is true then returns all unit keys
  * @returns array of unit keys as strings
  */
 const currentUserPermissionsSelector = createSelector(
-  currentUserSelector,
-  (user) => {
-    if (!user.staffPerms.unit) return [''];
-    return Object.keys(user.staffPerms.unit);
+  unitsSelector,
+  isSuperUserSelector,
+  isManagerForSelector,
+  (units, isSuperUser, isManager) => {
+    if (isSuperUser) return Object.keys(units);
+    return isManager;
   }
 );
 
+/**
+ * if staffStatus.isSuperuser then returns all resources,
+ * else returns resources where resource.id is in favorites
+ */
 const adminResourcesSelectors = createSelector(
   resourceIdsSelector,
   resourcesSelector,
-  (resourceIds, resources) => resourceIds.map(id => resources[id])
+  isSuperUserSelector,
+  (resourceIds, resources, isSuperUser) => {
+    if (isSuperUser) return Object.values(resources);
+    return resourceIds.map(id => resources[id]);
+  }
 );
 
+/**
+ * returns resources if resource.unit is in currentUserPermissions[]
+ */
 const adminResourcesSelector = createSelector(
   adminResourcesSelectors,
   currentUserPermissionsSelector,
@@ -65,6 +84,7 @@ const adminResourcesPageSelector = createStructuredSelector({
   date: dateSelector,
   selectedResourceTypes: selectedResourceTypesSelector,
   isAdmin: isAdminSelector,
+  isSuperUser: isSuperUserSelector,
   isLoggedin: isLoggedInSelector,
   isFetchingResources: requestIsActiveSelectorFactory(ActionTypes.API.RESOURCES_GET_REQUEST),
   resources: filteredAdminResourcesIdsSelector,

@@ -11,12 +11,17 @@ import {
   getSuccessTypeDescriptor,
 } from 'utils/apiUtils';
 
-function fetchFavoritedResources(timeAsMoment, source) {
+function fetchFavoritedResources(timeAsMoment, source, userIsSuperUser = false) {
+  const paramsAll = {
+    end: timeAsMoment.endOf('day').toISOString(),
+    start: timeAsMoment.startOf('day').toISOString(),
+  };
   const params = {
     end: timeAsMoment.endOf('day').toISOString(),
     is_favorite: true,
     start: timeAsMoment.startOf('day').toISOString(),
   };
+  if (source === 'adminResourcesPage' && userIsSuperUser === true) { return fetchResources(paramsAll, source); }
   return fetchResources(params, source);
 }
 

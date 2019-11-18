@@ -4,6 +4,8 @@ import {
   authUserSelector,
   currentUserSelector,
   isAdminSelector,
+  isSuperUserSelector,
+  isManagerForSelector,
   isLoadingUserSelector,
   isLoggedInSelector,
   staffUnitsSelector,
@@ -90,6 +92,58 @@ describe('state/selectors/authSelectors', () => {
     test('returns true if user.isStaff is true', () => {
       const user = { id: 'u-1', isStaff: true };
       expect(getSelected(user)).toBe(true);
+    });
+  });
+
+  describe('isSuperUserSelector', () => {
+    function getSelected(user = {}) {
+      const state = getState({
+        auth: {
+          user: {
+            profile: {
+              sub: user.id
+            }
+          }
+        },
+        'data.users': { [user.id]: user },
+      });
+      return isSuperUserSelector(state);
+    }
+    test('return true if user is superuser', () => {
+      const user = { id: 'u-1', isStaff: true, staffStatus: { isSuperuser: true } };
+      expect(getSelected(user)).toBe(true);
+    });
+
+    test('return false if user is not superuser', () => {
+      const user = { id: 'u-1', isStaff: true, staffStatus: { } };
+      expect(getSelected(user)).toBe(false);
+    });
+  });
+
+  describe('isManagerForSelector', () => {
+    function getSelected(user = {}) {
+      const state = getState({
+        auth: {
+          user: {
+            profile: {
+              sub: user.id
+            }
+          }
+        },
+        'data.users': { [user.id]: user },
+      });
+      return isManagerForSelector(state);
+    }
+    test('returns empty array if user isnt manager for any units', () => {
+      const user = { id: 'u-1' };
+      expect(getSelected(user)).toStrictEqual([]);
+    });
+
+    test('returns array of unit ids where user is manager', () => {
+      const units = ['unit-1', 'unit-2', 'unit-3'];
+      const user = { id: 'u-1', staffStatus: { isManagerFor: units } };
+
+      expect(getSelected(user)).toStrictEqual(units);
     });
   });
 
