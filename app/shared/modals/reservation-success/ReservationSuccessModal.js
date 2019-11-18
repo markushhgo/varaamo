@@ -4,14 +4,12 @@ import Button from 'react-bootstrap/lib/Button';
 import { FormattedHTMLMessage } from 'react-intl';
 import Modal from 'react-bootstrap/lib/Modal';
 
-import CompactReservationList from 'shared/compact-reservation-list';
 import ReservationAccessCode from 'shared/reservation-access-code';
 import ReservationDate from 'shared/reservation-date';
 import { injectT } from 'i18n';
 
 function ReservationSuccessModal({
   closeReservationSuccessModal,
-  failedReservations,
   reservationsToShow,
   resources,
   show,
@@ -52,19 +50,6 @@ function ReservationSuccessModal({
             }
           </h5>
           <hr />
-
-          {Boolean(failedReservations.length)
-            && (
-            <div>
-              <h5>{t('ReservationSuccessModal.failedReservationsHeader')}</h5>
-              <CompactReservationList
-                className="failed-reservations-list"
-                reservations={failedReservations}
-                subtitle="failReason"
-              />
-            </div>
-            )
-          }
 
           {reservation.accessCode && (
             <div>
@@ -114,7 +99,6 @@ function ReservationSuccessModal({
 
 ReservationSuccessModal.propTypes = {
   closeReservationSuccessModal: PropTypes.func.isRequired,
-  failedReservations: PropTypes.array.isRequired,
   reservationsToShow: PropTypes.array.isRequired,
   resources: PropTypes.object.isRequired,
   show: PropTypes.bool.isRequired,
