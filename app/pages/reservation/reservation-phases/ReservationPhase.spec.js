@@ -71,8 +71,9 @@ describe('pages/reservation/reservation-phases/ReservationPhase', () => {
 
   test('renders with correct title', () => {
     const title = getWrapper({
-      title: 'some title',
+      title: 'test title',
     }).find('.app-ReservationPage__phase-title');
     expect(title).toHaveLength(1);
+    expect(title.text()).toBe('test title');
   });
 });
