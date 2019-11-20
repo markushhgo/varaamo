@@ -108,6 +108,10 @@ export default (`
       Lainsäädäntö saavutettavuudesta ei koske karttasisältöjä.
       </span>
     </p>
+    <h2>Tunnistautumispalvelu</h2>
+    <p>
+      Vahvaan tunnistautumiseen käytettävä suomi.fi -palvelu on kolmannen osapuolen tuottama palvelu, jonka saavutettavuuteen ei Turun kaupunki voi vaikuttaa.
+    </p>
 
     <h2>Huomasitko saavutettavuuspuutteen digipalvelussamme?<br />Kerro se meille ja teemme parhaamme puutteen korjaamiseksi</h2>
     <p>
