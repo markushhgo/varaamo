@@ -136,7 +136,7 @@ class TopNavbar extends Component {
               </Navbar.Toggle>
             </div>
           </Navbar.Header>
-          <Navbar.Collapse id="navCollapse" role="presentation">
+          <Navbar.Collapse id="navCollapse">
             <Nav pullRight role="list">
               <ContrastChanger />
 
