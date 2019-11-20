@@ -15,90 +15,6 @@ export default (`
     <p>Täyttää kriittiset saavutettavuusvaatimukset</p>
 
     <h2>Digipalvelun ei-saavutettava sisältö (WCAG-kriteerien mukaan)</h2>
-    <h3>Havaittava</h3>
-    <h4>Ajanvarauspainikkeet</h4>
-    <p><strong>Saavuttamaton sisältö ja sen puutteet</strong></p>
-
-    <p>
-      <span class="value">
-      Ajan valinta on toteutettu painikejoukkona joka ei ole HTML-koodissa
-      taulukkomuodossa. Painikkeiden lukujärjestys on kuitenkin järkevä (päivä eli
-      sarake kerrallaan), mutta sarakeotsikkoa ei ole kytketty siihen liittyviin
-      painikkeisiin.
-
-      Mikä olennaisempaa, myös näppäimistökäytössä raskasta (ja muutenkin
-      hieman hämmentävää), että aikojen valintalista alkaa aina maanantaista,
-      vaikka käyttäjä olisi syöttänyt muun päivämäärän. Lisäksi kun haluttu aika on
-      löydetty, käyttäjän tulee käydä kaikki viikon loput ajat läpi
-      näppäimistöselauksessa päästäkseen käsiksi varauspainikkeisiin.
-      </span>
-    </p>
-    <p>
-      <strong>Saavutettavuusvaatimukset jotka eivät täyty</strong>
-    </p>
-    <p>
-      <ul>
-        <li>
-          1.3.1 Informaatio ja suhteet:
-        </li>
-      </ul>
-    </p>
-    <h3>Hallittava</h3>
-    <h4>Kieli- ja kirjautumisvalikot</h4>
-    <p>
-      <strong>
-        Saavuttamaton sisältö ja sen puutteet
-      </strong>
-    </p>
-    <p>
-      <span class="value">
-      Kielivalinta ja kirjaudu ulos -toiminnallisuus on toteutettu role=menu
-      attribuutilla. Tällöin niiden näppäimistökäyttölogiikka poikkeaa muusta
-      sisällöstä. Siirtymä navigaatiologiikassa on käytännössä  vaivalloinen
-      yksittäisen linkin takia.
-      </span>
-    </p>
-    <p>
-      <strong>
-        Saavutettavuusvaatimukset jotka eivät täyty
-      </strong>
-    </p>
-    <p>
-      <ul>
-        <li>
-          2.1.1 Näppäimistö
-        </li>
-      </ul>
-    </p>
-    <h3>Ymmärrettävä</h3>
-    <h4>Hakulomakkeen kenttien nimeäminen</h4>
-    <p>
-      <strong>
-        Saavuttamaton sisältö ja sen puutteet
-      </strong>
-    </p>
-    <p>
-      <span class="value">
-      Hakulomakkeen pudotusvalikoissa käytetään sekä label-elementtiä että aria-
-      label attribuuttia joiden sisältö on sama. Tämä tekee sivun kuuntelemisesta
-      ruudunlukijalla toisteista. Vastaavasti  liukukytkinelementeillä on
-      saavutettavasti toteutettu, hyvä label-checkbox rakenne, mutta niihin
-      liittyvillä svg-kuvilla on myös turhia  englanninkielisiä title-attribuutteja, jotka
-      ruudunlukija myös lukee.
-      </span>
-    </p>
-    <p>
-      <strong>
-        Saavutettavuusvaatimukset jotka eivät täyty
-      </strong>
-    </p>
-    <p>
-      <ul>
-        <li>
-          3.3.2 Nimilaput tai ohjeet
-        </li>
-      </ul>
-    </p>
     <h3>Ei kuulu lainsäädännön piiriin</h3>
     <p>
       <span class="value">
@@ -183,7 +99,7 @@ export default (`
     </p>
     <p>
       <span class="value">
-        11.11.2019
+        25.11.2019
       </span>
     </p>
   </body>
