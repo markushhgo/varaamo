@@ -16,78 +16,6 @@ export default (`
     <p>Tjänsten uppfyller tillgänglighetskraven</p>
 
     <h2>Digitjänstens icke-tillgängliga innehåll (enligt WCAG-kriterierna)</h2>
-    <h3>Möjlig att uppfatta</h3>
-    <h4>Tidsbokningstangenterna</h4>
-    <p><strong>Otillgängligt innehåll och dess brister</strong></p>
-
-    <p>
-      <span class="value">
-      Valet av tid har gjorts som en uppsättning knappar som inte är i tabellformat i HTML-kod.
-      Knapparnas läsordning är ändå rimlig (en dag, dvs. en kolumn åt gången), men kolumnens rubrik är inte kopplad till dess knappar.
-      Än mer relevant, och jobbigt i användingen (och annars också aningen förvirrande), är att listan med valbara tider börjar från måndag även om användaren skulle ha matat in ett annat datum.
-      Dessutom när en lämplig tid har hittats, är användaren tvungen att bläddra genom veckans alla andra tider för att komma fram till bokningsknapparna.
-      </span>
-    </p>
-    <p>
-      <strong>Tillgänglighetskrav som inte uppfylls</strong>
-    </p>
-    <p>
-      <ul>
-        <li>
-          1.3.1 Information och relationer:
-        </li>
-      </ul>
-    </p>
-    <h3>Hanterbar</h3>
-    <h4>Språk- och inloggningsmenyer</h4>
-    <p>
-      <strong>
-        Tillgängligt innehåll och dess brister
-      </strong>
-    </p>
-    <p>
-      <span class="value">
-      Språkmenyns och utloggningens funktioner har gjorts med role=menu -attribut.
-      Således avviker dessa funktioners tangetbordslogik från övrigt innehåll. Övergången är i navigationslogik praktiskt sett besvärlig för en enstaka länk.
-      </span>
-    </p>
-    <p>
-      <strong>
-        Tillgänglighetskrav som inte uppfylls
-      </strong>
-    </p>
-    <p>
-      <ul>
-        <li>
-          2.1.1 Tangentbord
-        </li>
-      </ul>
-    </p>
-    <h3>Begriplig</h3>
-    <h4>Namngivning av sökfunktionens fält</h4>
-    <p>
-      <strong>
-        Tillgängligt innehåll och dess brister
-      </strong>
-    </p>
-    <p>
-      <span class="value">
-      I sökfunktionens rullgardinsmenyer används både label-element och aria-label-attribut vars innehåll är det samma. Detta gör att lyssning av sidan med skärmläsare är upprepande.
-      På motsvarande sätt har en bra label-checkboxstruktur gjorts tillgänglig med skjutomkopplarelement, men svg-bilderna kopplade till dem har också onödiga engelskspråkiga title-attribut som skärmläsaren också läser.
-      </span>
-    </p>
-    <p>
-      <strong>
-        Tillgänglighetskrav som inte uppfylls
-      </strong>
-    </p>
-    <p>
-      <ul>
-        <li>
-          3.3.2 Ledtexter/etiketter eller instruktioner
-        </li>
-      </ul>
-    </p>
     <h3>Omfattas inte av lagstiftningen</h3>
     <p>
       <span class="value">
@@ -172,7 +100,7 @@ export default (`
     </p>
     <p>
       <span class="value">
-        11.11.2019
+        25.11.2019
       </span>
     </p>
   </body>
