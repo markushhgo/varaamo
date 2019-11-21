@@ -44,6 +44,7 @@ class UnconnectedResourcePage extends Component {
   componentDidMount() {
     this.props.actions.clearReservations();
     this.fetchResource();
+    window.scrollTo(0, 0);
   }
 
   componentWillUpdate(nextProps) {

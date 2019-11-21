@@ -220,6 +220,19 @@ describe('pages/resource/ResourcePage', () => {
       expect(fetchResource.callCount).toBe(1);
       expect(fetchResource.lastCall.args).toEqual([]);
     });
+
+    test('calls window.scrollTo', () => {
+      const scrollToMock = simple.mock();
+      simple.mock(window, 'scrollTo', scrollToMock);
+      const instance = getWrapper().instance();
+      instance.componentDidMount();
+
+      expect(scrollToMock.callCount).toBe(1);
+      const args = scrollToMock.lastCall.args;
+      expect(args).toHaveLength(2);
+      expect(args[0]).toBe(0);
+      expect(args[1]).toBe(0);
+    });
   });
 
   describe('componentWillUpdate', () => {
