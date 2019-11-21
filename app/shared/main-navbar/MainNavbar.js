@@ -1,3 +1,5 @@
+import constants from 'constants/AppConstants';
+
 import PropTypes from 'prop-types';
 import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
@@ -84,12 +86,12 @@ class MainNavbar extends React.Component {
             {isAdmin
               && (
                 <Fragment>
-                  <NavItem eventKey="adminMaintenance" href="https://varaamo.turku.fi:8010/ra/" target="_blank">
+                  <NavItem eventKey="adminMaintenance" href={constants.NAV_ADMIN_URLS.respa} target="_blank">
                     {t('Navbar.adminMaintenance')}
                     <FAIcon icon={faExternalLinkAlt} />
                   </NavItem>
 
-                  <NavItem eventKey="adminGuide" href="https://digipoint-turku.gitbook.io/varaamo-turku/" target="_blank">
+                  <NavItem eventKey="adminGuide" href={constants.NAV_ADMIN_URLS.gitbook} target="_blank">
                     {t('Navbar.adminGuide')}
                     <FAIcon icon={faExternalLinkAlt} />
                   </NavItem>
