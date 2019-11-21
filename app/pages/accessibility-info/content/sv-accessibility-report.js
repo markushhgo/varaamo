@@ -25,7 +25,7 @@ export default (`
     </p>
     <h3>Identifieringstjänsten</h3>
     <p>
-      Suomi.fi -identifikationstjänsten, som används för stark autentisering, prodceras av en tredje part och Åbo stad kan således inte påverka tjänstens tillgänglighet.
+      Suomi.fi -identifikationstjänsten, som används för stark autentisering, produceras av en tredje part och Åbo stad kan således inte påverka tjänstens tillgänglighet.
     </p>
 
     <h2>Upptäckte du tillgänglighetsbrister i vår digitjänst?<br />Tala om det för oss! Vi gör vårt bästa för att fixa bristerna.</h2>
