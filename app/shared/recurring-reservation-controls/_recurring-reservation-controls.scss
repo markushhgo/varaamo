@@ -8,10 +8,14 @@
       }
     }
   }
+  .app-SelectControl {
+    padding: 10px 0 !important;
+  }
   .Select-control {
     margin-bottom: $form-group-margin-bottom;
   }
   .react-numeric-input {
+    padding: 10px 0;
     margin-top: 4px;
   }
   label {
@@ -24,5 +28,11 @@
   }
   .date-picker-overlay {
     border: 2px solid $black;
+    margin-left: -12px;
+    margin-top: 5px;
+  }
+  .recurrence-frequency-select {
+    padding: 5px 10px;
+    margin-bottom: 24px;
   }
 }
