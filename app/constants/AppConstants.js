@@ -17,6 +17,10 @@ export default {
     timePeriod: 30,
     timePeriodType: 'minutes',
   },
+  NAV_ADMIN_URLS: {
+    gitbook: 'https://digipoint-turku.gitbook.io/varaamo-turku/',
+    respa: 'https://varaamo.turku.fi:5010/ra/',
+  },
   NOTIFICATION_DEFAULTS: {
     message: '',
     type: 'info',

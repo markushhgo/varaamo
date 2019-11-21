@@ -22,6 +22,22 @@ const isAdminSelector = createSelector(
   currentUser => Boolean(currentUser.isStaff)
 );
 
+const isSuperUserSelector = createSelector(
+  currentUserSelector,
+  currentUser => Boolean(currentUser.staffStatus && currentUser.staffStatus.isSuperuser)
+);
+
+const isManagerForSelector = createSelector(
+  currentUserSelector,
+  (currentUser) => {
+    if (!currentUser.staffStatus || !currentUser.staffStatus.isManagerFor) {
+      return [];
+    }
+    const units = currentUser.staffStatus.isManagerFor;
+    return units;
+  }
+);
+
 function isLoggedInSelector(state) {
   return Boolean(state.auth.user);
 }
@@ -55,7 +71,9 @@ export {
   createIsStaffSelector,
   currentUserSelector,
   isAdminSelector,
+  isSuperUserSelector,
   isLoadingUserSelector,
   isLoggedInSelector,
   staffUnitsSelector,
+  isManagerForSelector,
 };

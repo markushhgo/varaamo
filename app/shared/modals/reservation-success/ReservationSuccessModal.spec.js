@@ -17,7 +17,6 @@ describe('shared/modals/reservation-success/ReservationSuccessModal', () => {
   const reservation = Reservation.build({ resource: resource.id });
   const defaultProps = {
     closeReservationSuccessModal: simple.stub(),
-    failedReservations: [],
     reservationsToShow: Immutable([reservation]),
     resources: Immutable({ [resource.id]: resource }),
     show: true,
@@ -232,22 +231,6 @@ describe('shared/modals/reservation-success/ReservationSuccessModal', () => {
     });
   });
 
-  describe('failed reservations', () => {
-    function getFailedReservationsList(failedReservations) {
-      return getWrapper({ failedReservations }).find('.failed-reservations-list');
-    }
-
-    test('are rendered if there are any', () => {
-      const failedReservations = [Reservation.build()];
-      expect(getFailedReservationsList(failedReservations)).toHaveLength(1);
-    });
-
-    test('are not rendered if there are none', () => {
-      const failedReservations = [];
-      expect(getFailedReservationsList(failedReservations)).toHaveLength(0);
-    });
-  });
-
   describe('access code', () => {
     describe('if reservation has access code', () => {
       const reservationsToShow = Immutable([
@@ -258,14 +241,24 @@ describe('shared/modals/reservation-success/ReservationSuccessModal', () => {
       ]);
 
       test(
-        'renders ReservationAccessCode component with correct reservation',
+        'renders ReservationAccessCode component with correct reservation, resource and text',
         () => {
           const accessCode = getWrapper({ reservationsToShow }).find(ReservationAccessCode);
-
+          const correctResource = defaultProps.resources[reservationsToShow[0].resource];
           expect(accessCode.length).toBe(1);
           expect(accessCode.prop('reservation')).toEqual(reservationsToShow[0]);
+          expect(accessCode.prop('resource')).toBe(correctResource);
+          expect(accessCode.prop('text')).toBe('ReservationSuccessModal.reservationAccessCodeText');
         }
       );
+
+      test('renders FormattedHTMLMessage', () => {
+        const element = getWrapper({ reservationsToShow }).find(FormattedHTMLMessage)
+          .filter({ id: 'ReservationSuccessModal.emailHelpText' });
+        expect(element).toHaveLength(1);
+        expect(element.prop('id')).toBe('ReservationSuccessModal.emailHelpText');
+        expect(element.prop('values')).toEqual(defaultProps.user);
+      });
     });
 
     describe('if reservation does not have access code', () => {

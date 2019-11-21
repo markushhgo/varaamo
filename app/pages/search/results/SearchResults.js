@@ -6,20 +6,10 @@ import { connect } from 'react-redux';
 import { injectT } from 'i18n';
 import ResourceCompactList from 'shared/resource-compact-list';
 import ResourceList from 'shared/resource-list';
-import { scrollTo } from 'utils/domUtils';
 import SearchResultsPaging from './SearchResultsPaging';
 import searchResultsSelector from './searchResultsSelector';
 
 export class UnconnectedSearchResults extends Component {
-  constructor(props) {
-    super(props);
-    this.searchResultsComponent = React.createRef();
-  }
-
-  componentDidMount() {
-    scrollTo(this.searchResultsComponent.current);
-  }
-
   render() {
     const {
       filters,
@@ -33,7 +23,7 @@ export class UnconnectedSearchResults extends Component {
       t,
     } = this.props;
     return (
-      <div className="app-SearchResults" id="search-results" ref={this.searchResultsComponent}>
+      <div className="app-SearchResults" id="search-results">
         <Loader loaded={!isFetching}>
           {!showMap && (
             <div className="app-SearchResults__container">

@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import Glyphicon from 'react-bootstrap/lib/Glyphicon';
 
 import { injectT } from 'i18n';
 
@@ -22,9 +21,6 @@ function ReservationPhase({
       <div className="app-ReservationPage__phase-index">{index}</div>
       <div className="app-ReservationPage__phase-title">
         {title}
-        { isCompleted
-          && <Glyphicon glyph="ok" />
-        }
       </div>
     </div>
   );

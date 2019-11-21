@@ -2,11 +2,9 @@ import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
-import MenuItem from 'react-bootstrap/lib/MenuItem';
 import Navbar from 'react-bootstrap/lib/Navbar';
 import Nav from 'react-bootstrap/lib/Nav';
 import Button from 'react-bootstrap/lib/Button';
-import NavDropdown from 'react-bootstrap/lib/NavDropdown';
 import NavItem from 'react-bootstrap/lib/NavItem';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -18,6 +16,9 @@ import FontChanger from './accessibility/TopNavbarFontContainer';
 import ContrastChanger from './accessibility/TopNavbarContrastContainer';
 import { injectT } from 'i18n';
 import userManager from 'utils/userManager';
+import LanguageDropdown from './language-dropdown/LanguageDropdown';
+import LogoutControls from './login-logout-controls/LogoutControls';
+import LoginControls from './login-logout-controls/LoginControls';
 
 class TopNavbar extends Component {
   static propTypes = {
@@ -40,6 +41,7 @@ class TopNavbar extends Component {
     this.handleLoginClick = this.handleLoginClick.bind(this);
     this.handleLogoutClick = this.handleLogoutClick.bind(this);
     this.toggleMobileNavbar = this.toggleMobileNavbar.bind(this);
+    this.handleLanguageChange = this.handleLanguageChange.bind(this);
   }
 
   componentDidUpdate(prevState) {
@@ -61,6 +63,11 @@ class TopNavbar extends Component {
     // passing id token hint skips logout confirm on tunnistamo's side
     userManager.signoutRedirect({ id_token_hint: this.props.idToken });
     userManager.removeUser();
+  }
+
+  handleLanguageChange(e) {
+    event.preventDefault();
+    this.props.changeLocale(e);
   }
 
   handleLoginClick() {
@@ -99,23 +106,13 @@ class TopNavbar extends Component {
             <div className="mobile-buttons">
               <button className="navbar-toggle lang" data-target="#mobile" data-toggle="collapse" tabIndex="-1" type="button">
                 <div aria-label={t('Navbar.aria.topNavbar.mobileLocale')} className="mobile_lang" role="list" type="button">
-                  <NavDropdown
-                    aria-label={t('Navbar.language.active')}
-                    className="mobile_lang_dropdown"
-                    eventKey="lang"
-                    id="mobile"
-                    onSelect={changeLocale}
-                    title={currentLanguage}
-                  >
-                    {currentLanguage === 'fi'
-                      ? (<MenuItem active aria-label={t('Navbar.language-finnish')} eventKey="fi">FI</MenuItem>)
-                      : (<MenuItem aria-label={t('Navbar.language-finnish')} eventKey="fi">FI</MenuItem>)
-                    }
-                    {currentLanguage === 'sv'
-                      ? (<MenuItem active aria-label={t('Navbar.language-swedish')} eventKey="sv">SV</MenuItem>)
-                      : (<MenuItem aria-label={t('Navbar.language-swedish')} eventKey="sv">SV</MenuItem>)
-                    }
-                  </NavDropdown>
+                  <LanguageDropdown
+                    changeLocale={changeLocale}
+                    classNameOptional="mobile_lang_dropdown"
+                    currentLanguage={currentLanguage}
+                    handleLanguageChange={this.handleLanguageChange}
+                    id="mobileLang"
+                  />
                 </div>
               </button>
               <button
@@ -139,52 +136,27 @@ class TopNavbar extends Component {
               </Navbar.Toggle>
             </div>
           </Navbar.Header>
-          <Navbar.Collapse id="navCollapse" role="presentation">
+          <Navbar.Collapse id="navCollapse">
             <Nav pullRight role="list">
               <ContrastChanger />
 
               <FontChanger />
-
-              <NavDropdown
-                aria-label={t('Navbar.language.active')}
-                className="app-TopNavbar__language"
-                eventKey="lang"
-                id="language-nav-dropdown"
-                onSelect={changeLocale}
-                tabIndex="0"
-                title={currentLanguage}
-              >
-                {currentLanguage === 'fi'
-                  ? (<MenuItem active aria-label={t('Navbar.language-finnish')} eventKey="fi">FI</MenuItem>)
-                  : (<MenuItem aria-label={t('Navbar.language-finnish')} eventKey="fi">FI</MenuItem>)
-                }
-                {currentLanguage === 'sv'
-                  ? (<MenuItem active aria-label={t('Navbar.language-swedish')} eventKey="sv">SV</MenuItem>)
-                  : (<MenuItem aria-label={t('Navbar.language-swedish')} eventKey="sv">SV</MenuItem>)
-                }
-
-              </NavDropdown>
+              <LanguageDropdown
+                changeLocale={changeLocale}
+                currentLanguage={currentLanguage}
+                handleLanguageChange={this.handleLanguageChange}
+                id="desktopLang"
+              />
 
               {isLoggedIn && (
-                <NavDropdown
-                  aria-label={t('Navbar.logout')}
-                  className="app-TopNavbar__name"
-                  eventKey="lang"
-                  id="user-nav-dropdown"
-                  noCaret
-                  title={userName}
-                >
-                  <MenuItem eventKey="logout" onClick={this.handleLogoutClick}>
-                    {t('Navbar.logout')}
-                  </MenuItem>
-                </NavDropdown>
+                <LogoutControls handleLogoutClick={this.handleLogoutClick} userName={userName} />
               )}
 
+
               {!isLoggedIn && (
-                <NavItem className="login-button" id="app-TopNavbar__login" onClick={this.handleLoginClick}>
-                  {t('Navbar.login')}
-                </NavItem>
+                <LoginControls handleLoginClick={this.handleLoginClick} />
               )}
+
               {isLoggedIn && (
                 <Fragment>
                   <li className="app-TopNavbar__mobile username">

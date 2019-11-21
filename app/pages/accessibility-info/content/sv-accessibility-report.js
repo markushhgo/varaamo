@@ -6,123 +6,42 @@ export default (`
     <title>Tillgänglighetsutlåtande</title>
   </head>
   <body>
-    <h1>Tervetuloa, tämä on Turun kaupungin Varaamon saavutettavuusseloste</h1>
+    <h1>Välkommen, det här är tillgänglighetsutlåtandet för Åbo Stads bokningstjänst Varaamo</h1>
     <p>
-      Tämä saavutettavuusseloste koskee Varaamo -palvelua (<a href="https://varaamo.turku.fi" target="_blank" rel="noopener noreferrer">https://varaamo.turku.fi</a>) ja on laadittu 06.11.2019. Tämän digipalvelun saavutettavuuden on arvioinut Eficode / Tuukka Muroke.
+      Denna tillgänglighetsutlåtande berör Varaamo-tjänsten (<a href="https://varaamo.turku.fi" target="_blank" rel="noopener noreferrer">https://varaamo.turku.fi</a>) och har utarbetats 6.11.2019.
+      Tillgängligheten i denna digitjänst har bedömts av Eficode / Tuukka Muroke.
     </p>
 
-    <h2>Digipalvelun saavutettavuuden tila</h2>
-    <p>Täyttää kriittiset saavutettavuusvaatimukset</p>
+    <h2>Digitjänstens tillgänglighet just nu</h2>
+    <p>Tjänsten uppfyller tillgänglighetskraven</p>
 
-    <h2>Digipalvelun ei-saavutettava sisältö (WCAG-kriteerien mukaan)</h2>
-    <h3>Havaittava</h3>
-    <h4>Ajanvarauspainikkeet</h4>
-    <p><strong>Saavuttamaton sisältö ja sen puutteet</strong></p>
-
+    <h2>Digitjänstens icke-tillgängliga innehåll (enligt WCAG-kriterierna)</h2>
+    <h3>Omfattas inte av lagstiftningen</h3>
     <p>
       <span class="value">
-      Ajan valinta on toteutettu painikejoukkona joka ei ole HTML-koodissa
-      taulukkomuodossa. Painikkeiden lukujärjestys on kuitenkin järkevä (päivä eli
-      sarake kerrallaan), mutta sarakeotsikkoa ei ole kytketty siihen liittyviin
-      painikkeisiin.
-
-      Mikä olennaisempaa, myös näppäimistökäytössä raskasta (ja muutenkin
-      hieman hämmentävää), että aikojen valintalista alkaa aina maanantaista,
-      vaikka käyttäjä olisi syöttänyt muun päivämäärän. Lisäksi kun haluttu aika on
-      löydetty, käyttäjän tulee käydä kaikki viikon loput ajat läpi
-      näppäimistöselauksessa päästäkseen käsiksi varauspainikkeisiin.
+      Informationen i kartformat är inte fullständigt tillgänglig, men den inbäddade kartans existens stör inte den övriga användningen, och adressinformationen finns även i textformat.
+      Lagstiftningen om tillgänglighet berör inte kartinnehåll.
       </span>
     </p>
+    <h3>Identifieringstjänsten</h3>
     <p>
-      <strong>Saavutettavuusvaatimukset jotka eivät täyty</strong>
+      Suomi.fi -identifikationstjänsten, som används för stark autentisering, produceras av en tredje part och Åbo stad kan således inte påverka tjänstens tillgänglighet.
     </p>
-    <p>
-      <ul>
-        <li>
-          1.3.1 Informaatio ja suhteet:
-        </li>
-      </ul>
-    </p>
-    <h3>Hallittava</h3>
-    <h4>Kieli- ja kirjautumisvalikot</h4>
+
+    <h2>Upptäckte du tillgänglighetsbrister i vår digitjänst?<br />Tala om det för oss! Vi gör vårt bästa för att fixa bristerna.</h2>
     <p>
       <strong>
-        Saavuttamaton sisältö ja sen puutteet
+        Webbformulär
       </strong>
     </p>
     <p>
       <span class="value">
-      Kielivalinta ja kirjaudu ulos -toiminnallisuus on toteutettu role=menu
-      attribuutilla. Tällöin niiden näppäimistökäyttölogiikka poikkeaa muusta
-      sisällöstä. Siirtymä navigaatiologiikassa on käytännössä  vaivalloinen
-      yksittäisen linkin takia.
+        <a href="https://opaskartta.turku.fi/eFeedback/sv/Feedback/30-S%C3%A4hk%C3%B6iset%20asiointipalvelut" target="_blank" rel="noopener noreferrer">Ge feedback om tillgängligheten med detta webbformulär</a>
       </span>
     </p>
     <p>
       <strong>
-        Saavutettavuusvaatimukset jotka eivät täyty
-      </strong>
-    </p>
-    <p>
-      <ul>
-        <li>
-          2.1.1 Näppäimistö
-        </li>
-      </ul>
-    </p>
-    <h3>Ymmärrettävä</h3>
-    <h4>Hakulomakkeen kenttien nimeäminen</h4>
-    <p>
-      <strong>
-        Saavuttamaton sisältö ja sen puutteet
-      </strong>
-    </p>
-    <p>
-      <span class="value">
-      Hakulomakkeen pudotusvalikoissa käytetään sekä label-elementtiä että aria-
-      label attribuuttia joiden sisältö on sama. Tämä tekee sivun kuuntelemisesta
-      ruudunlukijalla toisteista. Vastaavasti  liukukytkinelementeillä on
-      saavutettavasti toteutettu, hyvä label-checkbox rakenne, mutta niihin
-      liittyvillä svg-kuvilla on myös turhia  englanninkielisiä title-attribuutteja, jotka
-      ruudunlukija myös lukee.
-      </span>
-    </p>
-    <p>
-      <strong>
-        Saavutettavuusvaatimukset jotka eivät täyty
-      </strong>
-    </p>
-    <p>
-      <ul>
-        <li>
-          3.3.2 Nimilaput tai ohjeet
-        </li>
-      </ul>
-    </p>
-    <h3>Ei kuulu lainsäädännön piiriin</h3>
-    <p>
-      <span class="value">
-      Karttamuotoinen tieto ei ole täysin saavutettava, mutta karttaupotuksen
-      olemassaolo ei haittaa muuta käyttöä ja osoitetiedot on esitetty myös
-      tekstimuodossa.
-      Lainsäädäntö saavutettavuudesta ei koske karttasisältöjä.
-      </span>
-    </p>
-
-    <h2>Huomasitko saavutettavuuspuutteen digipalvelussamme?<br />Kerro se meille ja teemme parhaamme puutteen korjaamiseksi</h2>
-    <p>
-      <strong>
-        Verkkolomakkeella
-      </strong>
-    </p>
-    <p>
-      <span class="value">
-        <a href="https://opaskartta.turku.fi/eFeedback/fi/Feedback/30-S%C3%A4hk%C3%B6iset%20asiointipalvelut" target="_blank" rel="noopener noreferrer">Anna saavutettavuuspalautetta tällä verkkolomakkeella</a>
-      </span>
-    </p>
-    <p>
-      <strong>
-        Sähköpostilla
+        E-post
       </strong>
     </p>
     <p>
@@ -130,27 +49,28 @@ export default (`
         <a href="mailto:varaamo@turku.fi">varaamo@turku.fi</a>
       </span>
     </p>
-    <h2>Valvontaviranomainen</h2>
+    <h2>Tillsynsmyndigheten</h2>
     <p>
-    Jos huomaat sivustolla saavutettavuusongelmia, anna ensin palautetta meille eli sivuston ylläpitäjälle. Vastauksessa voi mennä 14 päivää.
-    Jos et ole tyytyväinen saamaasi vastaukseen tai et saa vastausta lainkaan kahden viikon aikana, <a href="https://www.saavutettavuusvaatimukset.fi/oikeutesi/" target="_blank" rel="noopener noreferrer">voit tehdä ilmoituksen Etelä-Suomen aluehallintovirastoon</a>.
-    Etelä-Suomen aluehallintoviraston sivulla kerrotaan tarkasti, miten ilmoituksen voi tehdä ja miten asia käsitellään.
+    Om du upptäcker ett tillgänglighetsproblem på webbplatsen, ge feedback i första hand till oss d.v.s. vi som upprätthåller webbplatsen.
+    Det kan dröja upp till 14 dagar innan du får svar. Om du är missnöjd med svaret eller inte får något svar alls efter två veckor,
+    <a href="https://www.tillgänglighetskrav.fi/dina-rattigheter/" target="_blank" rel="noopener noreferrer">kan du göra en anmälan till Regionförvaltningsverket i Södra Finland</a>.
+    På webbplatsen för Regionförvaltningsverket i Södra Finland finns noggranna instruktioner för hur man gör en anmälan och hur ärendet hanteras.
     </p>
 
-    <h3>Valvontaviranomaisen yhteystiedot</h3>
+    <h3>Tillsynsmyndighetens kontaktuppgifter</h3>
 
     <p>
-      Etelä-Suomen aluehallintovirasto<br />
-      Saavutettavuuden valvonnan yksikkö<br />
-      <a href="https://www.saavutettavuusvaatimukset.fi" target="_blank" rel="noopener noreferrer">www.saavutettavuusvaatimukset.fi</a><br />
-      <a href="mailto:saavutettavuus@avi.fi">saavutettavuus(at)avi.fi</a><br />
-      puhelinnumero vaihde 0295 016 000
+      Regionförvaltningsverket i Södra Finland<br />
+      Enheten för tillgänglighetstillsyn<br />
+      <a href="https://www.tillgänglighetskrav.fi" target="_blank" rel="noopener noreferrer">www.tillgänglighetskrav.fi</a><br />
+      <a href="mailto:webbtillganglighet@rfv.fi">webbtillganglighet(at)rfv.fi</a><br />
+      telefonnummer växel 0295 016 000
     </p>
 
-    <h2>Teemme jatkuvasti työtä saavutettavuuden parantamiseksi</h2>
+    <h2>Vi jobbar kontinuerligt för bättre tillgänglighet</h2>
     <p>
       <strong>
-        Digipalveluistamme on tehty saavutettavuusarviointi
+        Det har gjorts en tillgänglighetsbedömning av våra digitjänster
       </strong>
     </p>
     <p>
@@ -160,26 +80,27 @@ export default (`
     </p>
     <p>
       <strong>
-        Olemme sitoutuneet digipalveluiden saavutettavuuden parantamiseen
+        Vi har bundit oss till att förbättra tillgängligheten i digitjänsterna
       </strong>
     </p>
     <p>
       <span class="value">
-      Turun kaupungin saavutettavuusosaamista kehitetään suunnitelmallisesti ja määrätietoisesti. Kaupungin saavutettavuuden sopimustoimittajat tulevat arvioimaan kaupungin nykyiset verkkopalvelut.
-      Arvioinnin perusteella palveluiden saavutettavuutta kehitetään lain vaatimalle tasolle kunkin palvelun määräaikaan mennessä.
-      Uusien verkkopalveluiden kehittämisessä ja hankinnassa saavutettavuus huomioidaan alusta lähtien.
-      Saavutettavuuskoulutusta järjestetään kaikille osapuolille, jotka osallistuvat verkkopalveluiden kehittämiseen ja niiden sisältöjen tuottamiseen.
-      Kaupungissa on käynnissä projekti Saavutettavuuslain vaatimusten täyttämiseksi.
+      Åbo stads tillgänglighetskompetens utvecklas systematiskt och målmedvetet.
+      Stadens avtalsleverantörer för tillgänglighet kommer att göra en bedömning av stadens nuvarande webbtjänster.
+      På basen av bedömingen kommer tillgängligheten i tjänsterna utvecklas att motsvara de lagenliga kraven för vardera tjänst inom utsatt tid.
+      Vid utveckling och anskaffning av nya webbtjänster tas tillgängligheten i beaktande från början.
+      Alla parter som deltar i utvecklingen och innehållsproduktinen av webbtjänsterna blir utbildade i tillgänglighetsfrågor.
+      Staden har ett pågående projekt för att uppfylla Tillgänglighetslagens krav.
       </span>
     </p>
     <p>
       <strong>
-        Tämä verkkosivusto/sovellus on julkaistu
+        Denna webbplats/plattform har publicerats
       </strong>
     </p>
     <p>
       <span class="value">
-        11.11.2019
+        25.11.2019
       </span>
     </p>
   </body>
