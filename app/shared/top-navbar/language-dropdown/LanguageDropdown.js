@@ -24,8 +24,7 @@ function LanguageDropdown(props) {
   };
 
   const handleLangClick = (lang, e) => {
-    e.preventDefault();
-    handleLanguageChange(lang);
+    handleLanguageChange(lang, e);
   };
 
   React.useEffect(() => {
