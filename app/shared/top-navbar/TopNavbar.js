@@ -65,9 +65,9 @@ class TopNavbar extends Component {
     userManager.removeUser();
   }
 
-  handleLanguageChange(e) {
-    event.preventDefault();
-    this.props.changeLocale(e);
+  handleLanguageChange(lang, e) {
+    this.props.changeLocale(lang, e);
+    e.preventDefault();
   }
 
   handleLoginClick() {
