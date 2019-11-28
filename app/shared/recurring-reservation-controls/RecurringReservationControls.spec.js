@@ -50,6 +50,7 @@ describe('shared/RecurringReservationControls/RecurringReservationControls', () 
     const control = getWrapper(props).find(NumericInput);
     expect(control).toHaveLength(1);
     expect(control.prop('min')).toBe(1);
+    expect(control.prop('max')).toBe(100);
     expect(control.prop('value')).toBe(props.numberOfOccurrences);
     expect(control.prop('onChange')).toBe(props.changeNumberOfOccurrences);
   });

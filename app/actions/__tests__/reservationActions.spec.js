@@ -27,6 +27,21 @@ describe('Actions: reservationActions', () => {
       });
     });
   });
+
+  describe('postRecurringReservations', () => {
+    test('includes correct track in meta', () => {
+      reservationActions.postRecurringReservations(reservation);
+      expect(getRequestTypeDescriptorMock.lastCall.args[1].meta.track).toEqual({
+        event: 'trackEvent',
+        args: [
+          'Reservation',
+          'reservation-add',
+          reservation.resource,
+        ],
+      });
+    });
+  });
+
   describe('postReservation', () => {
     test('includes correct track in meta', () => {
       reservationActions.postReservation(reservation);

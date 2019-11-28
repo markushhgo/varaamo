@@ -19,6 +19,7 @@ describe('pages/resource/reservation-calendar/ReservationConfirmationContainer',
       deleteReservation: simple.stub(),
       openConfirmReservationModal: simple.stub(),
       postReservation: simple.stub(),
+      postRecurringReservations: simple.stub(),
       putReservation: simple.stub(),
       removeReservation: simple.stub(),
     },
@@ -55,9 +56,8 @@ describe('pages/resource/reservation-calendar/ReservationConfirmationContainer',
         expect(actualProps.isAdmin).toBeDefined();
         expect(actualProps.isEditing).toBeDefined();
         expect(actualProps.isMakingReservations).toBe(defaultProps.isMakingReservations);
-        expect(
-          actualProps.isPreliminaryReservation
-        ).toBe(defaultProps.resource.needManualConfirmation);
+        expect(actualProps.isPreliminaryReservation)
+          .toBe(defaultProps.resource.needManualConfirmation);
         expect(actualProps.isStaff).toBeDefined();
         expect(actualProps.onCancel).toBe(defaultProps.actions.cancelReservationEdit);
         expect(actualProps.onClose).toBe(defaultProps.actions.closeConfirmReservationModal);
@@ -84,56 +84,107 @@ describe('pages/resource/reservation-calendar/ReservationConfirmationContainer',
   });
 
   describe('handleReservation', () => {
-    const recurringReservations = [
-      Reservation.build({
-        begin: '2018-01-29T13:00:00+02:00',
-        end: '2018-01-29T13:30:00+02:00',
-        resource: resource.id,
-        preferredLanguage: defaultProps.currentLanguage,
-      }),
-    ];
-    const selectedReservations = [
-      Reservation.build({
-        begin: '2018-01-30T13:00:00+02:00',
-        end: '2018-01-30T13:30:00+02:00',
-        resource: resource.id,
-        preferredLanguage: defaultProps.currentLanguage,
-      }),
-      Reservation.build({
-        begin: '2018-01-30T15:00:00+02:00',
-        end: '2018-01-30T15:30:00+02:00',
-        resource: resource.id,
-        preferredLanguage: defaultProps.currentLanguage,
-      }),
-    ];
-    const instance = getWrapper({ recurringReservations, selectedReservations }).instance();
+    describe('when no recurringReservations', () => {
+      const selectedReservations = [
+        Reservation.build({
+          begin: '2018-01-30T13:00:00+02:00',
+          end: '2018-01-30T13:30:00+02:00',
+          resource: resource.id,
+          preferredLanguage: defaultProps.currentLanguage,
+        }),
+      ];
 
-    beforeAll(() => {
-      defaultProps.actions.postReservation.reset();
-    });
-
-    test(
-      'calls postReservation for each selected and recurring reservation',
-      () => {
+      const recurringReservations = [];
+      const instance = getWrapper({ recurringReservations, selectedReservations }).instance();
+      const values = { comment: 'this is an added vlaue' };
+      beforeAll(() => {
+        defaultProps.actions.postReservation.reset();
+        defaultProps.actions.postRecurringReservations.reset();
         instance.handleReservation();
-        expect(defaultProps.actions.postReservation.callCount).toBe(2);
-      }
-    );
+      });
 
-    test('calls postReservation with correct arguments', () => {
-      instance.handleReservation();
-      const actualArgs = defaultProps.actions.postReservation.lastCall.args;
-      const expected = recurringReservations[0];
+      test('postReservation is called', () => {
+        expect(defaultProps.actions.postReservation.callCount).toBe(1);
+      });
 
-      expect(actualArgs[0]).toEqual(expected);
+      test('postRecurringReservations is not called', () => {
+        expect(defaultProps.actions.postRecurringReservations.callCount).toBe(0);
+      });
+
+      test('postReservation called with correct props', () => {
+        const args = defaultProps.actions.postReservation.lastCall.args;
+        expect(args[0]).toEqual(selectedReservations[0]);
+      });
+
+      test('adds added values to the reservation', () => {
+        instance.handleReservation(values);
+        const args = defaultProps.actions.postReservation.lastCall.args;
+        expect(args[0].comment).toBe(values.comment);
+      });
     });
+    describe('when recurringReservations.length > 0', () => {
+      const recurringReservations = [
+        Reservation.build({
+          begin: '2018-01-29T13:00:00+02:00',
+          end: '2018-01-29T13:30:00+02:00',
 
-    test('adds given values to the reservation', () => {
-      const values = { comments: 'Some random comment' };
-      instance.handleReservation(values);
-      const actualArgs = defaultProps.actions.postReservation.lastCall.args;
+        }),
+        Reservation.build({
+          begin: '2018-01-30T13:00:00+02:00',
+          end: '2018-01-30T13:30:00+02:00',
 
-      expect(actualArgs[0].comments).toBe(values.comments);
+        }),
+        Reservation.build({
+          begin: '2018-01-31T13:00:00+02:00',
+          end: '2018-01-31T13:30:00+02:00',
+
+        }),
+      ];
+      const selectedReservations = [
+        Reservation.build({
+          begin: '2018-01-28T13:00:00+02:00',
+          end: '2018-01-28T13:30:00+02:00',
+          resource: resource.id,
+          preferredLanguage: defaultProps.currentLanguage,
+        }),
+      ];
+      const instance = getWrapper({ recurringReservations, selectedReservations }).instance();
+      const values = { additional_info: 'this is very important' };
+      beforeAll(() => {
+        defaultProps.actions.postReservation.reset();
+        defaultProps.actions.postRecurringReservations.reset();
+        instance.handleReservation();
+      });
+
+      test('postRecurringReservations is called', () => {
+        expect(defaultProps.actions.postRecurringReservations.callCount).toBe(1);
+      });
+
+      test('postReservation is not called', () => {
+        expect(defaultProps.actions.postReservation.callCount).toBe(0);
+      });
+
+      test('postRecurringReservations is called with correct props', () => {
+        const args = defaultProps.actions.postRecurringReservations.lastCall.args;
+        const reservationStack = [...selectedReservations, ...recurringReservations];
+        expect(args[0]).toStrictEqual({
+          reservationStack,
+          resource: resource.id,
+          preferredLanguage: defaultProps.currentLanguage,
+        });
+      });
+
+      test('postRecurringReservations adds added values to reservations', () => {
+        instance.handleReservation(values);
+        const args = defaultProps.actions.postRecurringReservations.lastCall.args;
+        const reservationStack = [...selectedReservations, ...recurringReservations];
+        expect(args[0]).toStrictEqual({
+          reservationStack,
+          ...values,
+          resource: resource.id,
+          preferredLanguage: defaultProps.currentLanguage,
+        });
+      });
     });
   });
 });
