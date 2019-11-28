@@ -1,3 +1,5 @@
+import constants from 'constants/AppConstants';
+
 import {
   closeConfirmReservationModal,
   closeReservationCommentModal,
@@ -152,6 +154,22 @@ describe('state/recurringReservations', () => {
         expect(actual.reservations).toHaveLength(24);
       });
 
+      test('doesnt go over max occurrences limit', () => {
+        const state = {
+          baseTime: {
+            begin: '2017-04-18T15:00:00.000Z',
+            end: '2017-04-18T16:00:00.000Z',
+          },
+          frequency: 'days',
+          numberOfOccurrences: 1,
+          reservations: [],
+        };
+        const maxRecurringReservations = constants.RECURRING_RESERVATIONS.maxRecurringReservations;
+        const actual = reducer(state, changeNumberOfOccurrences(maxRecurringReservations + 1));
+        expect(actual.numberOfOccurrences).toBe(100);
+        expect(actual.reservations).toHaveLength(100);
+      });
+
       describe('changeLastTime', () => {
         const changeLastTime = recurringReservations.changeLastTime;
 
@@ -196,6 +214,23 @@ describe('state/recurringReservations', () => {
           const actual = reducer(state, changeLastTime(lastTime));
           expect(actual.numberOfOccurrences).toBe(1);
         });
+
+        test('doesnt go over max occurrences limit', () => {
+          const baseTime = {
+            begin: '2017-04-18T15:00:00.000Z',
+            end: '2017-04-18T16:00:00.000Z',
+          };
+          const lastTime = '2030-04-20';
+          const state = {
+            baseTime,
+            frequency: 'days',
+            numberOfOccurrences: 1,
+            lastTime: null,
+          };
+          const actual = reducer(state, changeLastTime(lastTime));
+          expect(actual.numberOfOccurrences).toBe(100);
+        });
+
 
         test('has a maximum of 2 years', () => {
           const baseTime = {

@@ -1,5 +1,6 @@
 import actionTypes from 'constants/ActionTypes';
 import modalTypes from 'constants/ModalTypes';
+import constants from 'constants/AppConstants';
 
 import filter from 'lodash/filter';
 import moment from 'moment';
@@ -45,12 +46,18 @@ export function populateReservations({ baseTime, frequency, numberOfOccurrences 
 }
 
 function setOccurrences(state, numberOfOccurrences) {
+  const maxRecurringReservations = constants.RECURRING_RESERVATIONS.maxRecurringReservations;
+
+  // dont allow number of occurrences be over max limit
+  const limitedOccurrenceCount = numberOfOccurrences > maxRecurringReservations
+    ? maxRecurringReservations : numberOfOccurrences;
+
   return {
     ...state,
-    numberOfOccurrences,
+    numberOfOccurrences: limitedOccurrenceCount,
     lastTime: (
       moment(state.baseTime.begin)
-        .add(numberOfOccurrences, state.frequency)
+        .add(limitedOccurrenceCount, state.frequency)
         .format('YYYY-MM-DD')
     ),
   };

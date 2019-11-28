@@ -27,6 +27,9 @@ export default {
     timeOut: 5000,
     hidden: false,
   },
+  RECURRING_RESERVATIONS: {
+    maxRecurringReservations: 100,
+  },
   REGEX: {
     namedLink: /(\[[^[\]]*?\]\(.*?(?!\[\]\(\))*?\))/gm
   },
