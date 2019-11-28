@@ -6,7 +6,9 @@ import first from 'lodash/first';
 import last from 'lodash/last';
 import orderBy from 'lodash/orderBy';
 
-import { deleteReservation, postReservation, putReservation } from 'actions/reservationActions';
+import {
+  deleteReservation, postReservation, postRecurringReservations, putReservation
+} from 'actions/reservationActions';
 import {
   cancelReservationEdit,
   closeConfirmReservationModal,
@@ -67,14 +69,26 @@ export class UnconnectedReservationConfirmationContainer extends Component {
     const mergedReservations = [selectedReservation];
     const preferredLanguage = currentLanguage;
 
-    [...mergedReservations, ...recurringReservations].forEach((reservation) => {
-      actions.postReservation({
-        ...reservation,
+
+    if (recurringReservations.length > 0) {
+      const reservationStack = [...mergedReservations, ...recurringReservations];
+
+      actions.postRecurringReservations({
+        reservationStack,
         ...values,
         preferredLanguage,
-        resource: resource.id,
+        resource: resource.id
       });
-    });
+    } else {
+      [...mergedReservations, ...recurringReservations].forEach((reservation) => {
+        actions.postReservation({
+          ...reservation,
+          ...values,
+          preferredLanguage,
+          resource: resource.id,
+        });
+      });
+    }
   }
 
   render() {
@@ -126,6 +140,7 @@ function mapDispatchToProps(dispatch) {
     deleteReservation,
     openConfirmReservationModal,
     postReservation,
+    postRecurringReservations,
     putReservation,
     removeReservation: recurringReservationsConnector.removeReservation,
   };

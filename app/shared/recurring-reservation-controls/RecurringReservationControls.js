@@ -69,6 +69,7 @@ function RecurringReservationControls({
               </ControlLabel>
               <NumericInput
                 className="form-control"
+                max={100}
                 min={1}
                 onChange={changeNumberOfOccurrences}
                 value={numberOfOccurrences}
