@@ -28,7 +28,7 @@ export default {
     hidden: false,
   },
   RECURRING_RESERVATIONS: {
-    maxRecurringReservations: 100,
+    maxRecurringReservations: 99,
   },
   REGEX: {
     namedLink: /(\[[^[\]]*?\]\(.*?(?!\[\]\(\))*?\))/gm
