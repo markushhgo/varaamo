@@ -106,12 +106,10 @@ export class UnconnectedReservationConfirmationContainer extends Component {
       timeSlots,
     } = this.props;
 
-    const isAdmin = resource.userPermissions.isAdmin;
     const isEditing = Boolean(reservationsToEdit.length);
 
     return (
       <ConfirmReservationModal
-        isAdmin={isAdmin}
         isEditing={isEditing}
         isMakingReservations={isMakingReservations}
         isPreliminaryReservation={resource.needManualConfirmation}

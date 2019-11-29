@@ -53,7 +53,6 @@ describe('pages/resource/reservation-calendar/ReservationConfirmationContainer',
         const wrapper = getWrapper();
         const actualProps = wrapper.find(ConfirmReservationModal).props();
 
-        expect(actualProps.isAdmin).toBeDefined();
         expect(actualProps.isEditing).toBeDefined();
         expect(actualProps.isMakingReservations).toBe(defaultProps.isMakingReservations);
         expect(actualProps.isPreliminaryReservation)
