@@ -35,6 +35,7 @@ function LanguageDropdown(props) {
     };
   });
 
+  const defaultLang = (currentLanguage === 'fi');
   return (
     <React.Fragment>
       <li className={`app-TopNavbar__lang ${langOpen ? 'open' : 'closed'}`} id={id}>
@@ -53,13 +54,10 @@ function LanguageDropdown(props) {
         </a>
         <ul className="language-dropdown-menu">
           <li>
-            <a aria-label={t('Navbar.language-finnish')} className={`${currentLanguage === 'fi' ? 'active' : ''}`} href="#" onClick={e => handleLangClick('fi', e)}>FI</a>
+            <a aria-label={t('Navbar.language-finnish')} className={`${defaultLang ? 'active' : ''}`} href="#" onClick={e => handleLangClick('fi', e)}>FI</a>
           </li>
           <li>
-            <a aria-label={t('Navbar.language-swedish')} className={`${currentLanguage === 'sv' ? 'active' : ''}`} href="#" onClick={e => handleLangClick('sv', e)}>SV</a>
-          </li>
-          <li>
-            <a aria-label={t('Navbar.language-english')} className={`${currentLanguage === 'en' ? 'active' : ''}`} href="#" onClick={e => handleLangClick('en', e)}>EN</a>
+            <a aria-label={t('Navbar.language-swedish')} className={`${!defaultLang ? 'active' : ''}`} href="#" onClick={e => handleLangClick('sv', e)}>SV</a>
           </li>
         </ul>
       </li>
