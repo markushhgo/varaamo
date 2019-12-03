@@ -101,6 +101,42 @@ describe('state/reducers/notificationReducer', () => {
       });
     });
 
+    describe('API.RESERVATION_DELETE_SUCCESS', () => {
+      const addNotification = createAction(types.API.RESERVATION_DELETE_SUCCESS);
+
+      const mockNotification = {
+        messageId: 'Notifications.reservationDeleteSuccessMessage',
+        type: 'success',
+        timeOut: 5000
+      };
+
+      const initialState = Immutable([]);
+      const action = addNotification(mockNotification);
+      const actualNotifications = notificationsReducer(initialState, action);
+
+      test('add new notification object to state array', () => {
+        expect(actualNotifications[0]).toMatchObject(mockNotification);
+      });
+    });
+
+    describe('API.RESERVATION_PUT_SUCCESS', () => {
+      const addNotification = createAction(types.API.RESERVATION_PUT_SUCCESS);
+
+      const mockNotification = {
+        messageId: 'Notifications.reservationUpdateSuccessMessage',
+        type: 'success',
+        timeOut: 5000
+      };
+
+      const initialState = Immutable([]);
+      const action = addNotification(mockNotification);
+      const actualNotifications = notificationsReducer(initialState, action);
+
+      test('add new notification object to state array', () => {
+        expect(actualNotifications[0]).toMatchObject(mockNotification);
+      });
+    });
+
     describe('error handlers', () => {
       const errorAction = createAction(types.API.RESERVATION_DELETE_ERROR);
       const initialState = Immutable([]);
@@ -128,6 +164,30 @@ describe('state/reducers/notificationReducer', () => {
 
         const actualNotifications = notificationsReducer(initialState, action);
         expect(actualNotifications[0].messageId).toEqual('Notifications.loginMessage');
+      });
+
+      test('show non field error when non_field_errors is specified and there is at least one error', () => {
+        const nonFieldErrors = ['error_1', 'error_2', 'error_3'];
+        const expected = nonFieldErrors.join('. ');
+        const action = errorAction({
+          response: {
+            non_field_errors: nonFieldErrors,
+          },
+        });
+
+        const actualNotifications = notificationsReducer(initialState, action);
+        expect(actualNotifications[0].message).toEqual(expected);
+      });
+
+      test('show recurring reservation error when recurring_validation_error is specified', () => {
+        const action = errorAction({
+          response: {
+            recurring_validation_error: 'some recurring error'
+          },
+        });
+
+        const actualNotifications = notificationsReducer(initialState, action);
+        expect(actualNotifications[0].message).toEqual('some recurring error');
       });
 
       test('show detail message when response is specified', () => {

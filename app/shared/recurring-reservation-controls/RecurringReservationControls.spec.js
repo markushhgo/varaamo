@@ -1,3 +1,5 @@
+import constants from 'constants/AppConstants';
+
 import React from 'react';
 import NumericInput from 'react-numeric-input';
 import simple from 'simple-mock';
@@ -50,6 +52,7 @@ describe('shared/RecurringReservationControls/RecurringReservationControls', () 
     const control = getWrapper(props).find(NumericInput);
     expect(control).toHaveLength(1);
     expect(control.prop('min')).toBe(1);
+    expect(control.prop('max')).toBe(constants.RECURRING_RESERVATIONS.maxRecurringReservations);
     expect(control.prop('value')).toBe(props.numberOfOccurrences);
     expect(control.prop('onChange')).toBe(props.changeNumberOfOccurrences);
   });

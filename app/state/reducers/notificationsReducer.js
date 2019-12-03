@@ -35,16 +35,23 @@ function getErrorNotification(error) {
       ...defaults,
       messageId: 'Notifications.loginMessage',
     };
-  } if (
-    error.response
-    && error.response.non_field_errors
-    && error.response.non_field_errors.length
-  ) {
+  }
+
+  if (error.response && error.response.non_field_errors && error.response.non_field_errors.length) {
     return {
       ...defaults,
       message: error.response.non_field_errors.join('. '),
     };
-  } if (error.response && error.response.detail) {
+  }
+
+  if (error.response && error.response.recurring_validation_error) {
+    return {
+      ...defaults,
+      message: error.response.recurring_validation_error,
+    };
+  }
+
+  if (error.response && error.response.detail) {
     return {
       ...defaults,
       message: error.response.detail,
