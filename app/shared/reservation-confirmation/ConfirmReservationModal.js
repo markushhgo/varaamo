@@ -17,7 +17,6 @@ import ReservationForm from './ReservationForm';
 
 class ConfirmReservationModal extends Component {
   static propTypes = {
-    isAdmin: PropTypes.bool.isRequired,
     isEditing: PropTypes.bool.isRequired,
     isMakingReservations: PropTypes.bool.isRequired,
     isPreliminaryReservation: PropTypes.bool.isRequired,
@@ -45,7 +44,6 @@ class ConfirmReservationModal extends Component {
 
   getFormFields = (termsAndConditions) => {
     const {
-      isAdmin,
       isStaff,
       resource,
       showTimeControls,
@@ -56,7 +54,7 @@ class ConfirmReservationModal extends Component {
       formFields.push('begin', 'end');
     }
 
-    if (isAdmin) {
+    if (isStaff) {
       formFields.push('comments');
       formFields.push('reserverName');
       formFields.push('reserverEmailAddress');
@@ -178,7 +176,7 @@ class ConfirmReservationModal extends Component {
 
   render() {
     const {
-      isAdmin,
+      isStaff,
       isEditing,
       isMakingReservations,
       isPreliminaryReservation,
@@ -191,8 +189,8 @@ class ConfirmReservationModal extends Component {
       timeSlots,
     } = this.props;
 
-    const termsAndConditions = isAdmin ? '' : getTermsAndConditions(resource);
-    const maxReservationPeriod = isAdmin ? null : resource.maxPeriod;
+    const termsAndConditions = isStaff ? '' : getTermsAndConditions(resource);
+    const maxReservationPeriod = isStaff ? null : resource.maxPeriod;
 
     return (
       <Modal
@@ -209,7 +207,7 @@ class ConfirmReservationModal extends Component {
         </Modal.Header>
 
         <Modal.Body>
-          {isAdmin && !showTimeControls && <RecurringReservationControls />}
+          {isStaff && !showTimeControls && <RecurringReservationControls />}
           {isEditing && this.renderEditingTexts()}
           {!showTimeControls && this.renderReservationTimes()}
           {this.renderInfoTexts()}

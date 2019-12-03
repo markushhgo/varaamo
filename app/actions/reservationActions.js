@@ -102,6 +102,38 @@ function parseReservationData(reservation) {
   return JSON.stringify(decamelizeKeys(parsed));
 }
 
+
+function postRecurringReservations(reservations) {
+  const url = buildAPIUrl('reservation_bulk');
+
+  return {
+    [RSAA]: {
+      types: [
+        getRequestTypeDescriptor(
+          types.API.RESERVATION_POST_REQUEST,
+          {
+            countable: true,
+            meta: { track: getTrackingInfo('add', reservations.resource) },
+          }
+        ),
+        getSuccessTypeDescriptor(
+          types.API.RESERVATION_POST_SUCCESS,
+          { countable: true }
+        ),
+        getErrorTypeDescriptor(
+          types.API.RESERVATION_POST_ERROR,
+          { countable: true, meta: { reservations } }
+        ),
+      ],
+      endpoint: url,
+      method: 'POST',
+      headers: getHeadersCreator(),
+      body: parseReservationData(reservations),
+    },
+  };
+}
+
+
 function postReservation(reservation) {
   const url = buildAPIUrl('reservation');
 
@@ -178,5 +210,6 @@ export {
   denyPreliminaryReservation,
   fetchReservations,
   postReservation,
+  postRecurringReservations,
   putReservation,
 };

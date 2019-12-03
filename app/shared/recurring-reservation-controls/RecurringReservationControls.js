@@ -1,3 +1,5 @@
+import constants from 'constants/AppConstants';
+
 import PropTypes from 'prop-types';
 import React from 'react';
 import Col from 'react-bootstrap/lib/Col';
@@ -69,6 +71,7 @@ function RecurringReservationControls({
               </ControlLabel>
               <NumericInput
                 className="form-control"
+                max={constants.RECURRING_RESERVATIONS.maxRecurringReservations}
                 min={1}
                 onChange={changeNumberOfOccurrences}
                 value={numberOfOccurrences}

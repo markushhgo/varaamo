@@ -14,7 +14,6 @@ import ReservationForm from './ReservationForm';
 
 describe('shared/reservation-confirmation/ConfirmReservationModal', () => {
   const defaultProps = {
-    isAdmin: false,
     isEditing: false,
     isMakingReservations: false,
     isPreliminaryReservation: false,
@@ -107,17 +106,17 @@ describe('shared/reservation-confirmation/ConfirmReservationModal', () => {
           expect(list.prop('removableReservations')).toEqual(recurringReservations);
         });
 
-        test('renders RecurringReservationControls if user is admin', () => {
+        test('renders RecurringReservationControls if user is staff', () => {
           expect(
-            getModalBodyWrapper({ ...props, isAdmin: true }).find(RecurringReservationControls)
+            getModalBodyWrapper({ ...props, isStaff: true }).find(RecurringReservationControls)
           ).toHaveLength(1);
         });
 
         test(
-          'does not render RecurringReservationControls if user is not admin',
+          'does not render RecurringReservationControls if user is not staff',
           () => {
             expect(
-              getModalBodyWrapper({ ...props, isAdmin: false }).find(RecurringReservationControls)
+              getModalBodyWrapper({ ...props, isStaff: false }).find(RecurringReservationControls)
             ).toHaveLength(0);
           }
         );
@@ -171,12 +170,12 @@ describe('shared/reservation-confirmation/ConfirmReservationModal', () => {
     });
 
     describe('comments', () => {
-      test('is included if user is an admin', () => {
-        expect(getFormFields({ isAdmin: true })).toEqual(expect.arrayContaining(['comments']));
+      test('is included if user is an staff', () => {
+        expect(getFormFields({ isStaff: true })).toEqual(expect.arrayContaining(['comments']));
       });
 
-      test('is not included if user is not an admin', () => {
-        expect(getFormFields({ isAdmin: false })).toEqual(expect.not.arrayContaining(['comments']));
+      test('is not included if user is not an staff', () => {
+        expect(getFormFields({ isStaff: false })).toEqual(expect.not.arrayContaining(['comments']));
       });
     });
 
