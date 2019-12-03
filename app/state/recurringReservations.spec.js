@@ -166,8 +166,8 @@ describe('state/recurringReservations', () => {
         };
         const maxRecurringReservations = constants.RECURRING_RESERVATIONS.maxRecurringReservations;
         const actual = reducer(state, changeNumberOfOccurrences(maxRecurringReservations + 1));
-        expect(actual.numberOfOccurrences).toBe(100);
-        expect(actual.reservations).toHaveLength(100);
+        expect(actual.numberOfOccurrences).toBe(99);
+        expect(actual.reservations).toHaveLength(99);
       });
 
       describe('changeLastTime', () => {
@@ -228,7 +228,7 @@ describe('state/recurringReservations', () => {
             lastTime: null,
           };
           const actual = reducer(state, changeLastTime(lastTime));
-          expect(actual.numberOfOccurrences).toBe(100);
+          expect(actual.numberOfOccurrences).toBe(99);
         });
 
 
