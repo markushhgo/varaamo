@@ -62,6 +62,7 @@ class Html extends Component {
       <html lang="fi">
         <head>
           <meta charSet="utf-8" />
+          <meta content="37B6C7A87B582B25B0C1C938BD8AD440" name="msvalidate.01" />
           <meta content="IE=edge" httpEquiv="X-UA-Compatible" />
           <meta content="width=device-width, initial-scale=1" name="viewport" />
           <meta content="Varaamo, Turku, Kirjasto, Pääkirjasto, Yliopisto, Palvelu, Pelitila, Soittohuone, Työpiste, 3D-tulostin, Stoori, Varauspalvelu, Kokoustila, Tulostus, Mikrofilmit, Musiikki, Askartelut" name="keywords" />
