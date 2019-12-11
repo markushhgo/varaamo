@@ -8,7 +8,7 @@ function BrowserWarning() {
 
         Currently, Varaamo does not support Internet Explorer.
         We are investigating this issue and finding a solution.
-        Meanwhile, use another browser (such as
+        Meanwhile, please use another browser (such as
         <a href="https://www.google.com/chrome/"> Chrome</a>
 
 
