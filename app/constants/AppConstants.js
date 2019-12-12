@@ -11,6 +11,7 @@ export default {
   FEEDBACK_URL: {
     FI: 'https://opaskartta.turku.fi/eFeedback/fi/Feedback/30-S%C3%A4hk%C3%B6iset%20asiointipalvelut',
     SV: 'https://opaskartta.turku.fi/eFeedback/sv/Feedback/30-S%C3%A4hk%C3%B6iset%20asiointipalvelut',
+    EN: 'https://opaskartta.turku.fi/eFeedback/en/Feedback/30-S%C3%A4hk%C3%B6iset%20asiointipalvelut',
   },
   FILTER: {
     timeFormat: 'HH:mm',
@@ -19,7 +20,7 @@ export default {
   },
   NAV_ADMIN_URLS: {
     gitbook: 'https://digipoint-turku.gitbook.io/varaamo-turku/',
-    respa: 'https://varaamo.turku.fi:5010/ra/',
+    respa: SETTINGS.ADMIN_URL,
   },
   NOTIFICATION_DEFAULTS: {
     message: '',
