@@ -7,7 +7,7 @@ import { createSelector, createStructuredSelector } from 'reselect';
 import { formValueSelector } from 'redux-form';
 
 import recurringReservations from 'state/recurringReservations';
-import { createIsStaffSelector } from 'state/selectors/authSelectors';
+import { isAdminSelector } from 'state/selectors/authSelectors';
 import { createResourceSelector } from 'state/selectors/dataSelectors';
 import selectedReservationsFromStateSelector from 'state/selectors/selectedReservationsSelector';
 import modalIsOpenSelectorFactory from 'state/selectors/factories/modalIsOpenSelectorFactory';
@@ -30,7 +30,7 @@ const reservationConfirmationSelector = createStructuredSelector({
   confirmReservationModalIsOpen: modalIsOpenSelectorFactory(ModalTypes.RESERVATION_CONFIRM),
   currentLanguage: currentLanguageSelector,
   isMakingReservations: requestIsActiveSelectorFactory(ActionTypes.API.RESERVATION_POST_REQUEST),
-  isStaff: createIsStaffSelector(resourceSelector),
+  isStaff: isAdminSelector,
   recurringReservations: recurringReservations.selectReservations,
   reservationsToEdit: toEditSelector,
   resource: resourceSelector,
