@@ -54,8 +54,8 @@ module.exports = merge(common, {
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('production'),
       SETTINGS: {
-        ADMIN_URL: JSON.stringify(process.env.ADMIN_URL || 'https://varaamo.turku.fi:5010/ra'),
-        API_URL: JSON.stringify(process.env.API_URL || 'https://varaamo.turku.fi:5010/v1'),
+        ADMIN_URL: JSON.stringify(process.env.ADMIN_URL || 'https://respa.turku.fi/ra'),
+        API_URL: JSON.stringify(process.env.API_URL || 'https://respa.turku.fi/v1'),
         SHOW_TEST_SITE_MESSAGE: Boolean(process.env.SHOW_TEST_SITE_MESSAGE),
         TRACKING: Boolean(process.env.PIWIK_SITE_ID),
         CUSTOM_MUNICIPALITY_OPTIONS: process.env.CUSTOM_MUNICIPALITY_OPTIONS,
