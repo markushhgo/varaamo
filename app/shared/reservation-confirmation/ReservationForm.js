@@ -13,7 +13,7 @@ import Well from 'react-bootstrap/lib/Well';
 import { Field, Fields, reduxForm } from 'redux-form';
 import isEmail from 'validator/lib/isEmail';
 
-
+import { isValidPhoneNumber } from 'utils/reservationUtils';
 import WrappedText from 'shared/wrapped-text';
 import ReduxFormField from 'shared/form-fields/ReduxFormField';
 import { injectT } from 'i18n';
@@ -23,6 +23,12 @@ const validators = {
   reserverEmailAddress: (t, { reserverEmailAddress }) => {
     if (reserverEmailAddress && !isEmail(reserverEmailAddress)) {
       return t('ReservationForm.emailError');
+    }
+    return null;
+  },
+  reserverPhoneNumber: (t, { reserverPhoneNumber }) => {
+    if (reserverPhoneNumber && !isValidPhoneNumber(reserverPhoneNumber)) {
+      return t('ReservationForm.phoneNumberError');
     }
     return null;
   },
@@ -271,7 +277,7 @@ class UnconnectedReservationForm extends Component {
               )}
             </Well>
           )}
-          {includes(this.props.fields, 'reserverAddressStreet') && (
+          {(includes(this.props.fields, 'reserverAddressStreet') || includes(this.props.fields, 'homeMunicipality')) && (
             <Well>
               <p>{t('common.reserverAddressLabel')}</p>
               {this.renderField(
@@ -294,6 +300,13 @@ class UnconnectedReservationForm extends Component {
                 'text',
                 t('common.addressCityLabel'),
                 { autoComplete: 'address-level2' },
+              )}
+              {this.renderField(
+                'homeMunicipality',
+                'municipality',
+                'select',
+                t('common.homeMunicipality'),
+                { options: resource.includedReservationHomeMunicipalityFields },
               )}
             </Well>
           )}

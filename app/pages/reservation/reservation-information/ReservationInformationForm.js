@@ -11,6 +11,7 @@ import { Field, reduxForm } from 'redux-form';
 import isEmail from 'validator/lib/isEmail';
 
 
+import { isValidPhoneNumber } from 'utils/reservationUtils';
 import ReduxFormField from 'shared/form-fields/ReduxFormField';
 import TermsField from 'shared/form-fields/TermsField';
 import { injectT } from 'i18n';
@@ -21,6 +22,12 @@ const validators = {
   reserverEmailAddress: (t, { reserverEmailAddress }) => {
     if (reserverEmailAddress && !isEmail(reserverEmailAddress)) {
       return t('ReservationForm.emailError');
+    }
+    return null;
+  },
+  reserverPhoneNumber: (t, { reserverPhoneNumber }) => {
+    if (reserverPhoneNumber && !isValidPhoneNumber(reserverPhoneNumber)) {
+      return t('ReservationForm.phoneNumberError');
     }
     return null;
   },
@@ -227,6 +234,15 @@ class UnconnectedReservationInformationForm extends Component {
               'text',
               t('common.addressCityLabel'),
               { autoComplete: 'address-level2' },
+            )
+          }
+          {includes(this.props.fields, 'homeMunicipality')
+            && this.renderField(
+              'homeMunicipality',
+              'municipality',
+              'select',
+              t('common.homeMunicipality'),
+              { options: resource.includedReservationHomeMunicipalityFields },
             )
           }
           {includes(this.props.fields, 'billingAddressStreet')
