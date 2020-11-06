@@ -2,6 +2,7 @@ import React from 'react';
 import CookieConsent from 'react-cookie-consent';
 import PropTypes from 'prop-types';
 
+import { addCookieScript } from '../../utils/cookieUtils';
 import { injectT } from 'i18n';
 
 function CookieBar({ t }) {
@@ -17,8 +18,8 @@ function CookieBar({ t }) {
       disableButtonStyles
       enableDeclineButton
       expires={90}
-      onDecline={() => { window.location.replace('http://www.turku.fi'); }}
-      setDeclineCookie={false}
+      onAccept={addCookieScript}
+      setDeclineCookie
     >
       {t('CookieBar.description')}
       <div className="cookiePolicy">
