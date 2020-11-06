@@ -25,6 +25,10 @@ function ResourceHeader({
   unit,
   t,
   contrast,
+  showOutlookCalendarLinkButton,
+  outlookLinkExists,
+  onOutlookCalendarLinkCreateClick,
+  onOutlookCalendarLinkRemoveClick,
 }) {
   const formatDistance = (distance) => {
     if (!distance) {
@@ -46,6 +50,27 @@ function ResourceHeader({
   const priceText = getHourlyPrice(t, resource);
   const typeName = resource.type ? resource.type.name : '\u00A0';
   const distance = formatDistance(resource.distance);
+
+  let linkButton;
+  if (outlookLinkExists) {
+    linkButton = (
+      <Button
+        className="app-ResourceHeader__calendar-link-remove-button"
+        onClick={onOutlookCalendarLinkRemoveClick}
+      >
+        {t('ResourceHeader.outlookCalendarRemove')}
+      </Button>
+    );
+  } else {
+    linkButton = (
+      <Button
+        className="app-ResourceHeader__calendar-link-create-button"
+        onClick={onOutlookCalendarLinkCreateClick}
+      >
+        {t('ResourceHeader.outlookCalendarCreate')}
+      </Button>
+    );
+  }
 
   return (
     <section aria-label={t('ResourceHeader.title')} className={`app-ResourceHeader ${contrast}`}>
@@ -104,6 +129,8 @@ function ResourceHeader({
                 </Button>
               )}
               {isLoggedIn && <FavoriteButton resource={resource} />}
+              { showOutlookCalendarLinkButton && linkButton }
+
             </div>
           </div>
         </div>
@@ -122,6 +149,10 @@ ResourceHeader.propTypes = {
   t: PropTypes.func.isRequired,
   unit: PropTypes.object.isRequired,
   contrast: PropTypes.string,
+  showOutlookCalendarLinkButton: PropTypes.bool.isRequired,
+  outlookLinkExists: PropTypes.bool,
+  onOutlookCalendarLinkCreateClick: PropTypes.func,
+  onOutlookCalendarLinkRemoveClick: PropTypes.func,
 };
 
 ResourceHeader = injectT(ResourceHeader); // eslint-disable-line

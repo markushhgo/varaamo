@@ -149,4 +149,21 @@ describe('pages/resource/resourcePageSelector', () => {
 
     expect(selected.unit).toEqual({});
   });
+
+  test('returns calendar link that matches to search', () => {
+    const resource = Resource.build();
+    const props = getProps(resource.id);
+    const state = {
+      ...getState([]),
+      resourceOutlookLinks:
+        {
+          [resource.id]: {
+            id: 'link1',
+            resource: resource.id,
+          },
+        },
+    };
+    const selected = resourcePageSelector(state, props);
+    expect(selected.calendarLink).toBeDefined();
+  });
 });

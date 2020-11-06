@@ -27,6 +27,11 @@ import ResourceHeader from './resource-header';
 import ResourceInfo from './resource-info';
 import ResourceMapInfo from './resource-map-info';
 import resourcePageSelector from './resourcePageSelector';
+import {
+  createResourceOutlookCalendarLink,
+  removeResourceOutlookCalendarLink,
+  fetchResourceOutlookCalendarLinks,
+} from 'resource-outlook-linker/actions';
 
 class UnconnectedResourcePage extends Component {
   constructor(props) {
@@ -39,11 +44,15 @@ class UnconnectedResourcePage extends Component {
 
     this.fetchResource = this.fetchResource.bind(this);
     this.handleBackButton = this.handleBackButton.bind(this);
+    this.createResourceOutlookCalendarLink = this.createResourceOutlookCalendarLink.bind(this);
+    this.removeResourceOutlookCalendarLink = this.removeResourceOutlookCalendarLink.bind(this);
+    this.fetchResourceOutlookCalendarLinks = this.fetchResourceOutlookCalendarLinks.bind(this);
   }
 
   componentDidMount() {
     this.props.actions.clearReservations();
     this.fetchResource();
+    this.fetchResourceOutlookCalendarLinks();
     window.scrollTo(0, 0);
   }
 
@@ -112,6 +121,19 @@ class UnconnectedResourcePage extends Component {
     );
   };
 
+  fetchResourceOutlookCalendarLinks() {
+    return this.props.actions.fetchResourceOutlookCalendarLinks();
+  }
+
+  createResourceOutlookCalendarLink() {
+    return this.props.actions.createResourceOutlookCalendarLink(this.props.resource.id);
+  }
+
+  removeResourceOutlookCalendarLink() {
+    const link = this.props.calendarLink;
+    return this.props.actions.removeResourceOutlookCalendarLink(link.resource, link.id);
+  }
+
   fetchResource(date = this.props.date) {
     const { actions, id } = this.props;
     const start = moment(date)
@@ -157,6 +179,11 @@ class UnconnectedResourcePage extends Component {
     const mainImageIndex = findIndex(images, image => image.type === 'main');
     const mainImage = mainImageIndex != null ? images[mainImageIndex] : null;
     const showBackButton = !!location.state && !!location.state.fromSearchResults;
+    const showOutlookCalendarLinkButton = this.props.resource.userPermissions
+      && (
+        this.props.resource.userPermissions.isManager
+        || this.props.resource.userPermissions.isAdmin
+      );
 
     return (
       <div className="app-ResourcePage">
@@ -166,9 +193,13 @@ class UnconnectedResourcePage extends Component {
             isLoggedIn={isLoggedIn}
             onBackClick={this.handleBackButton}
             onMapClick={actions.toggleResourceMap}
+            onOutlookCalendarLinkCreateClick={this.createResourceOutlookCalendarLink}
+            onOutlookCalendarLinkRemoveClick={this.removeResourceOutlookCalendarLink}
+            outlookLinkExists={!!this.props.calendarLink}
             resource={resource}
             showBackButton={showBackButton}
             showMap={showMap}
+            showOutlookCalendarLinkButton={showOutlookCalendarLinkButton}
             unit={unit}
           />
           {showMap && unit && <ResourceMapInfo currentLanguage={currentLanguage} unit={unit} />}
@@ -292,6 +323,7 @@ UnconnectedResourcePage.propTypes = {
   history: PropTypes.object.isRequired,
   contrast: PropTypes.string,
   currentLanguage: PropTypes.string,
+  calendarLink: PropTypes.object,
 };
 UnconnectedResourcePage = injectT(UnconnectedResourcePage); // eslint-disable-line
 
@@ -300,6 +332,9 @@ function mapDispatchToProps(dispatch) {
     clearReservations,
     fetchResource,
     toggleResourceMap,
+    fetchResourceOutlookCalendarLinks,
+    createResourceOutlookCalendarLink,
+    removeResourceOutlookCalendarLink,
   };
 
   return { actions: bindActionCreators(actionCreators, dispatch) };
