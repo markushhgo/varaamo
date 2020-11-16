@@ -225,7 +225,7 @@ describe('pages/resource/resource-header/ResourceHeader', () => {
           onOutlookCalendarLinkCreateClick: createFuncMock,
         });
         // Act
-        const linkButton = component.find('.app-ResourceHeader__calendar-link-create-button');
+        const linkButton = component.find('.calendar-link-button');
         // Assert
         expect(linkButton.length).not.toBe(0);
         linkButton.prop('onClick')();
@@ -241,7 +241,7 @@ describe('pages/resource/resource-header/ResourceHeader', () => {
           onOutlookCalendarLinkRemoveClick: removeFuncMock,
         });
         // Act
-        const linkButton = component.find('.app-ResourceHeader__calendar-link-remove-button');
+        const linkButton = component.find('.calendar-link-button');
         // Assert
         expect(linkButton.length).not.toBe(0);
         linkButton.prop('onClick')();

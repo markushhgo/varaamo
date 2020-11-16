@@ -55,7 +55,7 @@ function ResourceHeader({
   if (outlookLinkExists) {
     linkButton = (
       <Button
-        className="app-ResourceHeader__calendar-link-remove-button"
+        className="calendar-link-button"
         onClick={onOutlookCalendarLinkRemoveClick}
       >
         {t('ResourceHeader.outlookCalendarRemove')}
@@ -64,7 +64,7 @@ function ResourceHeader({
   } else {
     linkButton = (
       <Button
-        className="app-ResourceHeader__calendar-link-create-button"
+        className="calendar-link-button"
         onClick={onOutlookCalendarLinkCreateClick}
       >
         {t('ResourceHeader.outlookCalendarCreate')}
