@@ -57,6 +57,9 @@ describe('pages/resource/ResourcePage', () => {
       clearReservations: () => null,
       fetchResource: () => null,
       toggleResourceMap: () => null,
+      fetchResourceOutlookCalendarLinks: () => null,
+      createResourceOutlookCalendarLink: () => null,
+      removeResourceOutlookCalendarLink: () => null,
     },
     date: '2015-10-10',
     id: resource.id,
@@ -212,7 +215,9 @@ describe('pages/resource/ResourcePage', () => {
     test('calls clearReservations and fetchResource', () => {
       const clearReservations = simple.mock();
       const fetchResource = simple.mock();
-      const instance = getWrapper({ actions: { clearReservations } }).instance();
+      const instance = getWrapper({
+        actions: { ...defaultProps.actions, clearReservations }
+      }).instance();
       instance.fetchResource = fetchResource;
       instance.componentDidMount();
 

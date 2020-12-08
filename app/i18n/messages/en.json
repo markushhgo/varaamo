@@ -308,6 +308,8 @@
   "ResourceHeader.favoriteAddButton": "Add favorite",
   "ResourceHeader.favoriteRemoveButton": "Remove favorite",
   "ResourceHeader.title": "Overview",
+  "ResourceHeader.outlookCalendarCreate": "Connect with Outlook-calender",
+  "ResourceHeader.outlookCalendarRemove": "Unlink Outlook-calender",
   "ResourceIcons.free": "Free of charge",
   "ResourceInfo.additionalInfoTitle": "Additional information about the premises",
   "ResourceInfo.equipmentHeader": "Equipment available at the premises",

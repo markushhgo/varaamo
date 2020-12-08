@@ -308,6 +308,8 @@
   "ResourceHeader.favoriteAddButton": "Lisää suosikiksi",
   "ResourceHeader.favoriteRemoveButton": "Poista suosikeista",
   "ResourceHeader.title": "Yleiskatsaus",
+  "ResourceHeader.outlookCalendarCreate": "Liitä Outlook-kalenteriin",
+  "ResourceHeader.outlookCalendarRemove": "Poista Outlook-kalenteriliitos",
   "ResourceIcons.free": "Maksuton",
   "ResourceInfo.additionalInfoTitle": "Tilan lisätiedot",
   "ResourceInfo.equipmentHeader": "Tilan varusteet",

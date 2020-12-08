@@ -19,6 +19,13 @@ const unitSelector = createSelector(
   (resource, units) => units[resource.unit] || {}
 );
 
+function calendarLinkSelector(state, props) {
+  // Selects calendar link related to the resource, so it can be used to render link information.
+  return state.resourceOutlookLinks
+    && props.match
+    && state.resourceOutlookLinks[props.match.params.id];
+}
+
 const resourcePageSelector = createStructuredSelector({
   date: dateSelector,
   id: resourceIdSelector,
@@ -30,6 +37,7 @@ const resourcePageSelector = createStructuredSelector({
   unit: unitSelector,
   contrast: contrastOptionsSelector,
   currentLanguage: currentLanguageSelector,
+  calendarLink: calendarLinkSelector,
 });
 
 export default resourcePageSelector;
