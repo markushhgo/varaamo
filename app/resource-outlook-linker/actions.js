@@ -34,7 +34,7 @@ function fetchResourceOutlookCalendarLinks() {
         actionTypes.RESOURCE_OUTLOOK_CALENDAR_LINKS_GET_SUCCESS,
         actionTypes.RESOURCE_OUTLOOK_CALENDAR_LINKS_GET_ERROR,
       ],
-      endpoint: buildAPIUrl('o365/calendar_links', {}),
+      endpoint: buildAPIUrl('o365/calendar_links', { isOwn: true }),
       method: 'GET',
       headers: getHeadersCreator(),
     }
