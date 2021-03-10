@@ -16,6 +16,8 @@ import {
   getOpenReservations,
   getResourcePageUrl,
   getTermsAndConditions,
+  getPaymentTermsAndConditions,
+  getPrice,
   reservingIsRestricted,
   getResourcePageUrlComponents,
   getMinPeriodText,
@@ -926,6 +928,67 @@ describe('Utils: resourceUtils', () => {
 
         expect(getTermsAndConditions(resource)).toBe('');
       });
+    });
+  });
+
+  describe('getPaymentTermsAndConditions', () => {
+    test('returns resource.paymentTerms if it exists', () => {
+      const resource = { paymentTerms: 'this is the payment terms' };
+      expect(getPaymentTermsAndConditions(resource)).toBe(resource.paymentTerms);
+    });
+
+    test('returns empty string if given resource doesnt have payment terms', () => {
+      const resource = { };
+      expect(getPaymentTermsAndConditions(resource)).toBe('');
+    });
+  });
+
+  describe('getPrice', () => {
+    const t = message => message;
+
+    test('returns correct text if max and min price are empty', () => {
+      const resource = { maxPrice: '', minPrice: '' };
+      expect(getPrice(t, resource)).toBe('ResourceIcons.free');
+    });
+
+    test('returns correct text if max and min price are 0', () => {
+      const resource = { maxPrice: 0, minPrice: 0 };
+      expect(getPrice(t, resource)).toBe('ResourceIcons.free');
+    });
+
+    test('returns correct text if max and min price are defined and not same', () => {
+      const resource = { maxPrice: 10, minPrice: 5 };
+      expect(getPrice(t, resource)).toBe('5 - 10 €');
+    });
+
+    test('returns correct text if max and min price are defined and same', () => {
+      const resource = { maxPrice: 5, minPrice: 5 };
+      expect(getPrice(t, resource)).toBe('5 €');
+    });
+
+    test('returns correct text if only one price is defined', () => {
+      const resource = { maxPrice: 5, minPrice: '' };
+      expect(getPrice(t, resource)).toBe('5 €');
+    });
+
+    test('returns correct text if priceType is hourly', () => {
+      const resource = { maxPrice: 5, minPrice: '', priceType: 'hourly' };
+      expect(getPrice(t, resource)).toBe('5 €/common.unit.time.hour');
+    });
+
+    test('returns correct text if priceType is daily', () => {
+      const resource = { maxPrice: 5, minPrice: '', priceType: 'daily' };
+      expect(getPrice(t, resource)).toBe('5 €/common.unit.time.day');
+    });
+
+    test('returns correct text if priceType is weekly', () => {
+      const resource = { maxPrice: 5, minPrice: '', priceType: 'weekly' };
+      expect(getPrice(t, resource)).toBe('5 €/common.unit.time.week');
+    });
+
+    test('returns correct text if priceType is fixed', () => {
+      const resource = { maxPrice: 5, minPrice: '', priceType: 'fixed' };
+      expect(getPrice(t, resource)).toBe('5 €');
     });
   });
 

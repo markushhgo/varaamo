@@ -200,15 +200,35 @@ describe('pages/reservation/reservation-confirmation/ReservationConfirmation', (
       reserverAddressStreet: 'reserver address street',
       reserverAddressZip: 'reserver address zip',
       reserverAddressCity: 'reserver address city',
+      billingFirstName: 'billing first name',
+      billingLastName: 'billing last name',
+      billingPhoneNumber: 'billing phone number',
+      billingEmailAddress: 'billing email',
       billingAddressStreet: 'billing address street',
       billingAddressZip: 'billing address zip',
       billingAddressCity: 'billing address city',
       reservationExtraQuestions: 'Extra information',
       homeMunicipality: { id: 'city-id', name: { fi: 'city-fi', en: 'city-en', sv: 'city-sv' } },
       user: User.build(),
+      order: {
+        state: 'confirmed',
+        orderLines: {
+          0: {
+            product: {
+              id: 'testproduct1',
+              type: 'rent',
+              price: {
+                type: 'per_period', taxPercentage: '24', amount: '5.00', period: '01:00:00'
+              }
+            }
+          }
+        },
+        quantity: 1,
+        price: '2.50'
+      }
     });
     const fields = getWrapper({ reservation }).find('.app-ReservationConfirmation__field');
-    expect(fields).toHaveLength(18);
+    expect(fields).toHaveLength(24);
   });
 
   describe('Button onClick', () => {
