@@ -281,6 +281,31 @@ describe('pages/reservation/reservation-information/ReservationInformationForm',
         expect(header.text()).toBe('ReservationInformationForm.reserverInformationTitle');
       });
 
+      describe('Billing info heading', () => {
+        const billingFields = [
+          'billingFirstName',
+          'billingLastName',
+          'billingPhoneNumber',
+          'billingEmailAddress',
+          'billingAddressStreet',
+          'billingAddressZip',
+          'billingAddressCity'
+        ];
+        test('is rendered when any of the billing fields are among form fields', () => {
+          billingFields.forEach((billingField) => {
+            const fields = [billingField];
+            const billingHeading = getWrapper({ fields }).find('#payment-info-heading');
+            expect(billingHeading).toHaveLength(1);
+            expect(billingHeading.text()).toBe('common.payerInformationLabel');
+          });
+        });
+        test('is not rendered when none of the billing fields are among form fields', () => {
+          const fields = [];
+          const billingHeading = getWrapper({ fields }).find('#payment-info-title');
+          expect(billingHeading).toHaveLength(0);
+        });
+      });
+
       test('renders Reservation Information Form when field is selected', () => {
         const fields = [eventSubjectField];
         const header = getWrapper({ fields }).find('.ReservationInformationForm');

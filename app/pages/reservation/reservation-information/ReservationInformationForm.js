@@ -275,8 +275,14 @@ class UnconnectedReservationInformationForm extends Component {
               { options: resource.includedReservationHomeMunicipalityFields },
             )
           }
-          {includes(this.props.fields, 'billingFirstName')
-            && <h3 className="app-ReservationPage__title">{t('common.paymentInformationLabel')}</h3>
+          {(includes(this.props.fields, 'billingFirstName')
+            || includes(this.props.fields, 'billingLastName')
+            || includes(this.props.fields, 'billingPhoneNumber')
+            || includes(this.props.fields, 'billingEmailAddress')
+            || includes(this.props.fields, 'billingAddressStreet')
+            || includes(this.props.fields, 'billingAddressZip')
+            || includes(this.props.fields, 'billingAddressCity'))
+            && <h3 className="app-ReservationPage__title" id="payment-info-heading">{t('common.payerInformationLabel')}</h3>
           }
           {includes(this.props.fields, 'billingFirstName')
             && this.renderField(
@@ -315,9 +321,6 @@ class UnconnectedReservationInformationForm extends Component {
             )
           }
           {includes(this.props.fields, 'billingAddressStreet')
-            && <h3>{t('common.billingAddressLabel')}</h3>
-          }
-          {includes(this.props.fields, 'billingAddressStreet')
             && this.renderField(
               'billingAddressStreet',
               'address',
@@ -346,7 +349,7 @@ class UnconnectedReservationInformationForm extends Component {
           }
           {(includes(this.props.fields, 'eventSubject')
           || includes(this.props.fields, 'eventDescription')
-          || includes(this.props.fields, 'numberofParticipants')
+          || includes(this.props.fields, 'numberOfParticipants')
           || includes(this.props.fields, 'requireAssistance')
           || includes(this.props.fields, 'comments'))
           && <h3 className="ReservationInformationForm">{t('ReservationInformationForm.eventInformationTitle')}</h3>

@@ -49,15 +49,26 @@ describe('pages/reservation/reservation-confirmation/ReservationConfirmation', (
     expect(header.text()).toBe('ReservationConfirmation.reservationEditedTitle');
   });
 
-  describe('billing information header', () => {
-    test('renders correct header when billingAddressStreet prop is given', () => {
-      const reservation = Reservation.build({ billingAddressStreet: 'Katukatu 123' });
-      const header = getWrapper({ reservation }).find('#billingInformationHeader');
-      expect(header).toHaveLength(1);
-      expect(header.text()).toBe('common.billingAddressLabel');
+  describe('billing information heading', () => {
+    const billingFields = [
+      { billingFirstName: 'First' },
+      { billingLastName: 'Last' },
+      { billingPhoneNumber: '1234567890' },
+      { billingEmailAddress: 'test.tester123@testing.fi' },
+      { billingAddressStreet: 'street 123' },
+      { billingAddressZip: '123456' },
+      { billingAddressCity: 'city abc' },
+    ];
+    test('renders correct heading when any of the billing field props are given', () => {
+      billingFields.forEach((billingField) => {
+        const reservation = Reservation.build(billingField);
+        const header = getWrapper({ reservation }).find('#billingInformationHeader');
+        expect(header).toHaveLength(1);
+        expect(header.text()).toBe('common.payerInformationLabel');
+      });
     });
 
-    test('renders correct header when billingAddressStreet prop is not given', () => {
+    test('is not rendered when none of the billing field props are given', () => {
       const header = getWrapper().find('#billingInformationHeader');
       expect(header).toHaveLength(0);
     });

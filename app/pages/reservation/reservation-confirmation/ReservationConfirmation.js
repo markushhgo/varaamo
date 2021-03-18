@@ -197,9 +197,16 @@ class ReservationConfirmation extends Component {
                 t('common.priceTotalLabel'),
                 `${reservation.order.price}€`,
               )}
-            {reservation.billingAddressStreet && (
-              <Col xs={12}><h3 id="billingInformationHeader">{t('common.billingAddressLabel')}</h3></Col>
-            )}
+            {(reservation.billingFirstName
+              || reservation.billingLastName
+              || reservation.billingPhoneNumber
+              || reservation.billingEmailAddress
+              || reservation.billingAddressStreet
+              || reservation.billingAddressZip
+              || reservation.billingAddressCity)
+              && (
+              <Col xs={12}><h3 id="billingInformationHeader">{t('common.payerInformationLabel')}</h3></Col>
+              )}
             {reservation.billingFirstName
               && this.renderField(
                 'billingFirstName',
