@@ -18,6 +18,10 @@ export default {
     timePeriod: 30,
     timePeriodType: 'minutes',
   },
+  MANAGE_RESERVATIONS: {
+    PAGE_SIZE: 10,
+    MAX_SHOWN_PAGINATION_BUTTONS: 9,
+  },
   NAV_ADMIN_URLS: {
     gitbook: 'https://digipoint-turku.gitbook.io/varaamo-turku/',
     gitbook_sv: 'https://digipoint-turku.gitbook.io/varaamo-turku/v/v.1.0.0-swedish/',
@@ -41,6 +45,17 @@ export default {
     'Content-Type': 'application/json',
   },
   REQUIRED_STAFF_EVENT_FIELDS: ['eventDescription', 'reserverName'],
+  RESERVATION_SHOWONLY_FILTERS: {
+    FAVORITE: 'favorite',
+    CAN_MODIFY: 'can_modify',
+  },
+  RESERVATION_STATE: {
+    CONFIRMED: 'confirmed',
+    REQUESTED: 'requested',
+    CANCELLED: 'cancelled',
+    DENIED: 'denied',
+    WAITING_FOR_PAYMENT: 'waiting_for_payment',
+  },
   RESERVATION_STATE_LABELS: {
     cancelled: {
       labelBsStyle: 'default',
