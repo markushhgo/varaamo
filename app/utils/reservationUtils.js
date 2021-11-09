@@ -222,16 +222,20 @@ function createOrderLines(products) {
 /**
  * Creates an order object with order lines and return url.
  * @param {Array} products array
+ * @param {string} [customerGroup] customer group's id
  * @returns {object} order object e.g.
  * {order_lines: {...}, returnUrl: 'mysite/reservation-payment-return'}
  * or null if given products is empty
  */
-function createOrder(products) {
+function createOrder(products, customerGroup = '') {
   if (products && products.length > 0) {
     const orderLines = createOrderLines(products);
 
     const returnUrl = `${window.location.origin}/reservation-payment-return`;
     const order = { order_lines: orderLines, return_url: returnUrl };
+    if (customerGroup) {
+      order.customer_group = customerGroup;
+    }
     return order;
   }
   return null;
@@ -243,15 +247,20 @@ function createOrder(products) {
  * @param {string} end time
  * @param {Array} orderLines products of this order
  * @param {object} state current redux state
+ * @param {string} [customerGroup] customer group's id
  * @returns {object} response price data
  */
-async function checkOrderPrice(begin, end, orderLines, state) {
+async function checkOrderPrice(begin, end, orderLines, state, customerGroup = '') {
   const apiUrl = buildAPIUrl('order/check_price');
   const payload = {
     begin,
     end,
-    order_lines: orderLines
+    order_lines: orderLines,
   };
+
+  if (customerGroup) {
+    payload.customer_group = customerGroup;
+  }
 
   const response = await fetch(apiUrl, {
     method: 'POST',

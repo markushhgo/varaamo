@@ -11,13 +11,16 @@ import MandatoryProducts from './mandatory-products/MandatoryProducts';
 import ProductsSummary from './ProductsSummary';
 import ExtraProducts from './extra-products/ExtraProducts';
 import ReservationDetails from '../reservation-details/ReservationDetails';
-import { getProductsOfType, PRODUCT_TYPES } from './ReservationProductsUtils';
+import CustomerGroupSelect from './CustomerGroupSelect';
+import { getProductsOfType, PRODUCT_TYPES, getUniqueCustomerGroups } from './ReservationProductsUtils';
 
 function ReservationProducts({
-  changeProductQuantity, currentLanguage, isEditing, isStaff, onBack, onCancel, onConfirm,
+  changeProductQuantity, currentCustomerGroup, currentLanguage, isEditing,
+  isStaff, onBack, onCancel, onConfirm, onCustomerGroupChange,
   onStaffSkipChange, order, resource, selectedTime, skipMandatoryProducts, t, unit
 }) {
   const orderLines = order.order_lines || [];
+  const uniqueCustomerGroups = getUniqueCustomerGroups(resource);
   const mandatoryOrders = getProductsOfType(orderLines, PRODUCT_TYPES.MANDATORY);
   const extraOrders = getProductsOfType(orderLines, PRODUCT_TYPES.EXTRA);
 
@@ -28,6 +31,13 @@ function ReservationProducts({
         <Col lg={8} sm={12}>
           {!order.error ? (
             <Loader loaded={!order.loadingData}>
+              {uniqueCustomerGroups.length > 0 && (
+                <CustomerGroupSelect
+                  currentlySelectedGroup={currentCustomerGroup}
+                  customerGroups={uniqueCustomerGroups}
+                  onChange={onCustomerGroupChange}
+                />
+              )}
               <MandatoryProducts
                 currentLanguage={currentLanguage}
                 isStaff={isStaff}
@@ -87,12 +97,14 @@ function ReservationProducts({
 
 ReservationProducts.propTypes = {
   changeProductQuantity: PropTypes.func.isRequired,
+  currentCustomerGroup: PropTypes.string.isRequired,
   currentLanguage: PropTypes.string.isRequired,
   isEditing: PropTypes.bool.isRequired,
   isStaff: PropTypes.bool.isRequired,
   onBack: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,
   onConfirm: PropTypes.func.isRequired,
+  onCustomerGroupChange: PropTypes.func.isRequired,
   onStaffSkipChange: PropTypes.func.isRequired,
   order: PropTypes.object.isRequired,
   resource: PropTypes.object.isRequired,

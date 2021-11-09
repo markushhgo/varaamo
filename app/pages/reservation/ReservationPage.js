@@ -45,6 +45,7 @@ class UnconnectedReservationPage extends Component {
     this.handleCheckOrderPrice = this.handleCheckOrderPrice.bind(this);
     this.handleCreateErrorNotification = this.handleCreateErrorNotification.bind(this);
     this.HandleToggleMandatoryProducts = this.HandleToggleMandatoryProducts.bind(this);
+    this.handleCustomerGroupChange = this.handleCustomerGroupChange.bind(this);
 
     const { reservationToEdit, resource } = this.props;
 
@@ -54,6 +55,7 @@ class UnconnectedReservationPage extends Component {
       extraProducts: getInitialProducts(resource, constants.PRODUCT_TYPES.EXTRA),
       order: { loadingData: true },
       skipMandatoryProducts: false,
+      currentCustomerGroup: '',
     };
   }
 
@@ -192,11 +194,11 @@ class UnconnectedReservationPage extends Component {
       const { begin } = first(selected);
       const { end } = last(selected);
       const preferredLanguage = currentLanguage;
-      const { mandatoryProducts, extraProducts } = this.state;
+      const { mandatoryProducts, extraProducts, currentCustomerGroup } = this.state;
 
       // order with only zero quantity products won't go through payment process
       const products = getNonZeroQuantityProducts([...mandatoryProducts, ...extraProducts]);
-      const order = createOrder(products);
+      const order = createOrder(products, currentCustomerGroup);
 
       if (!isEmpty(reservationToEdit)) {
         // old reservation values before editing
@@ -257,8 +259,18 @@ class UnconnectedReservationPage extends Component {
     });
   }
 
+  handleCustomerGroupChange(event) {
+    const { value } = event.target;
+    const { resource, selected } = this.props;
+    const { mandatoryProducts, extraProducts } = this.state;
+    this.setState({ currentCustomerGroup: value });
+    this.handleCheckOrderPrice(
+      resource, selected, mandatoryProducts, extraProducts, false, value
+    );
+  }
+
   handleCheckOrderPrice(
-    resource, selectedTime, mandatoryProducts, extraProducts, isEditing = false
+    resource, selectedTime, mandatoryProducts, extraProducts, isEditing = false, customerGroup
   ) {
     if (!hasProducts(resource) || isEditing) {
       return;
@@ -268,7 +280,7 @@ class UnconnectedReservationPage extends Component {
     const end = !isEmpty(selectedTime) ? last(selectedTime).end : null;
     const products = [...mandatoryProducts, ...extraProducts];
 
-    checkOrderPrice(begin, end, createOrderLines(products), this.props.state)
+    checkOrderPrice(begin, end, createOrderLines(products), this.props.state, customerGroup)
       .then(order => this.setState({ order }))
       .catch(() => {
         this.handleCreateErrorNotification();
@@ -293,10 +305,10 @@ class UnconnectedReservationPage extends Component {
   }
 
   handleChangeProductQuantity(product, quantity, type = constants.PRODUCT_TYPES.EXTRA) {
-    const { resource } = this.props;
+    const { resource, selected } = this.props;
+    const { mandatoryProducts, extraProducts, currentCustomerGroup } = this.state;
     if (hasProducts(resource)) {
       if (type === constants.PRODUCT_TYPES.MANDATORY) {
-        const { mandatoryProducts } = this.state;
         const updatedMandatoryProducts = mandatoryProducts.map((mandatoryProduct) => {
           if (mandatoryProduct.id === product.id) {
             return changeProductQuantity(product, quantity);
@@ -305,11 +317,10 @@ class UnconnectedReservationPage extends Component {
         });
         this.setState({ mandatoryProducts: updatedMandatoryProducts });
         this.handleCheckOrderPrice(
-          resource, this.props.selected, updatedMandatoryProducts, this.state.extraProducts
+          resource, selected, updatedMandatoryProducts, extraProducts, false, currentCustomerGroup
         );
       }
       if (type === constants.PRODUCT_TYPES.EXTRA) {
-        const { extraProducts } = this.state;
         const updatedExtraProducts = extraProducts.map((extraProduct) => {
           if (extraProduct.id === product.id) {
             return changeProductQuantity(product, quantity);
@@ -318,7 +329,7 @@ class UnconnectedReservationPage extends Component {
         });
         this.setState({ extraProducts: updatedExtraProducts });
         this.handleCheckOrderPrice(
-          resource, this.props.selected, this.state.mandatoryProducts, updatedExtraProducts
+          resource, selected, mandatoryProducts, updatedExtraProducts, false, currentCustomerGroup
         );
       }
     }
@@ -381,7 +392,9 @@ class UnconnectedReservationPage extends Component {
       user,
       history,
     } = this.props;
-    const { order, skipMandatoryProducts, view } = this.state;
+    const {
+      currentCustomerGroup, order, skipMandatoryProducts, view
+    } = this.state;
 
     if (
       isEmpty(resource)
@@ -433,12 +446,14 @@ class UnconnectedReservationPage extends Component {
                 {view === 'products' && selectedTime && (
                   <ReservationProducts
                     changeProductQuantity={this.handleChangeProductQuantity}
+                    currentCustomerGroup={currentCustomerGroup}
                     currentLanguage={currentLanguage}
                     isEditing={isEditing}
                     isStaff={isStaff}
                     onBack={this.handleBack}
                     onCancel={this.handleCancel}
                     onConfirm={this.handleProductsConfirm}
+                    onCustomerGroupChange={this.handleCustomerGroupChange}
                     onStaffSkipChange={this.HandleToggleMandatoryProducts}
                     order={order}
                     resource={resource}
