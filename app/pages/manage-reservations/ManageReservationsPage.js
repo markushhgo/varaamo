@@ -17,6 +17,7 @@ import Pagination from '../../shared/pagination/Pagination';
 import { getFiltersFromUrl, getSearchFromFilters } from '../../utils/searchUtils';
 import { getEditReservationUrl } from 'utils/reservationUtils';
 import {
+  clearReservations,
   selectReservationToEdit,
   showReservationInfoModal,
   openReservationCancelModal,
@@ -126,6 +127,8 @@ class ManageReservationsPage extends React.Component {
     const normalizedReservation = Object.assign(
       {}, reservation, { resource: reservation.resource.id }
     );
+    // clear old selected reservations before selecting new reservation to edit
+    actions.clearReservations();
 
     // fetch resource before changing page to make sure reservation page has
     // all needed info to function
@@ -258,6 +261,7 @@ export const UnwrappedManageReservationsPage = injectT(ManageReservationsPage);
 
 const mapDispatchToProps = (dispatch) => {
   const actionCreators = {
+    clearReservations,
     editReservation: selectReservationToEdit,
     fetchUnits,
     fetchReservations,
