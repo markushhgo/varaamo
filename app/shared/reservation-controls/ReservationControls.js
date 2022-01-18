@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import Button from 'react-bootstrap/lib/Button';
 
+import constants from '../../constants/AppConstants';
 import { injectT } from 'i18n';
 
 class ReservationControls extends Component {
@@ -54,10 +55,19 @@ class ReservationControls extends Component {
           {props.t('ReservationControls.info')}
         </Button>
       ),
+      pay: (
+        <Button
+          bsStyle="success"
+          key="payButton"
+          onClick={props.onPayClick}
+        >
+          {props.t('ReservationControls.pay')}
+        </Button>
+      )
     };
   }
 
-  renderButtons(buttons, isAdmin, isStaff, reservation, canModify, canDelete) {
+  renderButtons(buttons, isAdmin, isStaff, reservation, canModify, canDelete, paymentUrlData) {
     if (!reservation.needManualConfirmation) {
       if (reservation.state === 'cancelled') {
         return null;
@@ -94,6 +104,20 @@ class ReservationControls extends Component {
           : [];
       }
 
+      case constants.RESERVATION_STATE.READY_FOR_PAYMENT: {
+        return [buttons.pay, buttons.cancel];
+      }
+
+      case constants.RESERVATION_STATE.WAITING_FOR_PAYMENT: {
+        if (paymentUrlData) {
+          if (paymentUrlData.paymentUrl && paymentUrlData.reservationId === reservation.id) {
+            return [buttons.pay];
+          }
+        }
+
+        return [];
+      }
+
       case 'requested': {
         if (isAdmin) {
           return isStaff
@@ -110,7 +134,9 @@ class ReservationControls extends Component {
   }
 
   render() {
-    const { isAdmin, isStaff, reservation } = this.props;
+    const {
+      isAdmin, isStaff, paymentUrlData, reservation
+    } = this.props;
 
     /*
       Reservation permissions can be used to determine what user can do.
@@ -128,7 +154,9 @@ class ReservationControls extends Component {
     return (
       <div className="buttons">
         {this.buttons.info}
-        {this.renderButtons(this.buttons, isAdmin, isStaff, reservation, canModify, canDelete)}
+        {this.renderButtons(
+          this.buttons, isAdmin, isStaff, reservation, canModify, canDelete, paymentUrlData
+        )}
       </div>
     );
   }
@@ -142,6 +170,8 @@ ReservationControls.propTypes = {
   onDenyClick: PropTypes.func.isRequired,
   onEditClick: PropTypes.func.isRequired,
   onInfoClick: PropTypes.func.isRequired,
+  onPayClick: PropTypes.func.isRequired,
+  paymentUrlData: PropTypes.object,
   reservation: PropTypes.object,
   t: PropTypes.func.isRequired,
 };

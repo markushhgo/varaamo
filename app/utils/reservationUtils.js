@@ -232,7 +232,7 @@ function createOrder(products, customerGroup = '') {
   if (products && products.length > 0) {
     const orderLines = createOrderLines(products);
 
-    const returnUrl = `${window.location.origin}/reservation-payment-return`;
+    const returnUrl = getPaymentReturnUrl();
     const order = { order_lines: orderLines, return_url: returnUrl };
     if (customerGroup) {
       order.customer_group = customerGroup;
@@ -295,6 +295,14 @@ function getFormattedProductPrice(product) {
 }
 
 /**
+ * Returns the url where Varaamo expects completed payments to be redirected to
+ * @returns {string} return url
+ */
+function getPaymentReturnUrl() {
+  return `${window.location.origin}/reservation-payment-return`;
+}
+
+/**
  * Returns localized customer group name from the given reservation.
  * If reservation has no customer group name or correct translation for it,
  * null is returned.
@@ -347,6 +355,22 @@ export const canUserCancelReservation = (reservation) => {
   return false;
 };
 
+/**
+ * Checks whether cancelling manually confirmed paid reservation is allowed or not
+ * @param {object} reservation
+ * @returns {boolean} true when allowed, false if not
+ */
+function isManuallyConfirmedWithOrderAllowed(reservation) {
+  const { needManualConfirmation, state } = reservation;
+  if (needManualConfirmation && hasOrder(reservation)) {
+    const states = constants.RESERVATION_STATE;
+    if (state === states.REQUESTED || state === states.READY_FOR_PAYMENT) {
+      return true;
+    }
+  }
+  return false;
+}
+
 export {
   combine,
   isStaffEvent,
@@ -368,5 +392,7 @@ export {
   createOrder,
   checkOrderPrice,
   getFormattedProductPrice,
+  getPaymentReturnUrl,
   getReservationCustomerGroupName,
+  isManuallyConfirmedWithOrderAllowed,
 };
