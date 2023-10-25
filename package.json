@@ -53,7 +53,7 @@
     "nocache": "2.0.0",
     "node-sass": "8.0.0",
     "normalizr": "2.2.1",
-    "oidc-client": "1.9.1",
+    "oidc-client": "1.11.5",
     "postcss-loader": "7.3.3",
     "query-string": "4.2.3",
     "rc-slider": "8.3.1",
